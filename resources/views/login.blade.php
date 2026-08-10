@@ -72,21 +72,40 @@
         <div class="login-box">
 <form action="{{ route('login') }}" method="POST">
     @csrf
-            <input type="username"
-                   class="form-control mb-2"
-                   placeholder="Username"
-                   style="border-radius:15px; background:#D9D9D9; border:none; height:45px;">
 
-            <input type="password"
-                   class="form-control mb-3"
-                   placeholder="Password"
-                   style="border-radius:15px; background:#D9D9D9; border:none; height:45px;">
-           
-            <div class="text-end">
-                <button class="login" style="justify-content:center; align-items:center; display:flex; margin:0 auto;">
-                    Log in
-                </button>
-            </div>
+    {{-- Error Username --}}
+    @error('username')
+        <div class="alert alert-danger py-2">
+            {{ $message }}
+        </div>
+    @enderror
+
+    <input type="text"
+           name="username"
+           value="{{ old('username') }}"
+           class="form-control mb-3"
+           placeholder="Username"
+           style="border-radius:15px; background:#D9D9D9; border:none; height:45px;">
+
+    {{-- Error Password --}}
+    @error('password')
+        <div class="alert alert-danger py-2">
+            {{ $message }}
+        </div>
+    @enderror
+
+    <input type="password"
+           name="password"
+           class="form-control mb-3"
+           placeholder="Password"
+           style="border-radius:15px; background:#D9D9D9; border:none; height:45px;">
+
+    <div class="text-end">
+        <button type="submit" class="login" style="justify-content:center; align-items:center; display:flex; margin:0 auto;">
+            Log in
+        </button>
+    </div>
+
 </form>
 
         </div>

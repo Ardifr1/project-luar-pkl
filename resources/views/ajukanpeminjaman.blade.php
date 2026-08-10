@@ -143,7 +143,7 @@
         <p>ruang lab komputer</p>
     </div>
 <form action="/dashboard" method="post">
-    @csrf
+    
     <select class="pilih-guru" name="Guru_id" style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; margin-top:40px;"> 
          <option value="" selected disabled hidden><p>Silahkan Pilih Guru</option>    
          @foreach($gurus as $guru)

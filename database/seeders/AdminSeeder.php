@@ -2,22 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\Login;
 use Illuminate\Support\Facades\Hash;
 
-class DatabaseSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        Login::create([
-            'username' => 'pengguna1',
-            'password' => Hash::make('pengguna123'),
-        ]);
-
-        Login::create([
+        User::create([
+            'name' => 'Admin',
             'username' => 'admin',
             'password' => Hash::make('admin123'),
+            'role' => 'admin',
         ]);
     }
 }
