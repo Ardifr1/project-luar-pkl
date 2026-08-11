@@ -22,4 +22,17 @@ Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
-Route::get('/guru', [ControllerGuru::class, 'index'])->name('guru');
+Route::get('/guru', [ControllerGuru::class, 'index'])
+    ->name('guru.index');
+
+Route::get('/guru/create', [ControllerGuru::class, 'create'])
+    ->name('guru.create');
+
+Route::post('/guru', [ControllerGuru::class, 'store'])
+    ->name('guru.store');
+
+Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
+    ->name('guru.show');
+
+Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
+    ->name('guru.destroy');

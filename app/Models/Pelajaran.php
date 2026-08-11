@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Pelajaran extends Model
 {
     protected $table = 'pelajaran';
+
     protected $fillable = [
         'nama_pelajaran',
     ];
 
-    public function gurus()
+    public function guru()
     {
-        return $this->belongsToMany(Guru::class, 'guru_pelajaran');
+        return $this->belongsToMany(
+            User::class,
+            'guru_pelajaran',
+            'pelajaran_id',
+            'user_id'
+        );
     }
 }

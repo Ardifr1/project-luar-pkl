@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guru_pelajaran', function (Blueprint $table) {
-            $table->id();
+    Schema::create('guru_pelajaran', function (Blueprint $table) {
+    $table->id();
 
-        $table->foreignId('guru_id')
-      ->constrained('gurus')
-      ->cascadeOnDelete();
+    $table->foreignId('user_id')
+        ->constrained('user')
+        ->cascadeOnDelete();
 
     $table->foreignId('pelajaran_id')
-      ->constrained('pelajaran')
-      ->cascadeOnDelete();
-       $table->unique(['guru_id', 'pelajaran_id']);
-            $table->timestamps();
-        });
+        ->constrained('pelajaran')
+        ->cascadeOnDelete();
+
+    $table->unique(['user_id', 'pelajaran_id']);
+
+    $table->timestamps();
+});
     }
 
     /**
