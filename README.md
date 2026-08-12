@@ -2,10 +2,8 @@
 Deskripsi singkat tentang proyek (bertujuan memudahkan pemakaian lab, manfaat efisiensi waktu).
 
 ## 👥 Anggota Kelompok
-- Dika  (peran: Frontend)
-- Ardi  (peran: Backend)
-- Ardi  (peran: Database)
-- Dika  (peran: UI/UX Design)
+- Dika  (peran: Frontend,ui/ux design)
+- Ardi  (peran: Backend,database)
 
 ## 🚀 Fitur Utama
 - Fitur 1: Pembookingan 
