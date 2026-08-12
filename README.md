@@ -15,5 +15,3 @@ Deskripsi singkat tentang proyek (bertujuan memudahkan pemakaian lab, manfaat ef
 - PHP /
 - MySQL / 
 - Framework (Laravel.)
-
-## 📂 Struktur Folder
