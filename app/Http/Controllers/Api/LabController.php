@@ -68,33 +68,33 @@ class LabController extends Controller
     }
 
 
-    // ==========================================
-    // MELIHAT DETAIL SATU LAB
-    // ==========================================
-    public function show(Request $request, $id)
-    {
-        // Hanya admin dan guru yang boleh melihat detail lab
-        if (!in_array($request->user()->role, ['admin', 'guru'])) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Anda tidak memiliki akses'
-            ], 403);
-        }
-
-        $lab = Lab::find($id);
-
-        if (!$lab) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Lab tidak ditemukan'
-            ], 404);
-        }
-
+// ==========================================
+// ADMIN MELIHAT DETAIL SATU LAB
+// ==========================================
+public function show(Request $request, $id)
+{
+    // Hanya admin yang boleh melihat detail lab
+    if ($request->user()->role !== 'admin') {
         return response()->json([
-            'success' => true,
-            'data' => $lab
-        ]);
+            'success' => false,
+            'message' => 'Hanya admin yang dapat melihat detail lab'
+        ], 403);
     }
+
+    $lab = Lab::find($id);
+
+    if (!$lab) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Lab tidak ditemukan'
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'data' => $lab
+    ]);
+}
 
 
     // ==========================================
