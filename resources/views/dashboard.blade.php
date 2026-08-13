@@ -96,38 +96,7 @@
             text-align:left;
             padding:20px;
         }
-        .android-nav{
-    background:#102C6B;
-    height:55px;
-    margin-top:20px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    color:white;
-    font-size:24px;
-    position:fixed;
-    bottom:0;
-    width:360px;
-    
-}
-
-        .back{
-            color:#fff;
-            font-size:24px;
-        }
-
-        .home{
-            width:22px;
-            height:22px;
-            background:#fff;
-        }
-
-        .recent{
-            width:24px;
-            height:24px;
-            background:#fff;
-            border-radius:50%;
-        }
+       
 
     </style>
 
@@ -158,15 +127,7 @@
         
 </div>
 
-    <div class="android-nav">
-
-        <div class="back">◀</div>
-
-        <div class="home"></div>
-
-        <div class="recent"></div>
-
-    </div>
+   
 
 </div>
 
