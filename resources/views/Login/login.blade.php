@@ -144,6 +144,21 @@
             class="logo"
         >
 
+        @if ($errors->any())
+    <div style="
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        background: #f8d7da;
+        color: #842029;
+        border-radius: 10px;
+        font-size: 12px;
+        text-align: center;
+    ">
+        {{ $errors->first() }}
+    </div>
+@endif
+
         <!-- FORM LOGIN -->
         <form
             action="/dashboard"

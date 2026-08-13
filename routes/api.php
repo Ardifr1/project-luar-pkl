@@ -12,16 +12,28 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/mock', [MockApiController::class, 'index']);
 Route::middleware('auth:sanctum')->group(function () {
     
-    // Menambahkan guru
-    Route::post('/guru', [UserController::class, 'store']);
-    // Mengedit guru 
-    Route::put('/guru/{id}', [UserController::class, 'update']);
-    // Menghapus guru
-    Route::delete('/guru/{id}', [UserController::class, 'destroy']);
+// =========================
+// GURU
+// =========================
 
-    Route::post('/lab', [LabController::class, 'store']);
+// Melihat daftar guru
+Route::get('/guru', [UserController::class, 'index']);
 
-    Route::get('/lab', [LabController::class, 'index']);
+// Melihat detail guru
+Route::get('/guru/{id}', [UserController::class, 'show']);
+
+// Menambahkan guru
+Route::post('/guru', [UserController::class, 'store']);
+
+// Mengedit guru
+Route::put('/guru/{id}', [UserController::class, 'update']);
+
+// Menghapus guru
+Route::delete('/guru/{id}', [UserController::class, 'destroy']);
+
+// =========================
+// LAB
+// =========================
 
     // Melihat detail lab
 Route::get('/lab/{id}', [LabController::class, 'show']);

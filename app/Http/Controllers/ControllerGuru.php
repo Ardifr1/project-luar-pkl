@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ControllerGuru extends Controller
 {
@@ -62,34 +63,38 @@ class ControllerGuru extends Controller
     }
 
     // Memperbarui data guru
-    public function update(Request $request, $id)
-    {
-        $guru = User::where('role', 'guru')
-            ->findOrFail($id);
+public function update(Request $request, $id)
+{
+    $guru = User::where('role', 'guru')
+        ->findOrFail($id);
 
+    $request->validate([
+        'name' => 'required|string',
+        'nip' => [
+            'required',
+            'string',
+            Rule::unique('user', 'nip')->ignore($guru->id),
+        ],
+    ]);
+
+    $guru->name = $request->name;
+    $guru->nip = $request->nip;
+
+    // Password hanya diubah jika diisi
+    if ($request->filled('password')) {
         $request->validate([
-            'name' => 'required|string',
-            'nip' => 'required|string',
+            'password' => 'min:6',
         ]);
 
-        $guru->name = $request->name;
-        $guru->nip = $request->nip;
-
-        // Password hanya diubah jika diisi
-        if ($request->filled('password')) {
-            $request->validate([
-                'password' => 'min:6',
-            ]);
-
-            $guru->password = Hash::make($request->password);
-        }
-
-        $guru->save();
-
-        return redirect()
-            ->route('guru.index')
-            ->with('success', 'Data guru berhasil diperbarui');
+        $guru->password = Hash::make($request->password);
     }
+
+    $guru->save();
+
+    return redirect()
+        ->route('guru.index')
+        ->with('success', 'Data guru berhasil diperbarui');
+}
 
     // Menghapus akun guru
     public function destroy($id)
