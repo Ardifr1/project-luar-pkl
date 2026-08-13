@@ -55,9 +55,10 @@ Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
 
 Route::get('/dashboard', [ControllerDashboard::class, 'index'])
     ->name('dashboard');
-Route::get('/dashboardadmin', function () {
-    return view('dashboardadmin');
-});
+    
+Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
+    ->name('dashboardadmin');
+
 
 
 // =========================
