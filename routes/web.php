@@ -5,6 +5,7 @@ use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
 use App\Http\Controllers\ControllerGuru;
+use App\Http\Controllers\ControllerDashboardAdmin;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +53,9 @@ Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
 
 Route::get('/dashboard', [ControllerDashboard::class, 'index'])
     ->name('dashboard');
+Route::get('/dashboardadmin', function () {
+    return view('dashboardadmin');
+});
 
 
 // =========================

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Utama</title>
+    <title>Dashboard admin</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -11,6 +11,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+
 
         body{
             background:#222;
@@ -101,14 +102,8 @@
             height:58px;
             border-radius:15px;
         }
-         .box5 p{
-            text-align:center;
-            padding:20px;
-        }
+        
     </style>
-
-</head>
-<body>
 
 <div class="phone">
 
@@ -121,25 +116,19 @@
     </div>
 
     <div class="menu-card">
-    <div class="dropdown">
-        <a href="">profil</a>
-        <a href="">log out</a>
-        <a href="">ubah password</a>
-    </div>
+    
 
 
     <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
     <div class="box1">
-        <p>Ajukan Peminjaman Lab</p>
+        <p>Data Guru</p>
     </div>
 </a>
-        <div class="box2"> <p>Jadwal Peminjaman Lab</p>   
+        <div class="box2"> <p>Data Lab</p>   
         </div>
-        <div class="box3"> <p>Laporan Penolakan</p>    
+        <div class="box3"> <p>Laporan</p>    
         </div>
-        <div class="box4"> <p>Status ajukan</p>
-        </div>
-        <div class="box5"> <p>Data ajukan</p>
+        <div class="box4"> <p>Daftar ajukan</p>
         </div>
 </div>
 
@@ -147,5 +136,10 @@
 
 </div>
 
+
+
+</head>
+<body>
+    
 </body>
 </html>
