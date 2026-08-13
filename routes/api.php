@@ -11,12 +11,26 @@ use App\Http\Controllers\ControllerAjukanPeminjaman;
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/mock', [MockApiController::class, 'index']);
 Route::middleware('auth:sanctum')->group(function () {
-
+    
+    // Menambahkan guru
     Route::post('/guru', [UserController::class, 'store']);
+    // Mengedit guru 
+    Route::put('/guru/{id}', [UserController::class, 'update']);
+    // Menghapus guru
+    Route::delete('/guru/{id}', [UserController::class, 'destroy']);
 
     Route::post('/lab', [LabController::class, 'store']);
 
     Route::get('/lab', [LabController::class, 'index']);
+
+    // Melihat detail lab
+Route::get('/lab/{id}', [LabController::class, 'show']);
+
+// Mengedit lab
+Route::put('/lab/{id}', [LabController::class, 'update']);
+
+// Menghapus lab
+Route::delete('/lab/{id}', [LabController::class, 'destroy']);
 
     Route::post('/peminjaman', [
     ControllerAjukanPeminjaman::class,

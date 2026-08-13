@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class LabController extends Controller
 {
-    // Admin menambahkan lab
+    // ==========================================
+    // ADMIN MENAMBAHKAN LAB
+    // ==========================================
     public function store(Request $request)
     {
         // Hanya admin yang boleh menambahkan lab
@@ -39,7 +41,9 @@ class LabController extends Controller
     }
 
 
-    // Guru melihat daftar lab dan statusnya
+    // ==========================================
+    // GURU MELIHAT DAFTAR LAB
+    // ==========================================
     public function index(Request $request)
     {
         // Hanya guru yang boleh melihat status lab
@@ -60,6 +64,108 @@ class LabController extends Controller
         return response()->json([
             'success' => true,
             'data' => $labs
+        ]);
+    }
+
+
+    // ==========================================
+    // MELIHAT DETAIL SATU LAB
+    // ==========================================
+    public function show(Request $request, $id)
+    {
+        // Hanya admin dan guru yang boleh melihat detail lab
+        if (!in_array($request->user()->role, ['admin', 'guru'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki akses'
+            ], 403);
+        }
+
+        $lab = Lab::find($id);
+
+        if (!$lab) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Lab tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $lab
+        ]);
+    }
+
+
+    // ==========================================
+    // ADMIN MENGUBAH DATA LAB
+    // ==========================================
+    public function update(Request $request, $id)
+    {
+        // Hanya admin yang boleh mengubah lab
+        if ($request->user()->role !== 'admin') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hanya admin yang dapat mengubah lab'
+            ], 403);
+        }
+
+        $lab = Lab::find($id);
+
+        if (!$lab) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Lab tidak ditemukan'
+            ], 404);
+        }
+
+        $request->validate([
+            'nama' => 'required|string',
+            'kapasitas_murid' => 'required|integer|min:1',
+            'status' => 'required|in:tersedia,tidak_tersedia,sedang_maintenance',
+        ]);
+
+        $lab->update([
+            'nama_lab' => $request->nama,
+            'kapasitas_murid' => $request->kapasitas_murid,
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab berhasil diperbarui',
+            'data' => $lab
+        ]);
+    }
+
+
+    // ==========================================
+    // ADMIN MENGHAPUS LAB
+    // ==========================================
+    public function destroy(Request $request, $id)
+    {
+        // Hanya admin yang boleh menghapus lab
+        if ($request->user()->role !== 'admin') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hanya admin yang dapat menghapus lab'
+            ], 403);
+        }
+
+        $lab = Lab::find($id);
+
+        if (!$lab) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Lab tidak ditemukan'
+            ], 404);
+        }
+
+        $lab->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab berhasil dihapus'
         ]);
     }
 }

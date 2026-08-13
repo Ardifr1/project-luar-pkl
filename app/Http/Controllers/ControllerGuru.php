@@ -27,13 +27,13 @@ class ControllerGuru extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'username' => 'required|string|unique:user,username',
+            'nip' => 'required|string|unique:user,nip',
             'password' => 'required|min:6',
         ]);
 
         User::create([
             'name' => $request->name,
-            'username' => $request->username,
+            'nip' => $request->nip,
             'password' => Hash::make($request->password),
             'role' => 'guru',
         ]);
@@ -50,6 +50,45 @@ class ControllerGuru extends Controller
             ->findOrFail($id);
 
         return view('guru.show', compact('guru'));
+    }
+
+    // Menampilkan form edit guru
+    public function edit($id)
+    {
+        $guru = User::where('role', 'guru')
+            ->findOrFail($id);
+
+        return view('guru.edit', compact('guru'));
+    }
+
+    // Memperbarui data guru
+    public function update(Request $request, $id)
+    {
+        $guru = User::where('role', 'guru')
+            ->findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string',
+            'nip' => 'required|string',
+        ]);
+
+        $guru->name = $request->name;
+        $guru->nip = $request->nip;
+
+        // Password hanya diubah jika diisi
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => 'min:6',
+            ]);
+
+            $guru->password = Hash::make($request->password);
+        }
+
+        $guru->save();
+
+        return redirect()
+            ->route('guru.index')
+            ->with('success', 'Data guru berhasil diperbarui');
     }
 
     // Menghapus akun guru
