@@ -38,7 +38,7 @@
         .logo {
             width: 80px;
             height: 80px;
-
+            
             object-fit: contain;
 
             margin-bottom: 100px;
@@ -99,6 +99,7 @@
             color: #222;
 
             font-size: 13px;
+
 
             cursor: pointer;
         }
@@ -161,8 +162,8 @@
 
         <!-- FORM LOGIN -->
         <form
-            action="/dashboard"
-            method="GET"
+            action="{{ route('login.submit') }}"
+            method="POST"
             class="form-login"
         >
 

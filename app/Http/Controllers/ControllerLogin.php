@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class ControllerLogin extends Controller
 {
     // =========================
-    // HALAMAN PILIHAN LOGIN
+    // HALAMAN LOGIN
     // =========================
     public function index()
     {
@@ -18,25 +18,9 @@ class ControllerLogin extends Controller
 
 
     // =========================
-    // HALAMAN LOGIN ADMIN
-    // =========================
-    public function admin()
-    {
-        return view('login-admin');
-    }
-
-
-    // =========================
-    // HALAMAN LOGIN GURU
-    // =========================
-    public function guru()
-    {
-        return view('login-guru');
-    }
-
-
-    // =========================
-    // PROSES LOGIN NIP / USERNAME
+    // PROSES LOGIN
+    // ADMIN = USERNAME
+    // GURU  = NIP
     // =========================
     public function login(Request $request)
     {
@@ -51,12 +35,12 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari berdasarkan username ATAU NIP
+        // Cari user berdasarkan username ATAU NIP
         $user = User::where('username', $request->login)
             ->orWhere('nip', $request->login)
             ->first();
 
-        // NIP / Username tidak ditemukan
+        // Jika username / NIP tidak ditemukan
         if (!$user) {
             return back()
                 ->withErrors([
@@ -65,7 +49,7 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Password salah
+        // Cek password
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -81,8 +65,44 @@ class ControllerLogin extends Controller
             'user_name' => $user->name,
         ]);
 
-        // Login berhasil
-        return redirect()->route('dashboard');
+        // =========================
+        // ARAHKAN BERDASARKAN ROLE
+        // =========================
+
+        // Jika Admin
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboardadmin');
+        }
+
+        // Jika Guru
+        if ($user->role === 'guru') {
+            return redirect()->route('dashboard');
+        }
+
+        // Jika role tidak dikenali
+        return back()
+            ->withErrors([
+                'login' => 'Role pengguna tidak dikenali.'
+            ])
+            ->withInput();
+    }
+
+
+    // =========================
+    // HALAMAN LOGIN ADMIN LAMA
+    // =========================
+    public function admin()
+    {
+        return view('login-admin');
+    }
+
+
+    // =========================
+    // HALAMAN LOGIN GURU LAMA
+    // =========================
+    public function guru()
+    {
+        return view('login-guru');
     }
 
 
@@ -106,6 +126,7 @@ class ControllerLogin extends Controller
             ->where('role', 'admin')
             ->first();
 
+        // Username admin salah
         if (!$user) {
             return back()
                 ->withErrors([
@@ -114,6 +135,7 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+        // Password salah
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -122,13 +144,15 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+        // Simpan session
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
             'user_name' => $user->name,
         ]);
 
-        return redirect()->route('dashboard');
+        // Masuk dashboard admin
+        return redirect()->route('dashboardadmin');
     }
 
 
@@ -152,6 +176,7 @@ class ControllerLogin extends Controller
             ->where('role', 'guru')
             ->first();
 
+        // NIP guru salah
         if (!$user) {
             return back()
                 ->withErrors([
@@ -160,6 +185,7 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+        // Password salah
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -168,12 +194,14 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+        // Simpan session
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
             'user_name' => $user->name,
         ]);
 
+        // Masuk dashboard guru
         return redirect()->route('dashboard');
     }
 }
