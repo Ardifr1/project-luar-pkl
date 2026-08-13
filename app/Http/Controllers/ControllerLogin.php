@@ -36,7 +36,58 @@ class ControllerLogin extends Controller
 
 
     // =========================
-    // PROSES LOGIN ADMIN
+    // PROSES LOGIN NIP / USERNAME
+    // =========================
+    public function login(Request $request)
+    {
+        $request->validate(
+            [
+                'login' => 'required',
+                'password' => 'required',
+            ],
+            [
+                'login.required' => 'NIP / Username harus diisi.',
+                'password.required' => 'Password harus diisi.',
+            ]
+        );
+
+        // Cari berdasarkan username ATAU NIP
+        $user = User::where('username', $request->login)
+            ->orWhere('nip', $request->login)
+            ->first();
+
+        // NIP / Username tidak ditemukan
+        if (!$user) {
+            return back()
+                ->withErrors([
+                    'login' => 'NIP / Username tidak ditemukan.'
+                ])
+                ->withInput();
+        }
+
+        // Password salah
+        if (!Hash::check($request->password, $user->password)) {
+            return back()
+                ->withErrors([
+                    'password' => 'Password salah.'
+                ])
+                ->withInput();
+        }
+
+        // Simpan data user ke session
+        session([
+            'user_id' => $user->id,
+            'user_role' => $user->role,
+            'user_name' => $user->name,
+        ]);
+
+        // Login berhasil
+        return redirect()->route('dashboard');
+    }
+
+
+    // =========================
+    // PROSES LOGIN ADMIN LAMA
     // =========================
     public function loginAdmin(Request $request)
     {
@@ -51,13 +102,10 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari user yang username-nya sesuai
-        // DAN harus memiliki role admin
         $user = User::where('username', $request->username)
             ->where('role', 'admin')
             ->first();
 
-        // Username tidak ditemukan
         if (!$user) {
             return back()
                 ->withErrors([
@@ -66,7 +114,6 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Password salah
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -75,7 +122,6 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Login berhasil
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
@@ -87,7 +133,7 @@ class ControllerLogin extends Controller
 
 
     // =========================
-    // PROSES LOGIN GURU
+    // PROSES LOGIN GURU LAMA
     // =========================
     public function loginGuru(Request $request)
     {
@@ -102,13 +148,10 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari user berdasarkan NIP
-        // DAN harus memiliki role guru
         $user = User::where('nip', $request->nip)
             ->where('role', 'guru')
             ->first();
 
-        // NIP tidak ditemukan
         if (!$user) {
             return back()
                 ->withErrors([
@@ -117,7 +160,6 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Password salah
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -126,7 +168,6 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Login berhasil
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,

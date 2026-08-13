@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/login', [ControllerLogin::class, 'index'])
     ->name('login');
 
+Route::post('/login', [ControllerLogin::class, 'login'])
+    ->name('login.submit');
 
 // =========================
 // LOGIN ADMIN
