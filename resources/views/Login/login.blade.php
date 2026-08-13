@@ -105,7 +105,7 @@
 
      <div class="menu-card">
     
-    <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
+    <a href="{{ route('Guru') }}" class="text-decoration-none">
     <div class="box1">
         <p>Guru</p>
     </div>
