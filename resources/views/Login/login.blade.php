@@ -3,129 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        body{
-            background:#222;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .phone{
-            max-width:360px;
-            min-height:600px;
-            margin:20px auto;
-            background:#fff;
+        body {
+            background: #222;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .header{
-            background:#fff;
-            padding:10px;
+        .phone {
+            width: 375px;
+            min-height: 100vh;
+            background: white;
+
+            padding: 70px 45px 40px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        .logo {
+            width: 80px;
+            height: 80px;
 
-        .logo img{
-            width:100px;
-            height:100px;
-        }
-        .text-atas{
-            
-            color:black;
-            padding:10px;
-            text-align:center;
-            font-size:16px;
+            object-fit: contain;
+
+            margin-bottom: 100px;
         }
 
-      .icon-box{
-            width:75px;
-            height:75px;
-            background:#ececec;
-            margin:auto;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+        .form-login {
+            width: 100%;
         }
 
-        .icon-box i{
-            font-size:38px;
-            color:#000;
+        .form-group {
+            width: 100%;
+            margin-bottom: 8px;
         }
 
-        .menu-text{
-            color:white;
-            text-align:center;
-            margin-top:10px;
-            font-size:18px;
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+            color: #222;
+
+            margin-left: 10px;
+            margin-bottom: 5px;
         }
-        .box1{
-            margin-top:10px;
-            background:#D9D9D9;
-            width:100%;
-            height:52px;
-            border-radius:15px;
+
+        .form-group input {
+            width: 100%;
+            height: 42px;
+
+            border: none;
+            outline: none;
+
+            background: #d9d9d9;
+
+            border-radius: 14px;
+
+            padding: 0 15px;
+
+            font-size: 14px;
         }
-        .box1 p{
-            text-align:center;
-            padding:15px;
+
+        .form-group input:focus {
+            background: #d0d0d0;
         }
-        
-        .box2{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:52px;
-            border-radius:15px;
+
+        .btn-login {
+            display: block;
+
+            width: 150px;
+            height: 42px;
+
+            margin: 25px auto 0;
+
+            border: none;
+            border-radius: 13px;
+
+            background: #d9d9d9;
+
+            color: #222;
+
+            font-size: 13px;
+
+            cursor: pointer;
         }
-         .box2 p{
-            text-align:center;
-            padding:15px;
+
+        .btn-login:hover {
+            background: #cfcfcf;
         }
-      
-       
+
+        .forgot {
+            margin-top: 38px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #222;
+
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 400px) {
+            .phone {
+                width: 100%;
+                padding-left: 45px;
+                padding-right: 45px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
+    <div class="phone">
+
+        <!-- LOGO -->
+        <img
+            src="{{ asset('gambar/logo mp png.png') }}"
+            alt="Logo"
+            class="logo"
+        >
+
+        <!-- FORM LOGIN -->
+        <form
+            action="{{ url('/login') }}"
+            method="POST"
+            class="form-login"
+        >
+
+            @csrf
+
+            <!-- NIP / USERNAME -->
+            <div class="form-group">
 
 
-<div class="phone">
+                <input
+                    type="text"
+                    id="login"
+                    name="login"
+                    autocomplete="username"
+                    required
+                    placeholder="NIP / Username"
+                >
 
-    <div class="header">
-        <div class="user-btn"></div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+
+                <input
+                placeholder="Password"
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <!-- LOGIN -->
+            <button type="submit" class="btn-login">
+                Login
+            </button>
+
+        </form>
+
+        <!-- LUPA PASSWORD -->
+        <a href="#" class="forgot">
+            Lupa password? hubungi admin
+        </a>
+
     </div>
-
-     <div class="text-center logo mb-4">
-            <img src="{{asset ('gambar/download.png') }}" class="logo"alt="">
-        </div>
-
-
-    <div class="container py-4">
-        <div class="text-atas"><p>Posisi sebagai</p></div>
-
-     <div class="menu-card">
-    
-    <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
-    <div class="box1">
-        <p>Guru</p>
-    </div>
-</a>
-        <a href="{{ route('admin') }}" class="text-decoration-none">
-        <div class="box2"> <p>Admin</p>   
-        </div>
-       
-</div>
-
-
-</form>
-
-        </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 </body>
 </html>
