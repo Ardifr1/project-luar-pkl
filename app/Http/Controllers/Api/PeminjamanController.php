@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
-    // Melihat semua pengajuan peminjaman
+    // =========================================================
+    // ADMIN MELIHAT SEMUA PENGAJUAN PEMINJAMAN
+    // =========================================================
     public function index(Request $request)
     {
         // Hanya admin
@@ -32,7 +34,9 @@ class PeminjamanController extends Controller
     }
 
 
-    // Admin menyetujui peminjaman
+    // =========================================================
+    // ADMIN MENYETUJUI PEMINJAMAN
+    // =========================================================
     public function approve(Request $request, $id)
     {
         // Hanya admin
@@ -72,7 +76,9 @@ class PeminjamanController extends Controller
     }
 
 
-    // Admin menolak peminjaman
+    // =========================================================
+    // ADMIN MENOLAK PEMINJAMAN
+    // =========================================================
     public function reject(Request $request, $id)
     {
         // Hanya admin
@@ -101,18 +107,48 @@ class PeminjamanController extends Controller
         }
 
         // Alasan wajib diisi
-    $request->validate([
-        'alasan_penolakan' => 'required|string|min:3',
-    ]);
+        $request->validate([
+            'alasan_penolakan' => 'required|string|min:3',
+        ]);
 
-    $peminjaman->update([
-        'status' => 'ditolak',
-        'alasan_penolakan' => $request->alasan_penolakan,
-    ]);
+        $peminjaman->update([
+            'status' => 'ditolak',
+            'alasan_penolakan' => $request->alasan_penolakan,
+        ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Peminjaman berhasil ditolak',
+            'data' => $peminjaman
+        ]);
+    }
+
+
+    // =========================================================
+    // GURU MELIHAT STATUS PENGAJUAN MILIKNYA
+    // =========================================================
+    public function myPeminjaman(Request $request)
+    {
+        // Hanya guru
+        if ($request->user()->role !== 'guru') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hanya guru yang dapat melihat status pengajuan'
+            ], 403);
+        }
+
+        // Ambil pengajuan milik guru yang sedang login
+        $peminjaman = Peminjaman::with([
+            'lab',
+            'pelajaran'
+        ])
+        ->where('user_id', $request->user()->id)
+        ->latest()
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status pengajuan berhasil diambil',
             'data' => $peminjaman
         ]);
     }

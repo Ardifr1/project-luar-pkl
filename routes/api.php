@@ -16,6 +16,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/lab', [LabController::class, 'store']);
 
+    Route::get('/lab', [LabController::class, 'index']);
+
     Route::post('/peminjaman', [
     ControllerAjukanPeminjaman::class,
     'storeApi'
@@ -32,5 +34,11 @@ Route::middleware('auth:sanctum')->group(function () {
         PeminjamanController::class,
         'reject'
     ]);
+
+    Route::get('/peminjaman/guru', [
+        PeminjamanController::class,
+        'myPeminjaman'
+    ]);
+
 });
 

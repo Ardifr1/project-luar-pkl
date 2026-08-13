@@ -11,16 +11,63 @@ Route::get('/', function () {
 });
 
 
+// =========================
+// LOGIN
+// =========================
 
-Route::get('/login', [ControllerLogin::class, 'index'])->name('login');
-Route::post('/login', [ControllerLogin::class, 'login']);
+// Halaman pilihan: Admin atau Guru
+Route::get('/login', [ControllerLogin::class, 'index'])
+    ->name('login');
 
-Route::get('/dashboard', [ControllerDashboard::class, 'index'])->name('dashboard');
+
+// =========================
+// LOGIN ADMIN
+// =========================
+
+// Menampilkan halaman login admin
+Route::get('/login/admin', [ControllerLogin::class, 'admin'])
+    ->name('login.admin');
+
+// Memproses login admin
+Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
+    ->name('login.admin.submit');
+
+
+// =========================
+// LOGIN GURU
+// =========================
+
+// Menampilkan halaman login guru
+Route::get('/login/guru', [ControllerLogin::class, 'guru'])
+    ->name('login.guru');
+
+// Memproses login guru
+Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
+    ->name('login.guru.submit');
+
+
+// =========================
+// DASHBOARD
+// =========================
+
+Route::get('/dashboard', [ControllerDashboard::class, 'index'])
+    ->name('dashboard');
+
+
+// =========================
+// PEMINJAMAN LAB
+// =========================
 
 Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
     ->name('ajukanpeminjaman');
+
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
+
+
+// =========================
+// GURU
+// =========================
 
 Route::get('/guru', [ControllerGuru::class, 'index'])
     ->name('guru.index');

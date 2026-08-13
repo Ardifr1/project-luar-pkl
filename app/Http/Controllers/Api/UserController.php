@@ -24,7 +24,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'nip' => 'required|string|unique:user,nip',
-            'pelajaran' => 'required|string',
+            'pelajaran' => 'required|array|min:1',
+            'pelajaran.*' => 'required|string',
             'password' => 'required|min:6',
         ]);
 
@@ -36,10 +37,10 @@ class UserController extends Controller
             'role' => 'guru',
         ]);
 
-        // Pisahkan nama pelajaran berdasarkan koma
+        // Ambil nama-nama pelajaran dari request
         $namaPelajaran = array_map(
             'trim',
-            explode(',', $request->pelajaran)
+            $request->pelajaran
         );
 
         // Cari ID pelajaran berdasarkan nama
@@ -48,8 +49,11 @@ class UserController extends Controller
             $namaPelajaran
         )->pluck('id');
 
-        // Hubungkan guru dengan pelajaran
+        // Hubungkan guru dengan semua pelajaran
         $guru->pelajaran()->sync($pelajaranIds);
+
+        // Ambil ulang relasi pelajaran
+        $guru->load('pelajaran');
 
         return response()->json([
             'success' => true,
