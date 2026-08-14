@@ -72,7 +72,7 @@
 }
 
 .search-box input {
-  width: 200px;
+  width: 122px;
   height: 30px;
   border: 1px solid #aaa;
   padding-left: 15px;
@@ -137,7 +137,11 @@
         
     </style>
 
-<div class="phone">
+
+
+</head>
+<body>
+    <div class="phone">
 
     <div class="header">
     <img src="{{asset ('gambar/download.png') }}" alt="logo" class="logo" style="width:100px; height:100px; margin-right:10px; border-radius:20%">
@@ -146,6 +150,7 @@
 </button>
 
     </div>
+
 <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
@@ -178,9 +183,5 @@
 </div>
 
 
-
-</head>
-<body>
-    
 </body>
 </html>
