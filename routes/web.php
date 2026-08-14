@@ -109,3 +109,10 @@ Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
 
 Route::post('/ubah-password', [ControllerPassword::class, 'update'])
     ->name('ubah.password.update');
+
+    // =========================
+    // LOGOUT   
+    // =========================
+
+Route::get('/logout', [ControllerLogin::class, 'logout'])
+    ->name('logout');

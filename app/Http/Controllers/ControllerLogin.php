@@ -204,4 +204,17 @@ class ControllerLogin extends Controller
         // Masuk dashboard guru
         return redirect()->route('dashboard');
     }
+
+    // =========================
+    // LOGOUT
+    // =========================
+
+    public function logout(Request $request)
+{
+    // Hapus semua data session login
+    $request->session()->flush();
+
+    // Kembali ke halaman login
+    return redirect()->route('login');
+}
 }
