@@ -7,7 +7,7 @@ use App\Http\Controllers\ControllerAjukanPeminjaman;
 use App\Http\Controllers\ControllerGuru;
 use App\Http\Controllers\ControllerDashboardAdmin;
 
-use App\Http\Controllers\Controllerprofilguru;
+use App\Http\Controllers\ControllerProfil;
 
 use App\Http\Controllers\ControllerPassword; 
 
@@ -97,8 +97,8 @@ Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
 
 
 
-Route::get('/profil', [Controllerprofilguru::class, 'index'])
-    ->name('profilguru');
+Route::get('/profil-guru', [ControllerProfil::class, 'guru'])
+    ->name('profil.guru');
 
 // =========================
 // UBAH PASSWORD
