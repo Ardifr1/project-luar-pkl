@@ -48,6 +48,7 @@
             font-size:18px;
         }
 
+<<<<<<< HEAD
 .menu-card1 {
   width: 400px;      
   height: 40px;
@@ -88,6 +89,8 @@
 }
 
 
+=======
+>>>>>>> 8c4f26f0dc76db7b79f796b3456b85ab3105092d
         .box1{
             margin-top:10px;
             background:#D9D9D9;
@@ -95,6 +98,7 @@
             height:58px;
             border-radius:15px;
         }
+
         .box1 p{
             text-align:center;
             padding:20px;
@@ -107,10 +111,12 @@
             height:58px;
             border-radius:15px;
         }
-         .box2 p{
+
+        .box2 p{
             text-align:center;
             padding:20px;
         }
+
         .box3{
             margin-top:40px;
             background:#D9D9D9;
@@ -118,10 +124,12 @@
             height:58px;
             border-radius:15px;
         }
-         .box3 p{
+
+        .box3 p{
             text-align:center;
             padding:20px;
         }
+
         .box4{
             margin-top:40px;
             background:#D9D9D9;
@@ -129,10 +137,12 @@
             height:58px;
             border-radius:15px;
         }
-         .box4 p{
+
+        .box4 p{
             text-align:center;
             padding:20px;
         }
+
         .box5{
             margin-top:40px;
             background:#D9D9D9;
@@ -140,10 +150,86 @@
             height:58px;
             border-radius:15px;
         }
-         .box5 p{
+
+        .box5 p{
             text-align:center;
             padding:20px;
         }
+
+
+        /* =========================
+           DROPDOWN HAMBURGER
+           ========================= */
+
+        .hamburger-container{
+            position:relative;
+        }
+
+        .hamburger-dropdown{
+            display:none;
+
+            position:absolute;
+
+            top:70px;
+            right:10px;
+
+            width:180px;
+
+            background:#D9D9D9;
+
+            border-radius:10px;
+
+            overflow:hidden;
+
+            z-index:1000;
+        }
+
+        .hamburger-dropdown.show{
+            display:block;
+        }
+
+        .hamburger-dropdown a{
+            display:block;
+
+            padding:15px;
+
+            color:#222;
+
+            text-decoration:none;
+
+            text-align:center;
+
+            font-size:14px;
+        }
+
+        .hamburger-dropdown a:hover{
+            background:#c5c5c5;
+        }
+
+        .hamburger-dropdown form{
+            margin:0;
+        }
+
+        .hamburger-dropdown button{
+            width:100%;
+
+            padding:15px;
+
+            border:none;
+
+            background:#D9D9D9;
+
+            color:#222;
+
+            font-size:14px;
+
+            cursor:pointer;
+        }
+
+        .hamburger-dropdown button:hover{
+            background:#c5c5c5;
+        }
+
     </style>
 
 </head>
@@ -152,13 +238,64 @@
 <div class="phone">
 
     <div class="header">
-    <img src="{{asset ('gambar/download.png') }}" alt="logo" class="logo" style="width:100px; height:100px; margin-right:10px; border-radius:20%">
-    <button class="btn text-white">
-    <i class="bi bi-list fs-1"></i>
-</button>
+
+        <img
+            src="{{asset ('gambar/download.png') }}"
+            alt="logo"
+            class="logo"
+            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+        >
+
+        <!-- HAMBURGER -->
+        <div class="hamburger-container">
+
+            <button
+                class="btn text-white"
+                id="hamburgerBtn"
+                type="button"
+            >
+                <i class="bi bi-list fs-1"></i>
+            </button>
+
+
+            <!-- DROPDOWN -->
+            <div
+                class="hamburger-dropdown"
+                id="hamburgerDropdown"
+            >
+
+                <!-- PROFIL -->
+                <a href="{{ route('profil.guru') }}">
+                    Profil
+                </a>
+
+
+                <!-- UBAH PASSWORD -->
+                <a href="{{ route('ubah.password') }}">
+                    Ubah Password
+                </a>
+
+
+                <!-- LOG OUT -->
+                <form
+                    action="{{ route('logout') }}"
+                    method="POST"
+                >
+                    @csrf
+
+                    <button type="submit">
+                        Log out
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
 
     </div>
 
+<<<<<<< HEAD
     <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
@@ -171,26 +308,66 @@
 </div>
     
     <div class="menu-card">
+=======
+
+    <div class="menu-card">
 
 
-    <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
-    <div class="box1">
-        <p>Ajukan Peminjaman Lab</p>
+        <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
+
+            <div class="box1">
+                <p>Ajukan Peminjaman Lab</p>
+            </div>
+
+        </a>
+
+
+        <div class="box2">
+            <p>Jadwal Peminjaman Lab</p>
+        </div>
+
+
+        <div class="box3">
+            <p>Laporan Penolakan</p>
+        </div>
+
+
+        <div class="box4">
+            <p>Status ajukan</p>
+        </div>
+
+
+        <div class="box5">
+            <p>Data ajukan</p>
+        </div>
+
+
     </div>
-</a>
-        <div class="box2"> <p>Jadwal Peminjaman Lab</p>   
-        </div>
-        <div class="box3"> <p>Laporan Penolakan</p>    
-        </div>
-        <div class="box4"> <p>Status ajukan</p>
-        </div>
-        <div class="box5"> <p>Data ajukan</p>
-        </div>
-</div>
+>>>>>>> 8c4f26f0dc76db7b79f796b3456b85ab3105092d
 
-   
 
 </div>
+
+
+<!-- =========================
+     JAVASCRIPT HAMBURGER
+     ========================= -->
+
+<script>
+
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+
+
+    hamburgerBtn.addEventListener('click', function () {
+
+        hamburgerDropdown.classList.toggle('show');
+
+    });
+
+
+</script>
 
 </body>
 </html>

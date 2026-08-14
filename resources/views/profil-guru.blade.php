@@ -28,9 +28,6 @@ body{
             justify-content:space-between;
             display:flex;
         }
-
-        
-
         .menu-card1 {
   width: 400px;      
   height: 40px;
@@ -69,6 +66,8 @@ body{
     <a href="#">Home</a> >
     <a href="#">profil</a>
   </nav>
+
+
 
 
 </body>
