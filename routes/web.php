@@ -6,7 +6,11 @@ use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
 use App\Http\Controllers\ControllerGuru;
 use App\Http\Controllers\ControllerDashboardAdmin;
+<<<<<<< HEAD
 use App\Http\Controllers\Controllerprofilguru;
+=======
+use App\Http\Controllers\ControllerPassword;
+>>>>>>> 653c50c0eb4f9edc585f2e53e7cd5cf487e8a347
 
 Route::get('/', function () {
     return view('welcome');
@@ -92,6 +96,18 @@ Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
 Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
     ->name('guru.destroy');
 
+<<<<<<< HEAD
 
 Route::get('/profil', [Controllerprofilguru::class, 'index'])
     ->name('profilguru');
+=======
+// =========================
+// UBAH PASSWORD
+// =========================
+
+Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
+    ->name('ubah.password');
+
+Route::post('/ubah-password', [ControllerPassword::class, 'update'])
+    ->name('ubah.password.update');
+>>>>>>> 653c50c0eb4f9edc585f2e53e7cd5cf487e8a347
