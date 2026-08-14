@@ -6,6 +6,7 @@ use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
 use App\Http\Controllers\ControllerGuru;
 use App\Http\Controllers\ControllerDashboardAdmin;
+use App\Http\Controllers\Controllerprofilguru;
 
 Route::get('/', function () {
     return view('welcome');
@@ -90,3 +91,7 @@ Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
 
 Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
     ->name('guru.destroy');
+
+
+Route::get('/profil', [Controllerprofilguru::class, 'index'])
+    ->name('profilguru');

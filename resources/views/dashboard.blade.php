@@ -33,7 +33,7 @@
 
         .menu-card{
             background:#1F4E9D;
-            width:300px;
+            width:320px;
             margin:50px auto;
             padding:20px;
             border-radius:4px;

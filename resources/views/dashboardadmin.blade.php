@@ -31,10 +31,9 @@
             display:flex;
         }
 
-
         .menu-card{
             background:#1F4E9D;
-            width:300px;
+            width:320px;
             margin:50px auto;
             padding:20px;
             border-radius:4px;
@@ -42,14 +41,52 @@
             border-radius:15px;
         }
 
-
-
         .menu-text{
             color:white;
             text-align:center;
             margin-top:10px;
             font-size:18px;
         }
+
+        .menu-card1 {
+  width: 400px;      
+  height: 40px;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:  20px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.search-box {
+  display: flex;
+  align-items: ;
+}
+
+.search-box input {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #aaa;
+  padding-left: 15px;
+}
+
+.search-box button {
+  width: 40px;
+  height: 30px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
         .box1{
             margin-top:10px;
             background:#D9D9D9;
@@ -86,6 +123,7 @@
         }
         .box4{
             margin-top:40px;
+            margin-bottom:20px;
             background:#D9D9D9;
             width:100%;
             height:58px;
@@ -95,13 +133,7 @@
             text-align:center;
             padding:20px;
         }
-        .box5{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
+       
         
     </style>
 
@@ -114,10 +146,19 @@
 </button>
 
     </div>
+<div class="menu-card1">
+  <nav class="breadcrumb">
+    <a href="#">Home</a> >
+    <a href="#"></a>
+  </nav>
+  <div class="search-box">
+    <input type="text" placeholder="Cari...">
+    <button><i class="fa fa-search"></i></button>
+  </div>
+</div>
+
 
     <div class="menu-card">
-    
-
 
     <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
     <div class="box1">
