@@ -48,7 +48,6 @@
             font-size:18px;
         }
 
-<<<<<<< HEAD
 .menu-card1 {
   width: 400px;      
   height: 40px;
@@ -89,8 +88,6 @@
 }
 
 
-=======
->>>>>>> 8c4f26f0dc76db7b79f796b3456b85ab3105092d
         .box1{
             margin-top:10px;
             background:#D9D9D9;
@@ -295,7 +292,6 @@
 
     </div>
 
-<<<<<<< HEAD
     <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
@@ -307,8 +303,7 @@
   </div>
 </div>
     
-    <div class="menu-card">
-=======
+
 
     <div class="menu-card">
 
@@ -343,7 +338,6 @@
 
 
     </div>
->>>>>>> 8c4f26f0dc76db7b79f796b3456b85ab3105092d
 
 
 </div>
