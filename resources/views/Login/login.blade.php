@@ -25,7 +25,7 @@
 
         .phone {
             width: 412px;
-            min-height: 917x;
+            min-height: 120vh;
             background: white;
 
             padding: 70px 45px 40px;
