@@ -14,7 +14,7 @@ class ControllerAjukanPeminjaman extends Controller
         $pelajarans = Pelajaran::all();
         $labs = Lab::all();
 
-        return view('ajukan-peminjaman', compact('pelajarans', 'labs'));
+        return view('ajukanpeminjaman', compact('pelajarans', 'labs'));
     }
 
 

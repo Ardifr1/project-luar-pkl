@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ajukan peminjaman</title>
+    <title>Profil Admin</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -11,102 +11,66 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
-        body{
+body{
             background:#222;
         }
 
         .phone{
-            max-width:360px;
-            min-height:800px;
+            max-width:412px;
+            min-height:917px;
             margin:20px auto;
             background:#fff;
         }
 
         .header{
             background:#102C6B;
-            height:82px;
+            height:100px;
             justify-content:space-between;
             display:flex;
         }
-     .text-atas{
-            
-            color:black;
-            margin-top:20px;
-            text-align:center;
-            font-size:30px;
-        }
-.menu-card1 {
-  width: 360px;      
+
+
+        /* ====== CARD STYLE ====== */
+.card {
+  background-color: #e2e8f0; /* abu muda */
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+/* ====== TITLE ====== */
+.card-title {
+  background-color: #f1f5f9; /* abu sangat muda */
+  color: #1e3a8a; /* biru tua */
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+        .menu-card1 {
+  width: 400px;      
   height: 40px;
   background-color: #d9d9d9;
-  display: block;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:  10px;
+  padding:  20px;
   border: 1px solid #aaa;
   border-radius: 6px;
 }
-    .breadcrumb a {
+
+.breadcrumb a {
   color: #007bff;
   text-decoration: none;
   margin-right: 5px;
 }
 
-        .menu-card{
-            background:#1F4E9D;
-            width:300px;
-            margin:10px auto;
-            padding:20px;
-            border-radius:4px;
-            box-shadow:0 3px 8px rgba(0,0,0,.2);
-            border-radius:15px;
-        }
-
-
-        .menu-text{
-            color:white;
-            text-align:center;
-            margin-top:10px;
-            font-size:18px;
-        }
-        .box1{
-            margin-top:10px;
-            background:#D9D9D9;
-            width:100%;
-            height:150px;
-            border-radius:15px;
-        }
-        .box1 p{
-            text-align:center;
-            
-            padding:20px;
-        }
-        
-        .box2{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:60px;
-            border-radius:15px;
-        }
-         .box2 p{
-            text-align:left;
-            padding:20px;
-        }
-        .box3{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:60px;
-            border-radius:15px;
-        }
-         .box3 p{
-            text-align:left;
-            padding:20px;
-        }
-
-         /* =========================
+ /* =========================
            DROPDOWN HAMBURGER
            ========================= */
 
@@ -179,18 +143,22 @@
             background:#c5c5c5;
         }
 
-
-    </style>
+</style>
 
 </head>
 <body>
-
 <div class="phone">
 
     <div class="header">
-    <img src="{{asset ('gambar/download.png') }}" alt="logo" class="logo" style="width:80px; height:80px; margin-right:10px; border-radius:20%">
 
-  <!-- HAMBURGER -->
+        <img
+            src="{{asset ('gambar/download.png') }}"
+            alt="logo"
+            class="logo"
+            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+        >
+
+        <!-- HAMBURGER -->
         <div class="hamburger-container">
 
             <button
@@ -239,52 +207,25 @@
 
     </div>
 
-<div class="menu-card1">
+ <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
     <a href="#">profil</a>
   </nav>
-  
-    </div>
-<div class="text-atas"><p>Peminjaman Lab</p></div>
-    <div class="menu-card">
-    
-    <div class="box1">
-        <p>ruang lab komputer</p>
-    </div>
-<form action="/dashboard" method="post">
-    
-    <select class="pilih-guru" name="Guru_id" style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; margin-top:40px;"> 
-         <option value="" selected disabled hidden><p>Silahkan Pilih Guru</option>    
-         
-            <option></option>
-         </select>
-        <select class="pilih-guru" name="Pelajaran_id[]"  style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; margin-top:40px;">
-               
-            <option value="" selected disabled hidden><p>Silahkan Pilih Mata Pelajaran</option>
-            @foreach($pelajarans as $pelajaran)
-                <option value="{{ $pelajaran->id }}" ><p>{{ $pelajaran->nama_pelajaran }}</option>
-            @endforeach
-         </select>
-         <div style="margin-top:40px;">
-    <input
-        type="date"
-        name="tanggal_peminjaman"
-        style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; padding:0 15px;">
-</div>
-    <div><a href="/dashboard"
-    id="btnAjukan"
-   class="btn btn-primary d-flex justify-content-center align-items-center"
-   style="width:100%; height:45px; border-radius:15px; background:#102C6B; margin-top:40px;">
-    Ajukan Peminjaman
-</a></div>
-</form>
-         
 
-</div>
+ </div>
 
-</div>
+ <div class="card">
+  <h3 class="card-title">Info profil Admin</h3>
+ <p>Nama admin:</p>
+<p>Username:</p>
+ </div>
 
+
+
+<!-- =========================
+     JAVASCRIPT HAMBURGER
+     ========================= -->
 
 <script>
 
@@ -298,6 +239,8 @@
         hamburgerDropdown.classList.toggle('show');
 
     });
+
+
 </script>
 
 </body>
