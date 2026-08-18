@@ -49,8 +49,9 @@
         }
 
         .menu-card1 {
-  width: 400px;      
+  width: auto;      
   height: 40px;
+  margin: 10px auto;
   background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
@@ -160,7 +161,7 @@
 
     <div class="menu-card">
 
-    <a href="{{ route('ajukanpeminjaman') }}" class="text-decoration-none">
+    <a href="#" class="text-decoration-none">
     <div class="box1">
         <p>Data Guru</p>
     </div>
