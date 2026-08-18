@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Utama</title>
+    <title>ajukan peminjaman</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -36,6 +36,22 @@
             text-align:center;
             font-size:30px;
         }
+.menu-card1 {
+  width: 360px;      
+  height: 40px;
+  background-color: #d9d9d9;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  padding:  10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+    .breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 5px;
+}
 
         .menu-card{
             background:#1F4E9D;
@@ -89,38 +105,80 @@
             text-align:left;
             padding:20px;
         }
-        .android-nav{
-    background:#102C6B;
-    height:55px;
-    margin-top:40px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    color:white;
-    font-size:24px;
-    position:fixed;
-    bottom:0;
-    width:360px;
-    
-}
 
-        .back{
-            color:#fff;
-            font-size:24px;
+         /* =========================
+           DROPDOWN HAMBURGER
+           ========================= */
+
+        .hamburger-container{
+            position:relative;
         }
 
-        .home{
-            width:22px;
-            height:22px;
-            background:#fff;
+        .hamburger-dropdown{
+            display:none;
+
+            position:absolute;
+
+            top:70px;
+            right:10px;
+
+            width:180px;
+
+            background:#D9D9D9;
+
+            border-radius:10px;
+
+            overflow:hidden;
+
+            z-index:1000;
         }
 
-        .recent{
-            width:24px;
-            height:24px;
-            background:#fff;
-            border-radius:50%;
+        .hamburger-dropdown.show{
+            display:block;
         }
+
+        .hamburger-dropdown a{
+            display:block;
+
+            padding:15px;
+
+            color:#222;
+
+            text-decoration:none;
+
+            text-align:center;
+
+            font-size:14px;
+        }
+
+        .hamburger-dropdown a:hover{
+            background:#c5c5c5;
+        }
+
+        .hamburger-dropdown form{
+            margin:0;
+        }
+
+        .hamburger-dropdown button{
+            width:100%;
+
+            padding:15px;
+
+            border:none;
+
+            background:#D9D9D9;
+
+            color:#222;
+
+            font-size:14px;
+
+            cursor:pointer;
+        }
+
+        .hamburger-dropdown button:hover{
+            background:#c5c5c5;
+        }
+
 
     </style>
 
@@ -131,10 +189,62 @@
 
     <div class="header">
     <img src="{{asset ('gambar/download.png') }}" alt="logo" class="logo" style="width:80px; height:80px; margin-right:10px; border-radius:20%">
-    <button class="btn text-white">
-    <i class="bi bi-list fs-1"></i>
-</button>
 
+  <!-- HAMBURGER -->
+        <div class="hamburger-container">
+
+            <button
+                class="btn text-white"
+                id="hamburgerBtn"
+                type="button"
+            >
+                <i class="bi bi-list fs-1"></i>
+            </button>
+
+
+            <!-- DROPDOWN -->
+            <div
+                class="hamburger-dropdown"
+                id="hamburgerDropdown"
+            >
+
+                <!-- PROFIL -->
+                <a href="{{ route('profil.guru') }}">
+                    Profil
+                </a>
+
+
+                <!-- UBAH PASSWORD -->
+                <a href="{{ route('ubah.password') }}">
+                    Ubah Password
+                </a>
+
+
+                <!-- LOG OUT -->
+                <form
+                    action="{{ route('logout') }}"
+                    method="POST"
+                >
+                    @csrf
+
+                    <button type="submit">
+                        Log out
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<div class="menu-card1">
+  <nav class="breadcrumb">
+    <a href="#">Home</a> >
+    <a href="#">profil</a>
+  </nav>
+  
     </div>
 <div class="text-atas"><p>Peminjaman Lab</p></div>
     <div class="menu-card">
@@ -146,9 +256,8 @@
     
     <select class="pilih-guru" name="Guru_id" style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; margin-top:40px;"> 
          <option value="" selected disabled hidden><p>Silahkan Pilih Guru</option>    
-         @foreach($gurus as $guru)
-            <option value="{{ $guru->id }}" >{{ $guru->nama_guru }}</option>
-             @endforeach
+         
+            <option></option>
          </select>
         <select class="pilih-guru" name="Pelajaran_id[]"  style="width:100%; height:45px; border-radius:15px; background:#D9D9D9; border:none; margin-top:40px;">
                
@@ -174,31 +283,21 @@
 
 </div>
 
-    <div class="android-nav">
-
-        <div class="back">◀</div>
-
-        <div class="home"></div>
-
-        <div class="recent"></div>
-
-    </div>
-
 </div>
 
+
 <script>
-document.getElementById('btnAjukan').addEventListener('click', function (e) {
 
-    const guru = document.querySelector('select[name="Guru_id"]').value;
-    const pelajaran = document.querySelector('select[name="Pelajaran_id[]"]').value;
-    const tanggal = document.querySelector('input[name="tanggal_peminjaman"]').value;
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
 
-    if (!guru || !pelajaran || !tanggal) {
-        e.preventDefault(); // Membatalkan pindah halaman
-        alert('Silakan lengkapi Guru, Mata Pelajaran, dan Tanggal terlebih dahulu.');
-    }
+    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
 
-});
+
+    hamburgerBtn.addEventListener('click', function () {
+
+        hamburgerDropdown.classList.toggle('show');
+
+    });
 </script>
 
 </body>
