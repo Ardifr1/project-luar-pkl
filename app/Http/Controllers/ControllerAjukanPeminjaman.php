@@ -25,9 +25,9 @@ class ControllerAjukanPeminjaman extends Controller
             'lab_id' => 'required|exists:lab,id',
             'pelajaran_id' => 'required|exists:pelajaran,id',
             'keterangan' => 'required|string',
-            'tanggal' => 'required|date',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required|after:jam_mulai',
+            'tanggal_peminjaman' => 'required|date',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
         ]);
 
         // Pastikan pelajaran memang dimiliki oleh guru yang login
@@ -44,18 +44,21 @@ class ControllerAjukanPeminjaman extends Controller
                 ->withInput();
         }
 
+        // Simpan peminjaman
         Peminjaman::create([
             'user_id' => auth()->id(),
             'lab_id' => $request->lab_id,
             'pelajaran_id' => $request->pelajaran_id,
             'keterangan' => $request->keterangan,
-            'tanggal' => $request->tanggal,
+            'tanggal' => $request->tanggal_peminjaman,
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'status' => 'menunggu',
         ]);
 
-        return redirect('/ajukan-peminjaman')
+        // Setelah berhasil kembali ke dashboard
+        return redirect()
+            ->route('dashboard')
             ->with('success', 'Pengajuan peminjaman berhasil dikirim.');
     }
 
