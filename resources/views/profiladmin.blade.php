@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Guru</title>
+    <title>Profil Admin</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -216,10 +216,9 @@ body{
  </div>
 
  <div class="card">
-  <h3 class="card-title">Info profil guru</h3>
- <p>nama:</p>
-<p>mapel:</p>
-<p>NIP</p>
+  <h3 class="card-title">Info profil Admin</h3>
+ <p>Nama admin:</p>
+<p>Username:</p>
  </div>
 
 
