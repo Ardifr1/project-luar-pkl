@@ -94,8 +94,6 @@
             padding: 15px;
             border-radius: 4px;
 
-            /* Supaya pagination bisa
-               ditempatkan di bawah */
             position: relative;
         }
 
@@ -114,7 +112,7 @@
 
         .table {
             margin-bottom: 0;
-             border: 2px solid #000;
+            border: 2px solid #000;
         }
 
         .table thead th {
@@ -195,7 +193,6 @@
         .pagination-container {
             position: absolute;
 
-            /* Letakkan di bagian bawah */
             bottom: 20px;
 
             left: 0;
@@ -399,7 +396,7 @@
 
             >
 
-            <a href="{{ route('data.guru') }}">
+            <a href="{{ route('data.lab') }}">
                 Data Lab
             </a>
 
@@ -436,7 +433,7 @@
         <div class="tambah-container">
 
             <a
-                href="#"
+                href="{{ route('tambah.datalab') }}"
                 class="btn-tambah"
             >
                 Tambah
@@ -460,18 +457,14 @@
 
         <div class="table-responsive">
 
-            <table class="table table-bordered" border >
+            <table class="table table-bordered">
 
                 <thead>
 
                     <tr>
 
                         <th>
-                            Nama
-                        </th>
-
-                        <th>
-                            NIP
+                            Nama Lab
                         </th>
 
                         <th>
@@ -489,17 +482,16 @@
 
                 <tbody>
 
-                    @forelse ($guru as $g)
+                    @forelse ($lab as $l)
 
                         <tr>
 
                             <td>
-                                {{ $g->name }}
+                                {{ $l->nama_lab }}
                             </td>
 
-                            <td>
-                                {{ $g->nip }}
-                            </td>
+                        
+
 
 
                             <!-- EDIT -->
@@ -507,7 +499,7 @@
                             <td>
 
                                 <a
-                                    href="#"
+                                    href="{{ route('edit.datalab', $l->id) }}"
                                     class="btn-edit"
                                 >
                                     edit
@@ -521,7 +513,7 @@
                             <td>
 
                                 <form
-                                    action="#"
+                                    action="{{ route('hapus.datalab', $l->id) }}"
                                     method="POST"
                                 >
 
@@ -548,11 +540,11 @@
                         <tr>
 
                             <td
-                                colspan="4"
+                                colspan="5"
                                 class="text-center"
                             >
 
-                                Belum ada data guru.
+                                Belum ada data lab.
 
                             </td>
 

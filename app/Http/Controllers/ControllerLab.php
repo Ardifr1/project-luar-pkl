@@ -2,15 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Lab;
 
 class ControllerLab extends Controller
 {
-    // Menampilkan data guru
+    // =========================
+    // MENAMPILKAN DATA LAB
+    // =========================
+
     public function index()
     {
-        $guru = User::where('role', 'guru')->get();
+        $lab = Lab::all();
 
-        return view('data-lab', compact('guru'));
+        return view('data-lab', compact('lab'));
+    }
+
+
+    // =========================
+    // HAPUS DATA LAB
+    // =========================
+
+    public function destroy($id)
+    {
+        $lab = Lab::findOrFail($id);
+
+        // Hapus data lab
+        $lab->delete();
+
+        return redirect()
+            ->route('data.lab')
+            ->with('success', 'Data lab berhasil dihapus.');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
@@ -19,6 +20,11 @@ use App\Http\Controllers\Controllereditdataguru;
 use App\Http\Controllers\Controllertambahdatalab;
 use App\Http\Controllers\Controllereditdatalab;
 
+
+// =========================
+// WELCOME
+// =========================
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,22 +34,24 @@ Route::get('/', function () {
 // LOGIN
 // =========================
 
-// Halaman pilihan: Admin atau Guru
+// Halaman login
 Route::get('/login', [ControllerLogin::class, 'index'])
     ->name('login');
 
+// Proses login
 Route::post('/login', [ControllerLogin::class, 'login'])
     ->name('login.submit');
+
 
 // =========================
 // LOGIN ADMIN
 // =========================
 
-// Menampilkan halaman login admin
+// Halaman login admin
 Route::get('/login/admin', [ControllerLogin::class, 'admin'])
     ->name('login.admin');
 
-// Memproses login admin
+// Proses login admin
 Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
     ->name('login.admin.submit');
 
@@ -52,11 +60,11 @@ Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
 // LOGIN GURU
 // =========================
 
-// Menampilkan halaman login guru
+// Halaman login guru
 Route::get('/login/guru', [ControllerLogin::class, 'guru'])
     ->name('login.guru');
 
-// Memproses login guru
+// Proses login guru
 Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
     ->name('login.guru.submit');
 
@@ -67,35 +75,108 @@ Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
 
 Route::get('/dashboard', [ControllerDashboard::class, 'index'])
     ->name('dashboard');
-    
+
 Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
     ->name('dashboardadmin');
 
 
 // =========================
-// Data Guru(Admin)   
+// DATA GURU (ADMIN)
 // =========================
+
+// Menampilkan data guru
 Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
     ->name('data.guru');
 
-Route::get('/tambah-guru',[Controllertambahguru::class, 'index']);
 
-Route::get('/editdataguru',[Controllereditdataguru::class,'index']);
 // =========================
-// Data Lab(Admin)   
+// TAMBAH GURU
 // =========================
-Route::get('/data-lab', [ControllerLab::class, 'index']);
 
-Route::get('/tambah-datalab',[Controllertambahdatalab::class,'index']);
+// Menampilkan halaman tambah guru
+Route::get('/tambah-guru', [Controllertambahguru::class, 'index'])
+    ->name('tambah.guru');
 
-Route::get('/edit-datalab',[Controllereditdatalab::class,'index']);
+// Menyimpan data guru
+Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
+    ->name('tambah.guru.store');
+
+
+// =========================
+// EDIT GURU
+// =========================
+
+// Menampilkan halaman edit guru
+Route::get('/editdataguru/{id}', [Controllereditdataguru::class, 'index'])
+    ->name('edit.guru');
+
+// Menyimpan perubahan data guru
+Route::put('/editdataguru/{id}', [Controllereditdataguru::class, 'update'])
+    ->name('update.guru');
+
+
+// =========================
+// HAPUS GURU
+// =========================
+
+// Menghapus data guru
+Route::delete('/data-guru/{id}', [ControllerDataGuru::class, 'destroy'])
+    ->name('data.guru.destroy');
+
+
+// =========================
+// DATA LAB (ADMIN)
+// =========================
+
+// Menampilkan data lab
+Route::get('/data-lab', [ControllerLab::class, 'index'])
+    ->name('data.lab');
+
+
+// =========================
+// TAMBAH LAB
+// =========================
+
+// Menampilkan halaman tambah lab
+Route::get('/tambah-datalab', [Controllertambahdatalab::class, 'index'])
+    ->name('tambah.datalab');
+
+// Menyimpan data lab
+Route::post('/tambah-datalab', [Controllertambahdatalab::class, 'store'])
+    ->name('tambah.datalab.store');
+
+
+// =========================
+// EDIT LAB
+// =========================
+
+// Menampilkan halaman edit lab
+Route::get('/edit-datalab/{id}', [Controllereditdatalab::class, 'index'])
+    ->name('edit.datalab');
+
+// Menyimpan perubahan data lab
+Route::put('/edit-datalab/{id}', [Controllereditdatalab::class, 'update'])
+    ->name('update.datalab');
+
+
+// =========================
+// HAPUS LAB
+// =========================
+
+// Menghapus data lab
+Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
+    ->name('hapus.datalab');
+
+
 // =========================
 // PEMINJAMAN LAB
 // =========================
 
+// Halaman ajukan peminjaman
 Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
     ->name('ajukanpeminjaman');
 
+// Proses ajukan peminjaman
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
@@ -121,29 +202,34 @@ Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
 
 
 // =========================
-// Profil
+// PROFIL
 // =========================
 
+// Profil guru
 Route::get('/profil-guru', [ControllerProfil::class, 'guru'])
     ->name('profil.guru');
 
+// Profil admin
 Route::get('/profil-admin', [ProfiladminController::class, 'admin'])
     ->name('profil.admin');
+
 
 // =========================
 // UBAH PASSWORD
 // =========================
 
+// Halaman ubah password
 Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
     ->name('ubah.password');
 
+// Proses ubah password
 Route::post('/ubah-password', [ControllerPassword::class, 'update'])
     ->name('ubah.password.update');
 
-    // =========================
-    // LOGOUT   
-    // =========================
 
-Route::get('/logout', [ControllerLogin::class, 'logout'])
+// =========================
+// LOGOUT
+// =========================
+
+Route::post('/logout', [ControllerLogin::class, 'logout'])
     ->name('logout');
-

@@ -94,8 +94,6 @@
             padding: 15px;
             border-radius: 4px;
 
-            /* Supaya pagination bisa
-               ditempatkan di bawah */
             position: relative;
         }
 
@@ -114,7 +112,7 @@
 
         .table {
             margin-bottom: 0;
-             border: 2px solid #000;
+            border: 2px solid #000;
         }
 
         .table thead th {
@@ -195,7 +193,6 @@
         .pagination-container {
             position: absolute;
 
-            /* Letakkan di bagian bawah */
             bottom: 20px;
 
             left: 0;
@@ -436,7 +433,7 @@
         <div class="tambah-container">
 
             <a
-                href="#"
+                href="{{ route('tambah.guru') }}"
                 class="btn-tambah"
             >
                 Tambah
@@ -460,7 +457,7 @@
 
         <div class="table-responsive">
 
-            <table class="table table-bordered" border >
+            <table class="table table-bordered">
 
                 <thead>
 
@@ -507,7 +504,7 @@
                             <td>
 
                                 <a
-                                    href="#"
+                                    href="{{ route('edit.guru', $g->id) }}"
                                     class="btn-edit"
                                 >
                                     edit
@@ -520,23 +517,20 @@
 
                             <td>
 
-                                <form
-                                    action="#"
-                                    method="POST"
-                                >
+                            <form
+    action="{{ route('data.guru.destroy', $g->id) }}"
+    method="POST"
+>
+    @csrf
+    @method('DELETE')
 
-                                    @csrf
-
-                                    @method('DELETE')
-
-                                    <button
-                                        type="submit"
-                                        class="btn-hapus"
-                                    >
-                                        hapus
-                                    </button>
-
-                                </form>
+    <button
+        type="submit"
+        class="btn-hapus"
+    >
+        hapus
+    </button>
+</form>
 
                             </td>
 
