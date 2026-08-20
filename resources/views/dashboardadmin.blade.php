@@ -287,17 +287,27 @@
 
     <div class="menu-card">
 
-    <a href="#" class="text-decoration-none">
+    <a href="/data-guru" class="text-decoration-none" style="color:black;">
     <div class="box1">
         <p>Data Guru</p>
     </div>
 </a>
-        <div class="box2"> <p>Data Lab</p>   
+<a href="#" class="text-decoration-none" style="color:black;">
+    <div class="box2"> <p>Data Lab</p>   
         </div>
-        <div class="box3"> <p>Laporan</p>    
+</a>
+<a href="#" class="text-decoration-none" style="color:black;">
+    <div class="box3"> <p>Laporan</p>    
         </div>
-        <div class="box4"> <p>Daftar ajukan</p>
+</a>
+<a href="#" class="text-decoration-none" style="color:black;">
+    <div class="box4"> <p>Daftar ajukan</p>
         </div>
+</a>
+
+       
+       
+       
 </div>
 
    

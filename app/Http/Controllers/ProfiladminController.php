@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProfiladminController extends Controller
 {
-    //
-     // Menampilkan profil admin
-    public function admin()
-    {
-        return view('profiladmin');
-    }
+public function admin()
+{
+    $admin = User::find(session('user_id'));
+
+    return view('profil-admin', compact('admin'));
+}
 }

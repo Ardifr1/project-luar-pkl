@@ -10,7 +10,9 @@ use App\Http\Controllers\ControllerDashboardAdmin;
 use App\Http\Controllers\ControllerProfil;
 use App\Http\Controllers\ProfiladminController;
 
-use App\Http\Controllers\ControllerPassword; 
+use App\Http\Controllers\ControllerPassword;
+
+use App\Http\Controllers\ControllerDataGuru;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,6 +65,13 @@ Route::get('/dashboard', [ControllerDashboard::class, 'index'])
     
 Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
     ->name('dashboardadmin');
+
+
+// =========================
+// Data Guru(Admin)   
+// =========================
+Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
+    ->name('data.guru');
 
 
 

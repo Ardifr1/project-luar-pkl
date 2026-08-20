@@ -209,7 +209,7 @@ body{
 
  <div class="menu-card1">
   <nav class="breadcrumb">
-    <a href="#">Home</a> >
+    <a href="/dashboardadmin">Home</a> >
     <a href="#">profil</a>
   </nav>
 
@@ -217,6 +217,7 @@ body{
 
  <div class="card">
   <h3 class="card-title">Info profil Admin</h3>
+ <p>Nama admin:</p>
 <p>Username:</p>
  </div>
 
