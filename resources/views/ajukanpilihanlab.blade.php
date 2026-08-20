@@ -121,6 +121,77 @@ body{
             background:#c5c5c5;
         }
 
+.lab-section {
+  text-align: center;
+  margin: 2rem auto;
+  width: 90%;
+}
+
+.lab-container {
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.lab-card {
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  padding: 1rem;
+  width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.lab-card h4 {
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
+}
+
+.lab-card input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+
+.lab-card button {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lab-card button:hover {
+  background-color: #3b82f6;
+}
+
+.pagination {
+  margin-top: 1rem;
+}
+
+.pagination button {
+  background-color: #f1f5f9;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  margin: 0 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+
+
 </style>
 
 </head>
@@ -192,6 +263,46 @@ body{
   </nav>
 
  </div>
+<section class="lab-section">
+  <h2>Silahkan Pilih Lab</h2>
+
+  <div class="lab-container">
+    <div class="lab-card">
+      <h4>Lab 1</h4>
+      <label>Peminjam :</label>
+      <input type="text" placeholder="Nama peminjam">
+      <button>Ajukan</button>
+    </div>
+
+    <div class="lab-card">
+      <h4>Lab 2</h4>
+      <label>Peminjam :</label>
+      <input type="text" placeholder="Nama peminjam">
+      <button>Ajukan</button>
+    </div>
+
+    <div class="lab-card">
+      <h4>Lab 3</h4>
+      <label>Peminjam :</label>
+      <input type="text" placeholder="Nama peminjam">
+      <button>Ajukan</button>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button>&lt;</button>
+    <button class="active">1</button>
+    <button> <a href="">2</a></button>
+    <button><a href="">3</a></button>
+    <button><a href="">4</a></button>
+    <button>&gt;</button>
+  </div>
+</section>
+
+
+
+
+
 
 
 <!-- =========================
