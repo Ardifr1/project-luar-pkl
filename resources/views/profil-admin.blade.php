@@ -217,8 +217,11 @@ body{
 
  <div class="card">
   <h3 class="card-title">Info profil Admin</h3>
- <p>Nama admin:</p>
-<p>Username:</p>
+
+<p>
+    <strong>Username:</strong>
+    {{ $admin->username }}
+</p>
  </div>
 
 
