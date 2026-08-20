@@ -11,6 +11,6 @@ class ControllerLab extends Controller
     {
         $guru = User::where('role', 'guru')->get();
 
-        return view('data-guru', compact('guru'));
+        return view('data-lab', compact('guru'));
     }
 }

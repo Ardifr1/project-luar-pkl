@@ -14,7 +14,10 @@ use App\Http\Controllers\ControllerPassword;
 
 use App\Http\Controllers\ControllerDataGuru;
 use App\Http\Controllers\ControllerLab;
-
+use App\Http\Controllers\Controllertambahguru;
+use App\Http\Controllers\Controllereditdataguru;
+use App\Http\Controllers\Controllertambahdatalab;
+use App\Http\Controllers\Controllereditdatalab;
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,12 +78,17 @@ Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
 Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
     ->name('data.guru');
 
+Route::get('/tambah-guru',[Controllertambahguru::class, 'index']);
+
+Route::get('/editdataguru',[Controllereditdataguru::class,'index']);
 // =========================
 // Data Lab(Admin)   
 // =========================
 Route::get('/data-lab', [ControllerLab::class, 'index']);
 
+Route::get('/tambah-datalab',[Controllertambahdatalab::class,'index']);
 
+Route::get('/edit-datalab',[Controllereditdatalab::class,'index']);
 // =========================
 // PEMINJAMAN LAB
 // =========================

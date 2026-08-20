@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tambah data guru</title>
+    <title>tambah data lab</title>
 
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -260,34 +260,52 @@ form input {
     <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
-    <a href="#">tambah guru</a>
+    <a href="#">data lab</a> >
+    <a href="#">tambah data lab</a>
   </nav>
 </div>
 
 <div class="form-container">
   <div class="form-header">
     <h3>Tambah Data</h3>
-    <div class="form-actions">
-      <button class="btn-cancel">Batal</button>
-      <button class="btn-add">Tambah</button>
-    </div>
   </div>
 
   <form>
     <label>Nama</label>
-    <input type="text" placeholder="Masukkan nama guru">
+    <input type="text" placeholder="Masukkan Nama">
 
-    <label>Mapel</label>
-    <input type="text" placeholder="Masukkan mata pelajaran">
+    <label>Kapasitas murid</label>
+    <input type="text" placeholder="Masukkan Kapasitas murid">
 
-    <label>NIP</label>
-    <input type="text" placeholder="Masukkan NIP">
+    <label>Status</label>
+    <input type="text" placeholder="Masukkan STATUS">
 
-    <label>Password</label>
-    <input type="password" placeholder="Masukkan password">
   </form>
 </div>
 
+ <div class="form-actions">
+      <button class="btn-cancel">Batal</button>
+      <button class="btn-add">Tambah</button>
+    </div>
+<!-- =========================
+     JAVASCRIPT HAMBURGER
+     ========================= -->
+
+<script>
+
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+
+
+    hamburgerBtn.addEventListener('click', function () {
+
+        hamburgerDropdown.classList.toggle('show');
+
+    });
+
+
+</script>
 
 </body>
 </html>

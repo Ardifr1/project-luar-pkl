@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Guru</title>
+    <title>Data Lab</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -83,7 +83,7 @@
         }
 
         /* =========================
-           DATA GURU
+           DATA LAB
            ========================= */
 
         .data-container {
@@ -400,7 +400,7 @@
             >
 
             <a href="{{ route('data.guru') }}">
-                Data Guru
+                Data Lab
             </a>
 
         </nav>
@@ -425,7 +425,7 @@
 
 
     <!-- =========================
-         DATA GURU
+         DATA LAB
          ========================= -->
 
     <div class="data-container">
@@ -449,7 +449,7 @@
 
         <div class="data-title">
 
-            Data guru
+            Data Lab
 
         </div>
 
