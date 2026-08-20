@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tambah Data Lab</title>
+    <title>Tambah Data Guru</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -185,15 +185,6 @@
             border-radius:4px;
         }
 
-        /* STATUS */
-
-        form.guru-form select {
-            padding:0.5rem;
-            border:1px solid #cbd5e1;
-            border-radius:4px;
-            background-color:white;
-        }
-
         .mapel-container {
             background:white;
             border:1px solid #cbd5e1;
@@ -334,14 +325,14 @@
 
             >
 
-            <a href="{{ route('data.lab') }}">
-                Data Lab
+            <a href="{{ route('data.guru') }}">
+                Data Guru
             </a>
 
             >
 
             <a href="#">
-                Tambah Lab
+                Tambah Guru
             </a>
 
         </nav>
@@ -350,7 +341,7 @@
 
 
     <!-- =========================
-         FORM TAMBAH LAB
+         FORM TAMBAH GURU
          ========================= -->
 
     <div class="form-container">
@@ -366,7 +357,7 @@
 
         <form
             class="guru-form"
-            action="{{ route('tambah.datalab.store') }}"
+            action="{{ route('tambah.guru.store') }}"
             method="POST"
         >
 
@@ -374,23 +365,23 @@
 
 
             <!-- =========================
-                 NAMA LAB
+                 NAMA
                  ========================= -->
 
-            <label for="nama_lab">
+            <label for="name">
                 Nama
             </label>
 
             <input
                 type="text"
-                id="nama_lab"
-                name="nama_lab"
-                value="{{ old('nama_lab') }}"
-                placeholder="Masukkan Nama"
+                id="name"
+                name="name"
+                value="{{ old('name') }}"
+                placeholder="Masukkan nama guru"
                 required
             >
 
-            @error('nama_lab')
+            @error('name')
 
                 <div class="error-message">
                     {{ $message }}
@@ -400,24 +391,23 @@
 
 
             <!-- =========================
-                 KAPASITAS MURID
+                 NIP
                  ========================= -->
 
-            <label for="kapasitas_murid">
-                Kapasitas murid
+            <label for="nip">
+                NIP
             </label>
 
             <input
-                type="number"
-                id="kapasitas_murid"
-                name="kapasitas_murid"
-                value="{{ old('kapasitas_murid') }}"
-                placeholder="Masukkan Kapasitas murid"
-                min="1"
+                type="text"
+                id="nip"
+                name="nip"
+                value="{{ old('nip') }}"
+                placeholder="Masukkan NIP"
                 required
             >
 
-            @error('kapasitas_murid')
+            @error('nip')
 
                 <div class="error-message">
                     {{ $message }}
@@ -427,47 +417,72 @@
 
 
             <!-- =========================
-                 STATUS
+                 PASSWORD
                  ========================= -->
 
-            <label for="status">
-                Status
+            <label for="password">
+                Password
             </label>
 
-            <select
-                id="status"
-                name="status"
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Masukkan password"
                 required
             >
 
-                <option value="">
-                    Pilih status
-                </option>
+            @error('password')
 
-                <option
-                    value="tersedia"
-                    {{ old('status') == 'tersedia' ? 'selected' : '' }}
-                >
-                    Tersedia
-                </option>
+                <div class="error-message">
+                    {{ $message }}
+                </div>
 
-                <option
-                    value="tidak_tersedia"
-                    {{ old('status') == 'tidak_tersedia' ? 'selected' : '' }}
-                >
-                    Tidak Tersedia
-                </option>
+            @enderror
 
-                <option
-                    value="sedang_maintenance"
-                    {{ old('status') == 'sedang_maintenance' ? 'selected' : '' }}
-                >
-                    Sedang Maintenance
-                </option>
 
-            </select>
+            <!-- =========================
+                 MAPEL
+                 ========================= -->
 
-            @error('status')
+            <label>
+                Mapel
+            </label>
+
+            <div class="mapel-container">
+
+                @forelse($pelajaran as $mapel)
+
+                    <div class="mapel-item">
+
+                        <input
+                            type="checkbox"
+                            id="mapel{{ $mapel->id }}"
+                            name="pelajaran[]"
+                            value="{{ $mapel->id }}"
+
+                            @if(is_array(old('pelajaran')) && in_array($mapel->id, old('pelajaran')))
+                                checked
+                            @endif
+                        >
+
+                        <label for="mapel{{ $mapel->id }}">
+                            {{ $mapel->nama_pelajaran }}
+                        </label>
+
+                    </div>
+
+                @empty
+
+                    <div>
+                        Belum ada data pelajaran.
+                    </div>
+
+                @endforelse
+
+            </div>
+
+            @error('pelajaran')
 
                 <div class="error-message">
                     {{ $message }}
@@ -483,7 +498,7 @@
             <div class="form-actions">
 
                 <a
-                    href="{{ route('data.lab') }}"
+                    href="{{ route('data.guru') }}"
                     class="btn-cancel"
                 >
                     Batal
