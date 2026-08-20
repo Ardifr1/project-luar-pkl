@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 
 class ControllerProfil extends Controller
 {
-    // Menampilkan profil guru
     public function guru()
     {
-        return view('profil-guru');
+        $guru = User::find(session('user_id'));
+
+        return view('profil-guru', compact('guru'));
     }
 }

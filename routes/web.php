@@ -8,6 +8,7 @@ use App\Http\Controllers\ControllerGuru;
 use App\Http\Controllers\ControllerDashboardAdmin;
 
 use App\Http\Controllers\ControllerProfil;
+use App\Http\Controllers\ProfiladminController;
 
 use App\Http\Controllers\ControllerPassword; 
 
@@ -96,9 +97,15 @@ Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
     ->name('guru.destroy');
 
 
+// =========================
+// Profil
+// =========================
 
 Route::get('/profil-guru', [ControllerProfil::class, 'guru'])
     ->name('profil.guru');
+
+Route::get('/profil-admin', [ProfiladminController::class, 'admin'])
+    ->name('profil.admin');
 
 // =========================
 // UBAH PASSWORD
