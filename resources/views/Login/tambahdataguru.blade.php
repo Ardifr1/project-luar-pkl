@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajukan pilihan lab</title>
+    <title>tambah data guru</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-body{
+
+        body{
             background:#222;
         }
 
@@ -30,7 +31,24 @@ body{
         }
 
 
-        .menu-card1 {
+        .menu-card{
+            background:#1F4E9D;
+            width:320px;
+            margin:50px auto;
+            padding:20px;
+            border-radius:4px;
+            box-shadow:0 3px 8px rgba(0,0,0,.2);
+            border-radius:15px;
+        }
+
+        .menu-text{
+            color:white;
+            text-align:center;
+            margin-top:10px;
+            font-size:18px;
+        }
+
+.menu-card1 {
   width: 400px;      
   height: 40px;
   background-color: #d9d9d9;
@@ -48,7 +66,7 @@ body{
   margin-right: 5px;
 }
 
- /* =========================
+/* =========================
            DROPDOWN HAMBURGER
            ========================= */
 
@@ -121,81 +139,63 @@ body{
             background:#c5c5c5;
         }
 
-.lab-section {
-  text-align: center;
-  margin: 2rem auto;
-  width: 90%;
-}
-
-.lab-container {
+.form-container {
   background-color: #e2e8f0;
   border-radius: 8px;
   padding: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f5f9;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.form-actions button {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #94a3b8;
+  color: white;
+}
+
+.btn-add {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+  gap: 0.8rem;
 }
 
-.lab-card {
-  background-color: #f1f5f9;
-  border-radius: 6px;
-  padding: 1rem;
-  width: 80%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: left;
+form label {
+  font-weight: 500;
 }
 
-.lab-card h4 {
-  margin-bottom: 0.5rem;
-  color: #1e3a8a;
-}
-
-.lab-card input {
-  width: 100%;
+form input {
   padding: 0.5rem;
-  margin: 0.5rem 0;
   border: 1px solid #cbd5e1;
   border-radius: 4px;
 }
 
-.lab-card button {
-  background-color: #1e3a8a;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.lab-card button:hover {
-  background-color: #3b82f6;
-}
-
-.pagination {
-  margin-top: 1rem;
-}
-
-.pagination button {
-  background-color: #f1f5f9;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  margin: 0 0.2rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.pagination .active {
-  background-color: #1e3a8a;
-  color: white;
-}
-
-
 
 </style>
-
 </head>
 <body>
+   
 <div class="phone">
 
     <div class="header">
@@ -226,7 +226,7 @@ body{
             >
 
                 <!-- PROFIL -->
-                <a href="{{ route('profil.guru') }}">
+                <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
@@ -256,74 +256,38 @@ body{
 
     </div>
 
- <div class="menu-card1">
+    
+    <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
-    <a href="#">profil</a>
+    <a href="#">tambah guru</a>
   </nav>
+</div>
 
- </div>
-<section class="lab-section">
-  <h2>Silahkan Pilih Lab</h2>
-
-  <div class="lab-container">
-    <div class="lab-card">
-      <h4>Lab 1</h4>
-      <label>Peminjam :</label>
-      <input type="text" placeholder="Nama peminjam">
-      <button>Ajukan</button>
-    </div>
-
-    <div class="lab-card">
-      <h4>Lab 2</h4>
-      <label>Peminjam :</label>
-      <input type="text" placeholder="Nama peminjam">
-      <button>Ajukan</button>
-    </div>
-
-    <div class="lab-card">
-      <h4>Lab 3</h4>
-      <label>Peminjam :</label>
-      <input type="text" placeholder="Nama peminjam">
-      <button>Ajukan</button>
+<div class="form-container">
+  <div class="form-header">
+    <h3>Tambah Data</h3>
+    <div class="form-actions">
+      <button class="btn-cancel">Batal</button>
+      <button class="btn-add">Tambah</button>
     </div>
   </div>
 
-  <div class="pagination">
-    <button>&lt;</button>
-    <button class="active">1</button>
-    <button> <a href="">2</a></button>
-    <button><a href="">3</a></button>
-    <button><a href="">4</a></button>
-    <button>&gt;</button>
-  </div>
-</section>
+  <form>
+    <label>Nama</label>
+    <input type="text" placeholder="Masukkan nama guru">
 
+    <label>Mapel</label>
+    <input type="text" placeholder="Masukkan mata pelajaran">
 
+    <label>NIP</label>
+    <input type="text" placeholder="Masukkan NIP">
 
+    <label>Password</label>
+    <input type="password" placeholder="Masukkan password">
+  </form>
+</div>
 
-
-
-
-<!-- =========================
-     JAVASCRIPT HAMBURGER
-     ========================= -->
-
-<script>
-
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-
-    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
-
-
-    hamburgerBtn.addEventListener('click', function () {
-
-        hamburgerDropdown.classList.toggle('show');
-
-    });
-
-
-</script>
 
 </body>
 </html>
