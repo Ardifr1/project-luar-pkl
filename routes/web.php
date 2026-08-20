@@ -19,7 +19,8 @@ use App\Http\Controllers\Controllertambahguru;
 use App\Http\Controllers\Controllereditdataguru;
 use App\Http\Controllers\Controllertambahdatalab;
 use App\Http\Controllers\Controllereditdatalab;
-
+use App\Http\Controllers\Controllertambahmapel;
+use App\Http\Controllers\Controllerdatamapel;
 
 // =========================
 // WELCOME
@@ -101,7 +102,6 @@ Route::get('/tambah-guru', [Controllertambahguru::class, 'index'])
 Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
     ->name('tambah.guru.store');
 
-
 // =========================
 // EDIT GURU
 // =========================
@@ -167,6 +167,16 @@ Route::put('/edit-datalab/{id}', [Controllereditdatalab::class, 'update'])
 Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
     ->name('hapus.datalab');
 
+
+// =========================
+// TAMBAH MAPEL
+// =========================
+Route::get('/tambah-mapel',[Controllertambahmapel::class,'index']);
+
+// =========================
+// DATA MAPEL
+// =========================
+Route::get('/datamapel',[Controllerdatamapel::class,'index']);
 
 // =========================
 // PEMINJAMAN LAB
