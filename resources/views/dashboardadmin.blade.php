@@ -292,7 +292,7 @@
         <p>Data Guru</p>
     </div>
 </a>
-<a href="#" class="text-decoration-none" style="color:black;">
+<a href="/data-lab" class="text-decoration-none" style="color:black;">
     <div class="box2"> <p>Data Lab</p>   
         </div>
 </a>
