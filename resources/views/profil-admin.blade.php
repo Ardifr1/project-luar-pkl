@@ -190,7 +190,7 @@ body{
 
                 <!-- LOG OUT -->
                 <form
-                    action="{{ route('logout') }}"
+                    action="{{ route('login') }}"
                     method="POST"
                 >
                     @csrf
@@ -217,10 +217,8 @@ body{
 
  <div class="card">
   <h3 class="card-title">Info profil Admin</h3>
-<p>
-    <strong>Username:</strong>
-    {{ $admin->username }}
-</p>
+ <p>Nama admin:</p>
+<p>Username:</p>
  </div>
 
 

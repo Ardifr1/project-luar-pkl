@@ -256,7 +256,7 @@
 
                 <!-- LOG OUT -->
                 <form
-                    action="{{ route('login') }}"
+                    action="{{ route('logout') }}"
                     method="POST"
                 >
                     @csrf
