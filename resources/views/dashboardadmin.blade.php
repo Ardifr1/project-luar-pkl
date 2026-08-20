@@ -243,7 +243,7 @@
             >
 
                 <!-- PROFIL -->
-                <a href="{{ route('profil.guru') }}">
+                <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
@@ -256,7 +256,7 @@
 
                 <!-- LOG OUT -->
                 <form
-                    action="{{ route('login') }}"
+                    action="{{ route('logout') }}"
                     method="POST"
                 >
                     @csrf
