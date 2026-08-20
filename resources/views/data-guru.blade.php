@@ -118,7 +118,7 @@
         }
 
         .table thead th {
-            background: #8b8989;
+            background: #0f2b80;
             text-align: center;
             font-size: 13px;
         }
@@ -127,7 +127,7 @@
             text-align: center;
             vertical-align: middle;
             font-size: 12px;
-            background: #8b8989;
+            background: #b8b9bb;
         }
 
         /* =========================
@@ -175,7 +175,7 @@
         }
 
         .btn-tambah {
-            background: #bdbdbd;
+            background: #27db66;
             border: none;
             padding: 5px 15px;
             font-size: 11px;
