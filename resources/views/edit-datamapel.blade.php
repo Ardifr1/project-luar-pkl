@@ -285,13 +285,13 @@
 
             >
 
-            <a href="{{ route('data.lab') }}">
+            <a href="{{ route('data.mapel') }}">
                 data mapel
             </a>
 
             >
 
-            <a href="{{ route('edit.datalab', $lab->id) }}">
+            <a href="{{ route('edit.mapel', $pelajaran->id) }}">
                 edit data mapel
             </a>
 
@@ -312,7 +312,7 @@
 
 
         <form
-            action="{{ route('update.datalab', $lab->id) }}"
+            action="{{ route('update.mapel', $pelajaran->id) }}"
             method="POST"
         >
 
@@ -331,8 +331,8 @@
 
             <input
                 type="text"
-                name="nama_lab"
-                value="{{ $lab->nama_lab }}"
+                name="nama_pelajaran"
+                value="{{ $pelajaran->nama_pelajaran }}"
                 placeholder="Masukkan Nama"
             >
 
@@ -346,7 +346,7 @@
                 <button
                     type="button"
                     class="btn-cancel"
-                    onclick="window.location.href='{{ route('data.lab') }}'"
+                    onclick="window.location.href='{{ route('data.mapel') }}'"
                 >
                     Batal
                 </button>

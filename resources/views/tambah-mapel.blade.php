@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tambah Mata pelajaran</title>
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -48,25 +48,25 @@
             font-size:18px;
         }
 
-.menu-card1 {
-  width: 400px;      
-  height: 40px;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  20px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
+        .menu-card1 {
+            width: 400px;
+            height: 40px;
+            background-color: #d9d9d9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+        }
 
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  margin-right: 5px;
-}
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 5px;
+        }
 
-/* =========================
+        /* =========================
            DROPDOWN HAMBURGER
            ========================= */
 
@@ -139,75 +139,81 @@
             background:#c5c5c5;
         }
 
-.form-container {
-  background-color: #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 85%;
-  margin: 1rem auto;
-}
+        .form-container {
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 85%;
+            margin: 1rem auto;
+        }
 
-.form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f1f5f9;
-  padding: 0.5rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f5f9;
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
 
-.form-actions button {
-  margin-left: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+        .form-actions {
+            text-align:right;
+            margin-right:40px;
+        }
 
-.btn-cancel {
-  background-color: #94a3b8;
-  color: white;
-}
+        .form-actions button {
+            margin-left: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-.btn-add {
-  background-color: #1e3a8a;
-  color: white;
-}
+        .btn-cancel {
+            background-color: #94a3b8;
+            color: white;
+        }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
+        .btn-add {
+            background-color: #1e3a8a;
+            color: white;
+        }
 
-form label {
-  font-weight: 500;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
 
-form input {
-  padding: 0.5rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-}
+        form label {
+            font-weight: 500;
+        }
 
+        form input {
+            padding: 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
 
-</style>
+    </style>
 </head>
+
 <body>
-   
+
 <div class="phone">
 
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
             style="width:100px; height:100px; margin-right:10px; border-radius:20%"
         >
 
         <!-- HAMBURGER -->
+
         <div class="hamburger-container">
 
             <button
@@ -218,30 +224,32 @@ form input {
                 <i class="bi bi-list fs-1"></i>
             </button>
 
-
             <!-- DROPDOWN -->
+
             <div
                 class="hamburger-dropdown"
                 id="hamburgerDropdown"
             >
 
                 <!-- PROFIL -->
+
                 <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
-
                 <!-- UBAH PASSWORD -->
+
                 <a href="{{ route('ubah.password') }}">
                     Ubah Password
                 </a>
 
-
                 <!-- LOG OUT -->
+
                 <form
                     action="{{ route('logout') }}"
                     method="POST"
                 >
+
                     @csrf
 
                     <button type="submit">
@@ -256,38 +264,109 @@ form input {
 
     </div>
 
-    
+
     <div class="menu-card1">
-  <nav class="breadcrumb">
-    <a href="#">Home</a> >
-    <a href="#">Tambah data mapel</a>
-  </nav>
-</div>
 
-<div class="form-container">
-  <div class="form-header">
-    <h3>Tambah Data mata pelajaran</h3>
-  </div>
+        <nav class="breadcrumb">
 
-  <form>
-    <label>Nama Mata Pelajaran</label>
-    <input type="text" placeholder="Masukkan Mata pelajaran">
-  </form>
-</div>
+            <a href="{{ route('dashboardadmin') }}">
+                Home
+            </a>
 
- <div class="form-actions">
-      <button class="btn-cancel">Batal</button>
-      <button class="btn-add">Tambah</button>
+            >
+
+            <a href="{{ route('data.mapel') }}">
+                Data Mapel
+            </a>
+
+            >
+
+            <a href="{{ route('tambah.mapel') }}">
+                Tambah data mapel
+            </a>
+
+        </nav>
+
     </div>
+
+
+    <div class="form-container">
+
+        <div class="form-header">
+
+            <h3>
+                Tambah Data mata pelajaran
+            </h3>
+
+        </div>
+
+
+        <form
+            action="{{ route('simpan.mapel') }}"
+            method="POST"
+        >
+
+            @csrf
+
+            <label>
+                Nama Mata Pelajaran
+            </label>
+
+            <input
+                type="text"
+                name="nama_pelajaran"
+                placeholder="Masukkan Mata pelajaran"
+                value="{{ old('nama_pelajaran') }}"
+                required
+            >
+
+            @error('nama_pelajaran')
+
+                <small class="text-danger">
+                    {{ $message }}
+                </small>
+
+            @enderror
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    onclick="window.location.href='{{ route('data.mapel') }}'"
+                >
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-add"
+                >
+                    Tambah
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>
+
+
 <!-- =========================
      JAVASCRIPT HAMBURGER
      ========================= -->
 
 <script>
 
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const hamburgerBtn =
+        document.getElementById('hamburgerBtn');
 
-    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+    const hamburgerDropdown =
+        document.getElementById('hamburgerDropdown');
 
 
     hamburgerBtn.addEventListener('click', function () {
@@ -295,7 +374,6 @@ form input {
         hamburgerDropdown.classList.toggle('show');
 
     });
-
 
 </script>
 

@@ -396,7 +396,7 @@
 
             >
 
-            <a href="{{ route('data.guru') }}">
+            <a href="{{ route('data.mapel') }}">
                 Data Mata pelajaran
             </a>
 
@@ -432,12 +432,12 @@
 
         <div class="tambah-container">
 
-            <a
-                href="{{ route('tambah.guru') }}"
-                class="btn-tambah"
-            >
-                Tambah
-            </a>
+        <a
+    href="{{ route('tambah.mapel') }}"
+    class="btn-tambah"
+>
+    Tambah
+</a>
 
         </div>
 
@@ -482,11 +482,12 @@
 
                 <tbody>
 
-                   
+                    @forelse ($pelajaran as $mapel)
 
                         <tr>
+
                             <td>
-                           
+                                {{ $mapel->nama_pelajaran }}
                             </td>
 
 
@@ -494,12 +495,12 @@
 
                             <td>
 
-                                <a
-                                  
-                                    class="btn-edit"
-                                >
-                                    edit
-                                </a>
+<a
+    href="{{ route('edit.mapel', $mapel->id) }}"
+    class="btn-edit"
+>
+    edit
+</a>
 
                             </td>
 
@@ -508,8 +509,8 @@
 
                             <td>
 
-                            <form
-   
+<form
+    action="{{ route('hapus.mapel', $mapel->id) }}"
     method="POST"
 >
     @csrf
@@ -527,13 +528,12 @@
 
                         </tr>
 
-
-                
+                    @empty
 
                         <tr>
 
                             <td
-                                colspan="4"
+                                colspan="3"
                                 class="text-center"
                             >
 
@@ -543,7 +543,7 @@
 
                         </tr>
 
-                 
+                    @endforelse
 
                 </tbody>
 
