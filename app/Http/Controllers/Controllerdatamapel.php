@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Pelajaran;
 
 class Controllerdatamapel extends Controller
 {
-     public function index()
+    public function index()
     {
-        return view('datamapel');
+        $pelajaran = Pelajaran::all();
+
+        return view('datamapel', compact('pelajaran'));
+    }
+
+    public function destroy($id)
+    {
+        $pelajaran = Pelajaran::findOrFail($id);
+
+        $pelajaran->delete();
+
+        return redirect()->route('data.mapel');
     }
 }

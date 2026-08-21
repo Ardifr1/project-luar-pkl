@@ -174,17 +174,31 @@ Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
 // =========================
 // TAMBAH MAPEL
 // =========================
-Route::get('/tambah-mapel',[Controllertambahmapel::class,'index']);
+Route::get('/tambah-datamapel', [Controllertambahmapel::class, 'index'])
+    ->name('tambah.mapel');
+
+Route::post('/tambah-datamapel', [Controllertambahmapel::class, 'store'])
+    ->name('simpan.mapel');
 
 // =========================
 // DATA MAPEL
 // =========================
-Route::get('/datamapel',[Controllerdatamapel::class,'index']);
+Route::get('/datamapel',[Controllerdatamapel::class,'index'])
+        ->name('data.mapel');
 
 // =========================
 // EDIT MAPEL
 // =========================
-Route::get('edit-datamapel',[Controllereditmapel::class,'index']);
+Route::get('/edit-datamapel/{id}', [Controllereditmapel::class, 'index'])
+    ->name('edit.mapel');
+
+Route::put('/edit-datamapel/{id}', [Controllereditmapel::class, 'update'])
+    ->name('update.mapel');
+// =========================
+// HAPUS MAPEL
+// =========================
+Route::delete('/hapus-mapel/{id}', [Controllerdatamapel::class, 'destroy'])
+    ->name('hapus.mapel');
 
 // =========================
 // DAFTAR AJUAN LAB ADMIN
