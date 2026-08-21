@@ -21,6 +21,8 @@ use App\Http\Controllers\Controllertambahdatalab;
 use App\Http\Controllers\Controllereditdatalab;
 use App\Http\Controllers\Controllertambahmapel;
 use App\Http\Controllers\Controllerdatamapel;
+use App\Http\Controllers\Controllereditmapel;
+
 
 // =========================
 // WELCOME
@@ -177,6 +179,11 @@ Route::get('/tambah-mapel',[Controllertambahmapel::class,'index']);
 // DATA MAPEL
 // =========================
 Route::get('/datamapel',[Controllerdatamapel::class,'index']);
+
+// =========================
+// EDIT MAPEL
+// =========================
+Route::get('edit-datamapel',[Controllereditmapel::class,'index']);
 
 // =========================
 // PEMINJAMAN LAB

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard admin</title>
+    <title>edit data mapel</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -11,7 +11,6 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
 
         body{
             background:#222;
@@ -31,6 +30,7 @@
             display:flex;
         }
 
+
         .menu-card{
             background:#1F4E9D;
             width:320px;
@@ -49,102 +49,21 @@
         }
 
         .menu-card1 {
-  width: auto;      
-  height: 40px;
-  margin: 10px auto;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  20px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
-
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  margin-right: 5px;
-}
-
-.search-box {
-  display: flex;
-  align-items: ;
-}
-
-.search-box input {
-  width: 122px;
-  height: 30px;
-  border: 1px solid #aaa;
-  padding-left: 15px;
-}
-
-.search-box button {
-  width: 40px;
-  height: 30px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-        .box1{
-            margin-top:10px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
-        .box1 p{
-            text-align:center;
+            width:400px;
+            height:40px;
+            background-color:#d9d9d9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
             padding:20px;
+            border:1px solid #aaa;
+            border-radius:6px;
         }
-        
-        .box2{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
-         .box2 p{
-            text-align:center;
-            padding:20px;
-        }
-        .box3{
-            margin-top:40px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
-         .box3 p{
-            text-align:center;
-            padding:20px;
-        }
-        .box4{
-            margin-top:40px;
-            margin-bottom:20px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
-         .box4 p{
-            text-align:center;
-            padding:20px;
-        }
-       .box5{
-            margin-top:40px;
-            margin-bottom:20px;
-            background:#D9D9D9;
-            width:100%;
-            height:58px;
-            border-radius:15px;
-        }
-         .box5 p{
-            text-align:center;
-            padding:20px;
+
+        .breadcrumb a {
+            color:#007bff;
+            text-decoration:none;
+            margin-right:5px;
         }
 
         /* =========================
@@ -219,24 +138,89 @@
         .hamburger-dropdown button:hover{
             background:#c5c5c5;
         }
+
+
+        .form-container {
+            background-color:#e2e8f0;
+            border-radius:8px;
+            padding:1rem;
+            width:85%;
+            margin:1rem auto;
+        }
+
+        .form-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:#f1f5f9;
+            padding:0.5rem;
+            border-radius:6px;
+            margin-bottom:1rem;
+        }
+
+        .form-actions {
+            text-align:right;
+            margin-right:40px;
+        }
+
+        .form-actions button {
+            margin-left:0;
+            padding:0.4rem 0.8rem;
+            border:none;
+            border-radius:4px;
+            cursor:pointer;
+        }
+
+        .btn-cancel {
+            background-color:#94a3b8;
+            color:white;
+        }
+
+        .btn-add {
+            background-color:#1e3a8a;
+            color:white;
+        }
+
+        form {
+            display:flex;
+            flex-direction:column;
+            gap:0.8rem;
+        }
+
+        form label {
+            font-weight:500;
+        }
+
+        form input {
+            padding:0.5rem;
+            border:1px solid #cbd5e1;
+            border-radius:4px;
+        }
+
+        form select {
+            padding:0.5rem;
+            border:1px solid #cbd5e1;
+            border-radius:4px;
+        }
+
     </style>
-
-
-
 </head>
+
 <body>
-  <div class="phone">
+
+<div class="phone">
 
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
             style="width:100px; height:100px; margin-right:10px; border-radius:20%"
         >
 
         <!-- HAMBURGER -->
+
         <div class="hamburger-container">
 
             <button
@@ -249,28 +233,33 @@
 
 
             <!-- DROPDOWN -->
+
             <div
                 class="hamburger-dropdown"
                 id="hamburgerDropdown"
             >
 
                 <!-- PROFIL -->
+
                 <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
 
                 <!-- UBAH PASSWORD -->
+
                 <a href="{{ route('ubah.password') }}">
                     Ubah Password
                 </a>
 
 
                 <!-- LOG OUT -->
+
                 <form
                     action="{{ route('logout') }}"
                     method="POST"
                 >
+
                     @csrf
 
                     <button type="submit">
@@ -285,48 +274,99 @@
 
     </div>
 
-<div class="menu-card1">
-  <nav class="breadcrumb">
-    <a href="#">Home</a> >
-    <a href="#"></a>
-  </nav>
-  <div class="search-box">
-    <input type="text" placeholder="Cari...">
-    <button><i class="fa fa-search"></i></button>
-  </div>
-</div>
 
+    <div class="menu-card1">
 
-    <div class="menu-card">
+        <nav class="breadcrumb">
 
-    <a href="/data-guru" class="text-decoration-none" style="color:black;">
-    <div class="box1">
-        <p>Data Guru</p>
+            <a href="{{ route('dashboardadmin') }}">
+                Home
+            </a>
+
+            >
+
+            <a href="{{ route('data.lab') }}">
+                data mapel
+            </a>
+
+            >
+
+            <a href="{{ route('edit.datalab', $lab->id) }}">
+                edit data mapel
+            </a>
+
+        </nav>
+
     </div>
-</a>
-<a href="/data-lab" class="text-decoration-none" style="color:black;">
-    <div class="box2"> <p>Data Lab</p>   
+
+
+    <div class="form-container">
+
+        <div class="form-header">
+
+            <h3>
+                Edit Data
+            </h3>
+
         </div>
-</a>
-<a href="#" class="text-decoration-none" style="color:black;">
-    <div class="box3"> <p>Laporan</p>    
-        </div>
-</a>
-<a href="#" class="text-decoration-none" style="color:black;">
-    <div class="box4"> <p>Daftar ajukan</p>
-        </div>
-</a>
-<a href="/datamapel" class="text-decoration-none" style="color:black;">
-    <div class="box5"> <p>Daftar Mapel</p>
-        </div>
-</a>
-       
-       
-       
+
+
+        <form
+            action="{{ route('update.datalab', $lab->id) }}"
+            method="POST"
+        >
+
+            @csrf
+
+            @method('PUT')
+
+
+            <!-- =========================
+                 NAMA MAPEL
+                 ========================= -->
+
+            <label>
+                Nama Mapel
+            </label>
+
+            <input
+                type="text"
+                name="nama_lab"
+                value="{{ $lab->nama_lab }}"
+                placeholder="Masukkan Nama"
+            >
+
+
+            <!-- =========================
+                 TOMBOL
+                 ========================= -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="btn-cancel"
+                    onclick="window.location.href='{{ route('data.lab') }}'"
+                >
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-add"
+                >
+                    Simpan
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
 </div>
 
-   
-</div>
 
 <!-- =========================
      JAVASCRIPT HAMBURGER
@@ -334,9 +374,11 @@
 
 <script>
 
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const hamburgerBtn =
+        document.getElementById('hamburgerBtn');
 
-    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+    const hamburgerDropdown =
+        document.getElementById('hamburgerDropdown');
 
 
     hamburgerBtn.addEventListener('click', function () {

@@ -482,16 +482,11 @@
 
                 <tbody>
 
-                    @forelse ($guru as $g)
+                   
 
                         <tr>
-
                             <td>
-                                {{ $g->name }}
-                            </td>
-
-                            <td>
-                                {{ $g->nip }}
+                           
                             </td>
 
 
@@ -500,7 +495,7 @@
                             <td>
 
                                 <a
-                                    href="{{ route('edit.guru', $g->id) }}"
+                                  
                                     class="btn-edit"
                                 >
                                     edit
@@ -514,7 +509,7 @@
                             <td>
 
                             <form
-    action="{{ route('data.guru.destroy', $g->id) }}"
+   
     method="POST"
 >
     @csrf
@@ -533,7 +528,7 @@
                         </tr>
 
 
-                    @empty
+                
 
                         <tr>
 
@@ -548,7 +543,7 @@
 
                         </tr>
 
-                    @endforelse
+                 
 
                 </tbody>
 
