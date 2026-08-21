@@ -22,7 +22,8 @@ use App\Http\Controllers\Controllereditdatalab;
 use App\Http\Controllers\Controllertambahmapel;
 use App\Http\Controllers\Controllerdatamapel;
 use App\Http\Controllers\Controllereditmapel;
-
+use App\Http\Controllers\Controllerajuanlab;
+use App\Http\Controllers\Controllerdetailajuan;
 
 // =========================
 // WELCOME
@@ -184,6 +185,16 @@ Route::get('/datamapel',[Controllerdatamapel::class,'index']);
 // EDIT MAPEL
 // =========================
 Route::get('edit-datamapel',[Controllereditmapel::class,'index']);
+
+// =========================
+// DAFTAR AJUAN LAB ADMIN
+// =========================
+Route::get('daftar-ajuan',[Controllerajuanlab::class,'index']);
+
+// =========================
+// DETAIL AJUAN LAB ADMIN
+// =========================
+Route::get('detail-ajuan',[Controllerdetailajuan::class,'index']);
 
 // =========================
 // PEMINJAMAN LAB
