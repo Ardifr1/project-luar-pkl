@@ -129,6 +129,56 @@
             background:#c5c5c5;
         }
 
+.lab-container {
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.lab-card {
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.btn-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.label-btn {
+  background-color: #94a3b8;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.label-btn:hover {
+  background-color: #64748b;
+}
+
+.btn-submit {
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #3b82f6;
+}
 
 
     </style>
@@ -198,9 +248,31 @@
 <div class="menu-card1">
   <nav class="breadcrumb">
     <a href="#">Home</a> >
-    <a href="#">pilihan lab</a>
+    <a href="#">Pilihan lab</a>
   </nav>
   </div>
+
+  <div class="lab-container">
+  <h2>Silahkan Pilih Lab</h2>
+
+  <div class="lab-card">
+    <h4>Lab 1</h4>
+    <label class="btn-label">Peminjam : <button class="label-btn">........</button></label>
+    <button class="btn-submit">Ajukan</button>
+  </div>
+
+  <div class="lab-card">
+    <h4>Lab 2</h4>
+    <label class="btn-label">Peminjam : <button class="label-btn">........</button></label>
+    <button class="btn-submit">Ajukan</button>
+  </div>
+
+  <div class="lab-card">
+    <h4>Lab 3</h4>
+    <label class="btn-label">Peminjam : <button class="label-btn">.........</button></label>
+    <button class="btn-submit">Ajukan</button>
+  </div>
+</div>
 
 
 </div>

@@ -24,6 +24,7 @@ use App\Http\Controllers\Controllerdatamapel;
 use App\Http\Controllers\Controllereditmapel;
 use App\Http\Controllers\Controllerajuanlab;
 use App\Http\Controllers\Controllerdetailajuan;
+use App\Http\Controllers\Controllerpilihanlab;
 
 // =========================
 // WELCOME
@@ -222,7 +223,8 @@ Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
-    
+Route::get('pilihanlab',[Controllerpilihanlab::class,'index']);
+
 // =========================
 // GURU
 // =========================
