@@ -66,13 +66,19 @@
             margin-top:10px;
             background:#D9D9D9;
             width:100%;
-            height:150px;
+            min-height:80px;
             border-radius:15px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:15px;
         }
 
         .box1 p{
             text-align:center;
-            padding:20px;
+            padding:10px;
+            margin:0;
+            font-weight:bold;
         }
 
         /* =========================
@@ -204,6 +210,19 @@
             text-align:center;
         }
 
+        /* =========================
+           ERROR LARAVEL
+           ========================= */
+
+        .server-error{
+            margin-top:15px;
+            padding:10px;
+            background:#f8d7da;
+            color:#842029;
+            border-radius:10px;
+            font-size:13px;
+        }
+
     </style>
 
 </head>
@@ -306,11 +325,21 @@
     <!-- CARD -->
     <div class="menu-card">
 
-        <!-- LAB -->
+        <!-- LAB YANG DIPILIH -->
         <div class="box1">
 
             <p>
-                Ruang Lab Komputer
+
+                @if($labDipilih)
+
+                    {{ $labDipilih->nama_lab }}
+
+                @else
+
+                    Silahkan pilih lab terlebih dahulu
+
+                @endif
+
             </p>
 
         </div>
@@ -326,7 +355,25 @@
             @csrf
 
 
-            <!-- KETERANGAN -->
+            <!-- =========================
+                 LAB ID
+                 ========================= -->
+
+            @if($labDipilih)
+
+                <input
+                    type="hidden"
+                    name="lab_id"
+                    value="{{ $labDipilih->id }}"
+                >
+
+            @endif
+
+
+            <!-- =========================
+                 KETERANGAN
+                 ========================= -->
+
             <textarea
                 name="keterangan"
                 id="keterangan"
@@ -342,13 +389,16 @@
                     margin-top:40px;
                     resize:none;
                 "
-            ></textarea>
+            >{{ old('keterangan') }}</textarea>
 
 
-            <!-- MATA PELAJARAN -->
+            <!-- =========================
+                 MATA PELAJARAN
+                 ========================= -->
+
             <select
                 class="pilih-guru"
-                name="Pelajaran_id"
+                name="pelajaran_id"
                 id="pelajaran"
                 style="
                     width:100%;
@@ -371,7 +421,10 @@
 
                 @foreach($pelajarans as $pelajaran)
 
-                    <option value="{{ $pelajaran->id }}">
+                    <option
+                        value="{{ $pelajaran->id }}"
+                        {{ old('pelajaran_id') == $pelajaran->id ? 'selected' : '' }}
+                    >
                         {{ $pelajaran->nama_pelajaran }}
                     </option>
 
@@ -380,7 +433,10 @@
             </select>
 
 
-            <!-- TANGGAL + JAM -->
+            <!-- =========================
+                 TANGGAL + JAM
+                 ========================= -->
+
             <div class="tanggal-jam">
 
                 <!-- TANGGAL -->
@@ -388,8 +444,9 @@
 
                     <input
                         type="date"
-                        name="tanggal"
+                        name="tanggal_peminjaman"
                         id="tanggal"
+                        value="{{ old('tanggal_peminjaman') }}"
                     >
 
                 </div>
@@ -406,6 +463,7 @@
                         type="time"
                         name="jam_mulai"
                         id="jam_mulai"
+                        value="{{ old('jam_mulai') }}"
                     >
 
                 </div>
@@ -424,6 +482,7 @@
                         type="time"
                         name="jam_selesai"
                         id="jam_selesai"
+                        value="{{ old('jam_selesai') }}"
                     >
 
                 </div>
@@ -431,14 +490,41 @@
             </div>
 
 
-            <!-- PESAN ERROR -->
+            <!-- =========================
+                 ERROR JAVASCRIPT
+                 ========================= -->
+
             <div
                 id="errorMessage"
                 class="error-message"
             ></div>
 
 
-            <!-- TOMBOL AJUKAN -->
+            <!-- =========================
+                 ERROR DARI LARAVEL
+                 ========================= -->
+
+            @if($errors->any())
+
+                <div class="server-error">
+
+                    @foreach($errors->all() as $error)
+
+                        <div>
+                            {{ $error }}
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+            @endif
+
+
+            <!-- =========================
+                 TOMBOL AJUKAN
+                 ========================= -->
+
             <button
                 type="submit"
                 id="btnAjukan"
@@ -452,7 +538,9 @@
                     border:none;
                 "
             >
+
                 Ajukan Peminjaman
+
             </button>
 
         </form>
@@ -494,6 +582,9 @@
 
     formPeminjaman.addEventListener('submit', function(event){
 
+        const labId =
+            document.querySelector('input[name="lab_id"]');
+
         const keterangan =
             document.getElementById('keterangan').value.trim();
 
@@ -513,11 +604,29 @@
         let pesan = '';
 
 
-        if(keterangan === ''){
+        /* =========================
+           CEK LAB
+           ========================= */
+
+        if(!labId){
+
+            pesan = 'Silahkan pilih lab terlebih dahulu.';
+
+        }
+
+        /* =========================
+           CEK KETERANGAN
+           ========================= */
+
+        else if(keterangan === ''){
 
             pesan = 'Keterangan tidak boleh kosong.';
 
         }
+
+        /* =========================
+           CEK PELAJARAN
+           ========================= */
 
         else if(!pelajaran){
 
@@ -525,11 +634,19 @@
 
         }
 
+        /* =========================
+           CEK TANGGAL
+           ========================= */
+
         else if(!tanggal){
 
             pesan = 'Silahkan pilih tanggal peminjaman.';
 
         }
+
+        /* =========================
+           CEK JAM MULAI
+           ========================= */
 
         else if(!jamMulai){
 
@@ -537,11 +654,19 @@
 
         }
 
+        /* =========================
+           CEK JAM SELESAI
+           ========================= */
+
         else if(!jamSelesai){
 
             pesan = 'Silahkan pilih jam selesai.';
 
         }
+
+        /* =========================
+           CEK JAM
+           ========================= */
 
         else if(jamSelesai <= jamMulai){
 
@@ -549,6 +674,10 @@
 
         }
 
+
+        /* =========================
+           TAMPILKAN ERROR
+           ========================= */
 
         if(pesan !== ''){
 

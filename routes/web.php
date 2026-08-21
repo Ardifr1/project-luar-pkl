@@ -223,7 +223,8 @@ Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
-Route::get('pilihanlab',[Controllerpilihanlab::class,'index']);
+Route::get('/pilihanlab',[Controllerpilihanlab::class,'index'])
+    ->name('ajukanpilihanlab');
 
 // =========================
 // GURU

@@ -13,4 +13,9 @@ class Lab extends Model
         'kapasitas_murid',
         'status',
     ];
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'lab_id');
+    }
 }
