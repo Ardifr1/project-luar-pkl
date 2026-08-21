@@ -208,7 +208,7 @@ Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
-
+    
 // =========================
 // GURU
 // =========================
