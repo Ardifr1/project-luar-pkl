@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Laporan Admin</title>
+    <title>Laporan Guru</title>
 
 
     <!-- BOOTSTRAP -->
@@ -552,13 +552,13 @@
 
         <nav class="breadcrumb">
 
-            <a href="{{ route('dashboardadmin') }}">
+            <a href="{{ route('dashboard') }}">
                 Home
             </a>
 
             >
 
-            <a href="{{ route('laporan.admin') }}">
+            <a href="{{ route('laporan.guru') }}">
                 Laporan Guru
             </a>
 
@@ -568,7 +568,7 @@
         <!-- SEARCH -->
 
         <form
-            action="{{ route('laporan.admin') }}"
+            action="{{ route('laporan.guru') }}"
             method="GET"
             class="search-box"
         >
@@ -598,7 +598,7 @@
          ========================= -->
 
     <form
-        action="{{ route('laporan.admin') }}"
+        action="{{ route('laporan.guru') }}"
         method="GET"
     >
 
