@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerLogin extends Controller
 {
     // =========================
     // HALAMAN LOGIN
     // =========================
+
     public function index()
     {
         return view('Login/login');
@@ -22,6 +24,7 @@ class ControllerLogin extends Controller
     // ADMIN = USERNAME
     // GURU  = NIP
     // =========================
+
     public function login(Request $request)
     {
         $request->validate(
@@ -58,7 +61,19 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Simpan data user ke session
+        // =========================
+        // LOGIN AUTH LARAVEL
+        // =========================
+
+        Auth::login($user);
+
+        // Regenerasi session untuk keamanan
+        $request->session()->regenerate();
+
+        // =========================
+        // SIMPAN SESSION TAMBAHAN
+        // =========================
+
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
@@ -80,6 +95,8 @@ class ControllerLogin extends Controller
         }
 
         // Jika role tidak dikenali
+        Auth::logout();
+
         return back()
             ->withErrors([
                 'login' => 'Role pengguna tidak dikenali.'
@@ -91,6 +108,7 @@ class ControllerLogin extends Controller
     // =========================
     // HALAMAN LOGIN ADMIN LAMA
     // =========================
+
     public function admin()
     {
         return view('login-admin');
@@ -100,6 +118,7 @@ class ControllerLogin extends Controller
     // =========================
     // HALAMAN LOGIN GURU LAMA
     // =========================
+
     public function guru()
     {
         return view('login-guru');
@@ -109,6 +128,7 @@ class ControllerLogin extends Controller
     // =========================
     // PROSES LOGIN ADMIN LAMA
     // =========================
+
     public function loginAdmin(Request $request)
     {
         $request->validate(
@@ -122,6 +142,7 @@ class ControllerLogin extends Controller
             ]
         );
 
+        // Cari admin berdasarkan username
         $user = User::where('username', $request->username)
             ->where('role', 'admin')
             ->first();
@@ -144,7 +165,19 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Simpan session
+        // =========================
+        // LOGIN AUTH LARAVEL
+        // =========================
+
+        Auth::login($user);
+
+        // Regenerasi session
+        $request->session()->regenerate();
+
+        // =========================
+        // SIMPAN SESSION TAMBAHAN
+        // =========================
+
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
@@ -159,6 +192,7 @@ class ControllerLogin extends Controller
     // =========================
     // PROSES LOGIN GURU LAMA
     // =========================
+
     public function loginGuru(Request $request)
     {
         $request->validate(
@@ -172,6 +206,7 @@ class ControllerLogin extends Controller
             ]
         );
 
+        // Cari guru berdasarkan NIP
         $user = User::where('nip', $request->nip)
             ->where('role', 'guru')
             ->first();
@@ -194,7 +229,19 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Simpan session
+        // =========================
+        // LOGIN AUTH LARAVEL
+        // =========================
+
+        Auth::login($user);
+
+        // Regenerasi session
+        $request->session()->regenerate();
+
+        // =========================
+        // SIMPAN SESSION TAMBAHAN
+        // =========================
+
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
@@ -205,16 +252,23 @@ class ControllerLogin extends Controller
         return redirect()->route('dashboard');
     }
 
+
     // =========================
     // LOGOUT
     // =========================
 
     public function logout(Request $request)
-{
-    // Hapus semua data session login
-    $request->session()->flush();
+    {
+        // Logout dari authentication Laravel
+        Auth::logout();
 
-    // Kembali ke halaman login
-    return redirect()->route('login');
-}
+        // Hapus seluruh session
+        $request->session()->invalidate();
+
+        // Buat CSRF token baru
+        $request->session()->regenerateToken();
+
+        // Kembali ke halaman login
+        return redirect()->route('login');
+    }
 }

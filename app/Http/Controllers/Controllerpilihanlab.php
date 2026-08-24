@@ -11,8 +11,8 @@ class Controllerpilihanlab extends Controller
         $labs = Lab::with([
             'peminjaman.user',
             'peminjaman.pelajaran'
-        ])->get();
+        ])->paginate(3);
 
-        return view('pilihanlab', compact('labs'));
+        return view('ajukanpilihanlab', compact('labs'));
     }
 }

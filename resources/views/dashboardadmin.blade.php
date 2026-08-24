@@ -312,7 +312,7 @@
     <div class="box3"> <p>Laporan</p>    
         </div>
 </a>
-<a href="#" class="text-decoration-none" style="color:black;">
+<a href="/daftar-ajuan" class="text-decoration-none" style="color:black;">
     <div class="box4"> <p>Daftar ajukan</p>
         </div>
 </a>

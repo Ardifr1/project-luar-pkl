@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>detail ajuan</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Detail Ajuan</title>
 
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
 
     <style>
-
 
         body{
             background:#222;
@@ -30,6 +37,7 @@
             justify-content:space-between;
             display:flex;
         }
+
         .menu-text{
             color:white;
             text-align:center;
@@ -37,24 +45,25 @@
             font-size:18px;
         }
 
-        .menu-card1 {
-  width: auto;      
-  height: 40px;
-  margin: 10px auto;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  20px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
+        .menu-card1{
+            width:auto;
+            height:40px;
+            margin:10px auto;
+            background-color:#d9d9d9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px;
+            border:1px solid #aaa;
+            border-radius:6px;
+        }
 
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  margin-right: 5px;
-}
+        .breadcrumb a{
+            color:#007bff;
+            text-decoration:none;
+            margin-right:5px;
+        }
+
 
         /* =========================
            DROPDOWN HAMBURGER
@@ -66,20 +75,13 @@
 
         .hamburger-dropdown{
             display:none;
-
             position:absolute;
-
             top:70px;
             right:10px;
-
             width:180px;
-
             background:#D9D9D9;
-
             border-radius:10px;
-
             overflow:hidden;
-
             z-index:1000;
         }
 
@@ -89,15 +91,10 @@
 
         .hamburger-dropdown a{
             display:block;
-
             padding:15px;
-
             color:#222;
-
             text-decoration:none;
-
             text-align:center;
-
             font-size:14px;
         }
 
@@ -111,17 +108,11 @@
 
         .hamburger-dropdown button{
             width:100%;
-
             padding:15px;
-
             border:none;
-
             background:#D9D9D9;
-
             color:#222;
-
             font-size:14px;
-
             cursor:pointer;
         }
 
@@ -129,75 +120,99 @@
             background:#c5c5c5;
         }
 
-    .detail-container {
-  background-color: #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 85%;
-  margin: 1rem auto;
-}
 
-.detail-card {
-  background-color: #f1f5f9;
-  border-radius: 6px;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        /* =========================
+           DETAIL
+           ========================= */
 
-.detail-card p {
-  margin: 0.4rem 0;
-}
+        .detail-container{
+            background-color:#e2e8f0;
+            border-radius:8px;
+            padding:1rem;
+            width:85%;
+            margin:1rem auto;
+        }
 
-.detail-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
+        .detail-card{
+            background-color:#f1f5f9;
+            border-radius:6px;
+            padding:1rem;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
 
-.btn-approve {
-  background-color: #1e3a8a;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
+        .detail-card p{
+            margin:0.4rem 0;
+        }
 
-.btn-reject {
-  background-color: #94a3b8;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
-.btn-approve:hover {
-  background-color: #3b82f6;
-}
+        /* =========================
+           BUTTON
+           ========================= */
 
-.btn-reject:hover {
-  background-color: #64748b;
-}
+        .detail-actions{
+            display:flex;
+            justify-content:center;
+            gap:1rem;
+            margin-top:1rem;
+        }
 
+        .btn-approve{
+            background-color:#1e3a8a;
+            color:white;
+            border:none;
+            padding:0.5rem 1rem;
+            border-radius:4px;
+            cursor:pointer;
+        }
+
+        .btn-reject{
+            background-color:#94a3b8;
+            color:white;
+            border:none;
+            padding:0.5rem 1rem;
+            border-radius:4px;
+            cursor:pointer;
+        }
+
+        .btn-approve:hover{
+            background-color:#3b82f6;
+        }
+
+        .btn-reject:hover{
+            background-color:#64748b;
+        }
 
     </style>
 
 </head>
+
+
 <body>
-  <div class="phone">
+
+<div class="phone">
+
+
+    <!-- =========================
+         HEADER
+         ========================= -->
 
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="
+                width:100px;
+                height:100px;
+                margin-right:10px;
+                border-radius:20%;
+            "
         >
 
+
         <!-- HAMBURGER -->
+
         <div class="hamburger-container">
 
             <button
@@ -205,33 +220,32 @@
                 id="hamburgerBtn"
                 type="button"
             >
+
                 <i class="bi bi-list fs-1"></i>
+
             </button>
 
 
             <!-- DROPDOWN -->
+
             <div
                 class="hamburger-dropdown"
                 id="hamburgerDropdown"
             >
 
-                <!-- PROFIL -->
                 <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
-
-                <!-- UBAH PASSWORD -->
                 <a href="{{ route('ubah.password') }}">
                     Ubah Password
                 </a>
 
-
-                <!-- LOG OUT -->
                 <form
                     action="{{ route('logout') }}"
                     method="POST"
                 >
+
                     @csrf
 
                     <button type="submit">
@@ -246,32 +260,175 @@
 
     </div>
 
-<div class="menu-card1">
-  <nav class="breadcrumb">
-    <a href="#">Home</a> >
-    <a href="#">daftar ajuan</a>
-  </nav>
-  </div>
 
-<div class="detail-container">
-  <h2>Detail Ajuan</h2>
+    <!-- =========================
+         BREADCRUMB
+         ========================= -->
 
-  <div class="detail-card">
-    <p class="text">Ajuan memakai Lab</p>
-    <p>Mapel : Informatika</p>
-    <p>Guru : Denis</p>
-    <p>Lab : Lab 1</p>
-    <p>Jadwal : Senin, Agustus 2026</p>
+    <div class="menu-card1">
 
-    <div class="detail-actions">
-      <button class="btn-approve">Setujui</button>
-      <button class="btn-reject">Tidak Setujui</button>
+        <nav class="breadcrumb">
+
+            <a href="{{ route('dashboardadmin') }}">
+                Home
+            </a>
+
+            >
+
+            <a href="{{ route('daftar.ajuan') }}">
+                Daftar Ajuan
+            </a>
+
+            >
+
+            <a href="#">
+                Detail Ajuan
+            </a>
+
+        </nav>
+
     </div>
-  </div>
-</div>
 
 
+    <!-- =========================
+         DETAIL AJUAN
+         ========================= -->
+
+    <div class="detail-container">
+
+        <h2>
+            Detail Ajuan
+        </h2>
+
+
+        <div class="detail-card">
+
+            <p>
+                Ajuan memakai Lab
+            </p>
+
+
+            <p>
+                Mapel :
+                <strong>
+                    {{ $peminjaman->pelajaran->nama_pelajaran }}
+                </strong>
+            </p>
+
+
+            <p>
+                Guru :
+                <strong>
+                    {{ $peminjaman->user->name }}
+                </strong>
+            </p>
+
+
+            <p>
+                Lab :
+                <strong>
+                    {{ $peminjaman->lab->nama_lab }}
+                </strong>
+            </p>
+
+
+            <p>
+                Tanggal :
+                <strong>
+                    {{ \Carbon\Carbon::parse($peminjaman->tanggal)->translatedFormat('l, d F Y') }}
+                </strong>
+            </p>
+
+
+            <p>
+                Jam :
+                <strong>
+                    {{ $peminjaman->jam_mulai }}
+                    -
+                    {{ $peminjaman->jam_selesai }}
+                </strong>
+            </p>
+
+
+            <p>
+                Keterangan :
+                <strong>
+                    {{ $peminjaman->keterangan }}
+                </strong>
+            </p>
+
+
+            <!-- =========================
+                 STATUS
+                 ========================= -->
+
+            <p>
+
+                Status :
+
+                <strong>
+                    {{ ucfirst($peminjaman->status) }}
+                </strong>
+
+            </p>
+
+
+            <!-- =========================
+                 TOMBOL
+                 ========================= -->
+
+            @if($peminjaman->status === 'menunggu')
+
+                <div class="detail-actions">
+
+
+                    <!-- SETUJUI -->
+
+                    <form
+                        action="{{ route('ajuan.setujui', ['id' => $peminjaman->id]) }}"
+                        method="POST"
+                    >
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="btn-approve"
+                        >
+                            Setujui
+                        </button>
+
+                    </form>
+
+
+                    <!-- TOLAK -->
+
+                    <form
+                        action="{{ route('ajuan.tolak', ['id' => $peminjaman->id]) }}"
+                        method="POST"
+                    >
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="btn-reject"
+                        >
+                            Tidak Setujui
+                        </button>
+
+                    </form>
+
+                </div>
+
+            @endif
+
+        </div>
+
+    </div>
+
 </div>
+
 
 <!-- =========================
      JAVASCRIPT HAMBURGER
@@ -279,12 +436,14 @@
 
 <script>
 
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const hamburgerBtn =
+        document.getElementById('hamburgerBtn');
 
-    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+    const hamburgerDropdown =
+        document.getElementById('hamburgerDropdown');
 
 
-    hamburgerBtn.addEventListener('click', function () {
+    hamburgerBtn.addEventListener('click', function(){
 
         hamburgerDropdown.classList.toggle('show');
 

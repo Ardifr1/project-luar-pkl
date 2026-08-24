@@ -204,26 +204,47 @@ Route::delete('/hapus-mapel/{id}', [Controllerdatamapel::class, 'destroy'])
 // =========================
 // DAFTAR AJUAN LAB ADMIN
 // =========================
-Route::get('daftar-ajuan',[Controllerajuanlab::class,'index']);
+
+Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
+    ->name('daftar.ajuan');
+
 
 // =========================
 // DETAIL AJUAN LAB ADMIN
 // =========================
-Route::get('detail-ajuan',[Controllerdetailajuan::class,'index']);
 
+Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
+    ->name('detail.ajuan');
+
+
+// =========================
+// SETUJUI AJUAN
+// =========================
+
+Route::post('/detail-ajuan/{id}/setujui', [Controllerdetailajuan::class, 'setujui'])
+    ->name('ajuan.setujui');
+
+
+// =========================
+// TOLAK AJUAN
+// =========================
+
+Route::post('/detail-ajuan/{id}/tolak', [Controllerdetailajuan::class, 'tolak'])
+    ->name('ajuan.tolak');
 // =========================
 // PEMINJAMAN LAB
 // =========================
 
-// Halaman ajukan peminjaman
-Route::get('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'index'])
-    ->name('ajukanpeminjaman');
+// Halaman ajukan peminjaman berdasarkan ID lab
+Route::get('/ajukan-peminjaman/{id}', [ControllerAjukanPeminjaman::class, 'index'])
+    ->name('ajukan.peminjaman');
 
 // Proses ajukan peminjaman
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
     ->name('ajukanpeminjaman.store');
 
-Route::get('/pilihanlab',[Controllerpilihanlab::class,'index'])
+// Halaman pilihan lab
+Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
     ->name('ajukanpilihanlab');
 
 // =========================

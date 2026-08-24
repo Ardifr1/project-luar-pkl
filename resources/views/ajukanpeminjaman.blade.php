@@ -316,10 +316,8 @@
 
     <!-- JUDUL -->
     <div class="text-atas">
-
-        <p>Peminjaman Lab</p>
-
-    </div>
+    <p>{{ $labDipilih->nama_lab }}</p>
+</div>
 
 
     <!-- CARD -->

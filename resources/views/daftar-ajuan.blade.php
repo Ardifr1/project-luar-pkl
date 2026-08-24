@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar ajuan</title>
+    <title>Daftar Ajuan</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -11,7 +12,6 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
 
         body{
             background:#222;
@@ -30,6 +30,7 @@
             justify-content:space-between;
             display:flex;
         }
+
         .menu-text{
             color:white;
             text-align:center;
@@ -37,24 +38,24 @@
             font-size:18px;
         }
 
-        .menu-card1 {
-  width: auto;      
-  height: 40px;
-  margin: 10px auto;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  20px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-}
+        .menu-card1{
+            width:auto;
+            height:40px;
+            margin:10px auto;
+            background-color:#d9d9d9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px;
+            border:1px solid #aaa;
+            border-radius:6px;
+        }
 
-.breadcrumb a {
-  color: #007bff;
-  text-decoration: none;
-  margin-right: 5px;
-}
+        .breadcrumb a{
+            color:#007bff;
+            text-decoration:none;
+            margin-right:5px;
+        }
 
 
         /* =========================
@@ -130,63 +131,95 @@
             background:#c5c5c5;
         }
 
-        .ajuan-container {
-  background-color: #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
-  width: 85%;
-  margin: 1rem auto;
-}
 
-.ajuan-card {
-  background-color: #f1f5f9;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        /* =========================
+           DAFTAR AJUAN
+           ========================= */
 
-.ajuan-card p {
-  margin: 0.3rem 0;
-}
+        .ajuan-container{
+            background-color:#e2e8f0;
+            border-radius:8px;
+            padding:1rem;
+            width:85%;
+            margin:1rem auto;
+        }
 
-.ajuan-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.5rem;
-}
+        .ajuan-container h2{
+            margin-bottom:20px;
+        }
 
-.btn-detail {
-  background-color: #1e3a8a;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
+        .ajuan-card{
+            background-color:#f1f5f9;
+            border-radius:6px;
+            padding:1rem;
+            margin-bottom:1rem;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
 
-.btn-detail:hover {
-  background-color: #3b82f6;
-}
+        .ajuan-card p{
+            margin:0.3rem 0;
+        }
 
+        .ajuan-info{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            margin-top:0.8rem;
+        }
+
+        .btn-detail{
+            background-color:#1e3a8a;
+            color:white;
+            border:none;
+            padding:0.4rem 0.8rem;
+            border-radius:4px;
+            cursor:pointer;
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .btn-detail:hover{
+            background-color:#3b82f6;
+            color:white;
+        }
+
+        .tidak-ada{
+            text-align:center;
+            padding:20px;
+            color:#555;
+        }
 
     </style>
 
 </head>
+
 <body>
-  <div class="phone">
+
+<div class="phone">
+
+
+    <!-- =========================
+         HEADER
+         ========================= -->
 
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="
+                width:100px;
+                height:100px;
+                margin-right:10px;
+                border-radius:20%;
+            "
         >
 
+
         <!-- HAMBURGER -->
+
         <div class="hamburger-container">
 
             <button
@@ -194,33 +227,40 @@
                 id="hamburgerBtn"
                 type="button"
             >
+
                 <i class="bi bi-list fs-1"></i>
+
             </button>
 
 
             <!-- DROPDOWN -->
+
             <div
                 class="hamburger-dropdown"
                 id="hamburgerDropdown"
             >
 
                 <!-- PROFIL -->
+
                 <a href="{{ route('profil.admin') }}">
                     Profil
                 </a>
 
 
                 <!-- UBAH PASSWORD -->
+
                 <a href="{{ route('ubah.password') }}">
                     Ubah Password
                 </a>
 
 
                 <!-- LOG OUT -->
+
                 <form
                     action="{{ route('logout') }}"
                     method="POST"
                 >
+
                     @csrf
 
                     <button type="submit">
@@ -235,47 +275,145 @@
 
     </div>
 
-<div class="menu-card1">
-  <nav class="breadcrumb">
-    <a href="#">Home</a> >
-    <a href="#">daftar ajuan</a>
-  </nav>
+
+    <!-- =========================
+         BREADCRUMB
+         ========================= -->
+
+    <div class="menu-card1">
+
+        <nav class="breadcrumb">
+
+            <a href="{{ route('dashboardadmin') }}">
+                Home
+            </a>
+
+            >
+
+            <a href="{{ url()->current() }}">
+                Daftar Ajuan
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =========================
+         DAFTAR AJUAN
+         ========================= -->
+
+    <div class="ajuan-container">
+
+        <h2>
+            Daftar Ajuan
+        </h2>
+
+
+        <!-- =========================
+             LOOP DATA PEMINJAMAN
+             ========================= -->
+
+        @forelse($peminjamans as $peminjaman)
+
+            <div class="ajuan-card">
+
+                <!-- JUDUL -->
+
+                <p>
+                    Ajuan memakai Lab
+                </p>
+
+
+                <!-- NAMA LAB -->
+
+                <p>
+
+                    <strong>
+                        {{ $peminjaman->lab->nama_lab }}
+                    </strong>
+
+                </p>
+
+
+                <!-- NAMA GURU -->
+
+                <p>
+
+                    Guru:
+
+                    <strong>
+                        {{ $peminjaman->user->name }}
+                    </strong>
+
+                </p>
+
+
+                <!-- MATA PELAJARAN -->
+
+                <p>
+
+                    Mata Pelajaran:
+
+                    <strong>
+                        {{ $peminjaman->pelajaran->nama_pelajaran }}
+                    </strong>
+
+                </p>
+
+
+                <!-- TANGGAL + DETAIL -->
+
+                <div class="ajuan-info">
+
+                    <span>
+
+                        📅
+
+                        {{ \Carbon\Carbon::parse($peminjaman->tanggal)->translatedFormat('l, d F Y') }}
+
+                    </span>
+
+
+                    <!-- LIHAT DETAIL -->
+
+                    <a
+                        href="{{ route('detail.ajuan', ['id' => $peminjaman->id]) }}"
+                        class="btn-detail"
+                    >
+
+                        Lihat Detail
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        @empty
+
+
+            <!-- =========================
+                 JIKA BELUM ADA AJUAN
+                 ========================= -->
+
+            <div class="ajuan-card">
+
+                <div class="tidak-ada">
+
+                    Belum ada pengajuan peminjaman.
+
+                </div>
+
+            </div>
+
+
+        @endforelse
+
+    </div>
+
 </div>
 
-   <div class="ajuan-container">
-  <h2>Daftar Ajuan</h2>
-
-  <div class="ajuan-card">
-    <p>Ajuan memakai Lab</p>
-    <p><strong>Lab 2</strong></p>
-    <div class="ajuan-info">
-      <span>📅 Senin, Agustus 2026</span>
-      <button class="btn-detail"><a href="/">Lihat Detail</a></button>
-    </div>
-  </div>
-
-  <div class="ajuan-card">
-    <p>Ajuan memakai Lab</p>
-    <p><strong>Lab 1</strong></p>
-    <div class="ajuan-info">
-      <span>📅 Senin, Agustus 2026</span>
-      <button class="btn-detail">Lihat detail</button>
-    </div>
-  </div>
-
-  <div class="ajuan-card">
-    <p>Ajuan memakai Lab</p>
-    <p><strong>Lab 1</strong></p>
-    <div class="ajuan-info">
-      <span>📅 Senin, Agustus 2026</span>
-      <button class="btn-detail">Lihat detail</button>
-    </div>
-  </div>
-</div>
-
-
-   
-</div>
 
 <!-- =========================
      JAVASCRIPT HAMBURGER
@@ -283,12 +421,14 @@
 
 <script>
 
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const hamburgerBtn =
+        document.getElementById('hamburgerBtn');
 
-    const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+    const hamburgerDropdown =
+        document.getElementById('hamburgerDropdown');
 
 
-    hamburgerBtn.addEventListener('click', function () {
+    hamburgerBtn.addEventListener('click', function(){
 
         hamburgerDropdown.classList.toggle('show');
 
@@ -298,3 +438,4 @@
 
 </body>
 </html>
+```

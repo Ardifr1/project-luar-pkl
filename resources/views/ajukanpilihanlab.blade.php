@@ -1,20 +1,38 @@
+```blade
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Ajukan Pilihan Lab</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- BOOTSTRAP -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- BOOTSTRAP ICONS -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
 
     <style>
 
         body {
             background: #222;
         }
+
 
         .phone {
             max-width: 412px;
@@ -23,12 +41,23 @@
             background: #fff;
         }
 
+
+        /* =========================
+           HEADER
+        ========================= */
+
         .header {
             background: #102C6B;
             height: 100px;
             justify-content: space-between;
             display: flex;
+            align-items: center;
         }
+
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
 
         .menu-card1 {
             width: 400px;
@@ -42,11 +71,18 @@
             border-radius: 6px;
         }
 
+
+        .breadcrumb {
+            margin-bottom: 0;
+        }
+
+
         .breadcrumb a {
             color: #007bff;
             text-decoration: none;
             margin-right: 5px;
         }
+
 
         /* =========================
            DROPDOWN HAMBURGER
@@ -56,12 +92,14 @@
             position: relative;
         }
 
+
         .hamburger-dropdown {
             display: none;
 
             position: absolute;
 
             top: 70px;
+
             right: 10px;
 
             width: 180px;
@@ -75,9 +113,11 @@
             z-index: 1000;
         }
 
+
         .hamburger-dropdown.show {
             display: block;
         }
+
 
         .hamburger-dropdown a {
             display: block;
@@ -93,13 +133,16 @@
             font-size: 14px;
         }
 
+
         .hamburger-dropdown a:hover {
             background: #c5c5c5;
         }
 
+
         .hamburger-dropdown form {
             margin: 0;
         }
+
 
         .hamburger-dropdown button {
             width: 100%;
@@ -117,9 +160,11 @@
             cursor: pointer;
         }
 
+
         .hamburger-dropdown button:hover {
             background: #c5c5c5;
         }
+
 
         /* =========================
            LAB
@@ -127,50 +172,109 @@
 
         .lab-section {
             text-align: center;
+
             margin: 2rem auto;
+
             width: 90%;
         }
 
+
         .lab-container {
             background-color: #e2e8f0;
+
             border-radius: 8px;
+
             padding: 1rem;
+
             display: flex;
+
             flex-direction: column;
+
             gap: 1rem;
+
             align-items: center;
         }
 
+
         .lab-card {
             background-color: #f1f5f9;
+
             border-radius: 6px;
+
             padding: 1rem;
+
             width: 80%;
+
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
             text-align: left;
         }
 
+
         .lab-card h4 {
             margin-bottom: 0.5rem;
+
             color: #1e3a8a;
         }
+
 
         .lab-card p {
             margin-bottom: 8px;
         }
 
-        .lab-card button {
-            background-color: #1e3a8a;
+
+        /* =========================
+           TOMBOL AJUKAN
+        ========================= */
+
+        .btn-ajukan {
+            display: inline-block;
+
+            background: #1e3a8a;
+
             color: white;
+
             border: none;
+
             padding: 0.5rem 1rem;
+
             border-radius: 4px;
+
+            text-decoration: none;
+
             cursor: pointer;
         }
 
-        .lab-card button:hover {
-            background-color: #3b82f6;
+
+        .btn-ajukan:hover {
+            background: #3b82f6;
+
+            color: white;
         }
+
+
+        /* =========================
+           TOMBOL TIDAK TERSEDIA
+        ========================= */
+
+        .btn-tidak-tersedia {
+            display: inline-block;
+
+            background: #999;
+
+            color: white;
+
+            border: none;
+
+            padding: 0.5rem 1rem;
+
+            border-radius: 4px;
+
+            cursor: not-allowed;
+
+            opacity: 1;
+        }
+
 
         /* =========================
            PAGINATION
@@ -178,27 +282,55 @@
 
         .pagination {
             margin-top: 1rem;
+
             justify-content: center;
+
+            display: flex;
+
+            align-items: center;
         }
+
 
         .pagination button {
             background-color: #f1f5f9;
+
             border: none;
+
             padding: 0.5rem 0.8rem;
+
             margin: 0 0.2rem;
+
             border-radius: 4px;
+
             cursor: pointer;
         }
 
-        .pagination button a {
-            text-decoration: none;
-            color: #222;
+
+        .pagination button:hover {
+            background-color: #dbeafe;
         }
+
 
         .pagination .active {
             background-color: #1e3a8a;
+
             color: white;
         }
+
+
+        .pagination .disabled {
+            background-color: #e5e7eb;
+
+            color: #999;
+
+            cursor: not-allowed;
+        }
+
+
+        .pagination a {
+            text-decoration: none;
+        }
+
 
         /* =========================
            STATUS
@@ -206,29 +338,41 @@
 
         .status {
             display: inline-block;
+
             padding: 5px 10px;
+
             border-radius: 5px;
+
             font-size: 13px;
+
             margin-bottom: 10px;
         }
 
+
         .status-tersedia {
             background: #d1fae5;
+
             color: #065f46;
         }
 
+
         .status-menunggu {
             background: #fef3c7;
+
             color: #92400e;
         }
 
+
         .status-dipinjam {
             background: #fee2e2;
+
             color: #991b1b;
         }
 
+
         .status-maintenance {
             background: #e5e7eb;
+
             color: #374151;
         }
 
@@ -236,9 +380,12 @@
 
 </head>
 
+
 <body>
 
+
 <div class="phone">
+
 
     <!-- =========================
          HEADER
@@ -246,24 +393,35 @@
 
     <div class="header">
 
+
         <img
             src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="
+                width:100px;
+                height:100px;
+                margin-right:10px;
+                border-radius:20%;
+            "
         >
+
 
         <!-- HAMBURGER -->
 
         <div class="hamburger-container">
+
 
             <button
                 class="btn text-white"
                 id="hamburgerBtn"
                 type="button"
             >
+
                 <i class="bi bi-list fs-1"></i>
+
             </button>
+
 
             <!-- DROPDOWN -->
 
@@ -272,17 +430,24 @@
                 id="hamburgerDropdown"
             >
 
+
                 <!-- PROFIL -->
 
                 <a href="{{ route('profil.guru') }}">
+
                     Profil
+
                 </a>
+
 
                 <!-- UBAH PASSWORD -->
 
                 <a href="{{ route('ubah.password') }}">
+
                     Ubah Password
+
                 </a>
+
 
                 <!-- LOG OUT -->
 
@@ -294,10 +459,13 @@
                     @csrf
 
                     <button type="submit">
+
                         Log out
+
                     </button>
 
                 </form>
+
 
             </div>
 
@@ -312,19 +480,29 @@
 
     <div class="menu-card1">
 
+
         <nav class="breadcrumb">
 
+
             <a href="{{ route('dashboard') }}">
+
                 Home
+
             </a>
+
 
             >
 
+
             <a href="#">
+
                 Pilih Lab
+
             </a>
 
+
         </nav>
+
 
     </div>
 
@@ -335,158 +513,257 @@
 
     <section class="lab-section">
 
-        <h2>Silahkan Pilih Lab</h2>
+
+        <h2>
+
+            Silahkan Pilih Lab
+
+        </h2>
+
 
         <div class="lab-container">
 
+
             @forelse($labs as $lab)
+
+
+                @php
+
+                    /*
+                     * Cari peminjaman yang sudah disetujui
+                     * untuk lab ini.
+                     */
+
+                    $peminjaman = $lab->peminjaman
+                        ->where('status', 'disetujui')
+                        ->first();
+
+                @endphp
+
 
                 <div class="lab-card">
 
-                    <!-- NAMA LAB -->
+
+                    <!-- =========================
+                         NAMA LAB
+                    ========================= -->
 
                     <h4>
+
                         {{ $lab->nama_lab }}
+
                     </h4>
 
 
-                    <!-- KAPASITAS -->
+                    <!-- =========================
+                         KAPASITAS
+                    ========================= -->
 
                     <p>
+
                         <strong>Kapasitas:</strong>
 
                         {{ $lab->kapasitas_murid }} murid
+
                     </p>
 
 
-                    @php
-
-                        $peminjaman = $lab->peminjaman
-                            ->where('status', 'disetujui')
-                            ->first();
-
-                    @endphp
-
-
-                    <!-- STATUS -->
+                    <!-- =========================
+                         STATUS LAB
+                    ========================= -->
 
                     @if($peminjaman)
 
+
+                        <!-- LAB SEDANG DIPAKAI -->
+
                         <span class="status status-dipinjam">
+
                             Sedang Dipinjam
+
                         </span>
+
+
+                    @elseif($lab->status == 'sedang_maintenance')
+
+
+                        <!-- LAB SEDANG MAINTENANCE -->
+
+                        <span class="status status-maintenance">
+
+                            Sedang Maintenance
+
+                        </span>
+
+
+                    @elseif($lab->status == 'tersedia')
+
+
+                        <!-- LAB TERSEDIA -->
+
+                        <span class="status status-tersedia">
+
+                            Tersedia
+
+                        </span>
+
 
                     @else
 
-                        @if($lab->status == 'tersedia')
 
-                            <span class="status status-tersedia">
-                                Tersedia
-                            </span>
+                        <!-- STATUS LAIN -->
 
-                        @elseif($lab->status == 'sedang_maintenance')
+                        <span class="status status-maintenance">
 
-                            <span class="status status-maintenance">
-                                Sedang Maintenance
-                            </span>
+                            {{ $lab->status }}
 
-                        @else
+                        </span>
 
-                            <span class="status status-maintenance">
-                                {{ $lab->status }}
-                            </span>
-
-                        @endif
 
                     @endif
 
 
-                    <!-- INFORMASI PEMINJAM -->
+                    <!-- =========================
+                         INFORMASI PEMINJAM
+                    ========================= -->
 
                     @if($peminjaman)
 
+
                         <p>
+
                             <strong>Peminjam:</strong>
 
                             {{ $peminjaman->user->name ?? '-' }}
+
                         </p>
 
 
                         <p>
+
                             <strong>Pelajaran:</strong>
 
                             {{ $peminjaman->pelajaran->nama ?? '-' }}
+
                         </p>
 
 
                         <p>
+
                             <strong>Tanggal:</strong>
 
-                            {{ $peminjaman->tanggal }}
+                            {{ $peminjaman->tanggal ?? '-' }}
+
                         </p>
 
 
                         <p>
+
                             <strong>Jam:</strong>
 
-                            {{ $peminjaman->jam_mulai }}
+                            {{ $peminjaman->jam_mulai ?? '-' }}
+
                             -
-                            {{ $peminjaman->jam_selesai }}
+
+                            {{ $peminjaman->jam_selesai ?? '-' }}
+
                         </p>
+
 
                     @else
 
+
                         <p>
+
                             <strong>Peminjam:</strong>
+
                             -
+
                         </p>
 
 
                         <p>
+
                             <strong>Pelajaran:</strong>
+
                             -
+
                         </p>
+
 
                     @endif
 
 
-                    <!-- BUTTON AJUKAN -->
+                    <!-- =========================
+                         TOMBOL AJUKAN
+                    ========================= -->
 
-                    @if($peminjaman)
+                    @if($peminjaman || $lab->status == 'sedang_maintenance')
+
+
+                        <!-- LAB TIDAK BISA DIAJUKAN -->
 
                         <button
                             type="button"
+                            class="btn-tidak-tersedia"
                             disabled
-                            style="background:#999; cursor:not-allowed;"
                         >
+
                             Tidak Tersedia
+
                         </button>
+
 
                     @else
 
-                        <button type="button">
+
+                        <!-- LAB TERSEDIA -->
+
+                        <a
+                            href="{{ url('/ajukan-peminjaman/' . $lab->id) }}"
+                            class="btn-ajukan"
+                        >
+
                             Ajukan
-                        </button>
+
+                        </a>
+
 
                     @endif
 
+
                 </div>
+
 
             @empty
 
+
+                <!-- =========================
+                     BELUM ADA LAB
+                ========================= -->
+
                 <div class="lab-card text-center">
 
+
                     <h4>
+
                         Belum Ada Lab
+
                     </h4>
 
+
                     <p>
+
                         Belum ada data lab yang ditambahkan oleh admin.
+
                     </p>
+
 
                 </div>
 
+
             @endforelse
+
 
         </div>
 
@@ -497,39 +774,119 @@
 
         <div class="pagination">
 
-            <button>
-                &lt;
-            </button>
 
-            <button class="active">
-                1
-            </button>
+            {{-- TOMBOL SEBELUMNYA --}}
 
-            <button>
-                <a href="">
-                    2
+            @if ($labs->onFirstPage())
+
+                <button
+                    type="button"
+                    class="disabled"
+                    disabled
+                >
+
+                    &lt;
+
+                </button>
+
+            @else
+
+                <a href="{{ $labs->previousPageUrl() }}">
+
+                    <button type="button">
+
+                        &lt;
+
+                    </button>
+
                 </a>
-            </button>
 
-            <button>
-                <a href="">
-                    3
+            @endif
+
+
+            {{-- NOMOR HALAMAN --}}
+
+            @php
+
+                $currentPage = $labs->currentPage();
+
+                $lastPage = $labs->lastPage();
+
+                /*
+                 * Menampilkan maksimal 3 nomor halaman.
+                 */
+
+                if ($currentPage <= 2) {
+
+                    $startPage = 1;
+
+                } elseif ($currentPage >= $lastPage - 1) {
+
+                    $startPage = max(1, $lastPage - 2);
+
+                } else {
+
+                    $startPage = $currentPage - 1;
+
+                }
+
+                $endPage = min($lastPage, $startPage + 2);
+
+            @endphp
+
+
+            @for ($page = $startPage; $page <= $endPage; $page++)
+
+                <a href="{{ $labs->url($page) }}">
+
+                    <button
+                        type="button"
+                        class="{{ $currentPage == $page ? 'active' : '' }}"
+                    >
+
+                        {{ $page }}
+
+                    </button>
+
                 </a>
-            </button>
 
-            <button>
-                <a href="">
-                    4
+            @endfor
+
+
+            {{-- TOMBOL BERIKUTNYA --}}
+
+            @if ($labs->hasMorePages())
+
+                <a href="{{ $labs->nextPageUrl() }}">
+
+                    <button type="button">
+
+                        &gt;
+
+                    </button>
+
                 </a>
-            </button>
 
-            <button>
-                &gt;
-            </button>
+            @else
+
+                <button
+                    type="button"
+                    class="disabled"
+                    disabled
+                >
+
+                    &gt;
+
+                </button>
+
+            @endif
+
 
         </div>
 
+
     </section>
+
 
 </div>
 
@@ -540,8 +897,10 @@
 
 <script>
 
+
     const hamburgerBtn =
         document.getElementById('hamburgerBtn');
+
 
     const hamburgerDropdown =
         document.getElementById('hamburgerDropdown');
@@ -553,7 +912,11 @@
 
     });
 
+
 </script>
 
+
 </body>
+
 </html>
+```
