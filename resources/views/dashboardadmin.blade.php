@@ -308,7 +308,7 @@
     <div class="box2"> <p>Data Lab</p>   
         </div>
 </a>
-<a href="#" class="text-decoration-none" style="color:black;">
+<a href="/Laporan-Admin" class="text-decoration-none" style="color:black;">
     <div class="box3"> <p>Laporan</p>    
         </div>
 </a>

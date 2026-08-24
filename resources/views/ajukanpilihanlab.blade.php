@@ -1,4 +1,3 @@
-```blade
 <!DOCTYPE html>
 <html lang="id">
 
@@ -95,21 +94,13 @@
 
         .hamburger-dropdown {
             display: none;
-
             position: absolute;
-
             top: 70px;
-
             right: 10px;
-
             width: 180px;
-
             background: #D9D9D9;
-
             border-radius: 10px;
-
             overflow: hidden;
-
             z-index: 1000;
         }
 
@@ -121,15 +112,10 @@
 
         .hamburger-dropdown a {
             display: block;
-
             padding: 15px;
-
             color: #222;
-
             text-decoration: none;
-
             text-align: center;
-
             font-size: 14px;
         }
 
@@ -146,17 +132,11 @@
 
         .hamburger-dropdown button {
             width: 100%;
-
             padding: 15px;
-
             border: none;
-
             background: #D9D9D9;
-
             color: #222;
-
             font-size: 14px;
-
             cursor: pointer;
         }
 
@@ -172,48 +152,34 @@
 
         .lab-section {
             text-align: center;
-
             margin: 2rem auto;
-
             width: 90%;
         }
 
 
         .lab-container {
             background-color: #e2e8f0;
-
             border-radius: 8px;
-
             padding: 1rem;
-
             display: flex;
-
             flex-direction: column;
-
             gap: 1rem;
-
             align-items: center;
         }
 
 
         .lab-card {
             background-color: #f1f5f9;
-
             border-radius: 6px;
-
             padding: 1rem;
-
             width: 80%;
-
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-
             text-align: left;
         }
 
 
         .lab-card h4 {
             margin-bottom: 0.5rem;
-
             color: #1e3a8a;
         }
 
@@ -229,26 +195,18 @@
 
         .btn-ajukan {
             display: inline-block;
-
             background: #1e3a8a;
-
             color: white;
-
             border: none;
-
             padding: 0.5rem 1rem;
-
             border-radius: 4px;
-
             text-decoration: none;
-
             cursor: pointer;
         }
 
 
         .btn-ajukan:hover {
             background: #3b82f6;
-
             color: white;
         }
 
@@ -259,19 +217,12 @@
 
         .btn-tidak-tersedia {
             display: inline-block;
-
             background: #999;
-
             color: white;
-
             border: none;
-
             padding: 0.5rem 1rem;
-
             border-radius: 4px;
-
             cursor: not-allowed;
-
             opacity: 1;
         }
 
@@ -282,26 +233,18 @@
 
         .pagination {
             margin-top: 1rem;
-
             justify-content: center;
-
             display: flex;
-
             align-items: center;
         }
 
 
         .pagination button {
             background-color: #f1f5f9;
-
             border: none;
-
             padding: 0.5rem 0.8rem;
-
             margin: 0 0.2rem;
-
             border-radius: 4px;
-
             cursor: pointer;
         }
 
@@ -313,16 +256,13 @@
 
         .pagination .active {
             background-color: #1e3a8a;
-
             color: white;
         }
 
 
         .pagination .disabled {
             background-color: #e5e7eb;
-
             color: #999;
-
             cursor: not-allowed;
         }
 
@@ -338,42 +278,47 @@
 
         .status {
             display: inline-block;
-
             padding: 5px 10px;
-
             border-radius: 5px;
-
             font-size: 13px;
-
             margin-bottom: 10px;
         }
 
 
         .status-tersedia {
             background: #d1fae5;
-
             color: #065f46;
         }
 
 
         .status-menunggu {
             background: #fef3c7;
-
             color: #92400e;
         }
 
 
         .status-dipinjam {
             background: #fee2e2;
-
             color: #991b1b;
         }
 
 
         .status-maintenance {
             background: #e5e7eb;
-
             color: #374151;
+        }
+
+
+        /* =========================
+           TIMER
+        ========================= */
+
+        .timer {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #991b1b;
         }
 
     </style>
@@ -530,13 +475,81 @@
                 @php
 
                     /*
-                     * Cari peminjaman yang sudah disetujui
-                     * untuk lab ini.
+                     * Gunakan timezone Jakarta secara eksplisit.
+                     */
+
+                    $timezone = 'Asia/Jakarta';
+
+                    $sekarang = \Carbon\Carbon::now($timezone);
+
+
+                    /*
+                     * Cari peminjaman yang sedang berlangsung.
+                     *
+                     * Syarat:
+                     * - status disetujui
+                     * - tanggal sesuai
+                     * - sekarang berada antara jam mulai
+                     *   dan jam selesai
                      */
 
                     $peminjaman = $lab->peminjaman
                         ->where('status', 'disetujui')
+                        ->filter(function ($pinjam) use ($sekarang, $timezone) {
+
+                            if (
+                                !$pinjam->tanggal ||
+                                !$pinjam->jam_mulai ||
+                                !$pinjam->jam_selesai
+                            ) {
+                                return false;
+                            }
+
+
+                            $mulai = \Carbon\Carbon::parse(
+                                $pinjam->tanggal . ' ' . $pinjam->jam_mulai,
+                                $timezone
+                            );
+
+
+                            $selesai = \Carbon\Carbon::parse(
+                                $pinjam->tanggal . ' ' . $pinjam->jam_selesai,
+                                $timezone
+                            );
+
+
+                            return $sekarang->between(
+                                $mulai,
+                                $selesai
+                            );
+
+                        })
+                        ->sortBy(function ($pinjam) use ($timezone) {
+
+                            return \Carbon\Carbon::parse(
+                                $pinjam->tanggal . ' ' . $pinjam->jam_mulai,
+                                $timezone
+                            )->timestamp;
+
+                        })
                         ->first();
+
+
+                    /*
+                     * Jika ada peminjaman aktif,
+                     * buat waktu selesai untuk timer.
+                     */
+
+                    $waktuSelesai = null;
+
+                    if ($peminjaman) {
+
+                        $waktuSelesai = \Carbon\Carbon::parse(
+                            $peminjaman->tanggal . ' ' . $peminjaman->jam_selesai,
+                            $timezone
+                        )->toIso8601String();
+
+                    }
 
                 @endphp
 
@@ -643,7 +656,7 @@
 
                             <strong>Pelajaran:</strong>
 
-                            {{ $peminjaman->pelajaran->nama ?? '-' }}
+                            {{ $peminjaman->pelajaran->nama_pelajaran ?? '-' }}
 
                         </p>
 
@@ -666,6 +679,26 @@
                             -
 
                             {{ $peminjaman->jam_selesai ?? '-' }}
+
+                        </p>
+
+
+                        <!-- =========================
+                             TIMER
+                        ========================= -->
+
+                        <p>
+
+                            <strong>Sisa waktu:</strong>
+
+                            <span
+                                class="timer"
+                                data-end="{{ $waktuSelesai }}"
+                            >
+
+                                Menghitung...
+
+                            </span>
 
                         </p>
 
@@ -698,7 +731,10 @@
                          TOMBOL AJUKAN
                     ========================= -->
 
-                    @if($peminjaman || $lab->status == 'sedang_maintenance')
+                    @if(
+                        $peminjaman ||
+                        $lab->status == 'sedang_maintenance'
+                    )
 
 
                         <!-- LAB TIDAK BISA DIAJUKAN -->
@@ -812,6 +848,7 @@
 
                 $lastPage = $labs->lastPage();
 
+
                 /*
                  * Menampilkan maksimal 3 nomor halaman.
                  */
@@ -830,12 +867,20 @@
 
                 }
 
-                $endPage = min($lastPage, $startPage + 2);
+
+                $endPage = min(
+                    $lastPage,
+                    $startPage + 2
+                );
 
             @endphp
 
 
-            @for ($page = $startPage; $page <= $endPage; $page++)
+            @for (
+                $page = $startPage;
+                $page <= $endPage;
+                $page++
+            )
 
                 <a href="{{ $labs->url($page) }}">
 
@@ -892,26 +937,201 @@
 
 
 <!-- =========================
-     JAVASCRIPT HAMBURGER
+     JAVASCRIPT
 ========================= -->
 
 <script>
 
+    /* =========================================
+       HAMBURGER
+    ========================================= */
 
-    const hamburgerBtn =
-        document.getElementById('hamburgerBtn');
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const hamburgerBtn =
+            document.getElementById('hamburgerBtn');
+
+        const hamburgerDropdown =
+            document.getElementById('hamburgerDropdown');
 
 
-    const hamburgerDropdown =
-        document.getElementById('hamburgerDropdown');
+        if (hamburgerBtn && hamburgerDropdown) {
+
+            hamburgerBtn.addEventListener('click', function () {
+
+                hamburgerDropdown.classList.toggle('show');
+
+            });
+
+        }
 
 
-    hamburgerBtn.addEventListener('click', function () {
+        /* =========================================
+           TIMER PEMINJAMAN
+        ========================================= */
 
-        hamburgerDropdown.classList.toggle('show');
+        const timers =
+            document.querySelectorAll('.timer');
+
+
+        timers.forEach(function (timer) {
+
+            const endTimeString =
+                timer.getAttribute('data-end');
+
+
+            /*
+             * Jika data-end kosong,
+             * jangan jalankan timer.
+             */
+
+            if (!endTimeString) {
+
+                timer.textContent = '-';
+
+                return;
+
+            }
+
+
+            /*
+             * Ubah waktu ISO menjadi timestamp.
+             */
+
+            const endTime =
+                new Date(endTimeString).getTime();
+
+
+            /*
+             * Pastikan tanggal valid.
+             */
+
+            if (isNaN(endTime)) {
+
+                timer.textContent = 'Waktu tidak valid';
+
+                console.error(
+                    'Timer error: data-end tidak valid:',
+                    endTimeString
+                );
+
+                return;
+
+            }
+
+
+            let interval;
+
+
+            function updateTimer() {
+
+                const sekarang =
+                    Date.now();
+
+
+                const selisih =
+                    endTime - sekarang;
+
+
+                /*
+                 * Jika waktu sudah habis.
+                 */
+
+                if (selisih <= 0) {
+
+                    timer.textContent =
+                        'Waktu selesai';
+
+
+                    clearInterval(interval);
+
+
+                    /*
+                     * Reload halaman agar status lab
+                     * diperbarui oleh Laravel.
+                     */
+
+                    setTimeout(function () {
+
+                        window.location.reload();
+
+                    }, 1000);
+
+
+                    return;
+
+                }
+
+
+                /*
+                 * Hitung jam.
+                 */
+
+                const jam =
+                    Math.floor(
+                        selisih /
+                        (1000 * 60 * 60)
+                    );
+
+
+                /*
+                 * Hitung menit.
+                 */
+
+                const menit =
+                    Math.floor(
+                        (selisih %
+                        (1000 * 60 * 60)) /
+                        (1000 * 60)
+                    );
+
+
+                /*
+                 * Hitung detik.
+                 */
+
+                const detik =
+                    Math.floor(
+                        (selisih %
+                        (1000 * 60)) /
+                        1000
+                    );
+
+
+                /*
+                 * Tampilkan HH:MM:SS.
+                 */
+
+                timer.textContent =
+                    String(jam).padStart(2, '0')
+                    + ':'
+                    + String(menit).padStart(2, '0')
+                    + ':'
+                    + String(detik).padStart(2, '0');
+
+            }
+
+
+            /*
+             * Jalankan langsung.
+             */
+
+            updateTimer();
+
+
+            /*
+             * Update setiap 1 detik.
+             */
+
+            interval =
+                setInterval(
+                    updateTimer,
+                    1000
+                );
+
+        });
 
     });
-
 
 </script>
 
@@ -919,4 +1139,3 @@
 </body>
 
 </html>
-```

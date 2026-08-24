@@ -25,6 +25,8 @@ use App\Http\Controllers\Controllereditmapel;
 use App\Http\Controllers\Controllerajuanlab;
 use App\Http\Controllers\Controllerdetailajuan;
 use App\Http\Controllers\Controllerpilihanlab;
+use App\Http\Controllers\ControllerLaporanAdmin;
+use App\Http\Controllers\ControllerLaporanGuru;
 
 // =========================
 // WELCOME
@@ -265,6 +267,16 @@ Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
 
 Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
     ->name('guru.destroy');
+
+
+// =========================
+// LAPORAN
+// =========================
+Route::get('/Laporan-Admin', [ControllerLaporanAdmin::class, 'index'])
+    ->name('laporan.admin');
+Route::get('/Laporan-Guru', [ControllerLaporanGuru::class, 'index'])
+    ->name('laporan.guru');
+
 
 
 // =========================

@@ -454,6 +454,7 @@
         <a
             href="/pilihanlab"
             class="text-decoration-none"
+            style="color:black;"
         >
 
             <div class="box1">
@@ -467,41 +468,47 @@
         </a>
 
 
-        <div class="box2">
+        <a href=""  class="text-decoration-none" style="color:black;">
+<div class="box2">
 
             <p>
                 Jadwal Peminjaman Lab
             </p>
 
         </div>
+        </a>
 
 
-        <div class="box3">
+        <a href="/Laporan-Guru" class="text-decoration-none" style="color:black;">
+   <div class="box3">
 
             <p>
                 Laporan Penolakan
             </p>
 
         </div>
+        </a>
 
 
-        <div class="box4">
+        <a href=""  class="text-decoration-none" style="color:black;">
+ <div class="box4">
 
             <p>
                 Status ajukan
             </p>
 
         </div>
+        </a>
 
-
-        <div class="box5">
+        <a href="" class="text-decoration-none" style="color:black;">
+ <div class="box5" >
 
             <p>
                 Data ajukan
             </p>
 
         </div>
-
+        </a>
 
     </div>
 

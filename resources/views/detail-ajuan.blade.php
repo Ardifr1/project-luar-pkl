@@ -377,51 +377,122 @@
                  TOMBOL
                  ========================= -->
 
-            @if($peminjaman->status === 'menunggu')
+           @if($peminjaman->status === 'menunggu')
 
-                <div class="detail-actions">
+    <div class="detail-actions">
+
+        <!-- SETUJUI -->
+
+        <form
+            action="{{ route('ajuan.setujui', ['id' => $peminjaman->id]) }}"
+            method="POST"
+        >
+
+            @csrf
+
+            <button
+                type="submit"
+                class="btn-approve"
+            >
+                Setujui
+            </button>
+
+        </form>
 
 
-                    <!-- SETUJUI -->
+        <!-- TIDAK SETUJUI -->
 
-                    <form
-                        action="{{ route('ajuan.setujui', ['id' => $peminjaman->id]) }}"
-                        method="POST"
-                    >
+        <button
+            type="button"
+            class="btn-reject"
+            id="btnTidakSetuju"
+        >
+            Tidak Setujui
+        </button>
 
-                        @csrf
-
-                        <button
-                            type="submit"
-                            class="btn-approve"
-                        >
-                            Setujui
-                        </button>
-
-                    </form>
+    </div>
 
 
-                    <!-- TOLAK -->
+    <!-- =========================
+         FORM ALASAN PENOLAKAN
+         ========================= -->
 
-                    <form
-                        action="{{ route('ajuan.tolak', ['id' => $peminjaman->id]) }}"
-                        method="POST"
-                    >
+    <div
+        id="formAlasan"
+        style="
+            display:none;
+            margin-top:20px;
+        "
+    >
 
-                        @csrf
+        <form
+            action="{{ route('ajuan.tolak', ['id' => $peminjaman->id]) }}"
+            method="POST"
+        >
 
-                        <button
-                            type="submit"
-                            class="btn-reject"
-                        >
-                            Tidak Setujui
-                        </button>
+            @csrf
 
-                    </form>
 
+            <label
+                for="alasan_penolakan"
+                class="form-label"
+            >
+                <strong>
+                    Alasan Tidak Menyetujui
+                </strong>
+            </label>
+
+
+            <textarea
+                name="alasan_penolakan"
+                id="alasan_penolakan"
+                class="form-control"
+                rows="4"
+                placeholder="Masukkan alasan tidak menyetujui ajuan..."
+                required
+            ></textarea>
+
+
+            @error('alasan_penolakan')
+
+                <div class="text-danger mt-2">
+                    {{ $message }}
                 </div>
 
-            @endif
+            @enderror
+
+
+            <div
+                style="
+                    display:flex;
+                    gap:10px;
+                    margin-top:10px;
+                "
+            >
+
+                <button
+                    type="submit"
+                    class="btn-reject"
+                >
+                    Kirim Penolakan
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnBatalTolak"
+                    class="btn btn-secondary"
+                >
+                    Batal
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+@endif
 
         </div>
 
@@ -448,6 +519,54 @@
         hamburgerDropdown.classList.toggle('show');
 
     });
+
+
+    // =========================
+    // FORM ALASAN PENOLAKAN
+    // =========================
+
+    const btnTidakSetuju =
+        document.getElementById('btnTidakSetuju');
+
+    const formAlasan =
+        document.getElementById('formAlasan');
+
+    const btnBatalTolak =
+        document.getElementById('btnBatalTolak');
+
+
+    if (btnTidakSetuju) {
+
+        btnTidakSetuju.addEventListener('click', function(){
+
+            formAlasan.style.display = 'block';
+
+            btnTidakSetuju.style.display = 'none';
+
+            document
+                .getElementById('alasan_penolakan')
+                .focus();
+
+        });
+
+    }
+
+
+    if (btnBatalTolak) {
+
+        btnBatalTolak.addEventListener('click', function(){
+
+            formAlasan.style.display = 'none';
+
+            btnTidakSetuju.style.display = 'inline-block';
+
+            document
+                .getElementById('alasan_penolakan')
+                .value = '';
+
+        });
+
+    }
 
 </script>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 
 class Controllerdetailajuan extends Controller
@@ -35,8 +36,10 @@ class Controllerdetailajuan extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
 
         // Ubah status menjadi disetujui
+        // dan kosongkan alasan penolakan
         $peminjaman->update([
             'status' => 'disetujui',
+            'alasan_penolakan' => null,
         ]);
 
         return redirect()
@@ -52,14 +55,27 @@ class Controllerdetailajuan extends Controller
     // TOLAK AJUAN
     // =========================
 
-    public function tolak($id)
+    public function tolak(Request $request, $id)
     {
+        // Validasi alasan penolakan
+        $request->validate([
+            'alasan_penolakan' => 'required|string|max:1000',
+        ], [
+            'alasan_penolakan.required' =>
+                'Alasan tidak menyetujui wajib diisi.',
+        ]);
+
+
+        // Ambil data peminjaman
         $peminjaman = Peminjaman::findOrFail($id);
 
-        // Ubah status menjadi ditolak
+
+        // Ubah status dan simpan alasan
         $peminjaman->update([
             'status' => 'ditolak',
+            'alasan_penolakan' => $request->alasan_penolakan,
         ]);
+
 
         return redirect()
             ->route('daftar.ajuan')
