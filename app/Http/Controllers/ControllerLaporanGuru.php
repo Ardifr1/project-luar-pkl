@@ -18,7 +18,7 @@ class ControllerLaporanGuru extends Controller
             'lab',
             'pelajaran'
         ])
-        ->where('status', 'ditolak')
+        ->whereIn('status', ['ditolak', 'dibatalkan'])
         ->where('user_id', auth()->id());
 
 

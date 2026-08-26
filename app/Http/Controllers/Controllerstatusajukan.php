@@ -29,14 +29,23 @@ class Controllerstatusajukan extends Controller
 
             return redirect()
                 ->route('statusajukan')
-                ->with('error', 'Pengajuan yang sudah disetujui tidak dapat dibatalkan.');
+                ->with(
+                    'error',
+                    'Pengajuan yang sudah disetujui tidak dapat dibatalkan.'
+                );
 
         }
 
-        $peminjaman->delete();
+        // Ubah status menjadi dibatalkan
+        $peminjaman->update([
+            'status' => 'dibatalkan'
+        ]);
 
         return redirect()
             ->route('statusajukan')
-            ->with('success', 'Pengajuan berhasil dibatalkan.');
+            ->with(
+                'success',
+                'Pengajuan berhasil dibatalkan.'
+            );
     }
 }

@@ -38,9 +38,10 @@ return new class extends Migration
             $table->enum('status', [
                 'menunggu',
                 'disetujui',
-                'ditolak'
+                'ditolak',
+                'dibatalkan'
             ])->default('menunggu');
-            
+
             $table->text('alasan_penolakan')->nullable();
 
             $table->timestamps();

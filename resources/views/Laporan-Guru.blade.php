@@ -180,7 +180,7 @@
 
 
         /* =========================
-           DATA PENOLAKAN
+           DATA
            ========================= */
 
         .penolakan-item {
@@ -248,7 +248,7 @@
 
 
         /* =========================
-           ALASAN PENOLAKAN
+           ALASAN
            ========================= */
 
         .alasan-container {
@@ -655,7 +655,7 @@
 
 
     <!-- =========================
-         DATA PENOLAKAN
+         DATA PENOLAKAN / PEMBATALAN
          ========================= -->
 
     <div class="data-container">
@@ -665,7 +665,7 @@
 
         <div class="data-title">
 
-            Daftar Penolakan
+            Daftar Riwayat Pengajuan
 
         </div>
 
@@ -708,7 +708,15 @@
 
                     <div class="tidak-setuju">
 
-                        Tidak setuju
+                        @if($data->status == 'ditolak')
+
+                            Tidak setuju
+
+                        @elseif($data->status == 'dibatalkan')
+
+                            Dibatalkan
+
+                        @endif
 
                     </div>
 
@@ -762,22 +770,42 @@
 
 
                 <!-- =========================
-                     ALASAN PENOLAKAN
+                     KETERANGAN STATUS
                      ========================= -->
 
-                <div class="alasan-container">
+                @if($data->status == 'ditolak')
 
-                    <div class="alasan-text">
+                    <div class="alasan-container">
 
-                        <strong>
-                            Alasan:
-                        </strong>
+                        <div class="alasan-text">
 
-                        {{ $data->alasan_penolakan ?? 'Tidak ada alasan.' }}
+                            <strong>
+                                Alasan:
+                            </strong>
+
+                            {{ $data->alasan_penolakan ?? 'Tidak ada alasan.' }}
+
+                        </div>
 
                     </div>
 
-                </div>
+                @elseif($data->status == 'dibatalkan')
+
+                    <div class="alasan-container">
+
+                        <div class="alasan-text">
+
+                            <strong>
+                                Keterangan:
+                            </strong>
+
+                            Pengajuan dibatalkan oleh guru.
+
+                        </div>
+
+                    </div>
+
+                @endif
 
 
 
@@ -800,7 +828,7 @@
 
                 <br>
 
-                Belum ada pengajuan yang ditolak.
+                Belum ada riwayat pengajuan.
 
             </div>
 
