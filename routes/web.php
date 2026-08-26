@@ -30,6 +30,7 @@ use App\Http\Controllers\ControllerLaporanAdmin;
 use App\Http\Controllers\ControllerLaporanGuru;
 use App\Http\Controllers\Controllerjadwaldipinjam;
 use App\Http\Controllers\Contollerstatusajukan;
+use App\Http\Controllers\Controllerubahpassword;
 
 // =========================
 // WELCOME
@@ -316,6 +317,7 @@ Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
 Route::post('/ubah-password', [ControllerPassword::class, 'update'])
     ->name('ubah.password.update');
 
+Route::get('ubahpasswordguru',[Controllerubahpassword::class, 'index']);
 
 // =========================
 // LOGOUT
