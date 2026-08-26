@@ -29,7 +29,6 @@ use App\Http\Controllers\Controllerpilihanlab;
 use App\Http\Controllers\ControllerLaporanAdmin;
 use App\Http\Controllers\ControllerLaporanGuru;
 use App\Http\Controllers\Controllerjadwaldipinjam;
-use App\Http\Controllers\Contollerstatusajukan;
 use App\Http\Controllers\Controllerubahpassword;
 
 // =========================
@@ -225,7 +224,12 @@ Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
 // =========================
 // STATUS AJUKAN
 // =========================
-Route::get('statusajukan-lab',[Controllerstatusajukan::class, 'index']);
+
+Route::get('/statusajukan-lab', [Controllerstatusajukan::class, 'index'])
+    ->name('statusajukan');
+
+Route::delete('/statusajukan-lab/{id}/batalkan', [Controllerstatusajukan::class, 'batalkan'])
+    ->name('statusajukan.batalkan');
 
 // =========================
 // SETUJUI AJUAN
