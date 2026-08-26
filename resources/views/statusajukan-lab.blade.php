@@ -241,7 +241,7 @@
 
 
   <div class="status-container">
-  <h3>Status Laporan Hari Ini</h3>
+  <h3>Status ajukan lab Anda</h3>
 
   <div class="status-card">
     <p>Peminjam : <strong>Bu Sit</strong></p>
