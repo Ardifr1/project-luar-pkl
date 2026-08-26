@@ -248,9 +248,10 @@
     <p>Jadwal : Senin, Agustus 2026 12.00 - 14.00</p>
     <p>Kapasitas murid : 20</p>
     <p>Mapel : Desain</p>
+    <p>Lab : Lab kom</p>
 
     <div class="status-actions">
-      <button class="btn-cancel">Ajukan Pembatalan?</button>
+      <button class="btn-cancel">Batalkan</button>
     </div>
   </div>
 </div>
