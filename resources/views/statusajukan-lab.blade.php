@@ -234,7 +234,7 @@
 
 <div class="menu-card1">
   <nav class="breadcrumb">
-    <a href="#">Home</a> >
+    <a href="/dashboard">Home</a> >
     <a href="#">status ajukan lab</a>
   </nav>
   </div>
@@ -251,7 +251,7 @@
     <p>Lab : Lab kom</p>
 
     <div class="status-actions">
-      <button class="btn-cancel">Batalkan</button>
+      <button class="btn-cancel"> <a href="/dashboard">Batalkan</a></button>
     </div>
   </div>
 </div>

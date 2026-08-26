@@ -222,7 +222,7 @@
 
 <div class="menu-card1">
   <nav class="breadcrumb">
-    <a href="#">Home</a> >
+    <a href="/dashboard">Home</a> >
     <a href="#">status ajukan lab</a>
   </nav>
   </div>

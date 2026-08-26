@@ -468,7 +468,7 @@
         </a>
 
 
-        <a href=""  class="text-decoration-none" style="color:black;">
+        <a href="jadwallab-dipinjam"  class="text-decoration-none" style="color:black;">
 <div class="box2">
 
             <p>
@@ -490,7 +490,7 @@
         </a>
 
 
-        <a href=""  class="text-decoration-none" style="color:black;">
+        <a href="/statusajukan-lab"  class="text-decoration-none" style="color:black;">
  <div class="box4">
 
             <p>
@@ -500,17 +500,7 @@
         </div>
         </a>
 
-        <a href="" class="text-decoration-none" style="color:black;">
- <div class="box5" >
-
-            <p>
-                Data ajukan
-            </p>
-
-        </div>
-        </a>
-
-    </div>
+       
 
 
 </div>
