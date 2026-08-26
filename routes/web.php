@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controllerstatusajukan;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ControllerLogin;
@@ -27,6 +28,8 @@ use App\Http\Controllers\Controllerdetailajuan;
 use App\Http\Controllers\Controllerpilihanlab;
 use App\Http\Controllers\ControllerLaporanAdmin;
 use App\Http\Controllers\ControllerLaporanGuru;
+use App\Http\Controllers\Controllerjadwaldipinjam;
+use App\Http\Controllers\Contollerstatusajukan;
 
 // =========================
 // WELCOME
@@ -218,6 +221,10 @@ Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
 Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
     ->name('detail.ajuan');
 
+// =========================
+// STATUS AJUKAN
+// =========================
+Route::get('statusajukan-lab',[Controllerstatusajukan::class, 'index']);
 
 // =========================
 // SETUJUI AJUAN
@@ -248,6 +255,11 @@ Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
 // Halaman pilihan lab
 Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
     ->name('ajukanpilihanlab');
+
+// =========================
+// JADWAL LAB DIPINJAM
+// =========================
+Route::get('jadwallab-dipinjam',[Controllerjadwaldipinjam::class, 'index']);
 
 // =========================
 // GURU
