@@ -9,22 +9,17 @@
 
     <title>Ajukan Pilihan Lab</title>
 
-
     <!-- BOOTSTRAP -->
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
     <!-- BOOTSTRAP ICONS -->
-
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
-
 
     <style>
 
@@ -32,14 +27,12 @@
             background: #222;
         }
 
-
         .phone {
             max-width: 412px;
             min-height: 917px;
             margin: 20px auto;
             background: #fff;
         }
-
 
         /* =========================
            HEADER
@@ -52,7 +45,6 @@
             display: flex;
             align-items: center;
         }
-
 
         /* =========================
            BREADCRUMB
@@ -70,18 +62,15 @@
             border-radius: 6px;
         }
 
-
         .breadcrumb {
             margin-bottom: 0;
         }
-
 
         .breadcrumb a {
             color: #007bff;
             text-decoration: none;
             margin-right: 5px;
         }
-
 
         /* =========================
            DROPDOWN HAMBURGER
@@ -90,7 +79,6 @@
         .hamburger-container {
             position: relative;
         }
-
 
         .hamburger-dropdown {
             display: none;
@@ -104,11 +92,9 @@
             z-index: 1000;
         }
 
-
         .hamburger-dropdown.show {
             display: block;
         }
-
 
         .hamburger-dropdown a {
             display: block;
@@ -119,16 +105,13 @@
             font-size: 14px;
         }
 
-
         .hamburger-dropdown a:hover {
             background: #c5c5c5;
         }
 
-
         .hamburger-dropdown form {
             margin: 0;
         }
-
 
         .hamburger-dropdown button {
             width: 100%;
@@ -140,11 +123,9 @@
             cursor: pointer;
         }
 
-
         .hamburger-dropdown button:hover {
             background: #c5c5c5;
         }
-
 
         /* =========================
            LAB
@@ -156,7 +137,6 @@
             width: 90%;
         }
 
-
         .lab-container {
             background-color: #e2e8f0;
             border-radius: 8px;
@@ -167,7 +147,6 @@
             align-items: center;
         }
 
-
         .lab-card {
             background-color: #f1f5f9;
             border-radius: 6px;
@@ -177,17 +156,14 @@
             text-align: left;
         }
 
-
         .lab-card h4 {
             margin-bottom: 0.5rem;
             color: #1e3a8a;
         }
 
-
         .lab-card p {
             margin-bottom: 8px;
         }
-
 
         /* =========================
            TOMBOL AJUKAN
@@ -204,12 +180,10 @@
             cursor: pointer;
         }
 
-
         .btn-ajukan:hover {
             background: #3b82f6;
             color: white;
         }
-
 
         /* =========================
            TOMBOL TIDAK TERSEDIA
@@ -226,7 +200,6 @@
             opacity: 1;
         }
 
-
         /* =========================
            PAGINATION
         ========================= */
@@ -238,7 +211,6 @@
             align-items: center;
         }
 
-
         .pagination button {
             background-color: #f1f5f9;
             border: none;
@@ -248,17 +220,14 @@
             cursor: pointer;
         }
 
-
         .pagination button:hover {
             background-color: #dbeafe;
         }
-
 
         .pagination .active {
             background-color: #1e3a8a;
             color: white;
         }
-
 
         .pagination .disabled {
             background-color: #e5e7eb;
@@ -266,11 +235,9 @@
             cursor: not-allowed;
         }
 
-
         .pagination a {
             text-decoration: none;
         }
-
 
         /* =========================
            STATUS
@@ -284,30 +251,25 @@
             margin-bottom: 10px;
         }
 
-
         .status-tersedia {
             background: #d1fae5;
             color: #065f46;
         }
-
 
         .status-menunggu {
             background: #fef3c7;
             color: #92400e;
         }
 
-
         .status-dipinjam {
             background: #fee2e2;
             color: #991b1b;
         }
 
-
         .status-maintenance {
             background: #e5e7eb;
             color: #374151;
         }
-
 
         /* =========================
            TIMER
@@ -325,19 +287,15 @@
 
 </head>
 
-
 <body>
 
-
 <div class="phone">
-
 
     <!-- =========================
          HEADER
     ========================= -->
 
     <div class="header">
-
 
         <img
             src="{{ asset('gambar/download.png') }}"
@@ -351,11 +309,9 @@
             "
         >
 
-
         <!-- HAMBURGER -->
 
         <div class="hamburger-container">
-
 
             <button
                 class="btn text-white"
@@ -367,7 +323,6 @@
 
             </button>
 
-
             <!-- DROPDOWN -->
 
             <div
@@ -375,24 +330,17 @@
                 id="hamburgerDropdown"
             >
 
-
                 <!-- PROFIL -->
 
                 <a href="{{ route('profil.guru') }}">
-
                     Profil
-
                 </a>
-
 
                 <!-- UBAH PASSWORD -->
 
                 <a href="{{ route('ubah.password') }}">
-
                     Ubah Password
-
                 </a>
-
 
                 <!-- LOG OUT -->
 
@@ -404,13 +352,10 @@
                     @csrf
 
                     <button type="submit">
-
                         Log out
-
                     </button>
 
                 </form>
-
 
             </div>
 
@@ -425,29 +370,19 @@
 
     <div class="menu-card1">
 
-
         <nav class="breadcrumb">
 
-
             <a href="{{ route('dashboard') }}">
-
                 Home
-
             </a>
-
 
             >
 
-
             <a href="#">
-
                 Pilih Lab
-
             </a>
 
-
         </nav>
-
 
     </div>
 
@@ -458,25 +393,22 @@
 
     <section class="lab-section">
 
-
         <h2>
-
             Silahkan Pilih Lab
-
         </h2>
 
 
         <div class="lab-container">
 
-
             @forelse($labs as $lab)
-
 
                 @php
 
                     /*
-                     * Gunakan timezone Jakarta secara eksplisit.
-                     */
+                    |--------------------------------------------------------------------------
+                    | TIMEZONE
+                    |--------------------------------------------------------------------------
+                    */
 
                     $timezone = 'Asia/Jakarta';
 
@@ -484,14 +416,30 @@
 
 
                     /*
-                     * Cari peminjaman yang sedang berlangsung.
-                     *
-                     * Syarat:
-                     * - status disetujui
-                     * - tanggal sesuai
-                     * - sekarang berada antara jam mulai
-                     *   dan jam selesai
-                     */
+                    |--------------------------------------------------------------------------
+                    | NORMALISASI STATUS LAB
+                    |--------------------------------------------------------------------------
+                    |
+                    | Supaya:
+                    | tersedia
+                    | TERSEDIA
+                    | Tidak_Tersedia
+                    | tidak_tersedia
+                    |
+                    | tetap bisa dibandingkan dengan aman.
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $statusLab = strtolower(
+                        trim($lab->status ?? '')
+                    );
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | CARI PEMINJAMAN YANG SEDANG BERLANGSUNG
+                    |--------------------------------------------------------------------------
+                    */
 
                     $peminjaman = $lab->peminjaman
                         ->where('status', 'disetujui')
@@ -505,18 +453,15 @@
                                 return false;
                             }
 
-
                             $mulai = \Carbon\Carbon::parse(
                                 $pinjam->tanggal . ' ' . $pinjam->jam_mulai,
                                 $timezone
                             );
 
-
                             $selesai = \Carbon\Carbon::parse(
                                 $pinjam->tanggal . ' ' . $pinjam->jam_selesai,
                                 $timezone
                             );
-
 
                             return $sekarang->between(
                                 $mulai,
@@ -536,9 +481,10 @@
 
 
                     /*
-                     * Jika ada peminjaman aktif,
-                     * buat waktu selesai untuk timer.
-                     */
+                    |--------------------------------------------------------------------------
+                    | WAKTU SELESAI TIMER
+                    |--------------------------------------------------------------------------
+                    */
 
                     $waktuSelesai = null;
 
@@ -551,30 +497,46 @@
 
                     }
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | TENTUKAN APAKAH LAB BOLEH DIAJUKAN
+                    |--------------------------------------------------------------------------
+                    |
+                    | LAB HANYA BOLEH DIAJUKAN JIKA:
+                    |
+                    | 1. Tidak sedang dipinjam
+                    | 2. Status database = tersedia
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $bolehAjukan =
+                        !$peminjaman &&
+                        $statusLab === 'tersedia';
+
                 @endphp
 
 
+                <!-- =========================
+                     CARD LAB
+                ========================= -->
+
                 <div class="lab-card">
 
-
-                    <!-- =========================
-                         NAMA LAB
-                    ========================= -->
+                    <!-- NAMA LAB -->
 
                     <h4>
-
                         {{ $lab->nama_lab }}
-
                     </h4>
 
 
-                    <!-- =========================
-                         KAPASITAS
-                    ========================= -->
+                    <!-- KAPASITAS -->
 
                     <p>
 
-                        <strong>Kapasitas:</strong>
+                        <strong>
+                            Kapasitas:
+                        </strong>
 
                         {{ $lab->kapasitas_murid }} murid
 
@@ -587,8 +549,7 @@
 
                     @if($peminjaman)
 
-
-                        <!-- LAB SEDANG DIPAKAI -->
+                        <!-- SEDANG DIPINJAM -->
 
                         <span class="status status-dipinjam">
 
@@ -597,10 +558,9 @@
                         </span>
 
 
-                    @elseif($lab->status == 'sedang_maintenance')
+                    @elseif($statusLab === 'sedang_maintenance')
 
-
-                        <!-- LAB SEDANG MAINTENANCE -->
+                        <!-- MAINTENANCE -->
 
                         <span class="status status-maintenance">
 
@@ -609,10 +569,9 @@
                         </span>
 
 
-                    @elseif($lab->status == 'tersedia')
+                    @elseif($statusLab === 'tersedia')
 
-
-                        <!-- LAB TERSEDIA -->
+                        <!-- TERSEDIA -->
 
                         <span class="status status-tersedia">
 
@@ -621,17 +580,29 @@
                         </span>
 
 
-                    @else
+                    @elseif(
+                        $statusLab === 'tidak_tersedia' ||
+                        $statusLab === 'tidak tersedia'
+                    )
 
+                        <!-- TIDAK TERSEDIA -->
+
+                        <span class="status status-maintenance">
+
+                            Tidak Tersedia
+
+                        </span>
+
+
+                    @else
 
                         <!-- STATUS LAIN -->
 
                         <span class="status status-maintenance">
 
-                            {{ $lab->status }}
+                            {{ $lab->status ?? 'Tidak Tersedia' }}
 
                         </span>
-
 
                     @endif
 
@@ -642,10 +613,11 @@
 
                     @if($peminjaman)
 
-
                         <p>
 
-                            <strong>Peminjam:</strong>
+                            <strong>
+                                Peminjam:
+                            </strong>
 
                             {{ $peminjaman->user->name ?? '-' }}
 
@@ -654,7 +626,9 @@
 
                         <p>
 
-                            <strong>Pelajaran:</strong>
+                            <strong>
+                                Pelajaran:
+                            </strong>
 
                             {{ $peminjaman->pelajaran->nama_pelajaran ?? '-' }}
 
@@ -663,7 +637,9 @@
 
                         <p>
 
-                            <strong>Tanggal:</strong>
+                            <strong>
+                                Tanggal:
+                            </strong>
 
                             {{ $peminjaman->tanggal ?? '-' }}
 
@@ -672,7 +648,9 @@
 
                         <p>
 
-                            <strong>Jam:</strong>
+                            <strong>
+                                Jam:
+                            </strong>
 
                             {{ $peminjaman->jam_mulai ?? '-' }}
 
@@ -689,26 +667,26 @@
 
                         <p>
 
-                            <strong>Sisa waktu:</strong>
+                            <strong>
+                                Sisa waktu:
+                            </strong>
 
                             <span
                                 class="timer"
                                 data-end="{{ $waktuSelesai }}"
                             >
-
                                 Menghitung...
-
                             </span>
 
                         </p>
 
-
                     @else
 
-
                         <p>
 
-                            <strong>Peminjam:</strong>
+                            <strong>
+                                Peminjam:
+                            </strong>
 
                             -
 
@@ -717,12 +695,13 @@
 
                         <p>
 
-                            <strong>Pelajaran:</strong>
+                            <strong>
+                                Pelajaran:
+                            </strong>
 
                             -
 
                         </p>
-
 
                     @endif
 
@@ -731,13 +710,30 @@
                          TOMBOL AJUKAN
                     ========================= -->
 
-                    @if(
-                        $peminjaman ||
-                        $lab->status == 'sedang_maintenance'
-                    )
+                    @if($bolehAjukan)
 
+                        <!--
+                        =====================================================
+                        LAB BOLEH DIAJUKAN
+                        =====================================================
+                        -->
 
-                        <!-- LAB TIDAK BISA DIAJUKAN -->
+                        <a
+                            href="{{ url('/ajukan-peminjaman/' . $lab->id) }}"
+                            class="btn-ajukan"
+                        >
+
+                            Ajukan
+
+                        </a>
+
+                    @else
+
+                        <!--
+                        =====================================================
+                        LAB TIDAK BOLEH DIAJUKAN
+                        =====================================================
+                        -->
 
                         <button
                             type="button"
@@ -749,22 +745,6 @@
 
                         </button>
 
-
-                    @else
-
-
-                        <!-- LAB TERSEDIA -->
-
-                        <a
-                            href="{{ url('/ajukan-peminjaman/' . $lab->id) }}"
-                            class="btn-ajukan"
-                        >
-
-                            Ajukan
-
-                        </a>
-
-
                     @endif
 
 
@@ -773,33 +753,23 @@
 
             @empty
 
-
                 <!-- =========================
                      BELUM ADA LAB
                 ========================= -->
 
                 <div class="lab-card text-center">
 
-
                     <h4>
-
                         Belum Ada Lab
-
                     </h4>
 
-
                     <p>
-
                         Belum ada data lab yang ditambahkan oleh admin.
-
                     </p>
-
 
                 </div>
 
-
             @endforelse
-
 
         </div>
 
@@ -810,8 +780,7 @@
 
         <div class="pagination">
 
-
-            {{-- TOMBOL SEBELUMNYA --}}
+            <!-- SEBELUMNYA -->
 
             @if ($labs->onFirstPage())
 
@@ -820,9 +789,7 @@
                     class="disabled"
                     disabled
                 >
-
                     &lt;
-
                 </button>
 
             @else
@@ -830,9 +797,7 @@
                 <a href="{{ $labs->previousPageUrl() }}">
 
                     <button type="button">
-
                         &lt;
-
                     </button>
 
                 </a>
@@ -840,7 +805,7 @@
             @endif
 
 
-            {{-- NOMOR HALAMAN --}}
+            <!-- NOMOR HALAMAN -->
 
             @php
 
@@ -848,25 +813,22 @@
 
                 $lastPage = $labs->lastPage();
 
-
-                /*
-                 * Menampilkan maksimal 3 nomor halaman.
-                 */
-
                 if ($currentPage <= 2) {
 
                     $startPage = 1;
 
                 } elseif ($currentPage >= $lastPage - 1) {
 
-                    $startPage = max(1, $lastPage - 2);
+                    $startPage = max(
+                        1,
+                        $lastPage - 2
+                    );
 
                 } else {
 
                     $startPage = $currentPage - 1;
 
                 }
-
 
                 $endPage = min(
                     $lastPage,
@@ -898,16 +860,14 @@
             @endfor
 
 
-            {{-- TOMBOL BERIKUTNYA --}}
+            <!-- BERIKUTNYA -->
 
             @if ($labs->hasMorePages())
 
                 <a href="{{ $labs->nextPageUrl() }}">
 
                     <button type="button">
-
                         &gt;
-
                     </button>
 
                 </a>
@@ -926,7 +886,6 @@
 
             @endif
 
-
         </div>
 
 
@@ -942,11 +901,12 @@
 
 <script>
 
-    /* =========================================
-       HAMBURGER
-    ========================================= */
-
     document.addEventListener('DOMContentLoaded', function () {
+
+
+        /* =========================================
+           HAMBURGER
+        ========================================= */
 
         const hamburgerBtn =
             document.getElementById('hamburgerBtn');
@@ -955,13 +915,21 @@
             document.getElementById('hamburgerDropdown');
 
 
-        if (hamburgerBtn && hamburgerDropdown) {
+        if (
+            hamburgerBtn &&
+            hamburgerDropdown
+        ) {
 
-            hamburgerBtn.addEventListener('click', function () {
+            hamburgerBtn.addEventListener(
+                'click',
+                function () {
 
-                hamburgerDropdown.classList.toggle('show');
+                    hamburgerDropdown.classList.toggle(
+                        'show'
+                    );
 
-            });
+                }
+            );
 
         }
 
@@ -981,9 +949,10 @@
 
 
             /*
-             * Jika data-end kosong,
-             * jangan jalankan timer.
-             */
+            |--------------------------------------------------------------------------
+            | JIKA DATA END KOSONG
+            |--------------------------------------------------------------------------
+            */
 
             if (!endTimeString) {
 
@@ -995,23 +964,28 @@
 
 
             /*
-             * Ubah waktu ISO menjadi timestamp.
-             */
+            |--------------------------------------------------------------------------
+            | UBAH ISO DATE KE TIMESTAMP
+            |--------------------------------------------------------------------------
+            */
 
             const endTime =
                 new Date(endTimeString).getTime();
 
 
             /*
-             * Pastikan tanggal valid.
-             */
+            |--------------------------------------------------------------------------
+            | VALIDASI TANGGAL
+            |--------------------------------------------------------------------------
+            */
 
             if (isNaN(endTime)) {
 
-                timer.textContent = 'Waktu tidak valid';
+                timer.textContent =
+                    'Waktu tidak valid';
 
                 console.error(
-                    'Timer error: data-end tidak valid:',
+                    'Timer error:',
                     endTimeString
                 );
 
@@ -1022,6 +996,12 @@
 
             let interval;
 
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE TIMER
+            |--------------------------------------------------------------------------
+            */
 
             function updateTimer() {
 
@@ -1034,8 +1014,10 @@
 
 
                 /*
-                 * Jika waktu sudah habis.
-                 */
+                |--------------------------------------------------------------------------
+                | WAKTU SUDAH HABIS
+                |--------------------------------------------------------------------------
+                */
 
                 if (selisih <= 0) {
 
@@ -1047,9 +1029,14 @@
 
 
                     /*
-                     * Reload halaman agar status lab
-                     * diperbarui oleh Laravel.
-                     */
+                    |--------------------------------------------------------------------------
+                    | RELOAD HALAMAN
+                    |--------------------------------------------------------------------------
+                    |
+                    | Laravel akan mengecek ulang apakah peminjaman
+                    | masih aktif atau sudah selesai.
+                    |--------------------------------------------------------------------------
+                    */
 
                     setTimeout(function () {
 
@@ -1064,8 +1051,10 @@
 
 
                 /*
-                 * Hitung jam.
-                 */
+                |--------------------------------------------------------------------------
+                | JAM
+                |--------------------------------------------------------------------------
+                */
 
                 const jam =
                     Math.floor(
@@ -1075,32 +1064,42 @@
 
 
                 /*
-                 * Hitung menit.
-                 */
+                |--------------------------------------------------------------------------
+                | MENIT
+                |--------------------------------------------------------------------------
+                */
 
                 const menit =
                     Math.floor(
-                        (selisih %
-                        (1000 * 60 * 60)) /
+                        (
+                            selisih %
+                            (1000 * 60 * 60)
+                        ) /
                         (1000 * 60)
                     );
 
 
                 /*
-                 * Hitung detik.
-                 */
+                |--------------------------------------------------------------------------
+                | DETIK
+                |--------------------------------------------------------------------------
+                */
 
                 const detik =
                     Math.floor(
-                        (selisih %
-                        (1000 * 60)) /
+                        (
+                            selisih %
+                            (1000 * 60)
+                        ) /
                         1000
                     );
 
 
                 /*
-                 * Tampilkan HH:MM:SS.
-                 */
+                |--------------------------------------------------------------------------
+                | TAMPILKAN TIMER
+                |--------------------------------------------------------------------------
+                */
 
                 timer.textContent =
                     String(jam).padStart(2, '0')
@@ -1113,15 +1112,19 @@
 
 
             /*
-             * Jalankan langsung.
-             */
+            |--------------------------------------------------------------------------
+            | JALANKAN LANGSUNG
+            |--------------------------------------------------------------------------
+            */
 
             updateTimer();
 
 
             /*
-             * Update setiap 1 detik.
-             */
+            |--------------------------------------------------------------------------
+            | UPDATE SETIAP 1 DETIK
+            |--------------------------------------------------------------------------
+            */
 
             interval =
                 setInterval(
