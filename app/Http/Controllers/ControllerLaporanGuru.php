@@ -8,7 +8,7 @@ use App\Models\Peminjaman;
 class ControllerLaporanGuru extends Controller
 {
     // =========================
-    // LAPORAN ADMIN
+    // LAPORAN GURU
     // =========================
 
     public function index(Request $request)
@@ -18,7 +18,8 @@ class ControllerLaporanGuru extends Controller
             'lab',
             'pelajaran'
         ])
-        ->where('status', 'ditolak');
+        ->where('status', 'ditolak')
+        ->where('user_id', auth()->id());
 
 
         // =========================
@@ -34,21 +35,33 @@ class ControllerLaporanGuru extends Controller
                 // Cari berdasarkan nama lab
                 $q->whereHas('lab', function ($lab) use ($search) {
 
-                    $lab->where('nama_lab', 'like', '%' . $search . '%');
+                    $lab->where(
+                        'nama_lab',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
                 // Cari berdasarkan nama guru
                 ->orWhereHas('user', function ($user) use ($search) {
 
-                    $user->where('name', 'like', '%' . $search . '%');
+                    $user->where(
+                        'name',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
                 // Cari berdasarkan pelajaran
                 ->orWhereHas('pelajaran', function ($pelajaran) use ($search) {
 
-                    $pelajaran->where('nama', 'like', '%' . $search . '%');
+                    $pelajaran->where(
+                        'nama',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
@@ -60,7 +73,6 @@ class ControllerLaporanGuru extends Controller
                 );
 
             });
-
         }
 
 
