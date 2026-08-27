@@ -11,25 +11,30 @@ use App\Models\Peminjaman;
 class Controllersearch extends Controller
 {
     public function index(Request $request)
-    {
-        $query = $request->input('q');
+{
+    $query = $request->input('q');
 
-        // Cari di tabel guru
-        $guru = User::where('role','guru')
-            ->where('name','like',"%{$query}%")
-            ->get();
+    // Cari lab
+    $lab = Lab::where('nama_lab','like',"%{$query}%")->get();
 
-        // Cari di tabel lab
-        $lab = Lab::where('nama_lab','like',"%{$query}%")->get();
+    // Cari mapel
+    $mapel = Pelajaran::where('nama_pelajaran','like',"%{$query}%")->get();
 
-        // Cari di tabel mapel
-        $mapel = Pelajaran::where('nama_pelajaran','like',"%{$query}%")->get();
+    // Cari peminjaman + relasi terkait
+    $peminjaman = Peminjaman::with(['lab','user','pelajaran'])
+        ->where('keterangan','like',"%{$query}%")
+        ->orWhereHas('lab', function($q) use ($query) {
+            $q->where('nama_lab','like',"%{$query}%");
+        })
+        ->orWhereHas('user', function($q) use ($query) {
+            $q->where('name','like',"%{$query}%");
+        })
+        ->orWhereHas('pelajaran', function($q) use ($query) {
+            $q->where('nama_pelajaran','like',"%{$query}%");
+        })
+        ->get();
 
-        // Cari di tabel peminjaman
-        $peminjaman = Peminjaman::with(['lab','user','pelajaran'])
-            ->where('keterangan','like',"%{$query}%")
-            ->get();
+    return view('search-result', compact('query','lab','mapel','peminjaman'));
+}
 
-        return view('search-result', compact('query','guru','lab','mapel','peminjaman'));
-    }
 }
