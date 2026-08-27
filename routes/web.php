@@ -30,6 +30,7 @@ use App\Http\Controllers\ControllerLaporanAdmin;
 use App\Http\Controllers\ControllerLaporanGuru;
 use App\Http\Controllers\Controllerjadwaldipinjam;
 use App\Http\Controllers\Controllerubahpassword;
+use App\Http\Controllers\Controllersearch;
 
 // =========================
 // WELCOME
@@ -332,3 +333,8 @@ Route::get('ubahpassword',[Controllerubahpassword::class, 'index']);
 
 Route::post('/logout', [ControllerLogin::class, 'logout'])
     ->name('logout');
+
+// =========================
+// SEARCH 
+// =========================
+Route::get('/search', [Controllersearch::class, 'index'])->name('search.global');
