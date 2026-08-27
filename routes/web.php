@@ -324,7 +324,7 @@ Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
 Route::post('/ubah-password', [ControllerPassword::class, 'update'])
     ->name('ubah.password.update');
 
-Route::get('ubahpassword',[Controllerubahpassword::class, 'index']);
+Route::get('ubahpasswordguru',[Controllerubahpassword::class, 'index']);
 
 // =========================
 // LOGOUT

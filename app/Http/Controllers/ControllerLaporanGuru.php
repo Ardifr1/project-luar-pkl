@@ -13,13 +13,33 @@ class ControllerLaporanGuru extends Controller
 
     public function index(Request $request)
     {
+        // =========================
+        // VALIDASI RENTANG TANGGAL
+        // =========================
+
+        if (
+            $request->filled('tanggal_mulai') &&
+            $request->filled('tanggal_selesai') &&
+            $request->tanggal_mulai > $request->tanggal_selesai
+        ) {
+            return redirect()
+                ->route('laporan.guru')
+                ->withInput()
+                ->with('error', 'Tanggal mulai tidak boleh lebih besar dari tanggal selesai.');
+        }
+
+
+        // =========================
+        // QUERY DATA
+        // =========================
+
         $query = Peminjaman::with([
             'user',
             'lab',
             'pelajaran'
         ])
-        ->whereIn('status', ['ditolak', 'dibatalkan'])
-        ->where('user_id', auth()->id());
+            ->whereIn('status', ['ditolak', 'dibatalkan'])
+            ->where('user_id', auth()->id());
 
 
         // =========================
@@ -54,7 +74,7 @@ class ControllerLaporanGuru extends Controller
 
                 })
 
-                // Cari berdasarkan pelajaran
+                // Cari berdasarkan nama pelajaran
                 ->orWhereHas('pelajaran', function ($pelajaran) use ($search) {
 
                     $pelajaran->where(

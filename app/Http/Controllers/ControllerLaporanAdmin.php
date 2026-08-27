@@ -13,6 +13,26 @@ class ControllerLaporanAdmin extends Controller
 
     public function index(Request $request)
     {
+        // =========================
+        // VALIDASI RENTANG TANGGAL
+        // =========================
+
+        if (
+            $request->filled('tanggal_mulai') &&
+            $request->filled('tanggal_selesai') &&
+            $request->tanggal_mulai > $request->tanggal_selesai
+        ) {
+
+            return redirect()
+                ->route('laporan.admin')
+                ->withInput()
+                ->with(
+                    'error',
+                    'Tanggal mulai tidak boleh lebih besar dari tanggal selesai.'
+                );
+        }
+
+
         $query = Peminjaman::with([
             'user',
             'lab',
@@ -34,21 +54,33 @@ class ControllerLaporanAdmin extends Controller
                 // Cari berdasarkan nama lab
                 $q->whereHas('lab', function ($lab) use ($search) {
 
-                    $lab->where('nama_lab', 'like', '%' . $search . '%');
+                    $lab->where(
+                        'nama_lab',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
                 // Cari berdasarkan nama guru
                 ->orWhereHas('user', function ($user) use ($search) {
 
-                    $user->where('name', 'like', '%' . $search . '%');
+                    $user->where(
+                        'name',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
                 // Cari berdasarkan pelajaran
                 ->orWhereHas('pelajaran', function ($pelajaran) use ($search) {
 
-                    $pelajaran->where('nama', 'like', '%' . $search . '%');
+                    $pelajaran->where(
+                        'nama',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
                 })
 
