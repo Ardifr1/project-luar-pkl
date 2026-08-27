@@ -9,14 +9,23 @@ class Controllerjadwaldipinjam extends Controller
 {
     public function index()
     {
-        // Ambil semua peminjaman beserta relasi lab, user, dan pelajaran
-        $peminjaman = Peminjaman::with(['lab','user','pelajaran'])
-            ->where('status', 'disetujui') // hanya tampilkan yang sudah disetujui
-            ->get();
+        // Ambil peminjaman yang sudah disetujui
+        // Maksimal 5 data setiap halaman
+        $peminjaman = Peminjaman::with([
+            'lab',
+            'user',
+            'pelajaran'
+        ])
+        ->where('status', 'disetujui')
+        ->latest('tanggal')
+        ->paginate(5);
 
-        $user = Auth::user(); // siapa yang login
+        // Siapa yang sedang login
+        $user = Auth::user();
 
-        return view('jadwallab-dipinjam', compact('peminjaman','user'));
+        return view(
+            'jadwallab-dipinjam',
+            compact('peminjaman', 'user')
+        );
     }
 }
-
