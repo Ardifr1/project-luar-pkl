@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ControllerPassword extends Controller
@@ -14,65 +14,50 @@ class ControllerPassword extends Controller
     public function edit()
     {
         // Pastikan user sudah login
-        if (!session()->has('user_id')) {
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
 
-        return view('ubah-password');
+        return view('ubahpassword');
     }
-
 
     // =========================
     // PROSES UBAH PASSWORD
     // =========================
     public function update(Request $request)
     {
-        // Pastikan user sudah login
-        if (!session()->has('user_id')) {
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
 
-        // Validasi
+        // Validasi input
         $request->validate(
             [
                 'password_lama' => 'required',
-                'password_baru' => 'required|min:6',
-                'password_baru_confirmation' => 'required|same:password_baru',
+                'password_baru' => 'required|min:8|confirmed',
             ],
             [
                 'password_lama.required' => 'Password lama harus diisi.',
                 'password_baru.required' => 'Password baru harus diisi.',
-                'password_baru.min' => 'Password baru minimal 6 karakter.',
-                'password_baru_confirmation.required' => 'Ulangi password baru harus diisi.',
-                'password_baru_confirmation.same' => 'Ulangi password baru tidak sama.',
+                'password_baru.min' => 'Password baru minimal 8 karakter.',
+                'password_baru.confirmed' => 'Konfirmasi password baru tidak sama.',
             ]
         );
 
-        // Ambil user yang sedang login
-        $user = User::find(session('user_id'));
+        $user = Auth::user(); // ambil user login
 
-        // Jika user tidak ditemukan
-        if (!$user) {
-            session()->flush();
-
-            return redirect()->route('login');
-        }
-
-        // Cek password lama
+        // cek password lama
         if (!Hash::check($request->password_lama, $user->password)) {
-            return back()
-                ->withErrors([
-                    'password_lama' => 'Password lama salah.'
-                ]);
+            return back()->withErrors(['password_lama' => 'Password lama salah.']);
         }
 
-        // Simpan password baru
+        // simpan password baru
         $user->password = Hash::make($request->password_baru);
         $user->save();
 
-        return back()->with(
-            'success',
-            'Password berhasil diubah.'
-        );
+        // logout otomatis agar login ulang
+        Auth::logout();
+
+        return redirect()->route('login')->with('success', 'Password berhasil diubah, silakan login ulang.');
     }
 }
