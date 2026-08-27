@@ -433,17 +433,12 @@
 
 
         <div class="search-box">
+  <form action="{{ route('search.global') }}" method="GET" style="display:flex;">
+    <input type="text" name="q" placeholder="Cari...">
+    <button type="submit"><i class="bi bi-search"></i></button>
+  </form>
+</div>
 
-            <input
-                type="text"
-                placeholder="Cari..."
-            >
-
-            <button>
-                <i class="fa fa-search"></i>
-            </button>
-
-        </div>
 
     </div>
 
