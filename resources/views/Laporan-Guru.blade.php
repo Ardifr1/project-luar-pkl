@@ -508,7 +508,7 @@
 
                 <!-- PROFIL -->
 
-                <a href="{{ route('profil.admin') }}">
+                <a href="{{ route('profil.guru') }}">
                     Profil
                 </a>
 
