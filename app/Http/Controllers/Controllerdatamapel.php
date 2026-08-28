@@ -8,7 +8,7 @@ class Controllerdatamapel extends Controller
 {
     public function index()
     {
-        $pelajaran = Pelajaran::all();
+        $pelajaran = Pelajaran::paginate(10);
 
         return view('datamapel', compact('pelajaran'));
     }

@@ -12,7 +12,8 @@ class ControllerLab extends Controller
 
     public function index()
     {
-        $lab = Lab::all();
+        $lab = Lab::paginate(10); 
+
 
         return view('data-lab', compact('lab'));
     }

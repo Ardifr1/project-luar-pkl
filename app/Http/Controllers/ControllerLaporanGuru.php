@@ -119,7 +119,7 @@ class ControllerLaporanGuru extends Controller
         // =========================
 
         $penolakan = $query
-            ->paginate(10)
+            ->paginate(6)
             ->withQueryString();
 
 

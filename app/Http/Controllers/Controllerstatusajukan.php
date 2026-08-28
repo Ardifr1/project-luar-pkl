@@ -12,7 +12,7 @@ class Controllerstatusajukan extends Controller
             ->where('user_id', auth()->id())
             ->whereIn('status', ['menunggu', 'disetujui'])
             ->latest('created_at')
-            ->paginate(5);
+            ->paginate(3);
 
         return view('statusajukan-lab', compact('pengajuan'));
     }

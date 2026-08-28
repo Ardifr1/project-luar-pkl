@@ -14,7 +14,7 @@ class ControllerDataGuru extends Controller
     {
         $guru = User::where('role', 'guru')
             ->with('pelajaran')
-            ->get();
+             ->paginate(10); 
 
         return view('data-guru', compact('guru'));
     }

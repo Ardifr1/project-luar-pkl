@@ -20,7 +20,7 @@ class Controllerajuanlab extends Controller
         ])
         ->where('status', 'menunggu')
         ->latest()
-        ->get();
+        ->paginate(4); 
 
         // Kirim data ke halaman daftar-ajuan
         return view(

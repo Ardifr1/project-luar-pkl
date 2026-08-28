@@ -151,12 +151,12 @@
            ========================= */
 
         .btn-hapus {
-            background: #eadede;
+            background: #b40c0c;
             border: none;
             padding: 5px 14px;
             font-size: 11px;
             border-radius: 4px;
-            color: #333;
+            color: #ffffff;
         }
 
         .btn-hapus:hover {
@@ -173,7 +173,7 @@
         }
 
         .btn-tambah {
-            background: #27db66;
+            background: #39b62b;
             border: none;
             padding: 5px 15px;
             font-size: 11px;
@@ -553,36 +553,12 @@
 
 
         <!-- =========================
-             PAGINATION
-             ========================= -->
+     PAGINATION
+     ========================= -->
+<div class="d-flex justify-content-center mt-3">
+    {{ $pelajaran->links('pagination::bootstrap-5') }}
+</div>
 
-        <div class="pagination-container">
-
-            <button type="button">
-                &lt;
-            </button>
-
-            <button type="button">
-                1
-            </button>
-
-            <button type="button">
-                2
-            </button>
-
-            <button type="button">
-                3
-            </button>
-
-            <button type="button">
-                4
-            </button>
-
-            <button type="button">
-                &gt;
-            </button>
-
-        </div>
 
 
     </div>

@@ -560,36 +560,12 @@
 
 
         <!-- =========================
-             PAGINATION
-             ========================= -->
+     PAGINATION
+     ========================= -->
+<div class="d-flex justify-content-center mt-3">
+    {{ $lab->links('pagination::bootstrap-5') }}
+</div>
 
-        <div class="pagination-container">
-
-            <button type="button">
-                &lt;
-            </button>
-
-            <button type="button">
-                1
-            </button>
-
-            <button type="button">
-                2
-            </button>
-
-            <button type="button">
-                3
-            </button>
-
-            <button type="button">
-                4
-            </button>
-
-            <button type="button">
-                &gt;
-            </button>
-
-        </div>
 
 
     </div>
