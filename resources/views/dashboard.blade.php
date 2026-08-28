@@ -32,13 +32,13 @@
 
 
         .menu-card{
-            background:#1F4E9D;
-            width:320px;
-            margin:50px auto;
-            padding:20px;
-            border-radius:4px;
-            box-shadow:0 3px 8px rgba(0,0,0,.2);
-            border-radius:15px;
+            background: #1F4E9D;
+    width: 340px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    transition: all 0.3s ease-in-out;
         }
 
 
@@ -51,8 +51,9 @@
 
 
         .menu-card1 {
-            width: 400px;
+          width: auto;
             height: 40px;
+            margin: 10px auto;
             background-color: #d9d9d9;
             display: flex;
             justify-content: space-between;
@@ -339,6 +340,94 @@
         .popup-button:hover{
             background:#1F4E9D;
         }
+
+        /* Efek shadow untuk semua box */
+.box1, .box2, .box3, .box4, .box5 {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efek hover biar lebih interaktif */
+.box1:hover, .box2:hover, .box3:hover, .box4:hover, .box5:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+    cursor: pointer;
+}
+
+.box1:hover ~ .menu-card,
+.menu-card:hover .box1:hover {
+    background: #4CAF50;
+}
+
+.box2:hover ~ .menu-card,
+.menu-card:hover .box2:hover {
+    background: #2196F3;
+}
+
+.box3:hover ~ .menu-card,
+.menu-card:hover .box3:hover {
+    background: #F44336;
+}
+
+.box4:hover ~ .menu-card,
+.menu-card:hover .box4:hover {
+    background: #FF9800;
+}
+
+.box5:hover ~ .menu-card,
+.menu-card:hover .box5:hover {
+    background: #9C27B0;
+}
+
+/* Tombol hamburger */
+#hamburgerBtn {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: white;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover tombol */
+#hamburgerBtn:hover {
+    opacity: 0.8;
+    transform: scale(1.05); /* sedikit membesar */
+}
+
+/* Dropdown */
+.hamburger-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 200px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Saat aktif */
+.hamburger-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Link & button */
+.hamburger-dropdown a,
+.hamburger-dropdown button {
+    display: block;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #eee; /* divider
 
     </style>
 
