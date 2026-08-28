@@ -427,7 +427,9 @@
     text-align: left;
     font-size: 14px;
     transition: background 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid #eee; /* divider
+    border-bottom: 1px solid #eee; 
+
+}
 
     </style>
 
