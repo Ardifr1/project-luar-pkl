@@ -489,7 +489,7 @@
  <div class="box4">
 
             <p>
-                Status ajukan
+                Status Pengajuan
             </p>
 
         </div>

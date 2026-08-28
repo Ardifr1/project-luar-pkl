@@ -144,6 +144,31 @@
             border-radius: 5px;
             padding: 3px 10px;
             font-size: 12px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           PERINGATAN
+           ========================= */
+
+        .peringatan {
+            width: 350px;
+            margin: 10px auto;
+            padding: 10px 12px;
+
+            background-color: #fff3cd;
+            border: 1px solid #ffecb5;
+
+            color: #664d03;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
 
@@ -655,6 +680,26 @@
 
 
     <!-- =========================
+         PERINGATAN
+         ========================= -->
+
+    @if(session('error'))
+
+        <div class="peringatan">
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+            <span>
+                {{ session('error') }}
+            </span>
+
+        </div>
+
+    @endif
+
+
+
+    <!-- =========================
          DATA PENOLAKAN / PEMBATALAN
          ========================= -->
 
@@ -745,7 +790,7 @@
                         Pelajaran:
 
                         <strong>
-                            {{ $data->pelajaran->nama ?? '-' }}
+                            {{ $data->pelajaran->nama_pelajaran ?? '-' }}
                         </strong>
 
                     @endif
@@ -828,7 +873,20 @@
 
                 <br>
 
-                Belum ada riwayat pengajuan.
+
+                @if(request('tanggal_mulai') || request('tanggal_selesai'))
+
+                    Data laporan tidak ditemukan pada rentang tanggal yang dipilih.
+
+                @elseif(request('search'))
+
+                    Data laporan tidak ditemukan berdasarkan pencarian.
+
+                @else
+
+                    Belum ada riwayat pengajuan.
+
+                @endif
 
             </div>
 
