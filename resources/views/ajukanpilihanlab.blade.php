@@ -51,15 +51,16 @@
         ========================= */
 
         .menu-card1 {
-            width: 400px;
-            height: 40px;
-            background-color: #d9d9d9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #aaa;
-            border-radius: 6px;
+         width: auto;      
+  height: 40px;
+  margin: 10px auto;
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:  20px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
         }
 
         .breadcrumb {
