@@ -143,6 +143,58 @@ body{
             background:#c5c5c5;
         }
 
+        /* Tombol hamburger */
+#hamburgerBtn {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: white;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover tombol */
+#hamburgerBtn:hover {
+    opacity: 0.8;
+    transform: scale(1.05); /* sedikit membesar */
+}
+
+/* Dropdown */
+.hamburger-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 200px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Saat aktif */
+.hamburger-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Link & button */
+.hamburger-dropdown a,
+.hamburger-dropdown button {
+    display: block;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #eee; 
+
+}
+
 </style>
 
 </head>
