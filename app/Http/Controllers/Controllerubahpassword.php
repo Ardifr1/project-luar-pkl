@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-<<<<<<< HEAD
+
 class ControllerubahPassword extends Controller
-=======
-class Controllerpassword extends Controller
->>>>>>> e60043872e9ece3c06c6ff61a813b9ce33ddec95
+
 {
     // =========================
     // HALAMAN UBAH PASSWORD
