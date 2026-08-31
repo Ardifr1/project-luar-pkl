@@ -268,6 +268,7 @@ Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
 Route::get('jadwallab-dipinjam',[Controllerjadwaldipinjam::class, 'index'])
     ->middleware('auth')
     ->name('jadwal.lab');
+Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])->name('jadwal.lab');
 
 
 // =========================
