@@ -32,7 +32,7 @@ body{
 
         /* ====== CARD STYLE ====== */
 .card {
-  background-color: #e2e8f0; /* abu muda */
+  background-color: #afbccd; /* abu muda */
   border-radius: 10px;
   padding: 1rem;
   margin: 1rem auto;
@@ -242,7 +242,7 @@ body{
 
                 <!-- LOG OUT -->
                 <form
-                    action="{{ route('login') }}"
+                    action="{{ route('logout') }}"
                     method="POST"
                 >
                     @csrf
