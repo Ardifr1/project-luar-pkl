@@ -32,13 +32,13 @@
         }
 
         .menu-card{
-            background:#1F4E9D;
-            width:320px;
-            margin:50px auto;
-            padding:20px;
-            border-radius:4px;
-            box-shadow:0 3px 8px rgba(0,0,0,.2);
-            border-radius:15px;
+               background: #1F4E9D;
+    width: 340px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    transition: all 0.3s ease-in-out;
         }
 
         .menu-text{

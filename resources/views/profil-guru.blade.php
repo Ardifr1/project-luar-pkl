@@ -30,7 +30,7 @@
         }
 
         .card {
-            background-color: #e2e8f0;
+            background-color: #afbccd;
             border-radius: 10px;
             padding: 1rem;
             margin: 1rem auto;
@@ -120,6 +120,9 @@
         .hamburger-dropdown button:hover {
             background: #c5c5c5;
         }
+
+        
+        
     </style>
 </head>
 
