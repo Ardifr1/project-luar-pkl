@@ -11,54 +11,110 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        // Validasi dasar
-        $request->validate([
-            'password' => 'required',
-        ]);
+        // ==========================================
+        // CEK INPUT KOSONG
+        // ==========================================
 
-        // =========================
+        // Username/NIP dan password sama-sama kosong
+        if (
+            !$request->filled('username') &&
+            !$request->filled('nip') &&
+            !$request->filled('password')
+        ) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Username/NIP harus diisi dan password harus diisi'
+            ], 422);
+        }
+
+
+        // ==========================================
+        // CEK USERNAME / NIP
+        // ==========================================
+
+        // Username/NIP kosong tetapi password diisi
+        if (
+            !$request->filled('username') &&
+            !$request->filled('nip')
+        ) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Username/NIP harus diisi'
+            ], 422);
+        }
+
+
+        // ==========================================
+        // CEK PASSWORD
+        // ==========================================
+
+        // Username/NIP diisi tetapi password kosong
+        if (!$request->filled('password')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Password harus diisi'
+            ], 422);
+        }
+
+
+        // ==========================================
         // LOGIN ADMIN
-        // =========================
-        if ($request->filled('username')) {
+        // ==========================================
 
-            $request->validate([
-                'username' => 'required|string',
-            ]);
+        if ($request->filled('username')) {
 
             $user = User::where('username', $request->username)
                 ->where('role', 'admin')
                 ->first();
 
-        // =========================
-        // LOGIN GURU
-        // =========================
-        } elseif ($request->filled('nip')) {
 
-            $request->validate([
-                'nip' => 'required|string',
-            ]);
+        // ==========================================
+        // LOGIN GURU
+        // ==========================================
+
+        } elseif ($request->filled('nip')) {
 
             $user = User::where('nip', $request->nip)
                 ->where('role', 'guru')
                 ->first();
 
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Masukkan username untuk admin atau NIP untuk guru'
-            ], 422);
         }
 
-        // Cek akun
-        if (!$user || !Hash::check($request->password, $user->password)) {
+
+        // ==========================================
+        // CEK USERNAME / NIP
+        // ==========================================
+
+        if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'Username/NIP atau password salah'
+                'message' => 'Username/NIP salah'
             ], 401);
         }
 
-        // Membuat token
+
+        // ==========================================
+        // CEK PASSWORD
+        // ==========================================
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Password salah'
+            ], 401);
+        }
+
+
+        // ==========================================
+        // MEMBUAT TOKEN
+        // ==========================================
+
         $token = $user->createToken('auth_token')->plainTextToken;
+
+
+        // ==========================================
+        // LOGIN BERHASIL
+        // ==========================================
 
         return response()->json([
             'success' => true,
@@ -71,6 +127,6 @@ class LoginController extends Controller
                 'role' => $user->role,
                 'token' => $token,
             ]
-        ]);
+        ], 200);
     }
 }
