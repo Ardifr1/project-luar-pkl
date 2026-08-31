@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LabController;
 use App\Http\Controllers\Api\PeminjamanController;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
+use App\Http\Controllers\Api\JadwalController;
+use App\Http\Controllers\Api\MapelController;
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/mock', [MockApiController::class, 'index']);
@@ -66,5 +68,13 @@ Route::delete('/lab/{id}', [LabController::class, 'destroy']);
         'myPeminjaman'
     ]);
 
+// Data Mapel
+Route::get('/mapel', [MapelController::class, 'index']);
+Route::post('/mapel', [MapelController::class, 'store']);
+Route::put('/mapel/{id}', [MapelController::class, 'update']);
+Route::delete('/mapel/{id}', [MapelController::class, 'destroy']);
+
+// Jadwal Lab
+    Route::get('/jadwal', [JadwalController::class, 'index']);
 });
 
