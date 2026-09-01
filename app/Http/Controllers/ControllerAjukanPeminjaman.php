@@ -8,9 +8,9 @@ use App\Models\Lab;
 
 class ControllerAjukanPeminjaman extends Controller
 {
-    // =========================
+    // =========================================================
     // HALAMAN AJUKAN PEMINJAMAN
-    // =========================
+    // =========================================================
 
     public function index($id)
     {
@@ -25,31 +25,14 @@ class ControllerAjukanPeminjaman extends Controller
                 ]);
         }
 
-
-        // =========================
-        // AMBIL MATA PELAJARAN GURU
-        // =========================
-
+        // Ambil mata pelajaran milik guru
         $pelajarans = $user->pelajaran;
 
-
-        // =========================
-        // AMBIL SEMUA LAB
-        // =========================
-
+        // Ambil semua lab
         $labs = Lab::all();
 
-
-        // =========================
-        // AMBIL LAB YANG DIPILIH
-        // =========================
-
+        // Ambil lab yang dipilih
         $labDipilih = Lab::findOrFail($id);
-
-
-        // =========================
-        // TAMPILKAN HALAMAN
-        // =========================
 
         return view(
             'ajukanpeminjaman',
@@ -62,9 +45,9 @@ class ControllerAjukanPeminjaman extends Controller
     }
 
 
-    // =========================
+    // =========================================================
     // PENGAJUAN MELALUI WEB
-    // =========================
+    // =========================================================
 
     public function store(Request $request)
     {
@@ -79,89 +62,53 @@ class ControllerAjukanPeminjaman extends Controller
                 ]);
         }
 
-
-        // =========================
-        // VALIDASI DATA
-        // =========================
-
+        // Validasi
         $request->validate([
-
             'lab_id' => 'required|exists:lab,id',
-
             'pelajaran_id' => 'required|exists:pelajaran,id',
-
             'keterangan' => 'required|string',
-
             'tanggal_peminjaman' => 'required|date',
-
             'jam_mulai' => 'required|date_format:H:i',
-
-            'jam_selesai' =>
-                'required|date_format:H:i|after:jam_mulai',
-
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
         ]);
 
-
-        // =========================
-        // CEK KEPEMILIKAN PELAJARAN
-        // =========================
-
+        // Cek apakah pelajaran milik guru
         $guruMemilikiPelajaran = $user
             ->pelajaran()
             ->where('pelajaran.id', $request->pelajaran_id)
             ->exists();
 
-
         if (!$guruMemilikiPelajaran) {
-
             return back()
                 ->withErrors([
                     'pelajaran_id' =>
                         'Pelajaran tersebut bukan pelajaran Anda.'
                 ])
                 ->withInput();
-
         }
 
-
-        // =========================
-        // CEK LAB
-        // =========================
-
+        // Cek lab
         $lab = Lab::find($request->lab_id);
 
-
         if (!$lab) {
-
             return back()
                 ->withErrors([
                     'lab_id' => 'Lab tidak ditemukan.'
                 ])
                 ->withInput();
-
         }
 
-
-        // =========================
-        // CEK LAB MAINTENANCE
-        // =========================
-
+        // Cek maintenance
         if ($lab->status === 'sedang_maintenance') {
-
             return back()
                 ->withErrors([
                     'lab_id' =>
                         'Lab sedang dalam maintenance dan tidak dapat diajukan.'
                 ])
                 ->withInput();
-
         }
 
-
-        // =========================
-        // CEK LAB SEDANG DIPAKAI
-        // =========================
-
+        // Cek bentrok jadwal
         $labSedangDipakai = Peminjaman::where(
             'lab_id',
             $request->lab_id
@@ -181,51 +128,29 @@ class ControllerAjukanPeminjaman extends Controller
                         '>',
                         $request->jam_mulai
                     );
-
             })
             ->exists();
 
-
         if ($labSedangDipakai) {
-
             return back()
                 ->withErrors([
                     'lab_id' =>
                         'Lab tersebut sedang digunakan pada tanggal dan jam yang dipilih.'
                 ])
                 ->withInput();
-
         }
 
-
-        // =========================
-        // SIMPAN PEMINJAMAN
-        // =========================
-
+        // Simpan peminjaman
         Peminjaman::create([
-
             'user_id' => $user->id,
-
             'lab_id' => $request->lab_id,
-
             'pelajaran_id' => $request->pelajaran_id,
-
             'keterangan' => $request->keterangan,
-
             'tanggal' => $request->tanggal_peminjaman,
-
             'jam_mulai' => $request->jam_mulai,
-
             'jam_selesai' => $request->jam_selesai,
-
             'status' => 'menunggu',
-
         ]);
-
-
-        // =========================
-        // KEMBALI KE DASHBOARD
-        // =========================
 
         return redirect()
             ->route('dashboard')
@@ -236,74 +161,44 @@ class ControllerAjukanPeminjaman extends Controller
     }
 
 
-    // =========================
+    // =========================================================
     // PENGAJUAN MELALUI API
-    // =========================
+    // POST /api/peminjaman
+    // =========================================================
 
     public function storeApi(Request $request)
     {
-        // =========================
-        // CEK USER
-        // =========================
+        // Pastikan user sudah login
+        $user = $request->user();
 
-        if (!$request->user()) {
-
+        if (!$user) {
             return response()->json([
                 'success' => false,
                 'message' => 'User belum login.'
             ], 401);
-
         }
 
-
-        // =========================
-        // CEK ROLE
-        // =========================
-
-        if ($request->user()->role !== 'guru') {
-
+        // Hanya guru
+        if ($user->role !== 'guru') {
             return response()->json([
                 'success' => false,
                 'message' =>
                     'Hanya guru yang dapat mengajukan peminjaman'
             ], 403);
-
         }
 
-
-        // =========================
-        // VALIDASI DATA
-        // =========================
-
+        // Validasi data API
         $request->validate([
-
-            'lab_id' =>
-                'required|exists:lab,id',
-
-            'pelajaran_id' =>
-                'required|exists:pelajaran,id',
-
-            'keterangan' =>
-                'nullable|string',
-
-            'tanggal' =>
-                'required|date',
-
-            'jam_mulai' =>
-                'required|date_format:H:i',
-
-            'jam_selesai' =>
-                'required|date_format:H:i|after:jam_mulai',
-
+            'lab_id' => 'required|exists:lab,id',
+            'pelajaran_id' => 'required|exists:pelajaran,id',
+            'keterangan' => 'nullable|string',
+            'tanggal' => 'required|date',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
         ]);
 
-
-        // =========================
-        // CEK KEPEMILIKAN PELAJARAN
-        // =========================
-
-        $guruMemilikiPelajaran = $request
-            ->user()
+        // Cek kepemilikan pelajaran
+        $guruMemilikiPelajaran = $user
             ->pelajaran()
             ->where(
                 'pelajaran.id',
@@ -311,63 +206,34 @@ class ControllerAjukanPeminjaman extends Controller
             )
             ->exists();
 
-
         if (!$guruMemilikiPelajaran) {
-
             return response()->json([
-
                 'success' => false,
-
                 'message' =>
                     'Pelajaran tersebut bukan pelajaran Anda'
-
             ], 403);
-
         }
 
-
-        // =========================
-        // CEK LAB
-        // =========================
-
+        // Cek lab
         $lab = Lab::find($request->lab_id);
 
-
         if (!$lab) {
-
             return response()->json([
-
                 'success' => false,
-
                 'message' => 'Lab tidak ditemukan.'
-
             ], 404);
-
         }
 
-
-        // =========================
-        // CEK MAINTENANCE
-        // =========================
-
+        // Cek maintenance
         if ($lab->status === 'sedang_maintenance') {
-
             return response()->json([
-
                 'success' => false,
-
                 'message' =>
                     'Lab sedang dalam maintenance dan tidak dapat diajukan.'
-
             ], 422);
-
         }
 
-
-        // =========================
-        // CEK LAB SEDANG DIPAKAI
-        // =========================
-
+        // Cek bentrok jadwal
         $labSedangDipakai = Peminjaman::where(
             'lab_id',
             $request->lab_id
@@ -387,76 +253,39 @@ class ControllerAjukanPeminjaman extends Controller
                         '>',
                         $request->jam_mulai
                     );
-
             })
             ->exists();
 
-
         if ($labSedangDipakai) {
-
             return response()->json([
-
                 'success' => false,
-
                 'message' =>
                     'Lab tersebut sedang digunakan pada tanggal dan jam yang dipilih.'
-
             ], 422);
-
         }
 
-
-        // =========================
-        // SIMPAN PEMINJAMAN
-        // =========================
-
+        // Simpan peminjaman
         $peminjaman = Peminjaman::create([
-
-            'user_id' =>
-                $request->user()->id,
-
-            'lab_id' =>
-                $request->lab_id,
-
-            'pelajaran_id' =>
-                $request->pelajaran_id,
-
-            'keterangan' =>
-                $request->keterangan,
-
-            'tanggal' =>
-                $request->tanggal,
-
-            'jam_mulai' =>
-                $request->jam_mulai,
-
-            'jam_selesai' =>
-                $request->jam_selesai,
-
-            'status' =>
-                'menunggu',
-
+            'user_id' => $user->id,
+            'lab_id' => $request->lab_id,
+            'pelajaran_id' => $request->pelajaran_id,
+            'keterangan' => $request->keterangan,
+            'tanggal' => $request->tanggal,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'status' => 'menunggu',
         ]);
 
-
-        // =========================
-        // RESPONSE API
-        // =========================
-
+        // Response API
         return response()->json([
-
             'success' => true,
-
             'message' =>
                 'Pengajuan peminjaman berhasil dikirim',
-
-            'data' =>
-                $peminjaman->load([
-                    'user',
-                    'lab',
-                    'pelajaran'
-                ])
-
+            'data' => $peminjaman->load([
+                'user',
+                'lab',
+                'pelajaran'
+            ])
         ], 201);
     }
 }

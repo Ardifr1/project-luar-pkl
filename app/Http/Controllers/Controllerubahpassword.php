@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 
 class ControllerubahPassword extends Controller
-
 {
     // =========================
     // HALAMAN UBAH PASSWORD

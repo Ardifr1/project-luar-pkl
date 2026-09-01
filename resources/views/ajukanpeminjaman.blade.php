@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Ajukan Peminjaman</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
 
     <style>
 
@@ -37,6 +50,20 @@
             font-size:30px;
         }
 
+<<<<<<< HEAD
+        .menu-card1{
+            width:auto;
+            height:40px;
+            margin:10px auto;
+            background-color:#d9d9d9;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px;
+            border:1px solid #aaa;
+            border-radius:6px;
+        }
+=======
                 /* =========================
    BREADCRUMB INTERAKTIF
 ========================= */
@@ -61,6 +88,7 @@
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s ease;
 }
+>>>>>>> 64ae19246c55efc2c8994d040c282a87784796d9
 
 
         .menu-card{
@@ -92,11 +120,25 @@
         }
 
         /* =========================
-           DROPDOWN HAMBURGER
+           HAMBURGER
            ========================= */
 
         .hamburger-container{
             position:relative;
+        }
+
+        #hamburgerBtn{
+            background:transparent;
+            border:none;
+            font-size:28px;
+            color:white;
+            transition:opacity .2s ease,
+                       transform .2s ease;
+        }
+
+        #hamburgerBtn:hover{
+            opacity:.8;
+            transform:scale(1.05);
         }
 
         .hamburger-dropdown{
@@ -104,47 +146,45 @@
             position:absolute;
             top:70px;
             right:10px;
-            width:180px;
-            background:#D9D9D9;
+            width:200px;
+            background:#f9f9f9;
             border-radius:10px;
             overflow:hidden;
+            box-shadow:0 4px 10px rgba(0,0,0,.15);
+            opacity:0;
+            transform:translateY(-5px);
+            transition:opacity .3s ease,
+                       transform .3s ease;
             z-index:1000;
         }
 
         .hamburger-dropdown.show{
             display:block;
+            opacity:1;
+            transform:translateY(0);
         }
 
-        .hamburger-dropdown a{
-            display:block;
-            padding:15px;
-            color:#222;
-            text-decoration:none;
-            text-align:center;
-            font-size:14px;
-        }
-
-        .hamburger-dropdown a:hover{
-            background:#c5c5c5;
-        }
-
-        .hamburger-dropdown form{
-            margin:0;
-        }
-
+        .hamburger-dropdown a,
         .hamburger-dropdown button{
+            display:block;
             width:100%;
-            padding:15px;
-            border:none;
-            background:#D9D9D9;
-            color:#222;
+            padding:12px;
+            color:#333;
+            text-decoration:none;
+            text-align:left;
             font-size:14px;
-            cursor:pointer;
+            transition:background .2s ease,
+                       color .2s ease;
+            border:none;
+            border-bottom:1px solid #eee;
+            background:#f9f9f9;
         }
 
+        .hamburger-dropdown a:hover,
         .hamburger-dropdown button:hover{
-            background:#c5c5c5;
+            background:#eee;
         }
+
 
         /* =========================
            TANGGAL + JAM
@@ -205,6 +245,7 @@
             font-size:13px;
         }
 
+
         /* =========================
            ERROR
            ========================= */
@@ -220,10 +261,6 @@
             text-align:center;
         }
 
-        /* =========================
-           ERROR LARAVEL
-           ========================= */
-
         .server-error{
             margin-top:15px;
             padding:10px;
@@ -233,73 +270,42 @@
             font-size:13px;
         }
 
-        /* Tombol hamburger */
-#hamburgerBtn {
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    color: white;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
 
-/* Hover tombol */
-#hamburgerBtn:hover {
-    opacity: 0.8;
-    transform: scale(1.05); /* sedikit membesar */
-}
+        /* =========================
+           SUCCESS
+           ========================= */
 
-/* Dropdown */
-.hamburger-dropdown {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 10px;
-    width: 200px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Saat aktif */
-.hamburger-dropdown.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Link & button */
-.hamburger-dropdown a,
-.hamburger-dropdown button {
-    display: block;
-    padding: 12px;
-    color: #333;
-    text-decoration: none;
-    text-align: left;
-    font-size: 14px;
-    transition: background 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid #eee; 
-
-}
+        .success-message{
+            display:none;
+            margin-top:15px;
+            padding:12px;
+            background:#d1e7dd;
+            color:#0f5132;
+            border-radius:10px;
+            font-size:13px;
+            text-align:center;
+        }
 
     </style>
 
 </head>
 
+
 <body>
+
 
 <div class="phone">
 
-    <!-- HEADER -->
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
     <div class="header">
 
         <img
             src="{{ asset('gambar/download.png') }}"
             alt="logo"
-            class="logo"
             style="
                 width:80px;
                 height:80px;
@@ -308,7 +314,7 @@
             "
         >
 
-        <!-- HAMBURGER -->
+
         <div class="hamburger-container">
 
             <button
@@ -316,26 +322,25 @@
                 id="hamburgerBtn"
                 type="button"
             >
+
                 <i class="bi bi-list fs-1"></i>
+
             </button>
 
-            <!-- DROPDOWN -->
+
             <div
                 class="hamburger-dropdown"
                 id="hamburgerDropdown"
             >
 
-                <!-- PROFIL -->
                 <a href="{{ route('profil.guru') }}">
                     Profil
                 </a>
 
-                <!-- UBAH PASSWORD -->
                 <a href="{{ route('ubah.password') }}">
                     Ubah Password
                 </a>
 
-                <!-- LOGOUT -->
                 <form
                     action="{{ route('logout') }}"
                     method="POST"
@@ -356,7 +361,10 @@
     </div>
 
 
-    <!-- BREADCRUMB -->
+    <!-- =========================
+         BREADCRUMB
+         ========================= -->
+
     <div class="menu-card1">
 
         <nav class="breadcrumb">
@@ -376,16 +384,28 @@
     </div>
 
 
-    <!-- JUDUL -->
+    <!-- =========================
+         JUDUL
+         ========================= -->
+
     <div class="text-atas">
-    <p>{{ $labDipilih->nama_lab }}</p>
-</div>
+
+        <p>
+            {{ $labDipilih->nama_lab }}
+        </p>
+
+    </div>
 
 
-    <!-- CARD -->
+    <!-- =========================
+         CARD
+         ========================= -->
+
     <div class="menu-card">
 
-        <!-- LAB YANG DIPILIH -->
+
+        <!-- LAB -->
+
         <div class="box1">
 
             <p>
@@ -405,19 +425,18 @@
         </div>
 
 
-        <!-- FORM -->
+        <!-- =========================
+             FORM
+             ========================= -->
+
         <form
             id="formPeminjaman"
-            action="{{ route('ajukanpeminjaman.store') }}"
-            method="POST"
         >
 
             @csrf
 
 
-            <!-- =========================
-                 LAB ID
-                 ========================= -->
+            <!-- LAB ID -->
 
             @if($labDipilih)
 
@@ -430,9 +449,7 @@
             @endif
 
 
-            <!-- =========================
-                 KETERANGAN
-                 ========================= -->
+            <!-- KETERANGAN -->
 
             <textarea
                 name="keterangan"
@@ -452,12 +469,9 @@
             >{{ old('keterangan') }}</textarea>
 
 
-            <!-- =========================
-                 MATA PELAJARAN
-                 ========================= -->
+            <!-- MATA PELAJARAN -->
 
             <select
-                class="pilih-guru"
                 name="pelajaran_id"
                 id="pelajaran"
                 style="
@@ -479,13 +493,16 @@
                     Silahkan Pilih Mata Pelajaran
                 </option>
 
+
                 @foreach($pelajarans as $pelajaran)
 
                     <option
                         value="{{ $pelajaran->id }}"
                         {{ old('pelajaran_id') == $pelajaran->id ? 'selected' : '' }}
                     >
+
                         {{ $pelajaran->nama_pelajaran }}
+
                     </option>
 
                 @endforeach
@@ -499,24 +516,21 @@
 
             <div class="tanggal-jam">
 
-                <!-- TANGGAL -->
-                <div class="tanggal-box">
 
-                    <input
-                        type="date"
-                        name="tanggal_peminjaman"
-                        id="tanggal"
-                        value="{{ old('tanggal_peminjaman') }}"
-                    >
+                <div class="tanggal-box">
+<input
+    type="date"
+    name="tanggal"
+    id="tanggal"
+    value="{{ old('tanggal') }}"
+>
 
                 </div>
 
 
-                <!-- PEMISAH -->
                 <div class="pemisah"></div>
 
 
-                <!-- JAM MULAI -->
                 <div class="jam-box">
 
                     <input
@@ -529,13 +543,11 @@
                 </div>
 
 
-                <!-- TANDA - -->
                 <span class="tanda">
                     -
                 </span>
 
 
-                <!-- JAM SELESAI -->
                 <div class="jam-box">
 
                     <input
@@ -550,9 +562,7 @@
             </div>
 
 
-            <!-- =========================
-                 ERROR JAVASCRIPT
-                 ========================= -->
+            <!-- ERROR -->
 
             <div
                 id="errorMessage"
@@ -560,9 +570,15 @@
             ></div>
 
 
-            <!-- =========================
-                 ERROR DARI LARAVEL
-                 ========================= -->
+            <!-- SUCCESS -->
+
+            <div
+                id="successMessage"
+                class="success-message"
+            ></div>
+
+
+            <!-- SERVER ERROR -->
 
             @if($errors->any())
 
@@ -581,9 +597,7 @@
             @endif
 
 
-            <!-- =========================
-                 TOMBOL AJUKAN
-                 ========================= -->
+            <!-- BUTTON -->
 
             <button
                 type="submit"
@@ -603,24 +617,28 @@
 
             </button>
 
+
         </form>
 
+
     </div>
+
 
 </div>
 
 
 <script>
 
-    /* =========================
-       HAMBURGER
-       ========================= */
+    // =========================================================
+    // HAMBURGER
+    // =========================================================
 
     const hamburgerBtn =
         document.getElementById('hamburgerBtn');
 
     const hamburgerDropdown =
         document.getElementById('hamburgerDropdown');
+
 
     hamburgerBtn.addEventListener('click', function(){
 
@@ -629,9 +647,9 @@
     });
 
 
-    /* =========================
-       VALIDASI FORM
-       ========================= */
+    // =========================================================
+    // FORM PEMINJAMAN
+    // =========================================================
 
     const formPeminjaman =
         document.getElementById('formPeminjaman');
@@ -639,124 +657,335 @@
     const errorMessage =
         document.getElementById('errorMessage');
 
+    const successMessage =
+        document.getElementById('successMessage');
 
-    formPeminjaman.addEventListener('submit', function(event){
-
-        const labId =
-            document.querySelector('input[name="lab_id"]');
-
-        const keterangan =
-            document.getElementById('keterangan').value.trim();
-
-        const pelajaran =
-            document.getElementById('pelajaran').value;
-
-        const tanggal =
-            document.getElementById('tanggal').value;
-
-        const jamMulai =
-            document.getElementById('jam_mulai').value;
-
-        const jamSelesai =
-            document.getElementById('jam_selesai').value;
+    const btnAjukan =
+        document.getElementById('btnAjukan');
 
 
-        let pesan = '';
-
-
-        /* =========================
-           CEK LAB
-           ========================= */
-
-        if(!labId){
-
-            pesan = 'Silahkan pilih lab terlebih dahulu.';
-
-        }
-
-        /* =========================
-           CEK KETERANGAN
-           ========================= */
-
-        else if(keterangan === ''){
-
-            pesan = 'Keterangan tidak boleh kosong.';
-
-        }
-
-        /* =========================
-           CEK PELAJARAN
-           ========================= */
-
-        else if(!pelajaran){
-
-            pesan = 'Silahkan pilih mata pelajaran.';
-
-        }
-
-        /* =========================
-           CEK TANGGAL
-           ========================= */
-
-        else if(!tanggal){
-
-            pesan = 'Silahkan pilih tanggal peminjaman.';
-
-        }
-
-        /* =========================
-           CEK JAM MULAI
-           ========================= */
-
-        else if(!jamMulai){
-
-            pesan = 'Silahkan pilih jam mulai.';
-
-        }
-
-        /* =========================
-           CEK JAM SELESAI
-           ========================= */
-
-        else if(!jamSelesai){
-
-            pesan = 'Silahkan pilih jam selesai.';
-
-        }
-
-        /* =========================
-           CEK JAM
-           ========================= */
-
-        else if(jamSelesai <= jamMulai){
-
-            pesan = 'Jam selesai harus lebih besar dari jam mulai.';
-
-        }
-
-
-        /* =========================
-           TAMPILKAN ERROR
-           ========================= */
-
-        if(pesan !== ''){
+    formPeminjaman.addEventListener(
+        'submit',
+        async function(event){
 
             event.preventDefault();
 
-            errorMessage.innerText = pesan;
 
-            errorMessage.style.display = 'block';
+            // =================================================
+            // AMBIL DATA
+            // =================================================
 
-            return;
+            const labId =
+                document.querySelector(
+                    'input[name="lab_id"]'
+                );
+
+            const keterangan =
+                document
+                    .getElementById('keterangan')
+                    .value
+                    .trim();
+
+            const pelajaran =
+                document
+                    .getElementById('pelajaran')
+                    .value;
+
+            const tanggal =
+                document
+                    .getElementById('tanggal')
+                    .value;
+
+            const jamMulai =
+                document
+                    .getElementById('jam_mulai')
+                    .value;
+
+            const jamSelesai =
+                document
+                    .getElementById('jam_selesai')
+                    .value;
+
+
+            let pesan = '';
+
+
+            // =================================================
+            // VALIDASI LAB
+            // =================================================
+
+            if(!labId){
+
+                pesan =
+                    'Silahkan pilih lab terlebih dahulu.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI KETERANGAN
+            // =================================================
+
+            else if(keterangan === ''){
+
+                pesan =
+                    'Keterangan tidak boleh kosong.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI PELAJARAN
+            // =================================================
+
+            else if(!pelajaran){
+
+                pesan =
+                    'Silahkan pilih mata pelajaran.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI TANGGAL
+            // =================================================
+
+            else if(!tanggal){
+
+                pesan =
+                    'Silahkan pilih tanggal peminjaman.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI JAM MULAI
+            // =================================================
+
+            else if(!jamMulai){
+
+                pesan =
+                    'Silahkan pilih jam mulai.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI JAM SELESAI
+            // =================================================
+
+            else if(!jamSelesai){
+
+                pesan =
+                    'Silahkan pilih jam selesai.';
+
+            }
+
+
+            // =================================================
+            // VALIDASI JAM
+            // =================================================
+
+            else if(jamSelesai <= jamMulai){
+
+                pesan =
+                    'Jam selesai harus lebih besar dari jam mulai.';
+
+            }
+
+
+            // =================================================
+            // TAMPILKAN ERROR
+            // =================================================
+
+            if(pesan !== ''){
+
+                errorMessage.innerText = pesan;
+
+                errorMessage.style.display = 'block';
+
+                successMessage.style.display = 'none';
+
+                return;
+
+            }
+
+
+            errorMessage.style.display = 'none';
+
+
+            // =================================================
+            // NONAKTIFKAN BUTTON
+            // =================================================
+
+            btnAjukan.disabled = true;
+
+            btnAjukan.innerText =
+                'Mengirim...';
+
+
+            try {
+
+
+                // =================================================
+                // AMBIL CSRF TOKEN
+                // =================================================
+
+                const csrfToken =
+                    document
+                        .querySelector(
+                            'meta[name="csrf-token"]'
+                        )
+                        .getAttribute('content');
+
+
+                // =================================================
+                // SIAPKAN DATA
+                // =================================================
+
+                const formData =
+                    new FormData(formPeminjaman);
+
+
+                // =================================================
+                // KIRIM KE API
+                // =================================================
+
+                const response =
+                    await fetch(
+                        '/api/peminjaman',
+                        {
+
+                            method:'POST',
+
+                            headers:{
+
+                                'X-CSRF-TOKEN':
+                                    csrfToken,
+
+                                'Accept':
+                                    'application/json'
+
+                            },
+
+                            credentials:'same-origin',
+
+                            body:formData
+
+                        }
+                    );
+
+
+                // =================================================
+                // AMBIL RESPONSE
+                // =================================================
+
+                const data =
+                    await response.json();
+
+
+                // =================================================
+                // JIKA ERROR
+                // =================================================
+
+                if(!response.ok){
+
+                    let pesanError =
+                        data.message ||
+                        'Pengajuan gagal dikirim.';
+
+
+                    if(data.errors){
+
+                        const semuaError =
+                            Object.values(data.errors)
+                                .flat();
+
+                        pesanError =
+                            semuaError.join('\n');
+
+                    }
+
+
+                    throw new Error(
+                        pesanError
+                    );
+
+                }
+
+
+                // =================================================
+                // BERHASIL
+                // =================================================
+
+                successMessage.innerText =
+                    data.message ||
+                    'Pengajuan berhasil dikirim.';
+
+                successMessage.style.display =
+                    'block';
+
+
+                // Bersihkan form
+
+                formPeminjaman.reset();
+
+
+                // =================================================
+                // KEMBALIKAN BUTTON
+                // =================================================
+
+                btnAjukan.disabled = false;
+
+                btnAjukan.innerText =
+                    'Ajukan Peminjaman';
+
+
+                // =================================================
+                // PINDAH KE DASHBOARD
+                // =================================================
+
+                setTimeout(function(){
+
+                    window.location.href =
+                        "{{ route('dashboard') }}";
+
+                }, 1000);
+
+
+            } catch(error) {
+
+
+                // =================================================
+                // ERROR
+                // =================================================
+
+                errorMessage.innerText =
+                    error.message ||
+                    'Terjadi kesalahan saat mengirim pengajuan.';
+
+                errorMessage.style.display =
+                    'block';
+
+
+                successMessage.style.display =
+                    'none';
+
+
+                btnAjukan.disabled =
+                    false;
+
+                btnAjukan.innerText =
+                    'Ajukan Peminjaman';
+
+            }
 
         }
-
-
-        errorMessage.style.display = 'none';
-
-    });
+    );
 
 </script>
 
+
 </body>
+
 </html>
