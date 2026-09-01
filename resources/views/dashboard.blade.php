@@ -50,49 +50,82 @@
         }
 
 
-        .menu-card1 {
-          width: auto;
-            height: 40px;
-            margin: 10px auto;
-            background-color: #d9d9d9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #aaa;
-            border-radius: 6px;
-        }
+              /* =========================
+   BREADCRUMB INTERAKTIF
+========================= */
+.menu-card1 {
+  width: auto;      
+  margin: 10px auto;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
 
+.breadcrumb a {
+  color: #1F4E9D;
+  text-decoration: none;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
 
-        .breadcrumb a {
-            color: #007bff;
-            text-decoration: none;
-            margin-right: 5px;
-        }
+/* =========================
+   SEARCH AUTOCOMPLETE
+========================= */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.search-box input {
+  width: 180px;
+  height: 34px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding-left: 10px;
+}
 
-        .search-box {
-            display: flex;
-            align-items: ;
-        }
+.search-box button {
+  width: 40px;
+  height: 34px;
+  background-color: #1F4E9D;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
+.search-suggestions {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+}
 
-        .search-box input {
-            width: 122px;
-            height: 30px;
-            border: 1px solid #aaa;
-            padding-left: 15px;
-        }
+.search-suggestions a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s ease;
+}
 
-
-        .search-box button {
-            width: 40px;
-            height: 30px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+.search-suggestions a:hover {
+  background: #f1f5f9;
+}
 
 
         .box1{
@@ -431,6 +464,49 @@
 
 }
 
+ 
+.search-suggestions {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  max-height: 220px; /* batasi tinggi dropdown */
+  overflow-y: auto;  /* aktifkan scroll jika hasil banyak */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+}
+
+/* scrollbar halus dan kecil */
+.search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+.search-suggestions::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+.search-suggestions::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+/* setiap item suggestion */
+.search-suggestions a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s ease;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* efek hover */
+.search-suggestions a:hover {
+  background: #f1f5f9;
+}
+
     </style>
 
 </head>
@@ -508,27 +584,20 @@
     </div>
 
 
-    <div class="menu-card1">
-
-        <nav class="breadcrumb">
-
-            <a href="#">
-                Home
-            </a>
-
-            >
-
-            <a href="#"></a>
-
-        </nav>
-
-
-        <div class="search-box">
-  <form action="{{ route('search.global') }}" method="GET" style="display:flex;">
-    <input type="text" name="q" placeholder="Cari...">
+ <div class="menu-card1">
+  <nav class="breadcrumb">
+    <a href="#">Home</a> >
+    <a href="#"></a>
+  </nav>
+<div class="search-box">
+  <form id="searchForm" action="{{ route('search.global') }}" method="GET" style="display:flex;">
+    <input type="text" id="searchInput" name="q" placeholder="Cari...">
     <button type="submit"><i class="bi bi-search"></i></button>
   </form>
+  <div id="suggestions" class="search-suggestions"></div>
 </div>
+
+
 
 
     </div>
@@ -688,6 +757,42 @@
 
 </script>
 
+<script>
+const searchInput = document.getElementById('searchInput');
+const suggestionsBox = document.getElementById('suggestions');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value;
+  suggestionsBox.innerHTML = '';
+
+  if (query.length > 0) {
+    fetch(`/search-autocomplete?q=${query}`)
+
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          suggestionsBox.style.display = 'block';
+          data.forEach(item => {
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.textContent = item.name;
+            suggestionsBox.appendChild(link);
+          });
+        } else {
+          suggestionsBox.style.display = 'none';
+        }
+      });
+  } else {
+    suggestionsBox.style.display = 'none';
+  }
+});
+
+document.addEventListener('click', function(e) {
+  if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+    suggestionsBox.style.display = 'none';
+  }
+});
+</script>
 
 </body>
 </html>

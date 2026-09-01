@@ -342,6 +342,9 @@ Route::post('/logout', [ControllerLogin::class, 'logout'])
 Route::get('/search', [Controllersearch::class, 'index'])->name('search.global');
 Route::get('/search-autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
 
+Route::get('/search-autocomplete-guru', [SearchController::class, 'autocompleteGuru'])->name('search.autocomplete.guru');
+
+
 // =========================
 // EDIT DATA LANGSUNG DARI SEARCH
 // =========================
