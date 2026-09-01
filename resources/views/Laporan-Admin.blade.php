@@ -716,6 +716,10 @@
 
             </div>
 
+<!-- Tombol buka popup -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#filterModal">
+    Filter Tanggal
+</button>
 
             <input
                 type="date"
@@ -736,12 +740,7 @@
             >
 
 
-            <button type="submit">
-                Filter
-            </button>
-
-        </div>
-
+        
     </form>
 
 
@@ -1073,6 +1072,41 @@
 
 </div>
 
+<!-- Modal Filter -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Filter Tanggal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <form action="{{ route('laporan.admin') }}" method="GET">
+          @if(request('search'))
+            <input type="hidden" name="search" value="{{ request('search') }}">
+          @endif
+
+          <div class="mb-3">
+            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+            <input type="date" id="tanggal_mulai" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+            <input type="date" id="tanggal_selesai" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Terapkan Filter</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 <!-- =========================

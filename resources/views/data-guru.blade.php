@@ -60,27 +60,57 @@
 }
 
 
-        .search-box {
-            display: flex;
-            align-items: center;
-        }
+        /* =========================
+   SEARCH AUTOCOMPLETE
+========================= */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-        .search-box input {
-            width: 122px;
-            height: 30px;
-            border: 1px solid #aaa;
-            padding-left: 15px;
-        }
+.search-box input {
+  width: 180px;
+  height: 34px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding-left: 10px;
+}
 
-        .search-box button {
-            width: 40px;
-            height: 30px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+.search-box button {
+  width: 40px;
+  height: 34px;
+  background-color: #1F4E9D;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
+.search-suggestions {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+}
+
+.search-suggestions a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.search-suggestions a:hover {
+  background: #f1f5f9;
+}
         /* =========================
            DATA GURU
            ========================= */
@@ -451,23 +481,15 @@
                 Data Guru
             </a>
 
-        </nav>
+      </nav>
 
+        <form method="GET" action="{{ route('data.guru') }}" class="search-box">
+    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama atau NIP...">
+    <button type="submit">
+        <i class="bi bi-search"></i>
+    </button>
+</form>
 
-        <div class="search-box">
-
-            <input
-                type="text"
-                placeholder="Cari..."
-            >
-
-            <button type="button">
-
-                <i class="bi bi-search"></i>
-
-            </button>
-
-        </div>
 
     </div>
 
@@ -647,6 +669,8 @@
     });
 
 </script>
+
+
 
 
 </body>

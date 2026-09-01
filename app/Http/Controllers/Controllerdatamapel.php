@@ -2,23 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Pelajaran;
 
 class Controllerdatamapel extends Controller
 {
-    public function index()
+    // =========================
+    // MENAMPILKAN DATA MAPEL + SEARCH
+    // =========================
+    public function index(Request $request)
     {
-        $pelajaran = Pelajaran::paginate(10);
+        $search = $request->input('q'); // ambil kata kunci dari input
 
-        return view('datamapel', compact('pelajaran'));
+        $pelajaran = Pelajaran::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama_pelajaran', 'like', "%{$search}%");
+            })
+            ->paginate(10)
+            ->withQueryString(); // supaya pagination tetap membawa parameter pencarian
+
+        return view('datamapel', compact('pelajaran', 'search'));
     }
 
+    // =========================
+    // HAPUS DATA MAPEL
+    // =========================
     public function destroy($id)
     {
         $pelajaran = Pelajaran::findOrFail($id);
 
         $pelajaran->delete();
 
-        return redirect()->route('data.mapel');
+        return redirect()
+            ->route('data.mapel')
+            ->with('success', 'Data mapel berhasil dihapus.');
     }
 }
