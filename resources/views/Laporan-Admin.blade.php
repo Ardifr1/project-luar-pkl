@@ -657,30 +657,7 @@
         </nav>
 
 
-        <!-- SEARCH -->
-
-        <form
-            action="{{ route('laporan.admin') }}"
-            method="GET"
-            class="search-box"
-        >
-
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Cari..."
-            >
-
-
-            <button type="submit">
-
-                <i class="bi bi-search"></i>
-
-            </button>
-
-        </form>
-
+      
     </div>
 
 
@@ -721,25 +698,7 @@
     Filter Tanggal
 </button>
 
-            <input
-                type="date"
-                name="tanggal_mulai"
-                value="{{ request('tanggal_mulai') }}"
-            >
-
-
-            <span>
-                -
-            </span>
-
-
-            <input
-                type="date"
-                name="tanggal_selesai"
-                value="{{ request('tanggal_selesai') }}"
-            >
-
-
+          
         
     </form>
 
@@ -1108,6 +1067,7 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- =========================
      JAVASCRIPT HAMBURGER
