@@ -1,80 +1,218 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// =========================
+// CONTROLLERS API
+// =========================
+
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\MockApiController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LabController;
 use App\Http\Controllers\Api\PeminjamanController;
-use App\Http\Controllers\ControllerAjukanPeminjaman;
 use App\Http\Controllers\Api\JadwalController;
 use App\Http\Controllers\Api\MapelController;
 
+// Controller Web yang memiliki method storeApi
+use App\Http\Controllers\ControllerAjukanPeminjaman;
+
+
+// =========================================================
+// LOGIN
+// =========================================================
+
+// Login API
+// POST /api/login
 Route::post('/login', [LoginController::class, 'login']);
+
+
+// =========================================================
+// MOCK API
+// =========================================================
+
+// POST /api/mock
 Route::post('/mock', [MockApiController::class, 'index']);
+
+
+// =========================================================
+// API YANG MEMBUTUHKAN LOGIN
+// =========================================================
+
 Route::middleware('auth:sanctum')->group(function () {
-    
-// =========================
-// GURU
-// =========================
 
-// Melihat daftar guru
-Route::get('/guru', [UserController::class, 'index']);
 
-// Melihat detail guru
-Route::get('/guru/{id}', [UserController::class, 'show']);
+    // =====================================================
+    // GURU
+    // =====================================================
 
-// Menambahkan guru
-Route::post('/guru', [UserController::class, 'store']);
+    // GET /api/guru
+    Route::get('/guru', [
+        UserController::class,
+        'index'
+    ]);
 
-// Mengedit guru
-Route::put('/guru/{id}', [UserController::class, 'update']);
+    // GET /api/guru/{id}
+    Route::get('/guru/{id}', [
+        UserController::class,
+        'show'
+    ]);
 
-// Menghapus guru
-Route::delete('/guru/{id}', [UserController::class, 'destroy']);
+    // POST /api/guru
+    Route::post('/guru', [
+        UserController::class,
+        'store'
+    ]);
 
-// =========================
-// LAB
-// =========================
+    // PUT /api/guru/{id}
+    Route::put('/guru/{id}', [
+        UserController::class,
+        'update'
+    ]);
 
-    // Melihat detail lab
-Route::get('/lab/{id}', [LabController::class, 'show']);
+    // DELETE /api/guru/{id}
+    Route::delete('/guru/{id}', [
+        UserController::class,
+        'destroy'
+    ]);
 
-// Mengedit lab
-Route::put('/lab/{id}', [LabController::class, 'update']);
 
-// Menghapus lab
-Route::delete('/lab/{id}', [LabController::class, 'destroy']);
+    // =====================================================
+    // LAB
+    // =====================================================
+
+    // POST /api/lab
+    Route::post('/lab', [
+        LabController::class,
+        'store'
+    ]);
+
+    // GET /api/lab/{id}
+    Route::get('/lab/{id}', [
+        LabController::class,
+        'show'
+    ]);
+
+    // PUT /api/lab/{id}
+    Route::put('/lab/{id}', [
+        LabController::class,
+        'update'
+    ]);
+
+    // DELETE /api/lab/{id}
+    Route::delete('/lab/{id}', [
+        LabController::class,
+        'destroy'
+    ]);
+
+
+    // =====================================================
+    // PEMINJAMAN LAB
+    // =====================================================
+
+    // -----------------------------------------------------
+    // GURU MENGAJUKAN PEMINJAMAN
+    // POST /api/peminjaman
+    // -----------------------------------------------------
 
     Route::post('/peminjaman', [
-    ControllerAjukanPeminjaman::class,
-    'storeApi'
-]);
-
-    Route::get('/peminjaman', [PeminjamanController::class, 'index']);
-
-    Route::put('/peminjaman/{id}/approve', [
-        PeminjamanController::class,
-        'approve'
+        ControllerAjukanPeminjaman::class,
+        'storeApi'
     ]);
 
-    Route::put('/peminjaman/{id}/reject', [
+
+    // -----------------------------------------------------
+    // ADMIN MELIHAT SEMUA PENGAJUAN
+    // GET /api/peminjaman
+    // -----------------------------------------------------
+
+    Route::get('/peminjaman', [
         PeminjamanController::class,
-        'reject'
+        'index'
     ]);
+
+
+    // -----------------------------------------------------
+    // GURU MELIHAT PENGAJUANNYA SENDIRI
+    // GET /api/peminjaman/guru
+    // -----------------------------------------------------
 
     Route::get('/peminjaman/guru', [
         PeminjamanController::class,
         'myPeminjaman'
     ]);
 
-// Data Mapel
-Route::get('/mapel', [MapelController::class, 'index']);
-Route::post('/mapel', [MapelController::class, 'store']);
-Route::put('/mapel/{id}', [MapelController::class, 'update']);
-Route::delete('/mapel/{id}', [MapelController::class, 'destroy']);
 
-// Jadwal Lab
-    Route::get('/jadwal', [JadwalController::class, 'index']);
+    // -----------------------------------------------------
+    // ADMIN MENYETUJUI PEMINJAMAN
+    // PUT /api/peminjaman/{id}/approve
+    // -----------------------------------------------------
+
+    Route::put('/peminjaman/{id}/approve', [
+        PeminjamanController::class,
+        'approve'
+    ]);
+
+
+    // -----------------------------------------------------
+    // ADMIN MENOLAK PEMINJAMAN
+    // PUT /api/peminjaman/{id}/reject
+    // -----------------------------------------------------
+
+    Route::put('/peminjaman/{id}/reject', [
+        PeminjamanController::class,
+        'reject'
+    ]);
+
+
+    // -----------------------------------------------------
+    // GURU MEMBATALKAN PENGAJUAN
+    // DELETE /api/peminjaman/{id}/cancel
+    // -----------------------------------------------------
+
+    Route::delete('/peminjaman/{id}/cancel', [
+        PeminjamanController::class,
+        'cancel'
+    ]);
+
+
+    // =====================================================
+    // MAPEL
+    // =====================================================
+
+    // GET /api/mapel
+    Route::get('/mapel', [
+        MapelController::class,
+        'index'
+    ]);
+
+    // POST /api/mapel
+    Route::post('/mapel', [
+        MapelController::class,
+        'store'
+    ]);
+
+    // PUT /api/mapel/{id}
+    Route::put('/mapel/{id}', [
+        MapelController::class,
+        'update'
+    ]);
+
+    // DELETE /api/mapel/{id}
+    Route::delete('/mapel/{id}', [
+        MapelController::class,
+        'destroy'
+    ]);
+
+
+    // =====================================================
+    // JADWAL LAB
+    // =====================================================
+
+    // GET /api/jadwal
+    Route::get('/jadwal', [
+        JadwalController::class,
+        'index'
+    ]);
+
 });
-

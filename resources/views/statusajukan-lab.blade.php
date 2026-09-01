@@ -7,10 +7,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- CSRF TOKEN -->
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Status Ajukan Lab</title>
 
 
-    <!-- BOOTSTRAP -->
+    <!-- =========================
+         BOOTSTRAP
+    ========================= -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -18,7 +24,9 @@
     >
 
 
-    <!-- BOOTSTRAP ICON -->
+    <!-- =========================
+         BOOTSTRAP ICON
+    ========================= -->
 
     <link
         rel="stylesheet"
@@ -28,415 +36,478 @@
 
     <style>
 
-        body{
-            background:#222;
-        }
+        /* =========================
+           BODY
+        ========================= */
 
-
-        .phone{
-            max-width:412px;
-            min-height:917px;
-            margin:20px auto;
-            background:#fff;
-        }
-
-
-        .header{
-            background:#102C6B;
-            height:100px;
-            justify-content:space-between;
-            display:flex;
-        }
-
-
-        .menu-text{
-            color:white;
-            text-align:center;
-            margin-top:10px;
-            font-size:18px;
-        }
-
-
-        .menu-card1{
-            width:auto;
-            height:40px;
-            margin:10px auto;
-            background-color:#d9d9d9;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:20px;
-            border:1px solid #aaa;
-            border-radius:6px;
-        }
-
-
-        .breadcrumb{
-            margin:0;
-        }
-
-
-        .breadcrumb a{
-            color:#007bff;
-            text-decoration:none;
-            margin-right:5px;
+        body {
+            background: #222;
         }
 
 
         /* =========================
-           DROPDOWN HAMBURGER
-           ========================= */
+           PHONE
+        ========================= */
 
-        .hamburger-container{
-            position:relative;
+        .phone {
+            max-width: 412px;
+            min-height: 917px;
+            margin: 20px auto;
+            background: #fff;
         }
 
 
-        .hamburger-dropdown{
-            display:none;
+        /* =========================
+           HEADER
+        ========================= */
 
-            position:absolute;
-
-            top:70px;
-            right:10px;
-
-            width:180px;
-
-            background:#D9D9D9;
-
-            border-radius:10px;
-
-            overflow:hidden;
-
-            z-index:1000;
+        .header {
+            background: #102C6B;
+            height: 100px;
+            justify-content: space-between;
+            display: flex;
         }
 
 
-        .hamburger-dropdown.show{
-            display:block;
+        .menu-text {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
         }
 
 
-        .hamburger-dropdown a{
-            display:block;
+        /* =========================
+           BREADCRUMB
+        ========================= */
 
-            padding:15px;
-
-            color:#222;
-
-            text-decoration:none;
-
-            text-align:center;
-
-            font-size:14px;
+        .menu-card1 {
+            width: auto;
+            height: 40px;
+            margin: 10px auto;
+            background-color: #d9d9d9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
         }
 
 
-        .hamburger-dropdown a:hover{
-            background:#c5c5c5;
+        .breadcrumb {
+            margin: 0;
         }
 
 
-        .hamburger-dropdown form{
-            margin:0;
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 5px;
         }
 
 
-        .hamburger-dropdown button{
-            width:100%;
+        /* =========================
+           HAMBURGER CONTAINER
+        ========================= */
 
-            padding:15px;
-
-            border:none;
-
-            background:#D9D9D9;
-
-            color:#222;
-
-            font-size:14px;
-
-            cursor:pointer;
+        .hamburger-container {
+            position: relative;
         }
 
 
-        .hamburger-dropdown button:hover{
-            background:#c5c5c5;
+        /* =========================
+           HAMBURGER BUTTON
+        ========================= */
+
+        #hamburgerBtn {
+            background: transparent;
+            border: none;
+            font-size: 28px;
+            color: white;
+
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        #hamburgerBtn:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           HAMBURGER DROPDOWN
+        ========================= */
+
+        .hamburger-dropdown {
+            display: none;
+
+            position: absolute;
+
+            top: 70px;
+            right: 10px;
+
+            width: 200px;
+
+            background: #f9f9f9;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.15);
+
+            opacity: 0;
+
+            transform: translateY(-5px);
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+
+            z-index: 1000;
+        }
+
+
+        /* DROPDOWN AKTIF */
+
+        .hamburger-dropdown.show {
+            display: block;
+
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           LINK DROPDOWN
+        ========================= */
+
+        .hamburger-dropdown a,
+        .hamburger-dropdown button {
+
+            display: block;
+
+            width: 100%;
+
+            padding: 12px;
+
+            color: #333;
+
+            text-decoration: none;
+
+            text-align: left;
+
+            font-size: 14px;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+
+            border: none;
+
+            border-bottom: 1px solid #eee;
+
+            background: #f9f9f9;
+        }
+
+
+        .hamburger-dropdown a:hover,
+        .hamburger-dropdown button:hover {
+
+            background: #e5e5e5;
+        }
+
+
+        .hamburger-dropdown form {
+            margin: 0;
         }
 
 
         /* =========================
            STATUS CONTAINER
-           ========================= */
+        ========================= */
 
-        .status-container{
+        .status-container {
 
-            background-color:#e2e8f0;
+            background-color: #e2e8f0;
 
-            border-radius:8px;
+            border-radius: 8px;
 
-            padding:1rem;
+            padding: 1rem;
 
-            width:85%;
+            width: 85%;
 
-            margin:1rem auto;
+            margin: 1rem auto;
 
-            text-align:center;
+            text-align: center;
         }
 
 
-        .status-container h3{
+        /* =========================
+           TITLE
+        ========================= */
 
-            font-size:20px;
+        .status-container h3 {
 
-            margin-bottom:20px;
+            font-size: 20px;
 
-            color:#102C6B;
+            margin-bottom: 20px;
 
+            color: #102C6B;
         }
 
 
         /* =========================
            STATUS CARD
-           ========================= */
+        ========================= */
 
-        .status-card{
+        .status-card {
 
-            background-color:#f1f5f9;
+            background-color: #f1f5f9;
 
-            border-radius:10px;
+            border-radius: 10px;
 
-            padding:1rem;
+            padding: 1rem;
 
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+            box-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.1);
 
-            text-align:left;
+            text-align: left;
 
-            margin-bottom:20px;
-
+            margin-bottom: 20px;
         }
 
 
-        .status-card p{
+        /* =========================
+           TEXT CARD
+        ========================= */
 
-            margin:0.7rem 0;
+        .status-card p {
 
+            margin: 0.7rem 0;
         }
 
 
         /* =========================
            STATUS BADGE
-           ========================= */
+        ========================= */
 
-        .status-badge{
+        .status-badge {
 
-            display:inline-block;
+            display: inline-block;
 
-            padding:8px 14px;
+            padding: 8px 14px;
 
-            border-radius:20px;
+            border-radius: 20px;
 
-            font-size:13px;
+            font-size: 13px;
 
-            font-weight:bold;
+            font-weight: bold;
 
-            margin-top:5px;
-
+            margin-top: 5px;
         }
 
 
-        .status-menunggu{
+        /* MENUNGGU */
 
-            background:#fff3cd;
+        .status-menunggu {
 
-            color:#856404;
+            background: #fff3cd;
 
+            color: #856404;
         }
 
 
-        .status-disetujui{
+        /* DISETUJUI */
 
-            background:#d4edda;
+        .status-disetujui {
 
-            color:#155724;
+            background: #d4edda;
 
+            color: #155724;
+        }
+
+
+        /* DIBATALKAN */
+
+        .status-dibatalkan {
+
+            background: #f8d7da;
+
+            color: #842029;
+        }
+
+
+        /* DITOLAK */
+
+        .status-ditolak {
+
+            background: #f8d7da;
+
+            color: #842029;
         }
 
 
         /* =========================
-           BUTTON
-           ========================= */
+           ACTION
+        ========================= */
 
-        .status-actions{
+        .status-actions {
 
-            text-align:right;
+            text-align: right;
 
-            margin-top:1rem;
-
+            margin-top: 1rem;
         }
 
 
-        .btn-cancel{
+        /* =========================
+           BUTTON BATALKAN
+        ========================= */
 
-            background-color:#1e3a8a;
+        .btn-cancel {
 
-            color:white;
+            background-color: #1e3a8a;
 
-            border:none;
+            color: white;
 
-            padding:0.5rem 1rem;
+            border: none;
 
-            border-radius:4px;
+            padding: 0.5rem 1rem;
 
-            cursor:pointer;
+            border-radius: 4px;
 
+            cursor: pointer;
+
+            transition:
+                background-color 0.2s ease;
         }
 
 
-        .btn-cancel:hover{
+        .btn-cancel:hover {
 
-            background-color:#3b82f6;
+            background-color: #3b82f6;
+        }
 
+
+        .btn-cancel:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
         }
 
 
         /* =========================
            EMPTY
-           ========================= */
+        ========================= */
 
-        .empty-status{
+        .empty-status {
 
-            background:#f1f5f9;
+            background: #f1f5f9;
 
-            border-radius:10px;
+            border-radius: 10px;
 
-            padding:25px 15px;
+            padding: 25px 15px;
 
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-
+            box-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
 
-        .empty-status i{
+        .empty-status i {
 
-            font-size:40px;
+            font-size: 40px;
 
-            color:#1F4E9D;
-
+            color: #1F4E9D;
         }
 
 
-        .empty-status p{
+        .empty-status p {
 
-            margin-top:10px;
+            margin-top: 10px;
 
-            margin-bottom:0;
+            margin-bottom: 0;
 
-            color:#555;
-
+            color: #555;
         }
 
 
         /* =========================
            ALERT
-           ========================= */
+        ========================= */
 
-        .alert{
+        .alert {
 
-            font-size:13px;
-
+            font-size: 13px;
         }
 
 
-/* =========================
-   PAGINATION
-========================= */
+        /* =========================
+           PAGINATION
+        ========================= */
 
-.pagination {
-    margin-top: 1rem;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
+        .pagination {
 
-.pagination button {
-    background-color: #f1f5f9;
-    border: none;
-    padding: 0.5rem 0.8rem;
-    margin: 0 0.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
+            margin-top: 1rem;
 
-.pagination button:hover {
-    background-color: #dbeafe;
-}
+            justify-content: center;
 
-.pagination .active {
-    background-color: #1e3a8a;
-    color: white;
-}
+            display: flex;
 
-.pagination .disabled {
-    background-color: #e5e7eb;
-    color: #999;
-    cursor: not-allowed;
-}
+            align-items: center;
+        }
 
-.pagination a {
-    text-decoration: none;
-}
 
-    /* Tombol hamburger */
-#hamburgerBtn {
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    color: white;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
+        .pagination button {
 
-/* Hover tombol */
-#hamburgerBtn:hover {
-    opacity: 0.8;
-    transform: scale(1.05); /* sedikit membesar */
-}
+            background-color: #f1f5f9;
 
-/* Dropdown */
-.hamburger-dropdown {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 10px;
-    width: 200px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+            border: none;
 
-/* Saat aktif */
-.hamburger-dropdown.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
+            padding: 0.5rem 0.8rem;
 
-/* Link & button */
-.hamburger-dropdown a,
-.hamburger-dropdown button {
-    display: block;
-    padding: 12px;
-    color: #333;
-    text-decoration: none;
-    text-align: left;
-    font-size: 14px;
-    transition: background 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid #eee; 
+            margin: 0 0.2rem;
 
-}
+            border-radius: 4px;
+
+            cursor: pointer;
+        }
+
+
+        .pagination button:hover {
+
+            background-color: #dbeafe;
+        }
+
+
+        .pagination .active {
+
+            background-color: #1e3a8a;
+
+            color: white;
+        }
+
+
+        .pagination .disabled {
+
+            background-color: #e5e7eb;
+
+            color: #999;
+
+            cursor: not-allowed;
+        }
+
+
+        .pagination a {
+
+            text-decoration: none;
+        }
 
     </style>
 
@@ -451,20 +522,29 @@
 
     <!-- =========================
          HEADER
-         ========================= -->
+    ========================= -->
 
     <div class="header">
 
+
+        <!-- LOGO -->
 
         <img
             src="{{ asset('gambar/download.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="
+                width:100px;
+                height:100px;
+                margin-right:10px;
+                border-radius:20%;
+            "
         >
 
 
-        <!-- HAMBURGER -->
+        <!-- =========================
+             HAMBURGER
+        ========================= -->
 
         <div class="hamburger-container">
 
@@ -480,7 +560,9 @@
             </button>
 
 
-            <!-- DROPDOWN -->
+            <!-- =========================
+                 DROPDOWN
+            ========================= -->
 
             <div
                 class="hamburger-dropdown"
@@ -506,7 +588,7 @@
                 </a>
 
 
-                <!-- LOG OUT -->
+                <!-- LOGOUT -->
 
                 <form
                     action="{{ route('logout') }}"
@@ -533,7 +615,7 @@
 
     <!-- =========================
          BREADCRUMB
-         ========================= -->
+    ========================= -->
 
     <div class="menu-card1">
 
@@ -559,8 +641,8 @@
 
 
     <!-- =========================
-         STATUS
-         ========================= -->
+         STATUS CONTAINER
+    ========================= -->
 
     <div class="status-container">
 
@@ -573,8 +655,8 @@
 
 
         <!-- =========================
-             NOTIFIKASI
-             ========================= -->
+             SUCCESS
+        ========================= -->
 
         @if(session('success'))
 
@@ -586,6 +668,10 @@
 
         @endif
 
+
+        <!-- =========================
+             ERROR
+        ========================= -->
 
         @if(session('error'))
 
@@ -600,7 +686,7 @@
 
         <!-- =========================
              DAFTAR PENGAJUAN
-             ========================= -->
+        ========================= -->
 
         @forelse($pengajuan as $item)
 
@@ -667,9 +753,11 @@
 
                     <strong>
 
-                        {{ $item->pelajaran->nama_pelajaran
+                        {{
+                            $item->pelajaran->nama_pelajaran
                             ?? $item->pelajaran->nama
-                            ?? '-' }}
+                            ?? '-'
+                        }}
 
                     </strong>
 
@@ -691,14 +779,16 @@
                 </p>
 
 
-                <!-- STATUS -->
+                <!-- =========================
+                     STATUS
+                ========================= -->
 
                 <p>
 
                     Status :
 
-                    
 
+                    <!-- MENUNGGU -->
 
                     @if($item->status == 'menunggu')
 
@@ -711,6 +801,8 @@
                         </span>
 
 
+                    <!-- DISETUJUI -->
+
                     @elseif($item->status == 'disetujui')
 
                         <span class="status-badge status-disetujui">
@@ -721,40 +813,56 @@
 
                         </span>
 
+
+                    <!-- DIBATALKAN -->
+
+                    @elseif($item->status == 'dibatalkan')
+
+                        <span class="status-badge status-dibatalkan">
+
+                            <i class="bi bi-x-circle"></i>
+
+                            Dibatalkan
+
+                        </span>
+
+
+                    <!-- DITOLAK -->
+
+                    @elseif($item->status == 'ditolak')
+
+                        <span class="status-badge status-ditolak">
+
+                            <i class="bi bi-x-circle"></i>
+
+                            Ditolak
+
+                        </span>
+
                     @endif
 
                 </p>
 
 
                 <!-- =========================
-                     BATalkan
-                     ========================= -->
+                     TOMBOL BATALKAN
+                ========================= -->
 
                 @if($item->status == 'menunggu')
 
                     <div class="status-actions">
 
-                        <form
-                            action="{{ route('statusajukan.batalkan', $item->id) }}"
-                            method="POST"
-                            onsubmit="return confirm('Apakah Anda yakin ingin membatalkan pengajuan ini?')"
+
+                        <button
+                            type="button"
+                            class="btn-cancel btn-batalkan"
+                            data-id="{{ $item->id }}"
                         >
 
-                            @csrf
+                            Batalkan
 
-                            @method('DELETE')
+                        </button>
 
-
-                            <button
-                                type="submit"
-                                class="btn-cancel"
-                            >
-
-                                Batalkan
-
-                            </button>
-
-                        </form>
 
                     </div>
 
@@ -769,7 +877,7 @@
 
             <!-- =========================
                  BELUM ADA PENGAJUAN
-                 ========================= -->
+            ========================= -->
 
             <div class="empty-status">
 
@@ -790,121 +898,151 @@
         @endforelse
 
 
-      <!-- =========================
-     PAGINATION
-========================= -->
+        <!-- =========================
+             PAGINATION
+        ========================= -->
 
-@if($pengajuan->hasPages())
+        @if($pengajuan->hasPages())
 
-    <div class="pagination">
 
-        <!-- SEBELUMNYA -->
+            <div class="pagination">
 
-        @if ($pengajuan->onFirstPage())
 
-            <button
-                type="button"
-                class="disabled"
-                disabled
-            >
-                &lt;
-            </button>
+                <!-- SEBELUMNYA -->
 
-        @else
+                @if($pengajuan->onFirstPage())
 
-            <a href="{{ $pengajuan->previousPageUrl() }}">
+                    <button
+                        type="button"
+                        class="disabled"
+                        disabled
+                    >
 
-                <button type="button">
-                    &lt;
-                </button>
+                        &lt;
 
-            </a>
+                    </button>
+
+                @else
+
+                    <a
+                        href="{{ $pengajuan->previousPageUrl() }}"
+                    >
+
+                        <button type="button">
+
+                            &lt;
+
+                        </button>
+
+                    </a>
+
+                @endif
+
+
+                <!-- =========================
+                     NOMOR HALAMAN
+                ========================= -->
+
+                @php
+
+                    $currentPage =
+                        $pengajuan->currentPage();
+
+                    $lastPage =
+                        $pengajuan->lastPage();
+
+
+                    if ($currentPage <= 2) {
+
+                        $startPage = 1;
+
+                    } elseif ($currentPage >= $lastPage - 1) {
+
+                        $startPage = max(
+                            1,
+                            $lastPage - 2
+                        );
+
+                    } else {
+
+                        $startPage =
+                            $currentPage - 1;
+
+                    }
+
+
+                    $endPage = min(
+                        $lastPage,
+                        $startPage + 2
+                    );
+
+                @endphp
+
+
+                @for(
+                    $page = $startPage;
+                    $page <= $endPage;
+                    $page++
+                )
+
+                    <a
+                        href="{{ $pengajuan->url($page) }}"
+                    >
+
+                        <button
+                            type="button"
+                            class="{{
+                                $currentPage == $page
+                                ? 'active'
+                                : ''
+                            }}"
+                        >
+
+                            {{ $page }}
+
+                        </button>
+
+                    </a>
+
+                @endfor
+
+
+                <!-- =========================
+                     BERIKUTNYA
+                ========================= -->
+
+                @if($pengajuan->hasMorePages())
+
+                    <a
+                        href="{{ $pengajuan->nextPageUrl() }}"
+                    >
+
+                        <button type="button">
+
+                            &gt;
+
+                        </button>
+
+                    </a>
+
+                @else
+
+                    <button
+                        type="button"
+                        class="disabled"
+                        disabled
+                    >
+
+                        &gt;
+
+                    </button>
+
+                @endif
+
+
+            </div>
 
         @endif
-
-
-        <!-- NOMOR HALAMAN -->
-
-        @php
-
-            $currentPage = $pengajuan->currentPage();
-
-            $lastPage = $pengajuan->lastPage();
-
-            if ($currentPage <= 2) {
-
-                $startPage = 1;
-
-            } elseif ($currentPage >= $lastPage - 1) {
-
-                $startPage = max(
-                    1,
-                    $lastPage - 2
-                );
-
-            } else {
-
-                $startPage = $currentPage - 1;
-
-            }
-
-            $endPage = min(
-                $lastPage,
-                $startPage + 2
-            );
-
-        @endphp
-
-
-        @for (
-            $page = $startPage;
-            $page <= $endPage;
-            $page++
-        )
-
-            <a href="{{ $pengajuan->url($page) }}">
-
-                <button
-                    type="button"
-                    class="{{ $currentPage == $page ? 'active' : '' }}"
-                >
-
-                    {{ $page }}
-
-                </button>
-
-            </a>
-
-        @endfor
-
-
-        <!-- BERIKUTNYA -->
-
-        @if ($pengajuan->hasMorePages())
-
-            <a href="{{ $pengajuan->nextPageUrl() }}">
-
-                <button type="button">
-                    &gt;
-                </button>
-
-            </a>
-
-        @else
-
-            <button
-                type="button"
-                class="disabled"
-                disabled
-            >
-                &gt;
-            </button>
-
-        @endif
-
-    </div>
-
-@endif
 
 
     </div>
@@ -914,11 +1052,15 @@
 
 
 <!-- =========================
-     JAVASCRIPT HAMBURGER
-     ========================= -->
+     JAVASCRIPT
+========================= -->
 
 <script>
 
+
+    /* =========================
+       HAMBURGER
+    ========================= */
 
     const hamburgerBtn =
         document.getElementById('hamburgerBtn');
@@ -928,12 +1070,205 @@
         document.getElementById('hamburgerDropdown');
 
 
-    hamburgerBtn.addEventListener('click', function(){
+    hamburgerBtn.addEventListener(
+        'click',
+        function () {
 
-        hamburgerDropdown.classList.toggle('show');
+            hamburgerDropdown.classList.toggle('show');
+
+        }
+    );
+
+
+    /* =========================
+       BATALKAN PENGAJUAN
+    ========================= */
+
+    const tombolBatalkan =
+        document.querySelectorAll('.btn-batalkan');
+
+
+    tombolBatalkan.forEach(function(button) {
+
+
+        button.addEventListener(
+            'click',
+            async function() {
+
+
+                /* =========================
+                   AMBIL ID
+                ========================= */
+
+                const id =
+                    this.dataset.id;
+
+
+                /* =========================
+                   KONFIRMASI
+                ========================= */
+
+                const yakin =
+                    confirm(
+                        'Apakah Anda yakin ingin membatalkan pengajuan ini?'
+                    );
+
+
+                if (!yakin) {
+
+                    return;
+
+                }
+
+
+                /* =========================
+                   DISABLE BUTTON
+                ========================= */
+
+                this.disabled = true;
+
+                this.innerText =
+                    'Membatalkan...';
+
+
+                try {
+
+
+                    /* =========================
+                       CSRF TOKEN
+                    ========================= */
+
+                    const csrfToken =
+                        document
+                        .querySelector(
+                            'meta[name="csrf-token"]'
+                        )
+                        .getAttribute('content');
+
+
+                    /* =========================
+                       REQUEST DELETE
+                    ========================= */
+
+                    const response =
+                        await fetch(
+                            "{{ url('/statusajukan-lab') }}/" +
+                            id +
+                            "/batalkan",
+                            {
+
+                                method: 'DELETE',
+
+                                headers: {
+
+                                    'X-CSRF-TOKEN':
+                                        csrfToken,
+
+                                    'Accept':
+                                        'application/json'
+
+                                }
+
+                            }
+                        );
+
+
+                    /* =========================
+                       BACA RESPONSE
+                    ========================= */
+
+                    const result =
+                        await response.json();
+
+
+                    console.log(
+                        'Status HTTP:',
+                        response.status
+                    );
+
+
+                    console.log(
+                        'Response:',
+                        result
+                    );
+
+
+                    /* =========================
+                       BERHASIL
+                    ========================= */
+
+                    if (
+                        response.status === 200 &&
+                        result.success === true
+                    ) {
+
+
+                        alert(
+                            result.message
+                            ??
+                            'Pengajuan berhasil dibatalkan.'
+                        );
+
+
+                        /*
+                         * Reload halaman
+                         * agar status menjadi Dibatalkan
+                         */
+
+                        window.location.reload();
+
+
+                        return;
+
+                    }
+
+
+                    /* =========================
+                       GAGAL
+                    ========================= */
+
+                    alert(
+                        result.message
+                        ??
+                        'Pengajuan gagal dibatalkan.'
+                    );
+
+
+                    this.disabled = false;
+
+                    this.innerText =
+                        'Batalkan';
+
+
+                } catch(error) {
+
+
+                    /* =========================
+                       ERROR
+                    ========================= */
+
+                    console.error(
+                        'Error:',
+                        error
+                    );
+
+
+                    alert(
+                        'Terjadi kesalahan saat membatalkan pengajuan.'
+                    );
+
+
+                    this.disabled = false;
+
+                    this.innerText =
+                        'Batalkan';
+
+                }
+
+            }
+        );
 
     });
-
 
 </script>
 
