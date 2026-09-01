@@ -483,12 +483,7 @@
 
       </nav>
 
-        <form method="GET" action="{{ route('data.guru') }}" class="search-box">
-    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama atau NIP...">
-    <button type="submit">
-        <i class="bi bi-search"></i>
-    </button>
-</form>
+        
 
 
     </div>
@@ -500,6 +495,12 @@
 
     <div class="data-container">
 
+<form method="GET" action="{{ route('data.guru') }}" class="search-box">
+    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama atau NIP...">
+    <button type="submit">
+        <i class="bi bi-search"></i>
+    </button>
+</form>
 
         <!-- TOMBOL TAMBAH -->
 
@@ -513,9 +514,9 @@
             </a>
 
         </div>
-
-
+        
         <!-- JUDUL -->
+
 
         <div class="data-title">
 
