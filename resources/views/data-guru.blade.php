@@ -35,31 +35,30 @@
         }
 
         /* =========================
-           BREADCRUMB + SEARCH
-           ========================= */
+   BREADCRUMB INTERAKTIF
+========================= */
+.menu-card1 {
+  width: auto;      
+  margin: 10px auto;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
 
-        .menu-card1 {
-            width: auto;
-            height: 40px;
-            margin: 10px auto;
-            background-color: #d9d9d9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #aaa;
-            border-radius: 6px;
-        }
+.breadcrumb a {
+  color: #1F4E9D;
+  text-decoration: none;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
 
-        .breadcrumb {
-            margin-bottom: 0;
-        }
-
-        .breadcrumb a {
-            color: #007bff;
-            text-decoration: none;
-            margin-right: 5px;
-        }
 
         .search-box {
             display: flex;

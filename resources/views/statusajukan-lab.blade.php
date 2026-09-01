@@ -40,9 +40,62 @@
            BODY
         ========================= */
 
+<<<<<<< HEAD
         body {
             background: #222;
         }
+=======
+
+        .phone{
+            max-width:412px;
+            min-height:917px;
+            margin:20px auto;
+            background:#fff;
+        }
+
+
+        .header{
+            background:#102C6B;
+            height:100px;
+            justify-content:space-between;
+            display:flex;
+        }
+
+
+        .menu-text{
+            color:white;
+            text-align:center;
+            margin-top:10px;
+            font-size:18px;
+        }
+
+
+               /* =========================
+   BREADCRUMB INTERAKTIF
+========================= */
+.menu-card1 {
+  width: auto;      
+  margin: 10px auto;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.breadcrumb a {
+  color: #1F4E9D;
+  text-decoration: none;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+>>>>>>> 64ae19246c55efc2c8994d040c282a87784796d9
 
 
         /* =========================

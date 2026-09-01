@@ -31,6 +31,7 @@ use App\Http\Controllers\ControllerLaporanGuru;
 use App\Http\Controllers\Controllerjadwaldipinjam;
 use App\Http\Controllers\Controllerubahpassword;
 use App\Http\Controllers\Controllersearch;
+use App\Http\Controllers\SearchController;
 
 // =========================
 // WELCOME
@@ -268,6 +269,7 @@ Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
 Route::get('jadwallab-dipinjam',[Controllerjadwaldipinjam::class, 'index'])
     ->middleware('auth')
     ->name('jadwal.lab');
+Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])->name('jadwal.lab');
 
 
 // =========================
@@ -338,3 +340,27 @@ Route::post('/logout', [ControllerLogin::class, 'logout'])
 // SEARCH 
 // =========================
 Route::get('/search', [Controllersearch::class, 'index'])->name('search.global');
+Route::get('/search-autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
+
+Route::get('/search-autocomplete-guru', [SearchController::class, 'autocompleteGuru'])->name('search.autocomplete.guru');
+
+
+// =========================
+// EDIT DATA LANGSUNG DARI SEARCH
+// =========================
+
+// Guru
+Route::get('/data-guru/{id}/edit', [Controllereditdataguru::class, 'index'])->name('guru.edit');
+Route::put('/data-guru/{id}', [Controllereditdataguru::class, 'update'])->name('guru.update');
+
+// Lab
+Route::get('/data-lab/{id}/edit', [Controllereditdatalab::class, 'index'])->name('lab.edit');
+Route::put('/data-lab/{id}', [Controllereditdatalab::class, 'update'])->name('lab.update');
+
+// Mapel
+Route::get('/datamapel/{id}/edit', [Controllereditmapel::class, 'index'])->name('mapel.edit');
+Route::put('/datamapel/{id}', [Controllereditmapel::class, 'update'])->name('mapel.update');
+
+// Peminjaman
+Route::get('/daftar-ajuan/{id}/edit', [Controllerdetailajuan::class, 'index'])->name('peminjaman.edit');
+Route::put('/daftar-ajuan/{id}', [Controllerdetailajuan::class, 'update'])->name('peminjaman.update');
