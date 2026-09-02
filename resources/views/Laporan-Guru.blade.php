@@ -702,30 +702,13 @@
                 </small>
 
             </div>
-
-
-            <input
-                type="date"
-                name="tanggal_mulai"
-                value="{{ request('tanggal_mulai') }}"
-            >
-
-
-            <span>
-                -
-            </span>
-
-
-            <input
-                type="date"
-                name="tanggal_selesai"
-                value="{{ request('tanggal_selesai') }}"
-            >
-
-
-            <button type="submit">
-                Filter
-            </button>
+<center>
+<!-- Tombol buka popup -->
+<button type="button" class="btn btn-primary btn-sm d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#filterModal">
+    <i class="bi bi-calendar-range"></i>
+    <span>Filter Tanggal</span>
+</button>
+</center>
 
         </div>
 
@@ -1089,6 +1072,48 @@
 
 </div>
 
+<!-- Modal Filter Tanggal -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="filterModalLabel">
+          <i class="bi bi-funnel"></i> Filter Tanggal
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <form action="{{ route('laporan.guru') }}" method="GET">
+          @if(request('search'))
+            <input type="hidden" name="search" value="{{ request('search') }}">
+          @endif
+
+          <div class="mb-3">
+            <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+            <input type="date" id="tanggal_mulai" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+            <input type="date" id="tanggal_selesai" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-check-circle"></i> Terapkan Filter
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 <!-- =========================
