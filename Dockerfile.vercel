@@ -1,0 +1,32 @@
+FROM dunglas/frankenphp:php8.3-bookworm
+
+WORKDIR /app
+
+RUN install-php-extensions \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    zip \
+    intl
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+COPY . .
+
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction \
+    --prefer-dist
+
+RUN npm install
+RUN npm run build
+
+RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
+
+ENV SERVER_NAME=:80
+
+CMD ["frankenphp", "run", "--config", "/app/Caddyfile"]
