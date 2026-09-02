@@ -7,26 +7,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSRF TOKEN -->
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Status Ajukan Lab</title>
 
-
-    <!-- =========================
-         BOOTSTRAP
-    ========================= -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
-    <!-- =========================
-         BOOTSTRAP ICON
-    ========================= -->
 
     <link
         rel="stylesheet"
@@ -36,15 +26,11 @@
 
     <style>
 
-        /* =========================
-           BODY
-        ========================= */
 
-<<<<<<< HEAD
+
         body {
             background: #222;
         }
-=======
 
         .phone{
             max-width:412px;
@@ -59,6 +45,7 @@
             height:100px;
             justify-content:space-between;
             display:flex;
+            align-items: center;
         }
 
 
@@ -68,15 +55,10 @@
             margin-top:10px;
             font-size:18px;
         }
-
-
-               /* =========================
-   BREADCRUMB INTERAKTIF
-========================= */
 .menu-card1 {
   width: auto;      
   margin: 10px auto;
-  background-color: #f1f5f9;
+  background-color: #f1f5f9; /* abu-abu lembut */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,7 +66,6 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
 }
 
 .breadcrumb a {
@@ -95,7 +76,8 @@
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
->>>>>>> 64ae19246c55efc2c8994d040c282a87784796d9
+
+
 
 
         /* =========================
@@ -666,31 +648,28 @@
     </div>
 
 
-    <!-- =========================
+   <!-- =========================
          BREADCRUMB
-    ========================= -->
+         ========================= -->
 
     <div class="menu-card1">
 
         <nav class="breadcrumb">
 
-            <a href="/dashboard">
-
+            <a href="{{ route('dashboard') }}">
                 Home
-
             </a>
 
             >
 
             <a href="#">
-
-                Status Pengajuan Lab
-
+                Status ajukan lab
             </a>
 
         </nav>
 
     </div>
+
 
 
     <!-- =========================
@@ -1132,7 +1111,9 @@
         }
     );
 
+    </script>
 
+<script>
     /* =========================
        BATALKAN PENGAJUAN
     ========================= */
