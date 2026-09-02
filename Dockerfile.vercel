@@ -38,8 +38,8 @@ RUN composer install \
     --no-dev \
     --optimize-autoloader \
     --no-interaction \
-    --prefer-source
-    
+    --prefer-dist
+
 # Build Vite assets
 RUN npm install
 RUN npm run build
