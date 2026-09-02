@@ -29,19 +29,22 @@
             background:#222;
         }
 
-        .phone{
-            max-width:360px;
-            min-height:850px;
-            margin:20px auto;
-            background:#fff;
-        }
+         .phone {
+    max-width: 412px;
+    min-height: 917px;
+    margin: 20px auto;
+    background: #fff;
+}
 
-        .header{
-            background:#102C6B;
-            height:82px;
-            justify-content:space-between;
-            display:flex;
-        }
+
+       .header {
+    background: #102C6B;
+    height: 100px;
+    justify-content: space-between;
+    display: flex;
+     align-items: center;
+}
+
 
         .text-atas{
             color:black;
@@ -50,21 +53,9 @@
             font-size:30px;
         }
 
-<<<<<<< HEAD
-        .menu-card1{
-            width:auto;
-            height:40px;
-            margin:10px auto;
-            background-color:#d9d9d9;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:20px;
-            border:1px solid #aaa;
-            border-radius:6px;
-        }
-=======
-                /* =========================
+
+
+/* =========================
    BREADCRUMB INTERAKTIF
 ========================= */
 .menu-card1 {
@@ -88,17 +79,18 @@
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s ease;
 }
->>>>>>> 64ae19246c55efc2c8994d040c282a87784796d9
 
 
-        .menu-card{
-            background:#1F4E9D;
-            width:300px;
-            margin:10px auto;
-            padding:20px;
-            border-radius:15px;
-            box-shadow:0 3px 8px rgba(0,0,0,.2);
-        }
+
+        .menu-card {
+    background: #1F4E9D;
+    width: 82%;          /* sebelumnya fixed 300px */
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+}
+
 
         .box1{
             margin-top:10px;
@@ -119,72 +111,60 @@
             font-weight:bold;
         }
 
-        /* =========================
-           HAMBURGER
-           ========================= */
+       /* =========================
+           DROPDOWN HAMBURGER
+        ========================= */
 
-        .hamburger-container{
-            position:relative;
+        .hamburger-container {
+            position: relative;
         }
 
-        #hamburgerBtn{
-            background:transparent;
-            border:none;
-            font-size:28px;
-            color:white;
-            transition:opacity .2s ease,
-                       transform .2s ease;
+        .hamburger-dropdown {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            width: 180px;
+            background: #D9D9D9;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 1000;
         }
 
-        #hamburgerBtn:hover{
-            opacity:.8;
-            transform:scale(1.05);
+        .hamburger-dropdown.show {
+            display: block;
         }
 
-        .hamburger-dropdown{
-            display:none;
-            position:absolute;
-            top:70px;
-            right:10px;
-            width:200px;
-            background:#f9f9f9;
-            border-radius:10px;
-            overflow:hidden;
-            box-shadow:0 4px 10px rgba(0,0,0,.15);
-            opacity:0;
-            transform:translateY(-5px);
-            transition:opacity .3s ease,
-                       transform .3s ease;
-            z-index:1000;
+        .hamburger-dropdown a {
+            display: block;
+            padding: 15px;
+            color: #222;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
         }
 
-        .hamburger-dropdown.show{
-            display:block;
-            opacity:1;
-            transform:translateY(0);
+        .hamburger-dropdown a:hover {
+            background: #c5c5c5;
         }
 
-        .hamburger-dropdown a,
-        .hamburger-dropdown button{
-            display:block;
-            width:100%;
-            padding:12px;
-            color:#333;
-            text-decoration:none;
-            text-align:left;
-            font-size:14px;
-            transition:background .2s ease,
-                       color .2s ease;
-            border:none;
-            border-bottom:1px solid #eee;
-            background:#f9f9f9;
+        .hamburger-dropdown form {
+            margin: 0;
         }
 
-        .hamburger-dropdown a:hover,
-        .hamburger-dropdown button:hover{
-            background:#eee;
+        .hamburger-dropdown button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: #D9D9D9;
+            color: #222;
+            font-size: 14px;
+            cursor: pointer;
         }
 
+        .hamburger-dropdown button:hover {
+            background: #c5c5c5;
+        }
 
         /* =========================
            TANGGAL + JAM
@@ -286,6 +266,58 @@
             text-align:center;
         }
 
+        /* Tombol hamburger */
+#hamburgerBtn {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: white;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover tombol */
+#hamburgerBtn:hover {
+    opacity: 0.8;
+    transform: scale(1.05); /* sedikit membesar */
+}
+
+/* Dropdown */
+.hamburger-dropdown {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 200px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Saat aktif */
+.hamburger-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Link & button */
+.hamburger-dropdown a,
+.hamburger-dropdown button {
+    display: block;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #eee; 
+
+}
+
     </style>
 
 </head>
@@ -304,15 +336,16 @@
     <div class="header">
 
         <img
-            src="{{ asset('gambar/download.png') }}"
-            alt="logo"
-            style="
-                width:80px;
-                height:80px;
-                margin-right:10px;
-                border-radius:20%;
-            "
-        >
+    src="{{ asset('gambar/download.png') }}"
+    alt="logo"
+    style="
+        width:100px;
+        height:100px;
+        margin-right:10px;
+        border-radius:20%;
+    "
+>
+
 
 
         <div class="hamburger-container">
