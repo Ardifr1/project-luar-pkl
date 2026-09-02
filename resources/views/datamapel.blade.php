@@ -485,14 +485,6 @@
         </nav>
 
 
-        <form method="GET" action="{{ route('data.mapel') }}" class="search-box">
-    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari Nama mapel...">
-    <button type="submit">
-        <i class="bi bi-search"></i>
-    </button>
-</form>
-
-
     </div>
 
 
@@ -503,18 +495,23 @@
     <div class="data-container">
 
 
-        <!-- TOMBOL TAMBAH -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
 
-        <div class="tambah-container">
+    <!-- SEARCH BOX -->
+    <form method="GET" action="{{ route('data.mapel') }}" class="search-box" style="display:flex; align-items:center; gap:5px;">
+        <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama mapel...">
+        <button type="submit">
+            <i class="bi bi-search"></i>
+        </button>
+    </form>
 
-        <a
-    href="{{ route('tambah.mapel') }}"
-    class="btn-tambah"
->
-    Tambah
-</a>
+    <!-- TOMBOL TAMBAH -->
+    <a href="{{ route('tambah.mapel') }}" class="btn-tambah">
+        Tambah
+    </a>
 
-        </div>
+</div>
+
 
 
         <!-- JUDUL -->

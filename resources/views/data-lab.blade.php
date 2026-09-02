@@ -484,14 +484,6 @@
 
         </nav>
 
-
-        <form method="GET" action="{{ route('data.lab') }}" class="search-box">
-    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama lab...">
-    <button type="submit">
-        <i class="bi bi-search"></i>
-    </button>
-</form>
-
     </div>
 
 
@@ -501,19 +493,23 @@
 
     <div class="data-container">
 
+<div class="d-flex justify-content-between align-items-center mb-3">
 
-        <!-- TOMBOL TAMBAH -->
+    <!-- SEARCH BOX -->
+    <form method="GET" action="{{ route('data.lab') }}" class="search-box" style="display:flex; align-items:center; gap:5px;">
+        <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Cari nama lab...">
+        <button type="submit">
+            <i class="bi bi-search"></i>
+        </button>
+    </form>
 
-        <div class="tambah-container">
+    <!-- TOMBOL TAMBAH -->
+    <a href="{{ route('tambah.datalab') }}" class="btn-tambah">
+        Tambah
+    </a>
 
-            <a
-                href="{{ route('tambah.datalab') }}"
-                class="btn-tambah"
-            >
-                Tambah
-            </a>
+</div>
 
-        </div>
 
 
         <!-- JUDUL -->
