@@ -113,41 +113,41 @@
         }
 
 
-        /* =========================
-           DATE RANGE
-           ========================= */
+       .date-container {
+  width: 90%; /* biar responsif */
+  margin: 20px auto; /* otomatis di tengah */
+  background-color: #bdbdbd;
+  border-radius: 10px;
+  text-align: center; /* semua isi di tengah */
+  padding: 10px 0;
+}
 
-        .date-container {
-            width: 350px;
-            margin-left: 30px;
-            margin-top: 20px;
-            min-height: 40px;
-            background-color: #bdbdbd;
-            margin-bottom: 8px;
-            border-radius: 10px;
-            text-align: center;
-            color: black;
-            padding: 6px;
-        }
+.date-container small {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
 
+.date-container button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
-        .date-container input {
-            border: none;
-            border-radius: 5px;
-            padding: 3px 5px;
-            font-size: 12px;
-        }
+.date-container button:hover {
+  background-color: #0056b3;
+}
 
-
-        .date-container button {
-            border: none;
-            background: #007bff;
-            color: white;
-            border-radius: 5px;
-            padding: 3px 10px;
-            font-size: 12px;
-            cursor: pointer;
-        }
 
 
         /* =========================
