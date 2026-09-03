@@ -338,53 +338,39 @@
 
 }
 
-/* =========================
-   FILTER TANGGAL (REVISI)
-========================= */
 .filter-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 15px auto 25px;
-    padding: 12px 15px;
-    background: #e2e8f0; /* warna abu lembut seperti jadwal-container */
-    border-radius: 10px;
-    width: 85%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  flex-wrap: wrap; /* biar bisa sejajar atau turun ke bawah */
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px auto 20px;
+  padding: 8px 12px;
+  background: #f9fafb; /* lebih terang agar menyatu */
+  border-radius: 6px;
+  width: 100%; /* penuh dalam kotak */
 }
 
 .filter-container input[type="date"] {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 14px;
-    width: 140px;
-    background: #fff;
-    color: #333;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.filter-container input[type="date"]:focus {
-    border-color: #1F4E9D;
-    box-shadow: 0 0 4px rgba(31,78,157,0.4);
-    outline: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  width: 130px;
 }
 
 .filter-container button {
-    background: #1F4E9D;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 6px 18px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+  background: #1F4E9D;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .filter-container button:hover {
-    background: #102C6B;
-    transform: scale(1.05);
+  background: #102C6B;
 }
 
 
