@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
     <meta charset="UTF-8">
@@ -20,189 +21,202 @@
 
     <style>
 
-        body{
-            background:#222;
+        body {
+            background: #222;
         }
 
-        .phone{
-            max-width:412px;
-            min-height:917px;
-            margin:20px auto;
-            background:#fff;
+        .phone {
+            max-width: 412px;
+            width: 100%;
+            min-height: 917px;
+            margin: 20px auto;
+            background: #fff;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        .header{
-            background:#102C6B;
-            height:100px;
-            justify-content:space-between;
-            display:flex;
+        .header {
+            background: #102C6B;
+            height: 100px;
+            justify-content: space-between;
+            display: flex;
             align-items: center;
         }
 
-        .menu-text{
-            color:white;
-            text-align:center;
-            margin-top:10px;
-            font-size:18px;
+        .menu-text {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
         }
 
-                /* =========================
-   BREADCRUMB INTERAKTIF
-========================= */
-.menu-card1 {
-  width: auto;      
-  margin: 10px auto;
-  background-color: #f1f5f9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.breadcrumb a {
-  color: #1F4E9D;
-  text-decoration: none;
-  margin-right: 5px;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-
-
-        /* =========================
-           DROPDOWN HAMBURGER
-           ========================= */
-
-        .hamburger-container{
-            position:relative;
+        .menu-card1 {
+            width: auto;
+            margin: 10px auto;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
         }
 
-        .hamburger-dropdown{
-            display:none;
-            position:absolute;
-            top:70px;
-            right:10px;
-            width:180px;
-            background:#D9D9D9;
-            border-radius:10px;
-            overflow:hidden;
-            z-index:1000;
+        .breadcrumb {
+            margin-bottom: 0;
         }
 
-        .hamburger-dropdown.show{
-            display:block;
+        .breadcrumb a {
+            color: #1F4E9D;
+            text-decoration: none;
+            margin-right: 5px;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
-        .hamburger-dropdown a{
-            display:block;
-            padding:15px;
-            color:#222;
-            text-decoration:none;
-            text-align:center;
-            font-size:14px;
+        .hamburger-container {
+            position: relative;
         }
 
-        .hamburger-dropdown a:hover{
-            background:#c5c5c5;
+        .hamburger-dropdown {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            width: 180px;
+            background: #D9D9D9;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 1000;
         }
 
-        .hamburger-dropdown form{
-            margin:0;
+        .hamburger-dropdown.show {
+            display: block;
         }
 
-        .hamburger-dropdown button{
-            width:100%;
-            padding:15px;
-            border:none;
-            background:#D9D9D9;
-            color:#222;
-            font-size:14px;
-            cursor:pointer;
+        .hamburger-dropdown a {
+            display: block;
+            padding: 15px;
+            color: #222;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
         }
 
-        .hamburger-dropdown button:hover{
-            background:#c5c5c5;
+        .hamburger-dropdown a:hover {
+            background: #c5c5c5;
         }
 
-
-        /* =========================
-           DETAIL
-           ========================= */
-
-        .detail-container{
-            background-color:#e2e8f0;
-            border-radius:8px;
-            padding:1rem;
-            width:85%;
-            margin:1rem auto;
+        .hamburger-dropdown form {
+            margin: 0;
         }
 
-        .detail-card{
-            background-color:#f1f5f9;
-            border-radius:6px;
-            padding:1rem;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        .hamburger-dropdown button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: #D9D9D9;
+            color: #222;
+            font-size: 14px;
+            cursor: pointer;
         }
 
-        .detail-card p{
-            margin:0.4rem 0;
+        .hamburger-dropdown button:hover {
+            background: #c5c5c5;
         }
 
-
-        /* =========================
-           BUTTON
-           ========================= */
-
-        .detail-actions{
-            display:flex;
-            justify-content:center;
-            gap:1rem;
-            margin-top:1rem;
+        .detail-container {
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            width: 85%;
+            margin: 1rem auto;
+            box-sizing: border-box;
         }
 
-        .btn-approve{
-            background-color:#1e3a8a;
-            color:white;
-            border:none;
-            padding:0.5rem 1rem;
-            border-radius:4px;
-            cursor:pointer;
+        .detail-container h2 {
+            margin-bottom: 1rem;
         }
 
-        .btn-reject{
-            background-color:#94a3b8;
-            color:white;
-            border:none;
-            padding:0.5rem 1rem;
-            border-radius:4px;
-            cursor:pointer;
+        .detail-card {
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+            /* Mencegah isi melebar keluar card */
+            min-width: 0;
+            overflow: hidden;
         }
 
-        .btn-approve:hover{
-            background-color:#3b82f6;
+        .detail-card p {
+            margin: 0.4rem 0;
+
+            /* Membuat teks panjang turun ke bawah */
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
-        .btn-reject:hover{
-            background-color:#64748b;
+        /* Khusus bagian Keterangan */
+        .keterangan {
+            margin-top: 0.8rem !important;
+        }
+
+        .keterangan strong {
+            display: block;
+            margin-top: 4px;
+
+            /* Teks panjang akan otomatis turun */
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .detail-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-approve {
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-reject {
+            background-color: #94a3b8;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-approve:hover {
+            background-color: #3b82f6;
+        }
+
+        .btn-reject:hover {
+            background-color: #64748b;
         }
 
     </style>
 
 </head>
 
-
 <body>
 
 <div class="phone">
 
-
-    <!-- =========================
-         HEADER
-         ========================= -->
+    <!-- HEADER -->
 
     <div class="header">
 
@@ -218,9 +232,6 @@
             "
         >
 
-
-        <!-- HAMBURGER -->
-
         <div class="hamburger-container">
 
             <button
@@ -228,13 +239,8 @@
                 id="hamburgerBtn"
                 type="button"
             >
-
                 <i class="bi bi-list fs-1"></i>
-
             </button>
-
-
-            <!-- DROPDOWN -->
 
             <div
                 class="hamburger-dropdown"
@@ -253,7 +259,6 @@
                     action="{{ route('logout') }}"
                     method="POST"
                 >
-
                     @csrf
 
                     <button type="submit">
@@ -269,9 +274,7 @@
     </div>
 
 
-    <!-- =========================
-         BREADCRUMB
-         ========================= -->
+    <!-- BREADCRUMB -->
 
     <div class="menu-card1">
 
@@ -298,16 +301,13 @@
     </div>
 
 
-    <!-- =========================
-         DETAIL AJUAN
-         ========================= -->
+    <!-- DETAIL AJUAN -->
 
     <div class="detail-container">
 
         <h2>
             Detail Ajuan
         </h2>
-
 
         <div class="detail-card">
 
@@ -358,149 +358,147 @@
             </p>
 
 
-            <p>
+            <!-- KETERANGAN -->
+
+            <p class="keterangan">
+
                 Keterangan :
+
                 <strong>
                     {{ $peminjaman->keterangan }}
                 </strong>
+
             </p>
 
 
-            <!-- =========================
-                 STATUS
-                 ========================= -->
+            <!-- STATUS -->
 
             <p>
-
                 Status :
-
                 <strong>
                     {{ ucfirst($peminjaman->status) }}
                 </strong>
-
             </p>
 
 
-            <!-- =========================
-                 TOMBOL
-                 ========================= -->
+            <!-- BUTTON AKSI -->
 
-           @if($peminjaman->status === 'menunggu')
+            @if($peminjaman->status === 'menunggu')
 
-    <div class="detail-actions">
+                <div class="detail-actions">
 
-        <!-- SETUJUI -->
+                    <!-- SETUJUI -->
 
-        <form
-            action="{{ route('ajuan.setujui', ['id' => $peminjaman->id]) }}"
-            method="POST"
-        >
+                    <form
+                        action="{{ route('ajuan.setujui', ['id' => $peminjaman->id]) }}"
+                        method="POST"
+                    >
 
-            @csrf
+                        @csrf
 
-            <button
-                type="submit"
-                class="btn-approve"
-            >
-                Setujui
-            </button>
+                        <button
+                            type="submit"
+                            class="btn-approve"
+                        >
+                            Setujui
+                        </button>
 
-        </form>
+                    </form>
 
 
-        <!-- TIDAK SETUJUI -->
+                    <!-- TIDAK SETUJUI -->
 
-        <button
-            type="button"
-            class="btn-reject"
-            id="btnTidakSetuju"
-        >
-            Tidak Setujui
-        </button>
+                    <button
+                        type="button"
+                        class="btn-reject"
+                        id="btnTidakSetuju"
+                    >
+                        Tidak Setujui
+                    </button>
 
-    </div>
-
-
-    <!-- =========================
-         FORM ALASAN PENOLAKAN
-         ========================= -->
-
-    <div
-        id="formAlasan"
-        style="
-            display:none;
-            margin-top:20px;
-        "
-    >
-
-        <form
-            action="{{ route('ajuan.tolak', ['id' => $peminjaman->id]) }}"
-            method="POST"
-        >
-
-            @csrf
-
-
-            <label
-                for="alasan_penolakan"
-                class="form-label"
-            >
-                <strong>
-                    Alasan Tidak Menyetujui
-                </strong>
-            </label>
-
-
-            <textarea
-                name="alasan_penolakan"
-                id="alasan_penolakan"
-                class="form-control"
-                rows="4"
-                placeholder="Masukkan alasan tidak menyetujui ajuan..."
-                required
-            ></textarea>
-
-
-            @error('alasan_penolakan')
-
-                <div class="text-danger mt-2">
-                    {{ $message }}
                 </div>
 
-            @enderror
 
+                <!-- FORM ALASAN PENOLAKAN -->
 
-            <div
-                style="
-                    display:flex;
-                    gap:10px;
-                    margin-top:10px;
-                "
-            >
-
-                <button
-                    type="submit"
-                    class="btn-reject"
+                <div
+                    id="formAlasan"
+                    style="
+                        display:none;
+                        margin-top:20px;
+                    "
                 >
-                    Kirim Penolakan
-                </button>
+
+                    <form
+                        action="{{ route('ajuan.tolak', ['id' => $peminjaman->id]) }}"
+                        method="POST"
+                    >
+
+                        @csrf
 
 
-                <button
-                    type="button"
-                    id="btnBatalTolak"
-                    class="btn btn-secondary"
-                >
-                    Batal
-                </button>
+                        <label
+                            for="alasan_penolakan"
+                            class="form-label"
+                        >
 
-            </div>
+                            <strong>
+                                Alasan Tidak Menyetujui
+                            </strong>
 
-        </form>
+                        </label>
 
-    </div>
 
-@endif
+                        <textarea
+                            name="alasan_penolakan"
+                            id="alasan_penolakan"
+                            class="form-control"
+                            rows="4"
+                            placeholder="Masukkan alasan tidak menyetujui ajuan..."
+                            required
+                        ></textarea>
+
+
+                        @error('alasan_penolakan')
+
+                            <div class="text-danger mt-2">
+                                {{ $message }}
+                            </div>
+
+                        @enderror
+
+
+                        <div
+                            style="
+                                display:flex;
+                                gap:10px;
+                                margin-top:10px;
+                            "
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn-reject"
+                            >
+                                Kirim Penolakan
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnBatalTolak"
+                                class="btn btn-secondary"
+                            >
+                                Batal
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            @endif
 
         </div>
 
@@ -509,9 +507,7 @@
 </div>
 
 
-<!-- =========================
-     JAVASCRIPT HAMBURGER
-     ========================= -->
+<!-- JAVASCRIPT -->
 
 <script>
 
@@ -522,16 +518,12 @@
         document.getElementById('hamburgerDropdown');
 
 
-    hamburgerBtn.addEventListener('click', function(){
+    hamburgerBtn.addEventListener('click', function () {
 
         hamburgerDropdown.classList.toggle('show');
 
     });
 
-
-    // =========================
-    // FORM ALASAN PENOLAKAN
-    // =========================
 
     const btnTidakSetuju =
         document.getElementById('btnTidakSetuju');
@@ -545,11 +537,12 @@
 
     if (btnTidakSetuju) {
 
-        btnTidakSetuju.addEventListener('click', function(){
+        btnTidakSetuju.addEventListener('click', function () {
 
             formAlasan.style.display = 'block';
 
             btnTidakSetuju.style.display = 'none';
+
 
             document
                 .getElementById('alasan_penolakan')
@@ -562,11 +555,12 @@
 
     if (btnBatalTolak) {
 
-        btnBatalTolak.addEventListener('click', function(){
+        btnBatalTolak.addEventListener('click', function () {
 
             formAlasan.style.display = 'none';
 
             btnTidakSetuju.style.display = 'inline-block';
+
 
             document
                 .getElementById('alasan_penolakan')
@@ -579,4 +573,5 @@
 </script>
 
 </body>
+
 </html>
