@@ -59,7 +59,7 @@
    BREADCRUMB INTERAKTIF
 ========================= */
 .menu-card1 {
-  width: auto;      
+  width: auto;
   margin: 10px auto;
   background-color: #f1f5f9;
   display: flex;
@@ -84,7 +84,7 @@
 
         .menu-card {
     background: #1F4E9D;
-    width: 82%;          /* sebelumnya fixed 300px */
+    width: 82%;
     margin: 10px auto;
     padding: 20px;
     border-radius: 15px;
@@ -278,7 +278,7 @@
 /* Hover tombol */
 #hamburgerBtn:hover {
     opacity: 0.8;
-    transform: scale(1.05); /* sedikit membesar */
+    transform: scale(1.05);
 }
 
 /* Dropdown */
@@ -314,7 +314,7 @@
     text-align: left;
     font-size: 14px;
     transition: background 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid #eee; 
+    border-bottom: 1px solid #eee;
 
 }
 
@@ -551,12 +551,13 @@
 
 
                 <div class="tanggal-box">
-<input
-    type="date"
-    name="tanggal"
-    id="tanggal"
-    value="{{ old('tanggal') }}"
->
+
+                    <input
+                        type="date"
+                        name="tanggal"
+                        id="tanggal"
+                        value="{{ old('tanggal') }}"
+                    >
 
                 </div>
 
@@ -877,7 +878,7 @@
                 // =================================================
 
                 const formData =
-                    new FormData(formPeminjaman);
+                    new window.FormData(formPeminjaman);
 
 
                 // =================================================
@@ -889,21 +890,28 @@
                         '/api/peminjaman',
                         {
 
-                            method:'POST',
+                            method: 'POST',
 
-                            headers:{
+                            headers: {
 
                                 'X-CSRF-TOKEN':
                                     csrfToken,
 
                                 'Accept':
-                                    'application/json'
+                                    'application/json',
+
+                                // =================================
+                                // TOKEN SANCTUM
+                                // =================================
+
+                                'Authorization':
+                                    'Bearer {{ session('api_token') }}'
 
                             },
 
-                            credentials:'same-origin',
+                            credentials: 'same-origin',
 
-                            body:formData
+                            body: formData
 
                         }
                     );

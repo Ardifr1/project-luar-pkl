@@ -71,13 +71,20 @@ class ControllerLogin extends Controller
         $request->session()->regenerate();
 
         // =========================
-        // SIMPAN SESSION TAMBAHAN
+        // BUAT TOKEN SANCTUM
+        // =========================
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        // =========================
+        // SIMPAN SESSION
         // =========================
 
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
             'user_name' => $user->name,
+            'api_token' => $token,
         ]);
 
         // =========================
@@ -175,13 +182,20 @@ class ControllerLogin extends Controller
         $request->session()->regenerate();
 
         // =========================
-        // SIMPAN SESSION TAMBAHAN
+        // BUAT TOKEN SANCTUM
+        // =========================
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        // =========================
+        // SIMPAN SESSION
         // =========================
 
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
             'user_name' => $user->name,
+            'api_token' => $token,
         ]);
 
         // Masuk dashboard admin
@@ -239,13 +253,20 @@ class ControllerLogin extends Controller
         $request->session()->regenerate();
 
         // =========================
-        // SIMPAN SESSION TAMBAHAN
+        // BUAT TOKEN SANCTUM
+        // =========================
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        // =========================
+        // SIMPAN SESSION
         // =========================
 
         session([
             'user_id' => $user->id,
             'user_role' => $user->role,
             'user_name' => $user->name,
+            'api_token' => $token,
         ]);
 
         // Masuk dashboard guru
@@ -272,3 +293,4 @@ class ControllerLogin extends Controller
         return redirect()->route('login');
     }
 }
+
