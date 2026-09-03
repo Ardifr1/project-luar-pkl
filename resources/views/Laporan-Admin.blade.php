@@ -167,6 +167,7 @@
 }
 
 
+
         /* =========================
            PERINGATAN
            ========================= */
@@ -292,41 +293,27 @@
 
 
         /* =========================
-           ALASAN PENOLAKAN
-           ========================= */
+   ALASAN PENOLAKAN (PERBAIKAN)
+========================= */
+.alasan-container {
+  background: #ff6767;
+  width: 90%; /* mengikuti lebar kartu */
+  margin: 10px auto; /* otomatis di tengah */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: black;
+  padding: 8px 12px;
+  box-sizing: border-box; /* agar padding tidak menambah lebar */
+}
 
-        .alasan-container {
-            background: #ff6767;
-
-            width: 250px;
-
-            min-height: 30px;
-
-            border-radius: 10px;
-
-            margin-left: 20px;
-
-            margin-top: 10px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            text-align: center;
-
-            color: black;
-
-            padding: 5px 10px;
-        }
-
-
-        .alasan-text {
-            font-size: 12px;
-            word-break: break-word;
-        }
-
+.alasan-text {
+  font-size: 13px;
+  word-break: break-word;
+  line-height: 1.4;
+}
 
         /* =========================
            PEMBATAS
