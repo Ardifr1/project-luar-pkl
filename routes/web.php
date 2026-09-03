@@ -38,8 +38,9 @@ use App\Http\Controllers\SearchController;
 // =========================
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login'); 
 });
+
 
 
 // =========================
