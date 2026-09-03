@@ -751,14 +751,6 @@
 
         </div>
 
-<center>
-<!-- Tombol buka popup -->
-<button type="button" class="btn btn-primary btn-sm d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#filterModal">
-    <i class="bi bi-calendar-range"></i>
-    <span>Filter Tanggal</span>
-</button>
-</center>
-
         <!-- =========================
              DATA
              ========================= -->

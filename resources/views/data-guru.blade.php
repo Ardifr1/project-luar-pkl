@@ -61,32 +61,54 @@
 }
 
 
-        /* =========================
-   SEARCH AUTOCOMPLETE
+/* =========================
+   SEARCH AUTOCOMPLETE (PERKECIL & RESPONSIF)
 ========================= */
 .search-box {
   position: relative;
   display: flex;
   align-items: center;
+  gap: 6px; /* beri jarak antar elemen */
+  flex-wrap: wrap; /* agar turun ke bawah di layar kecil */
+  justify-content: center;
 }
 
 .search-box input {
-  width: 180px;
-  height: 34px;
+  width: 160px; /* diperkecil dari 180px */
+  height: 30px; /* sedikit lebih pendek */
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding-left: 10px;
+  padding-left: 8px;
+  font-size: 13px;
 }
 
 .search-box button {
-  width: 40px;
-  height: 34px;
+  width: 36px;
+  height: 30px;
   background-color: #1F4E9D;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
 }
+
+/* =========================
+   RESPONSIVE FIX
+========================= */
+@media (max-width: 480px) {
+  .search-box {
+    flex-direction: column; /* input dan tombol turun ke bawah */
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .search-box input,
+  .search-box button {
+    width: 100%; /* penuh di layar kecil */
+  }
+}
+
 
 .search-suggestions {
   position: absolute;
@@ -379,6 +401,8 @@
     border-bottom: 1px solid #eee; 
 
 }
+
+
 
     </style>
 
