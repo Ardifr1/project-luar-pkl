@@ -551,7 +551,7 @@
 
 
                 <div class="tanggal-box">
-
+ 
                     <input
                         type="date"
                         name="tanggal"
@@ -578,7 +578,9 @@
 
 
                 <span class="tanda">
-                    -
+
+                    ->
+
                 </span>
 
 
