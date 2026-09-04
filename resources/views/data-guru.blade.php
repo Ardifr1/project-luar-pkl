@@ -68,14 +68,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 6px; /* beri jarak antar elemen */
-  flex-wrap: wrap; /* agar turun ke bawah di layar kecil */
+  gap: 6px; /* jarak antar elemen */
   justify-content: center;
 }
 
 .search-box input {
   width: 160px; /* diperkecil dari 180px */
-  height: 30px; /* sedikit lebih pendek */
+  height: 30px;
   border: 1px solid #ccc;
   border-radius: 6px;
   padding-left: 8px;
@@ -94,22 +93,28 @@
 }
 
 /* =========================
-   RESPONSIVE FIX
+   RESPONSIVE FIX (TETAP SEJEJAR DI MOBILE)
 ========================= */
 @media (max-width: 480px) {
   .search-box {
-    flex-direction: column; /* input dan tombol turun ke bawah */
-    align-items: stretch;
-    gap: 8px;
+    flex-direction: row; /* tetap sejajar */
+    justify-content: center;
+    gap: 6px;
   }
 
-  .search-box input,
+  .search-box input {
+    flex: 1; /* biar input menyesuaikan lebar */
+    min-width: 120px;
+  }
+
   .search-box button {
-    width: 100%; /* penuh di layar kecil */
+    flex-shrink: 0; /* tombol tetap kecil di samping */
   }
 }
 
-
+/* =========================
+   SUGGESTIONS
+========================= */
 .search-suggestions {
   position: absolute;
   top: 40px;
@@ -134,6 +139,7 @@
 .search-suggestions a:hover {
   background: #f1f5f9;
 }
+
         /* =========================
            DATA GURU
            ========================= */
@@ -159,26 +165,66 @@
         }
 
         /* =========================
-           TABLE
-           ========================= */
+   TABLE MODERN DARK BLUE
+========================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
 
-        .table {
-            margin-bottom: 0;
-            border: 2px solid #000;
-        }
+/* Header */
+.table thead th {
+  background: #102C6B;       /* biru gelap elegan */
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #0f2b80; /* garis bawah tipis */
+  letter-spacing: 0.5px;
+}
 
-        .table thead th {
-            background: #0f2b80;
-            text-align: center;
-            font-size: 13px;
-        }
+/* Body */
+.table tbody td {
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  padding: 8px;
+  border: 1px solid #bbb;   /* garis tipis abu gelap */
+  background: #fff;
+}
 
-        .table tbody td {
-            text-align: center;
-            vertical-align: middle;
-            font-size: 12px;
-            background: #b8b9bb;
-        }
+/* Zebra effect */
+.table tbody tr:nth-child(odd) {
+  background-color: #f9fafb;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #e5e7eb; /* abu muda highlight */
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE FIX
+========================= */
+@media (max-width: 480px) {
+  .table thead th,
+  .table tbody td {
+    font-size: 10px;
+    padding: 6px;
+    border: 1px solid #999; /* tetap jelas di mobile */
+  }
+}
 
         /* =========================
            TOMBOL EDIT
@@ -220,24 +266,23 @@
            ========================= */
 
         .tambah-container {
-            text-align: right;
-            margin-bottom: 8px;
-        }
+    text-align: right;
+    margin-bottom: 8px;
+}
 
-        .btn-tambah {
-            background: #39b62b;
-            border: none;
-            padding: 5px 15px;
-            font-size: 11px;
-            border-radius: 3px;
-            color: #222;
-            text-decoration: none;
-        }
+.btn-tambah {
+    background: #39b62b;
+    border: none;
+    padding: 5px 14px; /* lebih kecil dari 5px 15px */
+    font-size: 10px;   /* diperkecil dari 11px */
+    border-radius: 3px;
+    color: #222;
+    text-decoration: none;
+}
 
-        .btn-tambah:hover {
-            background: #aaa;
-        }
-
+.btn-tambah:hover {
+    background: #aaa;
+}
         /* =========================
            PAGINATION
            ========================= */

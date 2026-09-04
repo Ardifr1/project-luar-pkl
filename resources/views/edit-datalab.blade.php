@@ -211,6 +211,8 @@
             border-radius:4px;
         }
 
+
+        
     </style>
 </head>
 
@@ -333,8 +335,8 @@
                  NAMA
                  ========================= -->
 
-            <label>
-                Nama
+            <label> 
+                Nama Ruangan
             </label>
 
             <input

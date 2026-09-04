@@ -386,7 +386,7 @@
                  ========================= -->
 
             <label for="nama_lab">
-                Nama
+                Nama Ruangan
             </label>
 
             <input
