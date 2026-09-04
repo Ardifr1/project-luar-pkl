@@ -84,25 +84,31 @@
         }
 
         .btn-login {
-            display: block;
+    display: block;
 
-            width: 150px;
-            height: 42px;
+    width: 150px;
+    height: 42px;
 
-            margin: 25px auto 0;
+    margin: 25px auto 0;
 
-            border: none;
-            border-radius: 13px;
+    border: none;
+    border-radius: 13px;
 
-            background: #d9d9d9;
+    background: #d9d9d9;
 
-            color: #222;
+    color: #222;
 
-            font-size: 13px;
+    font-size: 13px;
 
+    cursor: pointer;
 
-            cursor: pointer;
-        }
+    -webkit-appearance: none;
+    appearance: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    touch-action: manipulation;
+}
 
         .btn-login:hover {
             background: #cfcfcf;
@@ -199,10 +205,11 @@
             </div>
 
             <!-- LOGIN -->
-            <button type="submit" class="btn-login">
-            
-                Login
-            </button>
+            <input
+    type="submit"
+    value="Login"
+    class="btn-login"
+>
 
 
         </form>

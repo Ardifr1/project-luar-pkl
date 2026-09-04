@@ -28,7 +28,7 @@ class Controllertambahguru extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:user,name',
 
             'nip' => 'required|string|max:255|unique:user,nip',
 

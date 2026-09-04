@@ -24,11 +24,13 @@ class Controllertambahdatalab extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lab' => 'required|string|max:255',
+            'nama_lab' => 'required|string|max:255|unique:lab,nama_lab',
 
             'kapasitas_murid' => 'required|integer|min:1',
 
             'status' => 'required|in:tersedia,tidak_tersedia,sedang_maintenance',
+        ], [
+            'nama_lab.unique' => 'Nama lab tersebut sudah ada. Silakan masukkan nama lab lain.',
         ]);
 
 
