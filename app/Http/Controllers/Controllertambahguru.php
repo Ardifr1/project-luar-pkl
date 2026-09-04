@@ -32,11 +32,11 @@ class Controllertambahguru extends Controller
 
             'nip' => 'required|string|max:255|unique:user,nip',
 
-            'username' => 'nullable|string|max:255|unique:user,username',
+            'username' => 'required|string|max:255|unique:user,username',
 
             'password' => 'required|string|min:6',
 
-            'pelajaran' => 'nullable|array',
+            'pelajaran' => 'required|array',
 
             'pelajaran.*' => 'exists:pelajaran,id',
         ]);
