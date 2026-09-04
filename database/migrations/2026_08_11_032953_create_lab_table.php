@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('lab', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lab');
+            $table->string('nama_lab')->unique();
             $table->integer('kapasitas_murid');
             $table->enum('status', [
-        'tersedia',
-        'tidak_tersedia',
-        "sedang_maintenance"
-    ])->default('tersedia');
+                'tersedia',
+                'tidak_tersedia',
+                'sedang_maintenance'
+            ])->default('tersedia');
             $table->timestamps();
         });
     }

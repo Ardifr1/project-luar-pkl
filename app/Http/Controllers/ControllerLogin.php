@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ControllerLogin extends Controller
 {
@@ -16,6 +17,25 @@ class ControllerLogin extends Controller
     public function index()
     {
         return view('Login/login');
+    }
+
+
+    // =========================
+    // CEK APAKAH USER SUDAH LOGIN
+    // DI DEVICE LAIN
+    // =========================
+
+    private function sudahLoginDiDeviceLain($userId, Request $request)
+    {
+        $sessionLifetime = config('session.lifetime', 120);
+
+        $batasWaktu = now()->subMinutes($sessionLifetime);
+
+        return DB::table('sessions')
+            ->where('user_id', $userId)
+            ->where('id', '!=', $request->session()->getId())
+            ->where('last_activity', '>=', $batasWaktu->timestamp)
+            ->exists();
     }
 
 
@@ -57,6 +77,18 @@ class ControllerLogin extends Controller
             return back()
                 ->withErrors([
                     'password' => 'Password salah.'
+                ])
+                ->withInput();
+        }
+
+        // =========================
+        // CEK LOGIN DI DEVICE LAIN
+        // =========================
+
+        if ($this->sudahLoginDiDeviceLain($user->id, $request)) {
+            return back()
+                ->withErrors([
+                    'login' => 'Akun ini sedang digunakan di perangkat lain. Silakan logout terlebih dahulu dari perangkat tersebut.'
                 ])
                 ->withInput();
         }
@@ -173,6 +205,18 @@ class ControllerLogin extends Controller
         }
 
         // =========================
+        // CEK LOGIN DI DEVICE LAIN
+        // =========================
+
+        if ($this->sudahLoginDiDeviceLain($user->id, $request)) {
+            return back()
+                ->withErrors([
+                    'username' => 'Akun ini sedang digunakan di perangkat lain. Silakan logout terlebih dahulu dari perangkat tersebut.'
+                ])
+                ->withInput();
+        }
+
+        // =========================
         // LOGIN AUTH LARAVEL
         // =========================
 
@@ -244,6 +288,18 @@ class ControllerLogin extends Controller
         }
 
         // =========================
+        // CEK LOGIN DI DEVICE LAIN
+        // =========================
+
+        if ($this->sudahLoginDiDeviceLain($user->id, $request)) {
+            return back()
+                ->withErrors([
+                    'nip' => 'Akun ini sedang digunakan di perangkat lain. Silakan logout terlebih dahulu dari perangkat tersebut.'
+                ])
+                ->withInput();
+        }
+
+        // =========================
         // LOGIN AUTH LARAVEL
         // =========================
 
@@ -293,4 +349,3 @@ class ControllerLogin extends Controller
         return redirect()->route('login');
     }
 }
-

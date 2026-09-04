@@ -15,7 +15,9 @@ class Controllertambahmapel extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pelajaran' => 'required|string|max:255',
+            'nama_pelajaran' => 'required|string|max:255|unique:pelajaran,nama_pelajaran',
+        ], [
+            'nama_pelajaran.unique' => 'Pelajaran tersebut sudah ada. Silakan masukkan pelajaran lain.',
         ]);
 
         Pelajaran::create([
