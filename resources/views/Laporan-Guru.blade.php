@@ -116,7 +116,7 @@
        .date-container {
   width: 90%; /* biar responsif */
   margin: 20px auto; /* otomatis di tengah */
-  background-color: #bdbdbd;
+  background-color: #E5E9EF;
   border-radius: 10px;
   text-align: center; /* semua isi di tengah */
   padding: 10px 0;
