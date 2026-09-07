@@ -29,7 +29,7 @@
             max-width: 412px;
             width: 100%;
             min-height: 917px;
-            margin: 20px auto;
+            margin:  auto;
             background: #fff;
             box-sizing: border-box;
             overflow: hidden;

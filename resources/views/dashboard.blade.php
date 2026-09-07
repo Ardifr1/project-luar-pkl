@@ -19,7 +19,7 @@
         .phone{
             max-width:412px;
             min-height:917px;
-            margin:20px auto;
+            margin: auto;
             background:#fff;
         }
 

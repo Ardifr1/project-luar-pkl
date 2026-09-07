@@ -20,7 +20,7 @@
         .phone{
             max-width:412px;
             min-height:917px;
-            margin:20px auto;
+            margin: auto;
             background:#fff;
         }
 
@@ -393,19 +393,19 @@
 
 /* Border sesuai warna hover untuk tiap box */
 .box1 {
-  border: 2px solid #4CAF50; /* hijau */
+  border: 3px solid #4CAF50; /* hijau */
 }
 .box2 {
-  border: 2px solid #2196F3; /* biru */
+  border: 3px solid #2196F3; /* biru */
 }
 .box3 {
-  border: 2px solid #F44336; /* merah */
+  border: 3px solid #F44336; /* merah */
 }
 .box4 {
-  border: 2px solid #FF9800; /* oranye */
+  border: 3px solid #FF9800; /* oranye */
 }
 .box5 {
-  border: 2px solid #b5cb0b; /* kuning/hijau muda */
+  border: 3px solid #b5cb0b; /* kuning/hijau muda */
 }
 
 

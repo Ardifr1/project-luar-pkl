@@ -19,7 +19,7 @@
         .phone {
             max-width: 412px;
             min-height: 917px;
-            margin: 20px auto;
+            margin:  auto;
             background: #fff;
         }
 
@@ -171,7 +171,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
