@@ -140,7 +140,7 @@
 
         .box1 p{
             text-align:center;
-            padding:20px;
+            padding:15px;
         }
 
 
@@ -155,7 +155,7 @@
 
         .box2 p{
             text-align:center;
-            padding:20px;
+            padding:15px;
         }
 
 
@@ -170,7 +170,7 @@
 
         .box3 p{
             text-align:center;
-            padding:20px;
+            padding:15px;
         }
 
 
@@ -185,7 +185,7 @@
 
         .box4 p{
             text-align:center;
-            padding:20px;
+            padding:15px;
         }
 
 
@@ -200,7 +200,7 @@
 
         .box5 p{
             text-align:center;
-            padding:20px;
+            padding:15px;
         }
 
 
