@@ -33,7 +33,7 @@ body{
 
         /* ====== CARD STYLE ====== */
 .card {
-  background-color: #a3c1e9; /* abu muda */
+  background-color: #cedff5; /* abu muda */
   border-radius: 10px;
   padding: 1rem;
   margin: 1rem auto;
