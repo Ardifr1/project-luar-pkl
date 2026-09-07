@@ -33,7 +33,7 @@
 
 
         .menu-card{
-            background: #1F4E9D;
+            background: #103f90;
     width: 340px;
     margin: 40px auto;
     padding: 25px;
@@ -508,6 +508,24 @@
   background: #f1f5f9;
 }
 
+/* Border sesuai warna hover untuk tiap box */
+.box1 {
+  border: 2px solid #4CAF50; /* hijau */
+}
+.box2 {
+  border: 2px solid #2196F3; /* biru */
+}
+.box3 {
+  border: 2px solid #F44336; /* merah */
+}
+.box4 {
+  border: 2px solid #FF9800; /* oranye */
+}
+.box5 {
+  border: 2px solid #b5cb0b; /* kuning/hijau muda */
+}
+
+
     </style>
 
 </head>
@@ -520,10 +538,10 @@
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{asset ('gambar/NOBGmahput.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="width:100px; height:100px; margin-right:10px; border-radius:35%"
         >
 
 
