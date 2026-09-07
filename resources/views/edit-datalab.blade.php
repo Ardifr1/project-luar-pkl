@@ -211,6 +211,8 @@
             border-radius:4px;
         }
 
+
+        
     </style>
 </head>
 
@@ -221,10 +223,10 @@
     <div class="header">
 
         <img
-            src="{{ asset('gambar/download.png') }}"
+            src="{{asset ('gambar/NOBGmahput.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="width:100px; height:100px; margin-right:10px; border-radius:35%"
         >
 
         <!-- HAMBURGER -->
@@ -333,8 +335,8 @@
                  NAMA
                  ========================= -->
 
-            <label>
-                Nama
+            <label> 
+                Nama Ruangan
             </label>
 
             <input

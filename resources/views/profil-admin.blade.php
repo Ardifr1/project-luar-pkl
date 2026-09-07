@@ -33,7 +33,7 @@ body{
 
         /* ====== CARD STYLE ====== */
 .card {
-  background-color: #afbccd; /* abu muda */
+  background-color: #a3c1e9; /* abu muda */
   border-radius: 10px;
   padding: 1rem;
   margin: 1rem auto;
@@ -213,10 +213,10 @@ body{
     <div class="header">
 
         <img
-            src="{{asset ('gambar/download.png') }}"
+            src="{{asset ('gambar/NOBGmahput.png') }}"
             alt="logo"
             class="logo"
-            style="width:100px; height:100px; margin-right:10px; border-radius:20%"
+            style="width:100px; height:100px; margin-right:10px; border-radius:35%"
         >
 
         <!-- HAMBURGER -->
