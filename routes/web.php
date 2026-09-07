@@ -87,9 +87,11 @@ Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
 // =========================
 
 Route::get('/dashboard', [ControllerDashboard::class, 'index'])
+    ->middleware('auth')
     ->name('dashboard');
 
 Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
+    ->middleware('auth')
     ->name('dashboardadmin');
 
 
@@ -99,6 +101,7 @@ Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
 
 // Menampilkan data guru
 Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
+->middleware('auth')
     ->name('data.guru');
 
 
@@ -108,10 +111,12 @@ Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
 
 // Menampilkan halaman tambah guru
 Route::get('/tambah-guru', [Controllertambahguru::class, 'index'])
+->middleware('auth')
     ->name('tambah.guru');
 
 // Menyimpan data guru
 Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
+->middleware('auth')
     ->name('tambah.guru.store');
 
 // =========================
@@ -120,10 +125,12 @@ Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
 
 // Menampilkan halaman edit guru
 Route::get('/editdataguru/{id}', [Controllereditdataguru::class, 'index'])
+->middleware('auth')
     ->name('edit.guru');
 
 // Menyimpan perubahan data guru
 Route::put('/editdataguru/{id}', [Controllereditdataguru::class, 'update'])
+->middleware('auth')
     ->name('update.guru');
 
 
@@ -142,7 +149,8 @@ Route::delete('/data-guru/{id}', [ControllerDataGuru::class, 'destroy'])
 
 // Menampilkan data lab
 Route::get('/data-lab', [ControllerLab::class, 'index'])
-    ->name('data.lab');
+    ->middleware('auth')
+->name('data.lab');
 
 
 // =========================
@@ -151,10 +159,12 @@ Route::get('/data-lab', [ControllerLab::class, 'index'])
 
 // Menampilkan halaman tambah lab
 Route::get('/tambah-datalab', [Controllertambahdatalab::class, 'index'])
-    ->name('tambah.datalab');
+    ->middleware('auth')
+->name('tambah.datalab');
 
 // Menyimpan data lab
 Route::post('/tambah-datalab', [Controllertambahdatalab::class, 'store'])
+->middleware('auth')
     ->name('tambah.datalab.store');
 
 
@@ -164,10 +174,12 @@ Route::post('/tambah-datalab', [Controllertambahdatalab::class, 'store'])
 
 // Menampilkan halaman edit lab
 Route::get('/edit-datalab/{id}', [Controllereditdatalab::class, 'index'])
+->middleware('auth')
     ->name('edit.datalab');
 
 // Menyimpan perubahan data lab
 Route::put('/edit-datalab/{id}', [Controllereditdatalab::class, 'update'])
+->middleware('auth')
     ->name('update.datalab');
 
 
@@ -184,24 +196,29 @@ Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
 // TAMBAH MAPEL
 // =========================
 Route::get('/tambah-datamapel', [Controllertambahmapel::class, 'index'])
+->middleware('auth')
     ->name('tambah.mapel');
 
 Route::post('/tambah-datamapel', [Controllertambahmapel::class, 'store'])
+->middleware('auth')
     ->name('simpan.mapel');
 
 // =========================
 // DATA MAPEL
 // =========================
 Route::get('/datamapel',[Controllerdatamapel::class,'index'])
+->middleware('auth')
         ->name('data.mapel');
 
 // =========================
 // EDIT MAPEL
 // =========================
 Route::get('/edit-datamapel/{id}', [Controllereditmapel::class, 'index'])
+->middleware('auth')
     ->name('edit.mapel');
 
 Route::put('/edit-datamapel/{id}', [Controllereditmapel::class, 'update'])
+->middleware('auth')
     ->name('update.mapel');
 // =========================
 // HAPUS MAPEL
@@ -214,6 +231,7 @@ Route::delete('/hapus-mapel/{id}', [Controllerdatamapel::class, 'destroy'])
 // =========================
 
 Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
+->middleware('auth')
     ->name('daftar.ajuan');
 
 
@@ -222,6 +240,7 @@ Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
 // =========================
 
 Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
+->middleware('auth')
     ->name('detail.ajuan');
 
 // =========================
@@ -229,9 +248,11 @@ Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
 // =========================
 
 Route::get('/statusajukan-lab', [Controllerstatusajukan::class, 'index'])
+->middleware('auth')
     ->name('statusajukan');
 
 Route::delete('/statusajukan-lab/{id}/batalkan', [Controllerstatusajukan::class, 'batalkan'])
+->middleware('auth')
     ->name('statusajukan.batalkan');
 
 // =========================
@@ -239,6 +260,7 @@ Route::delete('/statusajukan-lab/{id}/batalkan', [Controllerstatusajukan::class,
 // =========================
 
 Route::post('/detail-ajuan/{id}/setujui', [Controllerdetailajuan::class, 'setujui'])
+->middleware('auth')
     ->name('ajuan.setujui');
 
 
@@ -247,6 +269,7 @@ Route::post('/detail-ajuan/{id}/setujui', [Controllerdetailajuan::class, 'setuju
 // =========================
 
 Route::post('/detail-ajuan/{id}/tolak', [Controllerdetailajuan::class, 'tolak'])
+->middleware('auth')
     ->name('ajuan.tolak');
 // =========================
 // PEMINJAMAN LAB
@@ -254,14 +277,17 @@ Route::post('/detail-ajuan/{id}/tolak', [Controllerdetailajuan::class, 'tolak'])
 
 // Halaman ajukan peminjaman berdasarkan ID lab
 Route::get('/ajukan-peminjaman/{id}', [ControllerAjukanPeminjaman::class, 'index'])
+->middleware('auth')
     ->name('ajukan.peminjaman');
 
 // Proses ajukan peminjaman
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
+->middleware('auth')
     ->name('ajukanpeminjaman.store');
 
 // Halaman pilihan lab
 Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
+->middleware('auth')
     ->name('ajukanpilihanlab');
 
 // =========================
@@ -270,7 +296,9 @@ Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
 Route::get('jadwallab-dipinjam',[Controllerjadwaldipinjam::class, 'index'])
     ->middleware('auth')
     ->name('jadwal.lab');
-Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])->name('jadwal.lab');
+Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])
+->middleware('auth')
+->name('jadwal.lab');
 
 
 // =========================
@@ -278,18 +306,23 @@ Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])->name('jad
 // =========================
 
 Route::get('/guru', [ControllerGuru::class, 'index'])
-    ->name('guru.index');
+    ->middleware('auth')
+->name('guru.index');
 
 Route::get('/guru/create', [ControllerGuru::class, 'create'])
+->middleware('auth')
     ->name('guru.create');
 
 Route::post('/guru', [ControllerGuru::class, 'store'])
+->middleware('auth')
     ->name('guru.store');
 
 Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
+->middleware('auth')
     ->name('guru.show');
 
 Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
+->middleware('auth')
     ->name('guru.destroy');
 
 
@@ -297,8 +330,10 @@ Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
 // LAPORAN
 // =========================
 Route::get('/Laporan-Admin', [ControllerLaporanAdmin::class, 'index'])
+->middleware('auth')
     ->name('laporan.admin');
 Route::get('/Laporan-Guru', [ControllerLaporanGuru::class, 'index'])
+->middleware('auth')
     ->name('laporan.guru');
 
 
@@ -309,10 +344,12 @@ Route::get('/Laporan-Guru', [ControllerLaporanGuru::class, 'index'])
 
 // Profil guru
 Route::get('/profil-guru', [ControllerProfil::class, 'guru'])
+->middleware('auth')
     ->name('profil.guru');
 
 // Profil admin
 Route::get('/profil-admin', [ProfiladminController::class, 'admin'])
+->middleware('auth')
     ->name('profil.admin');
 
 
@@ -322,19 +359,24 @@ Route::get('/profil-admin', [ProfiladminController::class, 'admin'])
 
 // Halaman ubah password
 Route::get('/ubah-password', [ControllerPassword::class, 'edit'])
+->middleware('auth')
     ->name('ubah.password');
 
 // Proses ubah password
 Route::post('/ubah-password', [ControllerPassword::class, 'update'])
+->middleware('auth')
     ->name('ubah.password.update');
 
-Route::get('ubahpasswordguru',[Controllerubahpassword::class, 'index']);
+Route::get('ubahpasswordguru',[Controllerubahpassword::class, 'index'])
+->middleware('auth')
+    ->name('ubah.password.guru');
 
 // =========================
 // LOGOUT
 // =========================
 
 Route::post('/logout', [ControllerLogin::class, 'logout'])
+->middleware('auth')
     ->name('logout');
 
 // =========================
