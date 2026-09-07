@@ -146,7 +146,7 @@
 
         .data-container {
             margin: 15px auto;
-            background: #d9d9d9;
+            background: #E8EEF6;
             width: 90%;
             height: 700px;
             padding: 15px;
@@ -156,12 +156,13 @@
         }
 
         .data-title {
-            background: #eadede;
+            background: #ced3da;
             text-align: center;
             padding: 8px;
             font-weight: 600;
             color: #333;
             margin-bottom: 0;
+            border-radius: 5px;
         }
 
 /* =========================
@@ -277,8 +278,9 @@
     padding: 5px 14px; /* lebih kecil dari 5px 15px */
     font-size: 10px;   /* diperkecil dari 11px */
     border-radius: 3px;
-    color: #222;
+    color: #e3dddd;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .btn-tambah:hover {
