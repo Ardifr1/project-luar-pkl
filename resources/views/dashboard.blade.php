@@ -32,24 +32,22 @@
         }
 
 
-        .menu-card{
-            background: #103f90;
-    width: 340px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-    transition: all 0.3s ease-in-out;
-        }
+ .menu-card {
+  background: #103f90; /* biru utama */
+  width: 340px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); /* bayangan statis */
+}
 
-
-        .menu-text{
-            color:white;
-            text-align:center;
-            margin-top:10px;
-            font-size:18px;
-        }
-
+.menu-text {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600; /* teks lebih tebal */
+}
 
               /* =========================
    BREADCRUMB INTERAKTIF
@@ -390,28 +388,58 @@
 
 .box1:hover ~ .menu-card,
 .menu-card:hover .box1:hover {
-    background: #4CAF50;
+    background: #f0eded;
 }
 
 .box2:hover ~ .menu-card,
 .menu-card:hover .box2:hover {
-    background: #2196F3;
+    background: #f0eded;
 }
 
 .box3:hover ~ .menu-card,
 .menu-card:hover .box3:hover {
-    background: #F44336;
+    background: #f0eded;
 }
 
 .box4:hover ~ .menu-card,
 .menu-card:hover .box4:hover {
-    background: #FF9800;
+    background: #f0eded;
 }
 
 .box5:hover ~ .menu-card,
 .menu-card:hover .box5:hover {
-    background: #9C27B0;
+    background: #f0eded;
 }
+
+/* Efek hover dengan border animasi */
+.box1, .box2, .box3, .box4, .box5 {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Tambahkan pseudo-element untuk border */
+.box1::after, .box2::after, .box3::after, .box4::after, .box5::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 15px;
+    border: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Saat hover, border muncul */
+.box1:hover::after,
+.box2:hover::after,
+.box3:hover::after,
+.box4:hover::after,
+.box5:hover::after {
+    border-color: #6ebed8; /* warna border */
+    box-shadow: 0 0 10px rgba(31,78,157,0.5); /* efek glow */
+}
+
 
 /* Tombol hamburger */
 #hamburgerBtn {
@@ -510,19 +538,19 @@
 
 /* Border sesuai warna hover untuk tiap box */
 .box1 {
-  border: 2px solid #4CAF50; /* hijau */
+  border: 2px solid #6ebed8; /* hijau */
 }
 .box2 {
-  border: 2px solid #2196F3; /* biru */
+  border: 2px solid #6ebed8; /* biru */
 }
 .box3 {
-  border: 2px solid #F44336; /* merah */
+  border: 2px solid #6ebed8; /* merah */
 }
 .box4 {
-  border: 2px solid #FF9800; /* oranye */
+  border: 2px solid #6ebed8; /* oranye */
 }
 .box5 {
-  border: 2px solid #b5cb0b; /* kuning/hijau muda */
+  border: 2px solid #6ebed8; /* kuning/hijau muda */
 }
 
 
