@@ -10,11 +10,23 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
+.phone {
+      width: 412px;
+      background: white;
+      border-radius: 0px;
+      padding: 60px 40px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background:#222;
       font-family:'Poppins', Arial, sans-serif;
-      min-height:100vh;
+      
       display:flex;
       justify-content:center;
       align-items:center;
@@ -24,7 +36,7 @@
     .box-password {
       width: 400px;
       background: #fff;
-      border-radius: 16px;
+      border-radius: 0px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
       padding: 40px 30px;
       animation: fadeIn 0.6s ease-in-out;
@@ -50,12 +62,12 @@
     .boxkeun {
       background:#fff;
       border-radius:12px;
+      height: 470px;
 
      /* Bayangan container */
       box-shadow: 5px 5px 10px rgba(1, 1, 1,0.60);
       
-      padding:25px;
-      margin-top:20px;
+      padding: 50px;
     }
 
     .password-form {
