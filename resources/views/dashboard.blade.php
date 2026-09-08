@@ -382,7 +382,7 @@
 /* Efek hover biar lebih interaktif */
 .box1:hover, .box2:hover, .box3:hover, .box4:hover, .box5:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.75);
     cursor: pointer;
 }
 

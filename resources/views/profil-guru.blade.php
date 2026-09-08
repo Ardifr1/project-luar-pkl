@@ -30,15 +30,25 @@
             align-items: center;
         }
 
-        .card {
-            background-color: #cedff5;
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem auto;
-            width: 80%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: left;
-        }
+       /* ====== CARD STYLE ====== */
+.card {
+  background-color: #cedff5;   /* abu muda */
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 80%;
+  text-align: left;
+
+  /* Bayangan lebih tegas */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Efek hover agar interaktif */
+.card:hover {
+  box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+}
+
 
         .card-title {
             background-color: #f1f5f9;
