@@ -13,7 +13,7 @@
     }
 
     body {
-      background: #222; /* kembali ke background polos */
+      background: #222;
       font-family: 'Poppins', Arial, sans-serif;
       min-height: 100vh;
       display: flex;
@@ -35,8 +35,15 @@
     }
 
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo {
@@ -46,9 +53,20 @@
       margin-bottom: 60px;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
     }
-    .box-login{
-        border-radius: 20px;
-        border-color: black;
+
+    /* CONTAINER LOGIN */
+    .box-login {
+      width: 100%;
+      
+      border-radius: 20px;
+      padding: 45px;
+
+      /* Bayangan container */
+      box-shadow: 5px 5px 10px rgba(1, 1, 1,0.60);
+
+      /* Supaya berada di atas elemen lain */
+      position: relative;
+      z-index: 2;
     }
 
     .form-login {
@@ -58,7 +76,7 @@
     .form-group {
       position: relative;
       width: 100%;
-      margin-bottom: 18px;
+      margin-bottom: 25px;
     }
 
     .form-group input {
@@ -66,7 +84,7 @@
       height: 45px;
       border: none;
       outline: none;
-      background: #d9d9d9; /* kembali ke abu-abu */
+      background: #d9d9d9;
       border-radius: 14px;
       padding: 0 40px;
       font-size: 14px;
@@ -92,10 +110,10 @@
       display: block;
       width: 160px;
       height: 45px;
-      margin: 30px auto 0;
+      margin: 50px auto 0;
       border: none;
       border-radius: 13px;
-      background: #d9d9d9; /* tombol abu-abu sederhana */
+      background: #d9d9d9;
       color: #222;
       font-size: 14px;
       font-weight: 500;
@@ -121,47 +139,84 @@
       text-decoration: underline;
     }
   </style>
+
   <!-- Font Awesome untuk ikon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+
   <div class="phone">
-    <img src="{{ asset('gambar/logo mp png.png') }}" alt="Logo" class="logo">
-<div class="box-login">
-    @if ($errors->any())
-    <div style="
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      background: #f8d7da;
-      color: #842029;
-      border-radius: 10px;
-      font-size: 12px;
-      text-align: center;
-    ">
-      {{ $errors->first() }}
+
+    <img src="{{ asset('gambar/logo mp png.png') }}"
+         alt="Logo"
+         class="logo">
+
+    <div class="box-login">
+
+      @if ($errors->any())
+        <div style="
+          width: 100%;
+          margin-bottom: 15px;
+          padding: 10px;
+          background: #f8d7da;
+          color: #842029;
+          border-radius: 10px;
+          font-size: 12px;
+          text-align: center;
+        ">
+          {{ $errors->first() }}
+        </div>
+      @endif
+
+      <form action="{{ route('login.submit') }}"
+            method="POST"
+            class="form-login">
+
+        @csrf
+
+        <!-- USERNAME / NIP -->
+        <div class="form-group">
+          <i class="fa fa-user"></i>
+
+          <input
+            type="text"
+            id="login"
+            name="login"
+            autocomplete="username"
+            required
+            placeholder="NIP / Username">
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <i class="fa fa-lock"></i>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="current-password"
+            required
+            placeholder="Password">
+        </div>
+
+        <!-- TOMBOL LOGIN -->
+        <input
+          type="submit"
+          value="Login"
+          class="btn-login">
+
+      </form>
+
     </div>
-    @endif
 
-    <form action="{{ route('login.submit') }}" method="POST" class="form-login">
-      @csrf
-      <div class="form-group">
-        <i class="fa fa-user"></i>
-        <input type="text" id="login" name="login" autocomplete="username" required placeholder="NIP / Username">
-      </div>
+    <a href="#" class="forgot">
+      Lupa password? hubungi admin
+    </a>
 
-      <div class="form-group">
-        <i class="fa fa-lock"></i>
-        <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="Password">
-      </div>
-
-      <input type="submit" value="Login" class="btn-login">
-    </form>
-
-</div>
-    
-    <a href="#" class="forgot">Lupa password? hubungi admin</a>
   </div>
+
 </body>
 </html>
