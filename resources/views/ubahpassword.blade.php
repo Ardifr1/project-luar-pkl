@@ -13,70 +13,112 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background:#222;
-      font-family: Arial, sans-serif;
+      font-family:'Poppins', Arial, sans-serif;
       min-height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
     }
-    .phone {
-      width:412px;
-      min-height:120vh;
-      background:white;
-      padding:70px 45px 40px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+
+    /* Card utama */
+    .box-password {
+      width: 400px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      padding: 40px 30px;
+      animation: fadeIn 0.6s ease-in-out;
     }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
     .logo {
-      width:80px; height:80px;
+      width:90px; height:90px;
       object-fit:contain;
-      margin-bottom:50px;
+      margin:0 auto 30px;
+      display:block;
+      background:#fff;
+      border-radius:20%;
+      padding:10px;
+      box-shadow: 5px 5px 12px rgba(0,0,0,0.4);
     }
+
+    /* Box form */
+    .boxkeun {
+      background:#fff;
+      border-radius:12px;
+
+     /* Bayangan container */
+      box-shadow: 5px 5px 10px rgba(1, 1, 1,0.60);
+      
+      padding:25px;
+      margin-top:20px;
+    }
+
     .password-form {
       display:flex;
       flex-direction:column;
       gap:1rem;
       width:100%;
     }
+
     .password-form label { font-weight:500; margin-bottom:0.3rem; }
-    .password-form input {
-      padding:0.6rem;
-      border:1px solid #cbd5e1;
-      border-radius:10px;
+
+    .input-group {
+      position:relative;
       width:100%;
     }
-    .btn-confirm {
-      background-color:#102C6B;
-      color:white;
+
+    .password-form input {
+      padding:0.6rem;
       border:none;
-      padding:0.6rem 1rem;
-      border-radius:10px;
-      cursor:pointer;
-      margin-top:1rem;
+      border-radius:14px;
+      width:100%;
+      background:#d9d9d9;
+      font-size:14px;
+      color:#222;
+      transition:background 0.2s, box-shadow 0.2s;
     }
-    .btn-confirm:hover { background-color:#1e3a8a; }
-    .alert { margin-bottom:1rem; padding:0.6rem; border-radius:6px; }
-    .alert-success { background:#d1fae5; color:#065f46; }
-    .text-danger { color:#dc2626; font-size:0.9rem; }
+
+    .password-form input:focus {
+      background:#cfcfcf;
+      box-shadow:0 0 0 3px rgba(59,130,246,0.2);
+    }
 
     /* ikon mata */
     .toggle-eye {
       position:absolute;
-      right:10px;
+      right:12px;
       top:50%;
       transform:translateY(-50%);
       cursor:pointer;
       color:#555;
       font-size:18px;
     }
-    .input-group {
-      position:relative;
+
+    .btn-confirm {
+      background-color:#103f90;
+      color:white;
+      border:none;
+      padding:0.6rem 1rem;
+      border-radius:13px;
+      cursor:pointer;
+      margin-top:1rem;
+      font-weight:600;
+      transition:background 0.3s;
     }
+    .btn-confirm:hover { background-color:#1450b0; }
+
+    .alert { margin-bottom:1rem; padding:0.6rem; border-radius:6px; }
+    .alert-success { background:#d1fae5; color:#065f46; }
+    .text-danger { color:#dc2626; font-size:0.9rem; }
   </style>
 </head>
 <body>
-  <div class="phone">
+  <div class="box-password">
     <!-- LOGO -->
     <img src="{{ asset('gambar/logo mp png.png') }}" alt="Logo" class="logo">
 
@@ -85,32 +127,34 @@
       <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Form ubah password -->
-    <form class="password-form" method="POST" action="{{ route('ubah.password.update') }}">
-      @csrf
+    <!-- Box form -->
+    <div class="boxkeun">
+      <form class="password-form" method="POST" action="{{ route('ubah.password.update') }}">
+        @csrf
 
-      <label>Masukkan Password Lama</label>
-      <div class="input-group">
-        <input type="password" name="password_lama" id="password_lama" placeholder="Password lama" required>
-        <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_lama', this)"></i>
-      </div>
-      @error('password_lama') <small class="text-danger">{{ $message }}</small> @enderror
+        <label>Masukkan Password Lama</label>
+        <div class="input-group">
+          <input type="password" name="password_lama" id="password_lama" placeholder="Password lama" required>
+          <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_lama', this)"></i>
+        </div>
+        @error('password_lama') <small class="text-danger">{{ $message }}</small> @enderror
 
-      <label>Masukkan Password Baru</label>
-      <div class="input-group">
-        <input type="password" name="password_baru" id="password_baru" placeholder="Password baru" required>
-        <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_baru', this)"></i>
-      </div>
-      @error('password_baru') <small class="text-danger">{{ $message }}</small> @enderror
+        <label>Masukkan Password Baru</label>
+        <div class="input-group">
+          <input type="password" name="password_baru" id="password_baru" placeholder="Password baru" required>
+          <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_baru', this)"></i>
+        </div>
+        @error('password_baru') <small class="text-danger">{{ $message }}</small> @enderror
 
-      <label>Ulangi Password Baru</label>
-      <div class="input-group">
-        <input type="password" name="password_baru_confirmation" id="password_baru_confirmation" placeholder="Ulangi password baru" required>
-        <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_baru_confirmation', this)"></i>
-      </div>
+        <label>Ulangi Password Baru</label>
+        <div class="input-group">
+          <input type="password" name="password_baru_confirmation" id="password_baru_confirmation" placeholder="Ulangi password baru" required>
+          <i class="bi bi-eye toggle-eye" onclick="togglePassword('password_baru_confirmation', this)"></i>
+        </div>
 
-      <button type="submit" class="btn-confirm">Konfirmasi</button>
-    </form>
+        <button type="submit" class="btn-confirm">Konfirmasi</button>
+      </form>
+    </div>
   </div>
 
   <!-- Script toggle password -->

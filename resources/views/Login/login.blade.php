@@ -47,12 +47,17 @@
     }
 
     .logo {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      margin-bottom: 60px;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
-    }
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 60px;
+
+  /* Efek timbul */
+  background: #fff;              /* beri latar putih agar bayangan jelas */
+  border-radius: 20%;            /* bulatkan logo */
+  padding: 10px;                 /* beri ruang di sekeliling logo */
+  box-shadow: 5px 5px 12px rgba(0,0,0,0.4); /* bayangan tegas */
+}
 
     /* CONTAINER LOGIN */
     .box-login {
