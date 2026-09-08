@@ -46,6 +46,10 @@
       margin-bottom: 60px;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
     }
+    .box-login{
+        border-radius: 20px;
+        border-color: black;
+    }
 
     .form-login {
       width: 100%;
@@ -124,7 +128,7 @@
 <body>
   <div class="phone">
     <img src="{{ asset('gambar/logo mp png.png') }}" alt="Logo" class="logo">
-
+<div class="box-login">
     @if ($errors->any())
     <div style="
       width: 100%;
@@ -155,6 +159,8 @@
       <input type="submit" value="Login" class="btn-login">
     </form>
 
+</div>
+    
     <a href="#" class="forgot">Lupa password? hubungi admin</a>
   </div>
 </body>

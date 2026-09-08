@@ -277,7 +277,7 @@
     padding: 5px 14px; /* lebih kecil dari 5px 15px */
     font-size: 10px;   /* diperkecil dari 11px */
     border-radius: 3px;
-    color: #e3dddd;
+    color: #fbf8f8;
     text-decoration: none;
     font-weight: bold;
 }
