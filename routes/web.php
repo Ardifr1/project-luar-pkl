@@ -111,12 +111,12 @@ Route::get('/data-guru', [ControllerDataGuru::class, 'index'])
 
 // Menampilkan halaman tambah guru
 Route::get('/tambah-guru', [Controllertambahguru::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('tambah.guru');
 
 // Menyimpan data guru
 Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('tambah.guru.store');
 
 // =========================
@@ -125,12 +125,12 @@ Route::post('/tambah-guru', [Controllertambahguru::class, 'store'])
 
 // Menampilkan halaman edit guru
 Route::get('/editdataguru/{id}', [Controllereditdataguru::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('edit.guru');
 
 // Menyimpan perubahan data guru
 Route::put('/editdataguru/{id}', [Controllereditdataguru::class, 'update'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('update.guru');
 
 
@@ -140,6 +140,7 @@ Route::put('/editdataguru/{id}', [Controllereditdataguru::class, 'update'])
 
 // Menghapus data guru
 Route::delete('/data-guru/{id}', [ControllerDataGuru::class, 'destroy'])
+->middleware(['auth', 'admin'])
     ->name('data.guru.destroy');
 
 
@@ -149,7 +150,7 @@ Route::delete('/data-guru/{id}', [ControllerDataGuru::class, 'destroy'])
 
 // Menampilkan data lab
 Route::get('/data-lab', [ControllerLab::class, 'index'])
-    ->middleware('auth')
+   ->middleware(['auth', 'admin'])
 ->name('data.lab');
 
 
@@ -159,12 +160,12 @@ Route::get('/data-lab', [ControllerLab::class, 'index'])
 
 // Menampilkan halaman tambah lab
 Route::get('/tambah-datalab', [Controllertambahdatalab::class, 'index'])
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
 ->name('tambah.datalab');
 
 // Menyimpan data lab
 Route::post('/tambah-datalab', [Controllertambahdatalab::class, 'store'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('tambah.datalab.store');
 
 
@@ -174,12 +175,12 @@ Route::post('/tambah-datalab', [Controllertambahdatalab::class, 'store'])
 
 // Menampilkan halaman edit lab
 Route::get('/edit-datalab/{id}', [Controllereditdatalab::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('edit.datalab');
 
 // Menyimpan perubahan data lab
 Route::put('/edit-datalab/{id}', [Controllereditdatalab::class, 'update'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('update.datalab');
 
 
@@ -189,6 +190,7 @@ Route::put('/edit-datalab/{id}', [Controllereditdatalab::class, 'update'])
 
 // Menghapus data lab
 Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
+->middleware(['auth', 'admin'])
     ->name('hapus.datalab');
 
 
@@ -196,34 +198,35 @@ Route::delete('/data-lab/{id}', [ControllerLab::class, 'destroy'])
 // TAMBAH MAPEL
 // =========================
 Route::get('/tambah-datamapel', [Controllertambahmapel::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('tambah.mapel');
 
 Route::post('/tambah-datamapel', [Controllertambahmapel::class, 'store'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('simpan.mapel');
 
 // =========================
 // DATA MAPEL
 // =========================
 Route::get('/datamapel',[Controllerdatamapel::class,'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
         ->name('data.mapel');
 
 // =========================
 // EDIT MAPEL
 // =========================
 Route::get('/edit-datamapel/{id}', [Controllereditmapel::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('edit.mapel');
 
 Route::put('/edit-datamapel/{id}', [Controllereditmapel::class, 'update'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('update.mapel');
 // =========================
 // HAPUS MAPEL
 // =========================
 Route::delete('/hapus-mapel/{id}', [Controllerdatamapel::class, 'destroy'])
+->middleware(['auth', 'admin'])
     ->name('hapus.mapel');
 
 // =========================
@@ -231,7 +234,7 @@ Route::delete('/hapus-mapel/{id}', [Controllerdatamapel::class, 'destroy'])
 // =========================
 
 Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('daftar.ajuan');
 
 
@@ -240,7 +243,7 @@ Route::get('/daftar-ajuan', [Controllerajuanlab::class, 'index'])
 // =========================
 
 Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('detail.ajuan');
 
 // =========================
@@ -248,11 +251,11 @@ Route::get('/detail-ajuan/{id}', [Controllerdetailajuan::class, 'index'])
 // =========================
 
 Route::get('/statusajukan-lab', [Controllerstatusajukan::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('statusajukan');
 
 Route::delete('/statusajukan-lab/{id}/batalkan', [Controllerstatusajukan::class, 'batalkan'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('statusajukan.batalkan');
 
 // =========================
@@ -260,7 +263,7 @@ Route::delete('/statusajukan-lab/{id}/batalkan', [Controllerstatusajukan::class,
 // =========================
 
 Route::post('/detail-ajuan/{id}/setujui', [Controllerdetailajuan::class, 'setujui'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('ajuan.setujui');
 
 
@@ -269,7 +272,7 @@ Route::post('/detail-ajuan/{id}/setujui', [Controllerdetailajuan::class, 'setuju
 // =========================
 
 Route::post('/detail-ajuan/{id}/tolak', [Controllerdetailajuan::class, 'tolak'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('ajuan.tolak');
 // =========================
 // PEMINJAMAN LAB
@@ -277,27 +280,27 @@ Route::post('/detail-ajuan/{id}/tolak', [Controllerdetailajuan::class, 'tolak'])
 
 // Halaman ajukan peminjaman berdasarkan ID lab
 Route::get('/ajukan-peminjaman/{id}', [ControllerAjukanPeminjaman::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('ajukan.peminjaman');
 
 // Proses ajukan peminjaman
 Route::post('/ajukan-peminjaman', [ControllerAjukanPeminjaman::class, 'store'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('ajukanpeminjaman.store');
 
 // Halaman pilihan lab
 Route::get('/pilihanlab', [Controllerpilihanlab::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('ajukanpilihanlab');
 
 // =========================
 // JADWAL LAB DIPINJAM
 // =========================
 Route::get('jadwallab-dipinjam',[Controllerjadwaldipinjam::class, 'index'])
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
     ->name('jadwal.lab');
 Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
 ->name('jadwal.lab');
 
 
@@ -306,23 +309,23 @@ Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])
 // =========================
 
 Route::get('/guru', [ControllerGuru::class, 'index'])
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
 ->name('guru.index');
 
 Route::get('/guru/create', [ControllerGuru::class, 'create'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('guru.create');
 
 Route::post('/guru', [ControllerGuru::class, 'store'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('guru.store');
 
 Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('guru.show');
 
 Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('guru.destroy');
 
 
@@ -330,7 +333,7 @@ Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
 // LAPORAN
 // =========================
 Route::get('/Laporan-Admin', [ControllerLaporanAdmin::class, 'index'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('laporan.admin');
 Route::get('/Laporan-Guru', [ControllerLaporanGuru::class, 'index'])
 ->middleware('auth')
@@ -349,7 +352,7 @@ Route::get('/profil-guru', [ControllerProfil::class, 'guru'])
 
 // Profil admin
 Route::get('/profil-admin', [ProfiladminController::class, 'admin'])
-->middleware('auth')
+->middleware(['auth', 'admin'])
     ->name('profil.admin');
 
 
@@ -393,17 +396,25 @@ Route::get('/search-autocomplete-guru', [SearchController::class, 'autocompleteG
 // =========================
 
 // Guru
-Route::get('/data-guru/{id}/edit', [Controllereditdataguru::class, 'index'])->name('guru.edit');
-Route::put('/data-guru/{id}', [Controllereditdataguru::class, 'update'])->name('guru.update');
+Route::get('/data-guru/{id}/edit', [Controllereditdataguru::class, 'index'])->name('guru.edit')
+->middleware(['auth', 'admin']);
+Route::put('/data-guru/{id}', [Controllereditdataguru::class, 'update'])->name('guru.update')
+->middleware(['auth', 'admin']);
 
 // Lab
-Route::get('/data-lab/{id}/edit', [Controllereditdatalab::class, 'index'])->name('lab.edit');
-Route::put('/data-lab/{id}', [Controllereditdatalab::class, 'update'])->name('lab.update');
+Route::get('/data-lab/{id}/edit', [Controllereditdatalab::class, 'index'])->name('lab.edit')
+->middleware(['auth', 'admin']);
+Route::put('/data-lab/{id}', [Controllereditdatalab::class, 'update'])->name('lab.update')
+->middleware(['auth', 'admin']);
 
 // Mapel
-Route::get('/datamapel/{id}/edit', [Controllereditmapel::class, 'index'])->name('mapel.edit');
-Route::put('/datamapel/{id}', [Controllereditmapel::class, 'update'])->name('mapel.update');
+Route::get('/datamapel/{id}/edit', [Controllereditmapel::class, 'index'])->name('mapel.edit')
+->middleware(['auth', 'admin']);
+Route::put('/datamapel/{id}', [Controllereditmapel::class, 'update'])->name('mapel.update')
+->middleware(['auth', 'admin']);
 
 // Peminjaman
-Route::get('/daftar-ajuan/{id}/edit', [Controllerdetailajuan::class, 'index'])->name('peminjaman.edit');
-Route::put('/daftar-ajuan/{id}', [Controllerdetailajuan::class, 'update'])->name('peminjaman.update');
+Route::get('/daftar-ajuan/{id}/edit', [Controllerdetailajuan::class, 'index'])->name('peminjaman.edit')
+->middleware(['auth', 'admin']);
+Route::put('/daftar-ajuan/{id}', [Controllerdetailajuan::class, 'update'])->name('peminjaman.update')
+->middleware(['auth', 'admin']);
