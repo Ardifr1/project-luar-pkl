@@ -31,6 +31,31 @@ class ControllerLogin extends Controller
 
         $batasWaktu = now()->subMinutes($sessionLifetime);
 
+        /*
+        |--------------------------------------------------------------------------
+        | HAPUS SESSION LAMA YANG SUDAH EXPIRED
+        |--------------------------------------------------------------------------
+        |
+        | Ini penting supaya session lama yang sudah tidak aktif
+        | tidak membuat akun terus dianggap sedang digunakan.
+        |
+        */
+
+        DB::table('sessions')
+            ->where('user_id', $userId)
+            ->where('last_activity', '<', $batasWaktu->timestamp)
+            ->delete();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CEK SESSION AKTIF DI DEVICE LAIN
+        |--------------------------------------------------------------------------
+        |
+        | Session ID milik request sekarang dikecualikan.
+        |
+        */
+
         return DB::table('sessions')
             ->where('user_id', $userId)
             ->where('id', '!=', $request->session()->getId())
@@ -58,12 +83,20 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari user berdasarkan username ATAU NIP
+
+        // =========================
+        // CARI USER
+        // =========================
+
         $user = User::where('username', $request->login)
             ->orWhere('nip', $request->login)
             ->first();
 
-        // Jika username / NIP tidak ditemukan
+
+        // =========================
+        // USER TIDAK DITEMUKAN
+        // =========================
+
         if (!$user) {
             return back()
                 ->withErrors([
@@ -72,7 +105,11 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Cek password
+
+        // =========================
+        // CEK PASSWORD
+        // =========================
+
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -80,6 +117,7 @@ class ControllerLogin extends Controller
                 ])
                 ->withInput();
         }
+
 
         // =========================
         // CEK LOGIN DI DEVICE LAIN
@@ -93,20 +131,27 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+
         // =========================
         // LOGIN AUTH LARAVEL
         // =========================
 
         Auth::login($user);
 
-        // Regenerasi session untuk keamanan
+
+        // =========================
+        // REGENERASI SESSION
+        // =========================
+
         $request->session()->regenerate();
+
 
         // =========================
         // BUAT TOKEN SANCTUM
         // =========================
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
 
         // =========================
         // SIMPAN SESSION
@@ -119,22 +164,31 @@ class ControllerLogin extends Controller
             'api_token' => $token,
         ]);
 
+
         // =========================
         // ARAHKAN BERDASARKAN ROLE
         // =========================
 
-        // Jika Admin
+        // ADMIN
         if ($user->role === 'admin') {
             return redirect()->route('dashboardadmin');
         }
 
-        // Jika Guru
+
+        // GURU
         if ($user->role === 'guru') {
             return redirect()->route('dashboard');
         }
 
-        // Jika role tidak dikenali
+
+        // =========================
+        // ROLE TIDAK DIKENALI
+        // =========================
+
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return back()
             ->withErrors([
@@ -181,12 +235,20 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari admin berdasarkan username
+
+        // =========================
+        // CARI ADMIN
+        // =========================
+
         $user = User::where('username', $request->username)
             ->where('role', 'admin')
             ->first();
 
-        // Username admin salah
+
+        // =========================
+        // USERNAME SALAH
+        // =========================
+
         if (!$user) {
             return back()
                 ->withErrors([
@@ -195,7 +257,11 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Password salah
+
+        // =========================
+        // PASSWORD SALAH
+        // =========================
+
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -203,6 +269,7 @@ class ControllerLogin extends Controller
                 ])
                 ->withInput();
         }
+
 
         // =========================
         // CEK LOGIN DI DEVICE LAIN
@@ -216,20 +283,27 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+
         // =========================
         // LOGIN AUTH LARAVEL
         // =========================
 
         Auth::login($user);
 
-        // Regenerasi session
+
+        // =========================
+        // REGENERASI SESSION
+        // =========================
+
         $request->session()->regenerate();
+
 
         // =========================
         // BUAT TOKEN SANCTUM
         // =========================
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
 
         // =========================
         // SIMPAN SESSION
@@ -242,7 +316,11 @@ class ControllerLogin extends Controller
             'api_token' => $token,
         ]);
 
-        // Masuk dashboard admin
+
+        // =========================
+        // DASHBOARD ADMIN
+        // =========================
+
         return redirect()->route('dashboardadmin');
     }
 
@@ -264,12 +342,20 @@ class ControllerLogin extends Controller
             ]
         );
 
-        // Cari guru berdasarkan NIP
+
+        // =========================
+        // CARI GURU
+        // =========================
+
         $user = User::where('nip', $request->nip)
             ->where('role', 'guru')
             ->first();
 
-        // NIP guru salah
+
+        // =========================
+        // NIP SALAH
+        // =========================
+
         if (!$user) {
             return back()
                 ->withErrors([
@@ -278,7 +364,11 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
-        // Password salah
+
+        // =========================
+        // PASSWORD SALAH
+        // =========================
+
         if (!Hash::check($request->password, $user->password)) {
             return back()
                 ->withErrors([
@@ -286,6 +376,7 @@ class ControllerLogin extends Controller
                 ])
                 ->withInput();
         }
+
 
         // =========================
         // CEK LOGIN DI DEVICE LAIN
@@ -299,20 +390,27 @@ class ControllerLogin extends Controller
                 ->withInput();
         }
 
+
         // =========================
         // LOGIN AUTH LARAVEL
         // =========================
 
         Auth::login($user);
 
-        // Regenerasi session
+
+        // =========================
+        // REGENERASI SESSION
+        // =========================
+
         $request->session()->regenerate();
+
 
         // =========================
         // BUAT TOKEN SANCTUM
         // =========================
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
 
         // =========================
         // SIMPAN SESSION
@@ -325,7 +423,11 @@ class ControllerLogin extends Controller
             'api_token' => $token,
         ]);
 
-        // Masuk dashboard guru
+
+        // =========================
+        // DASHBOARD GURU
+        // =========================
+
         return redirect()->route('dashboard');
     }
 
@@ -339,11 +441,14 @@ class ControllerLogin extends Controller
         // Logout dari authentication Laravel
         Auth::logout();
 
+
         // Hapus seluruh session
         $request->session()->invalidate();
 
+
         // Buat CSRF token baru
         $request->session()->regenerateToken();
+
 
         // Kembali ke halaman login
         return redirect()->route('login');
