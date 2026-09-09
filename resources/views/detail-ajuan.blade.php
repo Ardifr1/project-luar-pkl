@@ -26,14 +26,27 @@
         }
 
         .phone {
-            max-width: 412px;
-            width: 100%;
-            min-height: 917px;
-            margin:  auto;
-            background: #fff;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
+  max-width: 412px;
+  min-height: 917px;
+  margin: auto;
+  background: #fff;
+
+  display: flex;
+  flex-direction: column; /* susun header, konten, footer ke bawah */
+}
+
+.footer {
+  background-color: #102C6B;   /* biru tua konsisten dengan header */
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 0 ;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.25);
+
+  margin-top: auto; /* dorong footer ke paling bawah container */
+}
+
 
         .header {
             background: #102C6B;
@@ -51,30 +64,26 @@
         }
 
         .menu-card1 {
-            width: auto;
-            margin: 10px auto;
-            background-color: #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
+  width: 100%;               /* penuh mengikuti lebar .phone */
+  margin: 10px auto;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: flex-start; /* biar teks mulai dari kiri */
+  align-items: center;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-        .breadcrumb {
-            margin-bottom: 0;
-        }
-
-        .breadcrumb a {
-            color: #1F4E9D;
-            text-decoration: none;
-            margin-right: 5px;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
+.breadcrumb a {
+  color: #1F4E9D;
+  text-decoration: none;
+  margin-right: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+ 
 
         .hamburger-container {
             position: relative;
@@ -498,9 +507,10 @@
         </div>
 
     </div>
-<footer style="background-color: #f8f9fa ; padding: 20px; text-align: center; border-top: 1px solid #dee2e6; margin-top: 100px;">
-    <p>© 2026 Sistem Admin | SMK Mahaputra</p>
-</footer>
+<div class="footer">
+  © 2026 Sistem Admin | SMK Mahaputra
+</div>
+
 </div>
 
 
