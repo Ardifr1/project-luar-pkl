@@ -11,6 +11,25 @@ class ControllerubahPassword extends Controller
 {
     // =========================
     // HALAMAN UBAH PASSWORD
+    // (ALIAS UNTUK ROUTE ubah.password.guru)
+    // =========================
+
+    /*
+    | Route GET /ubahpasswordguru (name: ubah.password.guru)
+    | sebelumnya memanggil method index() yang TIDAK ADA sehingga
+    | menghasilkan error 500. Method ini hanya alias dari edit():
+    | menampilkan view 'ubahpassword' yang sama (form sudah benar
+    | submit ke route ubah.password.update milik class ini).
+    |
+    | Perilaku edit() TIDAK diubah sama sekali.
+    */
+    public function index()
+    {
+        return $this->edit();
+    }
+
+    // =========================
+    // HALAMAN UBAH PASSWORD
     // =========================
     public function edit()
     {

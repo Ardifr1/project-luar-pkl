@@ -17,17 +17,12 @@ class ControllerLogin extends Controller
     public function index()
     {
         /*
-        |----------------------------------------------------------------------
+        |--------------------------------------------------------------------------
         | GUEST GUARD
-        |----------------------------------------------------------------------
+        |--------------------------------------------------------------------------
         |
         | User yang SUDAH login tidak boleh melihat form login lagi.
         | Jika dia membuka /login, langsung arahkan ke dashboard-nya.
-        |
-        | Ini mencegah:
-        | - user yang sudah login terasa "ditendang" balik ke login,
-        | - user men-submit form login lagi sehingga session di-regenerate
-        |   dan terbentuk session baru yang bertabrakan dengan yang lama.
         |
         */
 
@@ -46,7 +41,7 @@ class ControllerLogin extends Controller
 
     private function redirectJikaSudahLogin()
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return null;
         }
 
@@ -64,7 +59,7 @@ class ControllerLogin extends Controller
 
         /*
         | Role tidak dikenali: paksa logout agar session tidak menggantung,
-        | lalu tampilkan form login seperti biasa (bukan loop redirect).
+        | lalu tampilkan form login seperti biasa.
         */
 
         Auth::logout();
@@ -84,15 +79,11 @@ class ControllerLogin extends Controller
 
         $batasWaktu = now()->subMinutes($sessionLifetime);
 
-        /*
-        |--------------------------------------------------------------------------
-        | HAPUS SESSION LAMA YANG SUDAH EXPIRED
-        |--------------------------------------------------------------------------
-        |
-        | Ini penting supaya session lama yang sudah tidak aktif
-        | tidak membuat akun terus dianggap sedang digunakan.
-        |
-        */
+
+        // =========================
+        // HAPUS SESSION LAMA
+        // YANG SUDAH EXPIRED
+        // =========================
 
         DB::table('sessions')
             ->where('user_id', $userId)
@@ -100,14 +91,10 @@ class ControllerLogin extends Controller
             ->delete();
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | CEK SESSION AKTIF DI DEVICE LAIN
-        |--------------------------------------------------------------------------
-        |
-        | Session ID milik request sekarang dikecualikan.
-        |
-        */
+        // =========================
+        // CEK SESSION AKTIF
+        // DI DEVICE LAIN
+        // =========================
 
         return DB::table('sessions')
             ->where('user_id', $userId)
@@ -126,12 +113,17 @@ class ControllerLogin extends Controller
     public function login(Request $request)
     {
         /*
-        | Sudah login? Jangan proses login lagi (hindari session ganda).
+        | Sudah login? Jangan proses login lagi.
         */
 
         if ($redirect = $this->redirectJikaSudahLogin()) {
             return $redirect;
         }
+
+
+        // =========================
+        // VALIDASI
+        // =========================
 
         $request->validate(
             [
@@ -147,6 +139,7 @@ class ControllerLogin extends Controller
 
         // =========================
         // CARI USER
+        // USERNAME ATAU NIP
         // =========================
 
         $user = User::where('username', $request->login)
@@ -260,266 +253,6 @@ class ControllerLogin extends Controller
 
 
     // =========================
-    // HALAMAN LOGIN ADMIN LAMA
-    // =========================
-
-    public function admin()
-    {
-        // Guest guard (sama seperti halaman login utama).
-        if ($redirect = $this->redirectJikaSudahLogin()) {
-            return $redirect;
-        }
-
-        return view('login-admin');
-    }
-
-
-    // =========================
-    // HALAMAN LOGIN GURU LAMA
-    // =========================
-
-    public function guru()
-    {
-        // Guest guard (sama seperti halaman login utama).
-        if ($redirect = $this->redirectJikaSudahLogin()) {
-            return $redirect;
-        }
-
-        return view('login-guru');
-    }
-
-
-    // =========================
-    // PROSES LOGIN ADMIN LAMA
-    // =========================
-
-    public function loginAdmin(Request $request)
-    {
-        /*
-        | Sudah login? Jangan proses login lagi (hindari session ganda).
-        */
-
-        if ($redirect = $this->redirectJikaSudahLogin()) {
-            return $redirect;
-        }
-
-        $request->validate(
-            [
-                'username' => 'required',
-                'password' => 'required',
-            ],
-            [
-                'username.required' => 'Username harus diisi.',
-                'password.required' => 'Password harus diisi.',
-            ]
-        );
-
-
-        // =========================
-        // CARI ADMIN
-        // =========================
-
-        $user = User::where('username', $request->username)
-            ->where('role', 'admin')
-            ->first();
-
-
-        // =========================
-        // USERNAME SALAH
-        // =========================
-
-        if (!$user) {
-            return back()
-                ->withErrors([
-                    'username' => 'Username admin salah.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // PASSWORD SALAH
-        // =========================
-
-        if (!Hash::check($request->password, $user->password)) {
-            return back()
-                ->withErrors([
-                    'password' => 'Password salah.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // CEK LOGIN DI DEVICE LAIN
-        // =========================
-
-        if ($this->sudahLoginDiDeviceLain($user->id, $request)) {
-            return back()
-                ->withErrors([
-                    'username' => 'Akun ini sedang digunakan di perangkat lain. Silakan logout terlebih dahulu dari perangkat tersebut.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // LOGIN AUTH LARAVEL
-        // =========================
-
-        Auth::login($user);
-
-
-        // =========================
-        // REGENERASI SESSION
-        // =========================
-
-        $request->session()->regenerate();
-
-
-        // =========================
-        // BUAT TOKEN SANCTUM
-        // =========================
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-
-        // =========================
-        // SIMPAN SESSION
-        // =========================
-
-        session([
-            'user_id' => $user->id,
-            'user_role' => $user->role,
-            'user_name' => $user->name,
-            'api_token' => $token,
-        ]);
-
-
-        // =========================
-        // DASHBOARD ADMIN
-        // =========================
-
-        return redirect()->route('dashboardadmin');
-    }
-
-
-    // =========================
-    // PROSES LOGIN GURU LAMA
-    // =========================
-
-    public function loginGuru(Request $request)
-    {
-        /*
-        | Sudah login? Jangan proses login lagi (hindari session ganda).
-        */
-
-        if ($redirect = $this->redirectJikaSudahLogin()) {
-            return $redirect;
-        }
-
-        $request->validate(
-            [
-                'nip' => 'required',
-                'password' => 'required',
-            ],
-            [
-                'nip.required' => 'NIP harus diisi.',
-                'password.required' => 'Password harus diisi.',
-            ]
-        );
-
-
-        // =========================
-        // CARI GURU
-        // =========================
-
-        $user = User::where('nip', $request->nip)
-            ->where('role', 'guru')
-            ->first();
-
-
-        // =========================
-        // NIP SALAH
-        // =========================
-
-        if (!$user) {
-            return back()
-                ->withErrors([
-                    'nip' => 'NIP guru salah.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // PASSWORD SALAH
-        // =========================
-
-        if (!Hash::check($request->password, $user->password)) {
-            return back()
-                ->withErrors([
-                    'password' => 'Password salah.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // CEK LOGIN DI DEVICE LAIN
-        // =========================
-
-        if ($this->sudahLoginDiDeviceLain($user->id, $request)) {
-            return back()
-                ->withErrors([
-                    'nip' => 'Akun ini sedang digunakan di perangkat lain. Silakan logout terlebih dahulu dari perangkat tersebut.'
-                ])
-                ->withInput();
-        }
-
-
-        // =========================
-        // LOGIN AUTH LARAVEL
-        // =========================
-
-        Auth::login($user);
-
-
-        // =========================
-        // REGENERASI SESSION
-        // =========================
-
-        $request->session()->regenerate();
-
-
-        // =========================
-        // BUAT TOKEN SANCTUM
-        // =========================
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-
-        // =========================
-        // SIMPAN SESSION
-        // =========================
-
-        session([
-            'user_id' => $user->id,
-            'user_role' => $user->role,
-            'user_name' => $user->name,
-            'api_token' => $token,
-        ]);
-
-
-        // =========================
-        // DASHBOARD GURU
-        // =========================
-
-        return redirect()->route('dashboard');
-    }
-
-
-    // =========================
     // LOGOUT
     // =========================
 
@@ -541,3 +274,4 @@ class ControllerLogin extends Controller
         return redirect()->route('login');
     }
 }
+

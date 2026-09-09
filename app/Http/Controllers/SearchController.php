@@ -83,41 +83,92 @@ class SearchController extends Controller
             // GURU: hanya data miliknya
             // =========================
 
-            // Peminjaman milik guru login
-            $peminjaman = Peminjaman::where('user_id', auth()->id())
-                ->where('keterangan', 'like', "%{$query}%")
-                ->get(['id', 'keterangan']);
-            foreach ($peminjaman as $p) {
-                $results[] = [
-                    'name' => "Peminjaman: " . $p->keterangan,
-                    'url'  => route('peminjaman.edit', $p->id)
-                ];
-            }
-
-            // Status Pengajuan milik guru login
-            $status = Peminjaman::where('user_id', auth()->id())
-                ->where('status', 'like', "%{$query}%")
-                ->get(['id', 'status']);
-            foreach ($status as $s) {
-                $results[] = [
-                    'name' => "Status: " . $s->status,
-                    'url'  => route('statusajukan') // halaman status
-                ];
-            }
-
-            // Laporan Penolakan milik guru login
-            $laporan = Peminjaman::where('user_id', auth()->id())
-                ->where('status', 'tolak') // asumsi status 'tolak' = laporan penolakan
-                ->where('keterangan', 'like', "%{$query}%")
-                ->get(['id', 'keterangan']);
-            foreach ($laporan as $l) {
-                $results[] = [
-                    'name' => "Laporan: " . $l->keterangan,
-                    'url'  => route('laporan.guru') // halaman laporan guru
-                ];
-            }
+            $results = $this->hasilPencarianGuru($user->id, $query);
         }
 
         return response()->json($results);
+    }
+
+    // =========================
+    // AUTOCOMPLETE KHUSUS GURU
+    // =========================
+
+    /*
+    |---------------------------------------------------------
+    | SEARCH AUTOCOMPLETE GURU
+    |---------------------------------------------------------
+    |
+    | Route: GET /search-autocomplete-guru (name: search.autocomplete.guru)
+    |
+    | Sebelumnya method ini TIDAK ADA sehingga route menghasilkan
+    | error 500. Logika pencariannya sama dengan cabang "guru"
+    | pada autocomplete(): hasil dibatasi hanya pada data milik
+    | guru yang sedang login (user_id = auth id).
+    |
+    */
+
+    public function autocompleteGuru(Request $request)
+    {
+        $query = $request->input('q');
+
+        $user = $request->user();
+
+        // Pengaman lapis kedua (route sudah dilindungi middleware 'auth').
+        if (! $user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Silakan login terlebih dahulu.'
+            ], 401);
+        }
+
+        return response()->json(
+            $this->hasilPencarianGuru($user->id, $query)
+        );
+    }
+
+    // =========================
+    // LOGIKA PENCARIAN GURU
+    // (dipakai autocomplete & autocompleteGuru)
+    // =========================
+
+    private function hasilPencarianGuru($userId, $query): array
+    {
+        $results = [];
+
+        // Peminjaman milik guru login
+        $peminjaman = Peminjaman::where('user_id', $userId)
+            ->where('keterangan', 'like', "%{$query}%")
+            ->get(['id', 'keterangan']);
+        foreach ($peminjaman as $p) {
+            $results[] = [
+                'name' => "Peminjaman: " . $p->keterangan,
+                'url'  => route('peminjaman.edit', $p->id)
+            ];
+        }
+
+        // Status Pengajuan milik guru login
+        $status = Peminjaman::where('user_id', $userId)
+            ->where('status', 'like', "%{$query}%")
+            ->get(['id', 'status']);
+        foreach ($status as $s) {
+            $results[] = [
+                'name' => "Status: " . $s->status,
+                'url'  => route('statusajukan') // halaman status
+            ];
+        }
+
+        // Laporan Penolakan milik guru login
+        $laporan = Peminjaman::where('user_id', $userId)
+            ->where('status', 'tolak') // asumsi status 'tolak' = laporan penolakan
+            ->where('keterangan', 'like', "%{$query}%")
+            ->get(['id', 'keterangan']);
+        foreach ($laporan as $l) {
+            $results[] = [
+                'name' => "Laporan: " . $l->keterangan,
+                'url'  => route('laporan.guru') // halaman laporan guru
+            ];
+        }
+
+        return $results;
     }
 }

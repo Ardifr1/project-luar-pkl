@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\Controllerstatusajukan;
@@ -36,25 +35,55 @@ use App\Http\Controllers\SearchController;
 
 
 // =========================
-// WELCOME
+// WELCOME / ROOT
 // =========================
 
-/*
-| User yang sudah login diarahkan ke dashboard sesuai role-nya,
-| sehingga membuka kembali root aplikasi TIDAK melempar mereka
-| balik ke /login. User yang belum login tetap diarahkan ke /login.
-*/
-
 Route::get('/', function () {
-    if (! auth()->check()) {
+
+    // =========================
+    // USER BELUM LOGIN
+    // =========================
+
+    if (!auth()->check()) {
         return redirect()->route('login');
     }
 
-    if (auth()->user()->role === 'admin') {
+
+    // =========================
+    // USER SUDAH LOGIN
+    // =========================
+
+    $user = auth()->user();
+
+
+    // =========================
+    // ADMIN
+    // =========================
+
+    if ($user->role === 'admin') {
         return redirect()->route('dashboardadmin');
     }
 
-    return redirect()->route('dashboard');
+
+    // =========================
+    // GURU
+    // =========================
+
+    if ($user->role === 'guru') {
+        return redirect()->route('dashboard');
+    }
+
+
+    // =========================
+    // ROLE TIDAK DIKENALI
+    // =========================
+
+    auth()->logout();
+
+    return redirect()->route('login')
+        ->withErrors([
+            'login' => 'Role pengguna tidak dikenali.'
+        ]);
 });
 
 
@@ -62,11 +91,11 @@ Route::get('/', function () {
 // LOGIN
 // =========================
 
-// Halaman login
+// Halaman login utama
 Route::get('/login', [ControllerLogin::class, 'index'])
     ->name('login');
 
-// Proses login
+// Proses login utama
 Route::post('/login', [ControllerLogin::class, 'login'])
     ->name('login.submit');
 
@@ -75,11 +104,11 @@ Route::post('/login', [ControllerLogin::class, 'login'])
 // LOGIN ADMIN
 // =========================
 
-// Halaman login admin
+// Halaman login admin lama
 Route::get('/login/admin', [ControllerLogin::class, 'admin'])
     ->name('login.admin');
 
-// Proses login admin
+// Proses login admin lama
 Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
     ->name('login.admin.submit');
 
@@ -88,11 +117,11 @@ Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
 // LOGIN GURU
 // =========================
 
-// Halaman login guru
+// Halaman login guru lama
 Route::get('/login/guru', [ControllerLogin::class, 'guru'])
     ->name('login.guru');
 
-// Proses login guru
+// Proses login guru lama
 Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
     ->name('login.guru.submit');
 
