@@ -278,27 +278,29 @@ body{
 
     </div>
 
- <div class="menu-card1">
-  <nav class="breadcrumb">
+    <div class="menu-card1">
+    <nav class="breadcrumb">
     <a href="/dashboardadmin">Home</a> >
     <a href="#">profil</a>
-  </nav>
+    </nav>
 
- </div>
+    </div>
 
- <div class="card">
-  <h3 class="card-title">Info profil Admin</h3>
+    <div class="card">
+    <h3 class="card-title">Info profil Admin</h3>
 
-<p>
+    <p>
     <strong>Username:</strong>
     {{ $admin->username }}
-</p>
+    </p>
+
+    <footer style="background-color: #f8f9fa ; padding: 20px; text-align: center; border-top: 1px solid #dee2e6; margin-top: 100px;">
+    <p>© 2026 Sistem Admin | SMK Mahaputra</p>
+    </footer>
  </div>
 
 
-<footer style="background-color: #f8f9fa ; padding: 20px; text-align: center; border-top: 1px solid #dee2e6; margin-top: 100px;">
-    <p>© 2026 Sistem Admin | SMK Mahaputra</p>
-</footer>
+
 
 <!-- =========================
      JAVASCRIPT HAMBURGER
