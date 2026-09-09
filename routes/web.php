@@ -91,7 +91,7 @@ Route::get('/dashboard', [ControllerDashboard::class, 'index'])
     ->name('dashboard');
 
 Route::get('/dashboardadmin', [ControllerDashboardAdmin::class, 'index'])
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
     ->name('dashboardadmin');
 
 
