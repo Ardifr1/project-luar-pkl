@@ -1056,6 +1056,10 @@
   </div>
 </div>
 
+<footer style="background-color: #f8f9fa ; padding: 20px; text-align: center; border-top: 1px solid #dee2e6; margin-top: 100px;">
+    <p>© 2026 Sistem Admin | SMK Mahaputra</p>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- =========================

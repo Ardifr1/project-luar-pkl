@@ -18,7 +18,7 @@
 
         .phone{
             max-width:412px;
-            min-height:917px;
+            min-height:800px;
             margin: auto;
             background:#fff;
         }
@@ -757,6 +757,11 @@
     </div>
 
 @endif
+
+<footer style="background-color: #f8f9fa ; padding: 20px; text-align: center; border-top: 1px solid #dee2e6; margin-top: 100px;">
+    <p>© 2026 Sistem Admin | SMK Mahaputra</p>
+</footer>
+
 
 
 <!-- =========================
