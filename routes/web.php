@@ -39,8 +39,22 @@ use App\Http\Controllers\SearchController;
 // WELCOME
 // =========================
 
+/*
+| User yang sudah login diarahkan ke dashboard sesuai role-nya,
+| sehingga membuka kembali root aplikasi TIDAK melempar mereka
+| balik ke /login. User yang belum login tetap diarahkan ke /login.
+*/
+
 Route::get('/', function () {
-    return redirect('/login');
+    if (! auth()->check()) {
+        return redirect()->route('login');
+    }
+
+    if (auth()->user()->role === 'admin') {
+        return redirect()->route('dashboardadmin');
+    }
+
+    return redirect()->route('dashboard');
 });
 
 
@@ -412,12 +426,15 @@ Route::post('/logout', [ControllerLogin::class, 'logout'])
 // =========================
 
 Route::get('/search', [Controllersearch::class, 'index'])
+    ->middleware('auth')
     ->name('search.global');
 
 Route::get('/search-autocomplete', [SearchController::class, 'autocomplete'])
+    ->middleware('auth')
     ->name('search.autocomplete');
 
 Route::get('/search-autocomplete-guru', [SearchController::class, 'autocompleteGuru'])
+    ->middleware('auth')
     ->name('search.autocomplete.guru');
 
 

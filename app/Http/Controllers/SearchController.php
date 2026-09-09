@@ -15,7 +15,27 @@ class SearchController extends Controller
         $query = $request->input('q');
         $results = [];
 
-        if (auth()->user()->role === 'admin') {
+        $user = $request->user();
+
+        /*
+        |---------------------------------------------------------
+        | PENGAMAN: USER HARUS LOGIN
+        |---------------------------------------------------------
+        |
+        | Route ini dilindungi middleware 'auth'. Pengaman ini
+        | hanya lapisan kedua agar tidak pernah terjadi error
+        | "Attempt to read property on null" jika user null.
+        |
+        */
+
+        if (! $user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Silakan login terlebih dahulu.'
+            ], 401);
+        }
+
+        if ($user->role === 'admin') {
             // =========================
             // ADMIN: bisa cari semua data
             // =========================

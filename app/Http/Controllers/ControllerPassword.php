@@ -56,7 +56,13 @@ class ControllerPassword extends Controller
         $user->save();
 
         // logout otomatis agar login ulang
+        // invalidate() menghapus baris session di tabel sessions,
+        // sehingga fitur 1 akun 1 device langsung melepaskan akun
+        // dan session lama tidak bisa dipakai lagi.
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', 'Password berhasil diubah, silakan login ulang.');
     }

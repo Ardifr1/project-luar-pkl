@@ -16,7 +16,60 @@ class ControllerLogin extends Controller
 
     public function index()
     {
+        /*
+        |----------------------------------------------------------------------
+        | GUEST GUARD
+        |----------------------------------------------------------------------
+        |
+        | User yang SUDAH login tidak boleh melihat form login lagi.
+        | Jika dia membuka /login, langsung arahkan ke dashboard-nya.
+        |
+        | Ini mencegah:
+        | - user yang sudah login terasa "ditendang" balik ke login,
+        | - user men-submit form login lagi sehingga session di-regenerate
+        |   dan terbentuk session baru yang bertabrakan dengan yang lama.
+        |
+        */
+
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         return view('Login/login');
+    }
+
+
+    // =========================
+    // REDIRECT SESUAI ROLE
+    // UNTUK USER YANG SUDAH LOGIN
+    // =========================
+
+    private function redirectJikaSudahLogin()
+    {
+        if (! Auth::check()) {
+            return null;
+        }
+
+        $user = Auth::user();
+
+        // ADMIN
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboardadmin');
+        }
+
+        // GURU
+        if ($user->role === 'guru') {
+            return redirect()->route('dashboard');
+        }
+
+        /*
+        | Role tidak dikenali: paksa logout agar session tidak menggantung,
+        | lalu tampilkan form login seperti biasa (bukan loop redirect).
+        */
+
+        Auth::logout();
+
+        return null;
     }
 
 
@@ -72,6 +125,14 @@ class ControllerLogin extends Controller
 
     public function login(Request $request)
     {
+        /*
+        | Sudah login? Jangan proses login lagi (hindari session ganda).
+        */
+
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         $request->validate(
             [
                 'login' => 'required',
@@ -204,6 +265,11 @@ class ControllerLogin extends Controller
 
     public function admin()
     {
+        // Guest guard (sama seperti halaman login utama).
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         return view('login-admin');
     }
 
@@ -214,6 +280,11 @@ class ControllerLogin extends Controller
 
     public function guru()
     {
+        // Guest guard (sama seperti halaman login utama).
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         return view('login-guru');
     }
 
@@ -224,6 +295,14 @@ class ControllerLogin extends Controller
 
     public function loginAdmin(Request $request)
     {
+        /*
+        | Sudah login? Jangan proses login lagi (hindari session ganda).
+        */
+
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         $request->validate(
             [
                 'username' => 'required',
@@ -331,6 +410,14 @@ class ControllerLogin extends Controller
 
     public function loginGuru(Request $request)
     {
+        /*
+        | Sudah login? Jangan proses login lagi (hindari session ganda).
+        */
+
+        if ($redirect = $this->redirectJikaSudahLogin()) {
+            return $redirect;
+        }
+
         $request->validate(
             [
                 'nip' => 'required',
