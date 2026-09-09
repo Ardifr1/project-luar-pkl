@@ -72,7 +72,7 @@
   margin: 10px auto;
   background-color: #f1f5f9;
   display: flex;
-  justify-content: flex-start; /* biar teks mulai dari kiri */
+  justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
   border: 1px solid #ddd;
