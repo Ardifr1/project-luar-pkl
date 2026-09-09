@@ -121,6 +121,9 @@
       margin-top:1rem;
       font-weight:600;
       transition:background 0.3s;
+
+      /* Efek shadow timbul */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.35);
     }
     .btn-confirm:hover { background-color:#1450b0; }
 
