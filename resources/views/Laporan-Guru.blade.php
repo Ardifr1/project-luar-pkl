@@ -655,29 +655,7 @@
         </nav>
 
 
-        <!-- SEARCH -->
-
-        <form
-            action="{{ route('laporan.guru') }}"
-            method="GET"
-            class="search-box"
-        >
-
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Cari..."
-            >
-
-
-            <button type="submit">
-
-                <i class="bi bi-search"></i>
-
-            </button>
-
-        </form>
+        
 
     </div>
 
