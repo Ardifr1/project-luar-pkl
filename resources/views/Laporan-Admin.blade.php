@@ -97,8 +97,31 @@
   text-decoration: none;
   margin-right: 5px;
   font-weight: 500;
-  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  transition: color 0.3s ease;
 }
+
+/* Garis tipis di bawah link */
+.breadcrumb a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #1F4E9D;
+  transition: width 0.3s ease;
+}
+
+/* Saat hover: warna berubah + garis bergerak */
+.breadcrumb a:hover {
+  color: #163a73;
+}
+
+.breadcrumb a:hover::after {
+  width: 100%; /* garis melebar dari kiri ke kanan */
+}
+
 
 
 
