@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerDashboard;
 use App\Http\Controllers\ControllerAjukanPeminjaman;
-use App\Http\Controllers\ControllerGuru;
 use App\Http\Controllers\ControllerDashboardAdmin;
 
 use App\Http\Controllers\ControllerProfil;
@@ -91,39 +90,13 @@ Route::get('/', function () {
 // LOGIN
 // =========================
 
-// Halaman login utama
+// Halaman login utama (Admin = username, Guru = NIP)
 Route::get('/login', [ControllerLogin::class, 'index'])
     ->name('login');
 
 // Proses login utama
 Route::post('/login', [ControllerLogin::class, 'login'])
     ->name('login.submit');
-
-
-// =========================
-// LOGIN ADMIN
-// =========================
-
-// Halaman login admin lama
-Route::get('/login/admin', [ControllerLogin::class, 'admin'])
-    ->name('login.admin');
-
-// Proses login admin lama
-Route::post('/login/admin', [ControllerLogin::class, 'loginAdmin'])
-    ->name('login.admin.submit');
-
-
-// =========================
-// LOGIN GURU
-// =========================
-
-// Halaman login guru lama
-Route::get('/login/guru', [ControllerLogin::class, 'guru'])
-    ->name('login.guru');
-
-// Proses login guru lama
-Route::post('/login/guru', [ControllerLogin::class, 'loginGuru'])
-    ->name('login.guru.submit');
 
 
 // =========================
@@ -365,31 +338,6 @@ Route::get('jadwallab-dipinjam', [Controllerjadwaldipinjam::class, 'index'])
 Route::get('/jadwal-lab', [Controllerjadwaldipinjam::class, 'index'])
     ->middleware('auth')
     ->name('jadwal.lab');
-
-
-// =========================
-// GURU / DATA GURU (ADMIN)
-// =========================
-
-Route::get('/guru', [ControllerGuru::class, 'index'])
-    ->middleware(['auth', 'admin'])
-    ->name('guru.index');
-
-Route::get('/guru/create', [ControllerGuru::class, 'create'])
-    ->middleware(['auth', 'admin'])
-    ->name('guru.create');
-
-Route::post('/guru', [ControllerGuru::class, 'store'])
-    ->middleware(['auth', 'admin'])
-    ->name('guru.store');
-
-Route::get('/guru/{id}', [ControllerGuru::class, 'show'])
-    ->middleware(['auth', 'admin'])
-    ->name('guru.show');
-
-Route::delete('/guru/{id}', [ControllerGuru::class, 'destroy'])
-    ->middleware(['auth', 'admin'])
-    ->name('guru.destroy');
 
 
 // =========================

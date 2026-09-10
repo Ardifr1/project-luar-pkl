@@ -77,7 +77,7 @@ class ControllerLaporanAdmin extends Controller
                 ->orWhereHas('pelajaran', function ($pelajaran) use ($search) {
 
                     $pelajaran->where(
-                        'nama',
+                        'nama_pelajaran',
                         'like',
                         '%' . $search . '%'
                     );

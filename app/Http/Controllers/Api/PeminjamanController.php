@@ -66,6 +66,28 @@ class PeminjamanController extends Controller
             ], 400);
         }
 
+        /*
+        | Cek ulang bentrok jadwal saat persetujuan.
+        | Dua pengajuan 'menunggu' yang beriraman bisa sama-sama
+        | mencapai endpoint ini; tanpa pengecekan ini keduanya
+        | bisa disetujui (double booking).
+        */
+
+        $labSedangDipakai = Peminjaman::where('lab_id', $peminjaman->lab_id)
+            ->where('status', 'disetujui')
+            ->where('id', '!=', $peminjaman->id)
+            ->where('tanggal', $peminjaman->tanggal)
+            ->where('jam_mulai', '<', $peminjaman->jam_selesai)
+            ->where('jam_selesai', '>', $peminjaman->jam_mulai)
+            ->exists();
+
+        if ($labSedangDipakai) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Lab tersebut sudah disetujui untuk digunakan pada tanggal dan jam yang beriraman'
+            ], 422);
+        }
+
         $peminjaman->update([
             'status' => 'disetujui'
         ]);

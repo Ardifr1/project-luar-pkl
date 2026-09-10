@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Lab;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LabController extends Controller
 {
@@ -22,7 +23,11 @@ class LabController extends Controller
         }
 
         $request->validate([
-            'nama' => 'required|string',
+            'nama' => [
+                'required',
+                'string',
+                Rule::unique('lab', 'nama_lab'),
+            ],
             'kapasitas_murid' => 'required|integer|min:1',
             'status' => 'required|in:tersedia,tidak_tersedia,sedang_maintenance',
         ]);
@@ -120,7 +125,11 @@ public function show(Request $request, $id)
         }
 
         $request->validate([
-            'nama' => 'required|string',
+            'nama' => [
+                'required',
+                'string',
+                Rule::unique('lab', 'nama_lab')->ignore($lab->id),
+            ],
             'kapasitas_murid' => 'required|integer|min:1',
             'status' => 'required|in:tersedia,tidak_tersedia,sedang_maintenance',
         ]);
