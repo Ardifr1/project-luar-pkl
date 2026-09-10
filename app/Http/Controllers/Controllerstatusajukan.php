@@ -24,20 +24,24 @@ class Controllerstatusajukan extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | AMBIL PENGAJUAN YANG BELUM SELESAI
+        | AMBIL PENGAJUAN USER
         |--------------------------------------------------------------------------
         |
-        | Pengajuan akan tetap muncul jika:
+        | Pengajuan ditampilkan jika:
         |
         | 1. Tanggal peminjaman masih setelah hari ini
         |
         | ATAU
         |
-        | 2. Tanggal peminjaman hari ini dan jam selesai
-        |    belum terlewati
+        | 2. Tanggal hari ini dan jam selesai belum terlewati
         |
-        | Data yang sudah lewat TIDAK dihapus dari database.
-        | Hanya tidak ditampilkan di halaman.
+        | Tambahan:
+        |
+        | Jika user sudah mempunyai pengajuan yang DISAHKAN (disetujui),
+        | maka pengajuan lain milik user yang masih MENUNGGU tidak
+        | ditampilkan lagi.
+        |
+        | Data tetap berada di database dan tidak dihapus.
         |
         */
 
@@ -47,6 +51,43 @@ class Controllerstatusajukan extends Controller
             'pelajaran'
         ])
         ->where('user_id', $user->id)
+
+        /*
+        |--------------------------------------------------------------------------
+        | SEMBUNYIKAN PENGAJUAN MENUNGGU JIKA SUDAH ADA YANG DISETUJUI
+        |--------------------------------------------------------------------------
+        */
+
+        ->where(function ($query) use ($user) {
+
+            $query->where('status', '!=', 'menunggu')
+
+                ->orWhereNotExists(function ($subQuery) use ($user) {
+
+                    $subQuery->selectRaw('1')
+                        ->from('peminjaman as approved_peminjaman')
+                        ->whereColumn(
+                            'approved_peminjaman.user_id',
+                            'peminjaman.user_id'
+                        )
+                        ->where(
+                            'approved_peminjaman.user_id',
+                            $user->id
+                        )
+                        ->where(
+                            'approved_peminjaman.status',
+                            'disetujui'
+                        );
+
+                });
+
+        })
+
+        /*
+        |--------------------------------------------------------------------------
+        | HANYA TAMPILKAN DATA YANG BELUM LEWAT
+        |--------------------------------------------------------------------------
+        */
 
         ->where(function ($query) {
 

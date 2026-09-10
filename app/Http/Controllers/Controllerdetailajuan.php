@@ -36,10 +36,9 @@ class Controllerdetailajuan extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
 
         /*
-        | Guard status: hanya pengajuan yang masih 'menunggu'
-        | yang boleh diproses. Mencegah admin menimpa status
-        | yang sudah 'ditolak' / 'dibatalkan' / 'disetujui'
-        | (misalnya lewat double-submit atau POST langsung).
+        | Guard status:
+        | Hanya pengajuan yang masih 'menunggu'
+        | yang boleh diproses.
         */
 
         if ($peminjaman->status !== 'menunggu') {
@@ -51,11 +50,9 @@ class Controllerdetailajuan extends Controller
                 );
         }
 
+
         /*
         | Cek ulang bentrok jadwal saat persetujuan.
-        | Dua pengajuan 'menunggu' yang beriraman bisa sama-sama
-        | mencapai halaman ini; tanpa pengecekan ini keduanya
-        | bisa disetujui (double booking).
         */
 
         $labSedangDipakai = Peminjaman::where('lab_id', $peminjaman->lab_id)
@@ -75,12 +72,46 @@ class Controllerdetailajuan extends Controller
                 );
         }
 
-        // Ubah status menjadi disetujui
-        // dan kosongkan alasan penolakan
+
+        // =========================
+        // SETUJUI AJUAN
+        // =========================
+
         $peminjaman->update([
             'status' => 'disetujui',
             'alasan_penolakan' => null,
         ]);
+
+
+        /*
+        | ================================================================
+        | SEMBUNYIKAN AJUAN LAIN DARI USER YANG SAMA
+        | ================================================================
+        |
+        | Ajuan lain milik user yang sama tetap berstatus 'menunggu'
+        | di database.
+        |
+        | Kita hanya menyimpan user_id ke session admin agar ajuan
+        | tersebut tidak ditampilkan lagi di Daftar Ajuan.
+        |
+        | Tidak ada data database yang dihapus atau diubah.
+        |
+        */
+
+        $hiddenUserIds = session('hidden_ajuan_user_ids', []);
+
+        if (!in_array($peminjaman->user_id, $hiddenUserIds)) {
+            $hiddenUserIds[] = $peminjaman->user_id;
+        }
+
+        session([
+            'hidden_ajuan_user_ids' => $hiddenUserIds
+        ]);
+
+
+        // =========================
+        // KEMBALI KE DAFTAR AJUAN
+        // =========================
 
         return redirect()
             ->route('daftar.ajuan')
@@ -111,8 +142,9 @@ class Controllerdetailajuan extends Controller
 
 
         /*
-        | Guard status: hanya pengajuan yang masih 'menunggu'
-        | yang boleh ditolak (sama seperti setujui).
+        | Guard status:
+        | Hanya pengajuan yang masih 'menunggu'
+        | yang boleh ditolak.
         */
 
         if ($peminjaman->status !== 'menunggu') {
@@ -125,7 +157,10 @@ class Controllerdetailajuan extends Controller
         }
 
 
-        // Ubah status dan simpan alasan
+        // =========================
+        // TOLAK AJUAN
+        // =========================
+
         $peminjaman->update([
             'status' => 'ditolak',
             'alasan_penolakan' => $request->alasan_penolakan,
