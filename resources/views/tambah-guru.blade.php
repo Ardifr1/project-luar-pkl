@@ -263,6 +263,35 @@
             margin-top:-5px;
         }
 
+        .mapel-container {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 200px; /* tampilkan sekitar 5 item */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mapel-container.expanded {
+  max-height: none; /* tampilkan semua saat tombol ditekan */
+}
+
+.btn-mapel {
+  margin-top: 10px;
+  background-color: #1F4E9D; /* warna tombol */
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-mapel:hover {
+  background-color: #163a73; /* warna saat hover */
+}
+
+
     </style>
 </head>
 
@@ -466,45 +495,25 @@
             @enderror
 
 
-            <!-- =========================
-                 MAPEL
-                 ========================= -->
+            <label>Mapel</label>
 
-            <label>
-                Mapel
-            </label>
+<div class="mapel-container" id="mapelContainer">
+  @forelse($pelajaran as $mapel)
+    <div class="mapel-item">
+      <input type="checkbox" id="mapel{{ $mapel->id }}" name="pelajaran[]" value="{{ $mapel->id }}"
+        @if(is_array(old('pelajaran')) && in_array($mapel->id, old('pelajaran'))) checked @endif>
+      <label for="mapel{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</label>
+    </div>
+  @empty
+    <div>Belum ada data pelajaran.</div>
+  @endforelse
+</div>
 
-            <div class="mapel-container">
+<button type="button" id="toggleMapel" class="btn-mapel">
+  Lihat lainnya
+</button>
 
-                @forelse($pelajaran as $mapel)
-
-                    <div class="mapel-item">
-
-                        <input
-                            type="checkbox"
-                            id="mapel{{ $mapel->id }}"
-                            name="pelajaran[]"
-                            value="{{ $mapel->id }}"
-
-                            @if(is_array(old('pelajaran')) && in_array($mapel->id, old('pelajaran')))
-                                checked
-                            @endif
-                        >
-
-                        <label for="mapel{{ $mapel->id }}">
-                            {{ $mapel->nama_pelajaran }}
-                        </label>
-
-                    </div>
-
-                @empty
-
-                    <div>
-                        Belum ada data pelajaran.
-                    </div>
-
-                @endforelse
-
+                
             </div>
 
             @error('pelajaran')
@@ -540,11 +549,11 @@
             </div>
 
         </form>
-
-    </div>
 <div class="footer">
   © 2026 Sistem Admin | SMK Mahaputra
 </div>
+
+    </div>
 
 
 
@@ -568,6 +577,17 @@
         hamburgerDropdown.classList.toggle('show');
 
     });
+
+const toggleMapel = document.getElementById('toggleMapel');
+const mapelContainer = document.getElementById('mapelContainer');
+
+toggleMapel.addEventListener('click', () => {
+  mapelContainer.classList.toggle('expanded');
+  toggleMapel.textContent = mapelContainer.classList.contains('expanded')
+    ? 'Sembunyikan'
+    : 'Lihat lainnya';
+});
+
 
 </script>
 
