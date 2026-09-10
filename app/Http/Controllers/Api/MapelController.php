@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pelajaran;
+use Illuminate\Validation\Rule;
 
 class MapelController extends Controller
 {
@@ -45,7 +46,12 @@ class MapelController extends Controller
         }
 
         $request->validate([
-            'nama_pelajaran' => 'required|string|max:255',
+            'nama_pelajaran' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pelajaran', 'nama_pelajaran'),
+            ],
         ]);
 
         $pelajaran = Pelajaran::create([
@@ -73,10 +79,6 @@ class MapelController extends Controller
             ], 403);
         }
 
-        $request->validate([
-            'nama_pelajaran' => 'required|string|max:255',
-        ]);
-
         $pelajaran = Pelajaran::find($id);
 
         if (!$pelajaran) {
@@ -85,6 +87,15 @@ class MapelController extends Controller
                 'message' => 'Data pelajaran tidak ditemukan'
             ], 404);
         }
+
+        $request->validate([
+            'nama_pelajaran' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pelajaran', 'nama_pelajaran')->ignore($pelajaran->id),
+            ],
+        ]);
 
         $pelajaran->update([
             'nama_pelajaran' => $request->nama_pelajaran,

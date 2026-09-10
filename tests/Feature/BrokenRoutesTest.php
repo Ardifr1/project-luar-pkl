@@ -16,13 +16,15 @@ use Tests\TestCase;
 | BROKEN ROUTES TEST
 |--------------------------------------------------------------------------
 |
-| Menguji 3 bug sisa audit yang menyebabkan 500:
-|  1. GET /login/admin            -> view 'login-admin' tidak ada
-|  2. GET /login/guru             -> view 'login-guru' tidak ada
-|  3. GET /search-autocomplete-guru -> SearchController::autocompleteGuru tidak ada
-|  4. GET /ubahpasswordguru       -> Controllerubahpassword::index tidak ada
+| Menguji bug sisa audit yang menyebabkan 500:
+|  1. GET /search-autocomplete-guru -> SearchController::autocompleteGuru tidak ada
+|  2. GET /ubahpasswordguru       -> Controllerubahpassword::index tidak ada
 |
 | Plus regresi: GET /search-autocomplete (refactor SearchController)
+|
+| Route legacy /login/admin dan /login/guru SUDAH DIHAPUS
+| (sistem login satu halaman: /login). Keduanya kini harus 404 —
+| diuji di AuthFlowTest::test_route_login_legacy_tidak_tersedia.
 |
 | Tabel dibuat manual di sqlite :memory: (alasan sama dengan
 | AuthFlowTest: ada migration MySQL-only). Tidak menyentuh DB produksi.
@@ -135,31 +137,17 @@ class BrokenRoutesTest extends TestCase
     }
 
     // =========================
-    // BUG 1: HALAMAN LOGIN ADMIN
+    // REGRESI: HALAMAN LOGIN UTAMA TETAP BERFUNGSI
+    // (route legacy /login/admin & /login/guru sudah dihapus)
     // =========================
 
-    public function test_bug_1_halaman_login_admin_tampil_tanpa_500(): void
+    public function test_halaman_login_utama_tampil_tanpa_500(): void
     {
-        $response = $this->get('/login/admin');
+        $response = $this->get('/login');
 
         $response->assertOk();
-        $response->assertViewIs('login-admin');
-        $response->assertSee('Login Admin');
-        $response->assertSee(route('login.admin.submit'));
-    }
-
-    // =========================
-    // BUG 1: HALAMAN LOGIN GURU
-    // =========================
-
-    public function test_bug_1_halaman_login_guru_tampil_tanpa_500(): void
-    {
-        $response = $this->get('/login/guru');
-
-        $response->assertOk();
-        $response->assertViewIs('login-guru');
-        $response->assertSee('Login Guru');
-        $response->assertSee(route('login.guru.submit'));
+        $response->assertViewIs('Login.login');
+        $response->assertSee(route('login.submit'));
     }
 
     // =========================
@@ -203,8 +191,9 @@ class BrokenRoutesTest extends TestCase
             'Peminjaman: Pinjam lab kimia untuk praktikum',
             $data[0]['name']
         );
+        // Guru diarahkan ke halaman miliknya sendiri, bukan halaman admin (403).
         $this->assertEquals(
-            route('peminjaman.edit', $pinjam->id),
+            route('statusajukan'),
             $data[0]['url']
         );
     }
@@ -254,5 +243,181 @@ class BrokenRoutesTest extends TestCase
         $response->assertViewIs('ubahpassword');
         $response->assertSee('Masukkan Password Lama');
         $response->assertSee(route('ubah.password.update'));
+    }
+
+    // =========================
+    // REGRESI: SEARCH /search TIDAK ERROR 500
+    // (kolom 'nama' -> 'nama_pelajaran' di Laporan, scope guru)
+    // =========================
+
+    public function test_search_global_tanpa_error_500(): void
+    {
+        $guru = $this->buatGuru();
+
+        $response = $this->actingAs($guru)->get('/search?q=kimia');
+
+        $response->assertOk();
+        $response->assertViewIs('search-result');
+        $response->assertViewHas('peminjaman');
+    }
+
+    public function test_search_global_guru_hanya_melihat_peminjaman_miliknya(): void
+    {
+        $guru = $this->buatGuru();
+        $guruLain = $this->buatGuru([
+            'name' => 'Guru Lain',
+            'nip' => '0987654321',
+        ]);
+
+        $lab = Lab::create(['nama_lab' => 'Lab Biologi', 'kapasitas_murid' => 30]);
+        $pelajaran = Pelajaran::create(['nama_pelajaran' => 'Biologi']);
+
+        Peminjaman::create([
+            'user_id' => $guru->id,
+            'lab_id' => $lab->id,
+            'pelajaran_id' => $pelajaran->id,
+            'keterangan' => 'Praktikum biologi',
+            'tanggal' => '2026-09-05',
+            'jam_mulai' => '08:00:00',
+            'jam_selesai' => '09:00:00',
+        ]);
+
+        Peminjaman::create([
+            'user_id' => $guruLain->id,
+            'lab_id' => $lab->id,
+            'pelajaran_id' => $pelajaran->id,
+            'keterangan' => 'Praktikum biologi guru lain',
+            'tanggal' => '2026-09-06',
+            'jam_mulai' => '10:00:00',
+            'jam_selesai' => '11:00:00',
+        ]);
+
+        $response = $this->actingAs($guru)->get('/search?q=biologi');
+
+        $response->assertOk();
+
+        $peminjaman = $response->viewData('peminjaman');
+
+        $this->assertCount(1, $peminjaman);
+        $this->assertEquals($guru->id, $peminjaman->first()->user_id);
+    }
+
+    // =========================
+    // REGRESI: LAPORAN SEARCH TIDAK ERROR 500
+    // (kolom 'nama' -> 'nama_pelajaran')
+    // =========================
+
+    public function test_laporan_admin_search_dengan_nama_pelajaran_tanpa_500(): void
+    {
+        $admin = User::create([
+            'name' => 'Admin Test',
+            'username' => 'admin01',
+            'nip' => null,
+            'password' => Hash::make('password123'),
+            'role' => 'admin',
+        ]);
+
+        $response = $this->actingAs($admin)->get('/Laporan-Admin?search=kimia');
+
+        $response->assertOk();
+    }
+
+    public function test_laporan_guru_search_dengan_nama_pelajaran_tanpa_500(): void
+    {
+        $guru = $this->buatGuru();
+
+        $response = $this->actingAs($guru)->get('/Laporan-Guru?search=kimia');
+
+        $response->assertOk();
+    }
+
+    // =========================
+    // REGRESI: SETUJUI HANYA UNTUK STATUS MENUNGGU
+    // + RE-CHECK BENTROK SAAT PERSETUJUAN
+    // =========================
+
+    public function test_setujui_ditolak_jika_status_bukan_menunggu(): void
+    {
+        $admin = User::create([
+            'name' => 'Admin Test',
+            'username' => 'admin01',
+            'nip' => null,
+            'password' => Hash::make('password123'),
+            'role' => 'admin',
+        ]);
+
+        $guru = $this->buatGuru();
+
+        $lab = Lab::create(['nama_lab' => 'Lab Guard', 'kapasitas_murid' => 30]);
+        $pelajaran = Pelajaran::create(['nama_pelajaran' => 'Guard']);
+
+        $pinjam = Peminjaman::create([
+            'user_id' => $guru->id,
+            'lab_id' => $lab->id,
+            'pelajaran_id' => $pelajaran->id,
+            'keterangan' => 'Sudah dibatalkan guru',
+            'tanggal' => '2026-09-10',
+            'jam_mulai' => '08:00:00',
+            'jam_selesai' => '09:00:00',
+            'status' => 'dibatalkan',
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->post("/detail-ajuan/{$pinjam->id}/setujui");
+
+        // Guard: tidak jadi disetujui, tetap dibatalkan
+        $this->assertDatabaseHas('peminjaman', [
+            'id' => $pinjam->id,
+            'status' => 'dibatalkan',
+        ]);
+    }
+
+    public function test_setujui_ditolak_jika_jadwal_bentrok_dengan_yang_sudah_disetujui(): void
+    {
+        $admin = User::create([
+            'name' => 'Admin Test',
+            'username' => 'admin01',
+            'nip' => null,
+            'password' => Hash::make('password123'),
+            'role' => 'admin',
+        ]);
+
+        $guru = $this->buatGuru();
+
+        $lab = Lab::create(['nama_lab' => 'Lab Bentrok', 'kapasitas_murid' => 30]);
+        $pelajaran = Pelajaran::create(['nama_pelajaran' => 'Bentrok']);
+
+        // Peminjaman yang SUDAH disetujui: 08:00-10:00
+        Peminjaman::create([
+            'user_id' => $guru->id,
+            'lab_id' => $lab->id,
+            'pelajaran_id' => $pelajaran->id,
+            'keterangan' => 'Sudah disetujui lebih dulu',
+            'tanggal' => '2026-09-10',
+            'jam_mulai' => '08:00:00',
+            'jam_selesai' => '10:00:00',
+            'status' => 'disetujui',
+        ]);
+
+        // Pengajuan baru yang beriraman: 09:00-11:00
+        $pengajuan = Peminjaman::create([
+            'user_id' => $guru->id,
+            'lab_id' => $lab->id,
+            'pelajaran_id' => $pelajaran->id,
+            'keterangan' => 'Menunggu, beriraman',
+            'tanggal' => '2026-09-10',
+            'jam_mulai' => '09:00:00',
+            'jam_selesai' => '11:00:00',
+            'status' => 'menunggu',
+        ]);
+
+        $this->actingAs($admin)
+            ->post("/detail-ajuan/{$pengajuan->id}/setujui");
+
+        // Guard bentrok: tetap menunggu, tidak jadi disetujui
+        $this->assertDatabaseHas('peminjaman', [
+            'id' => $pengajuan->id,
+            'status' => 'menunggu',
+        ]);
     }
 }

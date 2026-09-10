@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lab;
+use Illuminate\Validation\Rule;
 
 class Controllereditdatalab extends Controller
 {
@@ -28,7 +29,12 @@ class Controllereditdatalab extends Controller
         $lab = Lab::findOrFail($id);
 
         $request->validate([
-            'nama_lab' => 'required|string|max:255',
+            'nama_lab' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('lab', 'nama_lab')->ignore($lab->id),
+            ],
 
             'kapasitas_murid' => 'required|integer|min:1',
 

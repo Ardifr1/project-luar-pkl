@@ -35,6 +35,46 @@ class Controllerdetailajuan extends Controller
     {
         $peminjaman = Peminjaman::findOrFail($id);
 
+        /*
+        | Guard status: hanya pengajuan yang masih 'menunggu'
+        | yang boleh diproses. Mencegah admin menimpa status
+        | yang sudah 'ditolak' / 'dibatalkan' / 'disetujui'
+        | (misalnya lewat double-submit atau POST langsung).
+        */
+
+        if ($peminjaman->status !== 'menunggu') {
+            return redirect()
+                ->route('detail.ajuan', ['id' => $peminjaman->id])
+                ->with(
+                    'error',
+                    'Pengajuan sudah diproses sebelumnya.'
+                );
+        }
+
+        /*
+        | Cek ulang bentrok jadwal saat persetujuan.
+        | Dua pengajuan 'menunggu' yang beriraman bisa sama-sama
+        | mencapai halaman ini; tanpa pengecekan ini keduanya
+        | bisa disetujui (double booking).
+        */
+
+        $labSedangDipakai = Peminjaman::where('lab_id', $peminjaman->lab_id)
+            ->where('status', 'disetujui')
+            ->where('id', '!=', $peminjaman->id)
+            ->where('tanggal', $peminjaman->tanggal)
+            ->where('jam_mulai', '<', $peminjaman->jam_selesai)
+            ->where('jam_selesai', '>', $peminjaman->jam_mulai)
+            ->exists();
+
+        if ($labSedangDipakai) {
+            return redirect()
+                ->route('detail.ajuan', ['id' => $peminjaman->id])
+                ->with(
+                    'error',
+                    'Lab tersebut sudah disetujui untuk digunakan pada tanggal dan jam yang beriraman.'
+                );
+        }
+
         // Ubah status menjadi disetujui
         // dan kosongkan alasan penolakan
         $peminjaman->update([
@@ -68,6 +108,21 @@ class Controllerdetailajuan extends Controller
 
         // Ambil data peminjaman
         $peminjaman = Peminjaman::findOrFail($id);
+
+
+        /*
+        | Guard status: hanya pengajuan yang masih 'menunggu'
+        | yang boleh ditolak (sama seperti setujui).
+        */
+
+        if ($peminjaman->status !== 'menunggu') {
+            return redirect()
+                ->route('detail.ajuan', ['id' => $peminjaman->id])
+                ->with(
+                    'error',
+                    'Pengajuan sudah diproses sebelumnya.'
+                );
+        }
 
 
         // Ubah status dan simpan alasan

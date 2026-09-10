@@ -136,13 +136,15 @@ class SearchController extends Controller
         $results = [];
 
         // Peminjaman milik guru login
+        // (URL diarahkan ke halaman milik guru sendiri, bukan halaman admin
+        //  yang dilindungi middleware 'admin' agar tidak menghasilkan 403)
         $peminjaman = Peminjaman::where('user_id', $userId)
             ->where('keterangan', 'like', "%{$query}%")
             ->get(['id', 'keterangan']);
         foreach ($peminjaman as $p) {
             $results[] = [
                 'name' => "Peminjaman: " . $p->keterangan,
-                'url'  => route('peminjaman.edit', $p->id)
+                'url'  => route('statusajukan')
             ];
         }
 
@@ -158,13 +160,14 @@ class SearchController extends Controller
         }
 
         // Laporan Penolakan milik guru login
+        // (nilai status di DB adalah 'ditolak' sesuai migration)
         $laporan = Peminjaman::where('user_id', $userId)
-            ->where('status', 'tolak') // asumsi status 'tolak' = laporan penolakan
-            ->where('keterangan', 'like', "%{$query}%")
-            ->get(['id', 'keterangan']);
+            ->where('status', 'ditolak')
+            ->where('alasan_penolakan', 'like', "%{$query}%")
+            ->get(['id', 'keterangan', 'alasan_penolakan']);
         foreach ($laporan as $l) {
             $results[] = [
-                'name' => "Laporan: " . $l->keterangan,
+                'name' => "Laporan: " . ($l->alasan_penolakan ?? $l->keterangan),
                 'url'  => route('laporan.guru') // halaman laporan guru
             ];
         }

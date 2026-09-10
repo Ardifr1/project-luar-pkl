@@ -335,15 +335,33 @@ class AuthFlowTest extends TestCase
     }
 
     // =========================
-    // EXTRA: ADMIN LOGIN VIA LOGIN ADMIN LAMA
+    // EXTRA: ROUTE LOGIN LEGACY SUDAH DIHAPUS
     // =========================
 
-    public function test_admin_bisa_login_via_form_admin_lama(): void
+    public function test_route_login_legacy_tidak_tersedia(): void
+    {
+        // Sistem login satu halaman: /login.
+        // Route legacy /login/admin dan /login/guru sudah dihapus (404).
+        $this->get('/login/admin')->assertNotFound();
+        $this->get('/login/guru')->assertNotFound();
+
+        $this->post('/login/admin', [
+            'username' => 'admin01',
+            'password' => 'password123',
+        ])->assertNotFound();
+
+        $this->post('/login/guru', [
+            'nip' => '1234567890',
+            'password' => 'password123',
+        ])->assertNotFound();
+    }
+
+    public function test_admin_tetap_bisa_login_via_login_utama(): void
     {
         $this->buatAdmin();
 
-        $response = $this->post('/login/admin', [
-            'username' => 'admin01',
+        $response = $this->post('/login', [
+            'login' => 'admin01',
             'password' => 'password123',
         ]);
 
