@@ -223,7 +223,7 @@
         }
 
         .btn-ajukan:hover {
-            background: #3b82f6;
+            background: #102b56;
             color: white;
         }
 
@@ -263,7 +263,7 @@
         }
 
         .pagination button:hover {
-            background-color: #dbeafe;
+            background-color: #8fa8c8;
         }
 
         .pagination .active {
