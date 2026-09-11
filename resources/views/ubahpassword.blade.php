@@ -34,7 +34,8 @@
 
     /* Card utama */
     .box-password {
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       background: #fff;
       border-radius: 0px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);

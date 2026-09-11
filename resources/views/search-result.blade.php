@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hasil Pencarian</title>
   <style>
     body { background:#222; font-family:Arial,sans-serif; }
@@ -61,7 +62,7 @@
     <h3>Peminjaman</h3>
     <ul>
       @forelse($peminjaman as $p)
-        <li>{{ $p->lab->nama_lab }} - {{ $p->tanggal }} ({{ $p->user->name }})</li>
+        <li>{{ $p->lab->nama_lab ?? '-' }} - {{ $p->tanggal }} ({{ $p->user->name ?? '-' }})</li>
       @empty
         <li>Tidak ada peminjaman ditemukan</li>
       @endforelse

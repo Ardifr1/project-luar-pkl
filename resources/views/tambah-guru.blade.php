@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -536,9 +536,6 @@
   Lihat lainnya
 </button>
 
-                
-            </div>
-
             @error('pelajaran')
 
                 <div class="error-message">
@@ -572,6 +569,8 @@
             </div>
 
         </form>
+
+    </div>
 <div class="footer">
   © 2026 Sistem Admin | SMK Mahaputra
 </div>

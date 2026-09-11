@@ -561,24 +561,24 @@
 
     <div class="menu-card">
 
-    <a href="/data-guru" class="text-decoration-none" style="color:black;">
+    <a href="{{ route('data.guru') }}" class="text-decoration-none" style="color:black;">
     <div class="box1">
         <p>Data Guru</p>
     </div>
 </a>
-<a href="/data-lab" class="text-decoration-none" style="color:black;">
+<a href="{{ route('data.lab') }}" class="text-decoration-none" style="color:black;">
     <div class="box2"> <p>Data Lab</p>   
         </div>
 </a>
-<a href="/Laporan-Admin" class="text-decoration-none" style="color:black;">
+<a href="{{ route('laporan.admin') }}" class="text-decoration-none" style="color:black;">
     <div class="box3"> <p>Laporan</p>    
         </div>
 </a>
-<a href="/daftar-ajuan" class="text-decoration-none" style="color:black;">
+<a href="{{ route('daftar.ajuan') }}" class="text-decoration-none" style="color:black;">
     <div class="box4"> <p>Daftar ajukan</p>
         </div>
 </a>
-<a href="/datamapel" class="text-decoration-none" style="color:black;">
+<a href="{{ route('data.mapel') }}" class="text-decoration-none" style="color:black;">
     <div class="box5"> <p>Daftar Mapel</p>
         </div>
 </a>
@@ -621,7 +621,7 @@ searchInput.addEventListener('input', function() {
   suggestionsBox.innerHTML = '';
 
   if (query.length > 0) {
-    fetch(`/search-autocomplete?q=${query}`)
+    fetch(`/search-autocomplete?q=${encodeURIComponent(query)}`)
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
@@ -635,6 +635,9 @@ searchInput.addEventListener('input', function() {
         } else {
           suggestionsBox.style.display = 'none';
         }
+      })
+      .catch(() => {
+        suggestionsBox.style.display = 'none';
       });
   } else {
     suggestionsBox.style.display = 'none';

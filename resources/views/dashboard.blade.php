@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Utama</title>
+    <title>Dashboard Guru</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -692,7 +692,7 @@
 
 
         <a
-            href="/pilihanlab"
+            href="{{ route('ajukanpilihanlab') }}"
             class="text-decoration-none"
             style="color:black;"
         >
@@ -708,7 +708,7 @@
         </a>
 
 
-        <a href="jadwallab-dipinjam"  class="text-decoration-none" style="color:black;">
+        <a href="{{ route('jadwal.lab') }}"  class="text-decoration-none" style="color:black;">
 <div class="box2">
 
             <p>
@@ -719,7 +719,7 @@
         </a>
 
 
-        <a href="/Laporan-Guru" class="text-decoration-none" style="color:black;">
+        <a href="{{ route('laporan.guru') }}" class="text-decoration-none" style="color:black;">
    <div class="box3">
 
             <p>
@@ -730,7 +730,7 @@
         </a>
 
 
-        <a href="/statusajukan-lab"  class="text-decoration-none" style="color:black;">
+        <a href="{{ route('statusajukan') }}"  class="text-decoration-none" style="color:black;">
  <div class="box4">
 
             <p>
@@ -857,7 +857,7 @@ searchInput.addEventListener('input', function() {
   suggestionsBox.innerHTML = '';
 
   if (query.length > 0) {
-    fetch(`/search-autocomplete?q=${query}`)
+    fetch(`/search-autocomplete?q=${encodeURIComponent(query)}`)
 
       .then(response => response.json())
       .then(data => {
@@ -872,6 +872,9 @@ searchInput.addEventListener('input', function() {
         } else {
           suggestionsBox.style.display = 'none';
         }
+      })
+      .catch(() => {
+        suggestionsBox.style.display = 'none';
       });
   } else {
     suggestionsBox.style.display = 'none';

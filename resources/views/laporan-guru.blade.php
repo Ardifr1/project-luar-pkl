@@ -219,7 +219,7 @@
 
         .data-container {
             margin: 15px auto;
-            background: #d9d9d9;
+            background: #d6d6dc;
             width: 90%;
             min-height: 700px;
             padding: 15px;
@@ -318,7 +318,7 @@
            ========================= */
 
         .alasan-container {
-            background: #ff6767;
+            background: #fd6a6a;
 
             width: 250px;
 
@@ -1122,10 +1122,6 @@
 
     </div>
   </div>
-
-<div class="footer">
-  © 2026 Sistem Admin | SMK Mahaputra
-</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

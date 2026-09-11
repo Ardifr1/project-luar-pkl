@@ -1214,9 +1214,7 @@
 
                     const response =
                         await fetch(
-                            "{{ url('/statusajukan-lab') }}/" +
-                            id +
-                            "/batalkan",
+                            "{{ route('statusajukan.batalkan', ['id' => ':id']) }}".replace(':id', id),
                             {
 
                                 method: 'DELETE',

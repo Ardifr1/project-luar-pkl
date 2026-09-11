@@ -22,7 +22,8 @@
     }
 
     .phone {
-      width: 412px;
+      width: 100%;
+      max-width: 412px;
       min-height: 100vh;
       background: white;
       border-radius: 0px;

@@ -187,7 +187,7 @@
             margin: 15px auto;
             background: #E8EEF6;
             width: 90%;
-            height: 700px;
+            min-height: 700px;
             padding: 15px;
             border-radius: 4px;
 
@@ -494,7 +494,7 @@
 
 </head>
 
-<>
+<body>
 
 <div class="phone">
 

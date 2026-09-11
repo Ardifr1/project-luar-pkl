@@ -515,7 +515,7 @@
 
         <nav class="breadcrumb">
 
-            <a href="/dashboard">
+            <a href="{{ route('dashboard') }}">
 
                 Home
 

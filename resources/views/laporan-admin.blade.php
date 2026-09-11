@@ -225,7 +225,7 @@
 
         .data-container {
             margin: 15px auto;
-            background: #d9d9d9;
+            background: #d6d6dc;
             width: 90%;
             min-height: 700px;
             padding: 15px;
@@ -679,22 +679,6 @@
          DATE RANGE
          ========================= -->
 
-    <form
-        action="{{ route('laporan.admin') }}"
-        method="GET"
-    >
-
-        @if(request('search'))
-
-            <input
-                type="hidden"
-                name="search"
-                value="{{ request('search') }}"
-            >
-
-        @endif
-
-
         <div class="date-container">
 
 
@@ -712,11 +696,6 @@
 </button>
 
             </div>
-
-
-          
-        
-    </form>
 
 
 
