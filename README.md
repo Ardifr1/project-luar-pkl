@@ -7,8 +7,8 @@ Deskripsi singkat tentang proyek (bertujuan memudahkan pemakaian lab, manfaat ef
 
 ## 🚀 Fitur Utama
 - Fitur 1: Pembookingan 
-- Fitur 2: Penjelasan singkat
-- Fitur 3: Penjelasan singkat
+- Fitur 2: Informasi Detail Lab
+- Fitur 3: 
 
 ## 🛠️ Teknologi yang Digunakan
 - HTML, CSS, JavaScript
