@@ -3,7 +3,7 @@ Deskripsi singkat tentang proyek (bertujuan memudahkan pemakaian lab, manfaat ef
 
 ## 👥 Anggota Kelompok
 - Dika  (peran: Frontend,ui/ux design)
-- Ardi  (peran: Backend,database)
+- Ardi  (peran: Backend,database,QA)
 
 ## 🚀 Fitur Utama
 - Fitur 1: Pembookingan 
